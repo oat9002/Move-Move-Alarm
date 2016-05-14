@@ -1,0 +1,5 @@
+<animation-list   android:id="@+id/pos3_5" android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/p3_5_1" android:duration="3000" />
+    <item android:drawable="@drawable/p3_5_2" android:duration="8000" />
+</animation-list>

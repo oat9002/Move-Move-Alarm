@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_fragment"
+            android:title="หน้าหลัก" />
+        <item
+            android:id="@+id/nav_alarm_fragment"
+            android:title="ตั้งค่าการเตือน" />
+        <item
+            android:id="@+id/nav_progress_fragment"
+            android:title="ความก้าวหน้า"/>
+        <item
+            android:id="@+id/nav_posture_fragment"
+            android:title="ท่าออกกำลังกาย" />
+        <item
+            android:id="@+id/nav_group_fragment"
+            android:title="กลุ่ม" />
+        <item
+            android:id="@+id/nav_lboard_fragment"
+            android:title="กระดานคะแนน" />
+        <item
+            android:id="@+id/nav_set_fragment"
+            android:title="ตั้งค่า" />
+        <item
+            android:id="@+id/nav_help_fragment"
+            android:title="ช่วยเหลือ" />
+        <item
+            android:id="@+id/nav_about_fragment"
+            android:title="เกี่ยวกับ" />
+        <item
+            android:id="@+id/nav_logout_fragment"
+            android:title="ออกจากระบบ" />
+    </group>
+</menu>
