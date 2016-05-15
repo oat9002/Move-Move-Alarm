@@ -45,6 +45,7 @@ public class ProgressActivityFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_progress_activity, container, false);
         //cal % of circular progress
+        //edit
         //HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
        // History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentIdUser());
         //History history = (History) Cache.getInstance().getData("userHistory");

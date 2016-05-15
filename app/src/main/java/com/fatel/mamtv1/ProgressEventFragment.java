@@ -50,6 +50,7 @@ public class ProgressEventFragment extends Fragment {
         timeFracE = (TextView) view.findViewById(R.id.timeFractionE);
 
         //cal % of circular progress
+        //edit
         //HistorygroupHelper mhistorygroupHelper = new HistorygroupHelper(getActivity());
         //Log.i("numgroup",""+UserManage.getInstance(getActivity()).getCurrentIdGroup());
         //Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentIdGroup(),getActivity());
