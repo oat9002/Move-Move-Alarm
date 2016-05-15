@@ -238,11 +238,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_group_fragment:
                 User currentUser = UserManage.getInstance(this).getCurrentUser();
-                if(currentUser.getIdGroup() == 0)
+                //edit
+                //if(currentUser.getIdGroup() == 0)
                     fragmentClass = GroupFragment.class;
-                else{//มีกลุ่ม
-                    requestGroupInfo(GroupMainActivity.class);
-                }
+//                else{//มีกลุ่ม
+//                    requestGroupInfo(GroupMainActivity.class);
+//                }
                 break;
 
             case R.id.nav_logout_fragment:
