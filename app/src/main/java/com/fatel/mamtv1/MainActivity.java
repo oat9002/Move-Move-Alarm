@@ -53,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
+      /* if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
         profilepic = (CircleImageView) findViewById(R.id.profile_image);
-
+        */
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
+        /*
         if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
             user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
         else
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
             requestEvent();
-        }
+        }*/
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
+        /*History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
         if(history==null){
             history = new History(UserManage.getInstance(this).getCurrentIdUser());
             history.save(this);
@@ -130,11 +131,10 @@ public class MainActivity extends AppCompatActivity {
         else{
             Cache.getInstance().putData("userHistory", history);
             requestSendUserProgress();
-        }
+        }*/
 //
         //historygroup
-        Log.i("idface",UserManage.getInstance(this).getCurrentFacebookId());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
+        /*Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
         if(historygroup==null&&UserManage.getInstance(this).getCurrentIdGroup()!=0){
             Log.i("historygroup","success");
             historygroup = new Historygroup(UserManage.getInstance(this).getCurrentIdGroup());
@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             Cache.getInstance().putData("groupHistory", historygroup);
             requestSendGroupProgress();
         }
+        */
     }
 
 

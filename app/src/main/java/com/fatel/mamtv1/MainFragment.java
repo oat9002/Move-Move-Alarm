@@ -34,16 +34,16 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mAlarmHelper = new DBAlarmHelper(getActivity());
         setTextAlarm(view, mAlarmHelper);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
-        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
+        /*String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
         if(!tempid.equals("0.0")) {
             if (!tempid.equals("0")) {
                 if(!(tempid.equals("fb0.0"))) {
                     Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
                 }
             }
-        }
+        }*/
         score = (TextView)view.findViewById(R.id.scoreNum);
-        score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore()+"");
+        //score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore()+"");
         return view;
     }
     public void setDay(View view){
