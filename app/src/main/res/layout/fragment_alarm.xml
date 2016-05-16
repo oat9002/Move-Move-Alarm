@@ -1,3 +1,6 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.fatel.mamtv1..HelpFragment">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
 android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -157,7 +160,7 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
             android:id="@+id/chkboxTue"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="อัง."
+            android:text="อ."
             />
         <CheckBox
             android:id="@+id/chkboxWed"
@@ -299,6 +302,19 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
                 android:text="สะโพก ขา และน่อง"
                 />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/chkboxMA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="เลือกทุกส่วน" />
+
+        </LinearLayout>
     </LinearLayout>
 <Button
     android:text="บันทึก"
@@ -320,3 +336,4 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
     android:layout_below="@+id/mode_blk"
     android:layout_marginTop="10dp" />
 </RelativeLayout>
+</ScrollView>
