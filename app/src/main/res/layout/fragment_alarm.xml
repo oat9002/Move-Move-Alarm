@@ -1,6 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<RelativeLayout
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:paddingBottom="@dimen/activity_vertical_margin"
@@ -300,7 +306,50 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
                 />
         </LinearLayout>
     </LinearLayout>
-<Button
+    <LinearLayout
+        android:id="@+id/setting_blk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/mode_blk"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+        >
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:text="แจ้งเตือน"
+            android:textColor="#FF7700"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+        <Switch
+            android:id="@+id/mySwitch"
+            android:layout_marginTop="-7dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/txt" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/reset"
+            android:layout_marginTop="5dp"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:background="@drawable/selectorsetting"
+            android:onClick="linktoreset"
+            />
+    </LinearLayout>
+    <Button
     android:text="บันทึก"
     android:gravity="center"
     android:textColor="#FFF5F5"
@@ -317,6 +366,7 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
     android:textAllCaps="false"
     android:id="@+id/buttonSet"
     android:textStyle="bold"
-    android:layout_below="@+id/mode_blk"
-    android:layout_marginTop="10dp" />
+    android:layout_below="@+id/setting_blk"
+    android:layout_marginTop="20dp" />
 </RelativeLayout>
+</ScrollView>
