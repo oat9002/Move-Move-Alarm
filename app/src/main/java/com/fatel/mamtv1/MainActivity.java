@@ -266,9 +266,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.nav_set_fragment:
-                fragmentClass = SetFragment.class;
-                break;
             default:
                 fragmentClass = MainFragment.class;
         }
