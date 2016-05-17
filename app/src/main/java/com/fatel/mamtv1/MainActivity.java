@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAlarmHelper = new DBAlarmHelper(this);
+
 
       /* if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
@@ -147,6 +149,31 @@ public class MainActivity extends AppCompatActivity {
             requestSendGroupProgress();
         }
         */
+
+        if(mAlarmHelper.checkdata()!=1){
+            //switch to AlarmFragment
+            Fragment fragment = null;
+            Class fragmentClass;
+            fragmentClass = AlarmFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
+            FragmentTransaction tx2 = fragmentManager.beginTransaction();
+            tx2.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            tx2.addToBackStack(null);
+            tx2.replace(R.id.container, fragment).commit();
+
+            // Highlight the selected item, update the title, and close the drawer
+            setTitle("ตั้งค่าการแจ้งเตือน");
+            mDrawerLayout.closeDrawers();
+
+            Toast.makeText(this, "กรุณาตั้งค่าการแจ้งเตือนก่อนใช้งาน", Toast.LENGTH_LONG).show();
+        }
     }
 
 
