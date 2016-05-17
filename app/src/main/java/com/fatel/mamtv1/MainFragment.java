@@ -1,14 +1,18 @@
 package com.fatel.mamtv1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.util.Calendar;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -28,10 +32,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         setDay(view);
         mAlarmHelper = new DBAlarmHelper(getActivity());
+
         setTextAlarm(view, mAlarmHelper);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
         /*String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
@@ -75,6 +81,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
             intervalstop.setText(alarm.getStopinterval());
         }
         else{
+
             hrstart.setText("--");
             minstart.setText("--");
             hrstop.setText("--");
