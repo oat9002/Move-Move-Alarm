@@ -29,16 +29,16 @@ public class SetFragment extends android.support.v4.app.Fragment implements View
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+        View view = inflater.inflate(R.layout.fragment_alarm, container, false);
         Button reset = (Button) view.findViewById(R.id.reset);
         mySwitch = (Switch) view.findViewById(R.id.mySwitch);
 
         //set the switch to ON
-        if (UserManage.getInstance(getActivity()).getCurrentStateSw() == 1) {
+        //if (UserManage.getInstance(getActivity()).getCurrentStateSw() == 1) {
             mySwitch.setChecked(true);
-        } else {
-            mySwitch.setChecked(false);
-        }
+//        } else {
+//            mySwitch.setChecked(false);
+//        }
         //attach a listener to check for changes in state
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
