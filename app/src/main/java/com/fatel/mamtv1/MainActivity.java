@@ -364,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
-        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือนน");
+        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือน");
         builder.setMessage("ยืนยันการรีเซต?").setPositiveButton("ตกลง", dialogClickListener)
                 .setNegativeButton("ยกเลิก", dialogClickListener).show();
     }
