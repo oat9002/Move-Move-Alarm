@@ -1,3 +1,7 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -46,70 +50,11 @@
                 style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
                 android:layout_width="200dip"
                 android:layout_height="200dip"
-                circular:cpb_subtitle="subtitle"
-                circular:cpb_title="Title"
+                circular:cpb_subtitle="accept of event per week"
+                circular:cpb_title="0%"
                 android:layout_gravity="center"
                 android:layout_below="@+id/title1"
                 android:layout_centerHorizontal="true" />
-
-
-
-            <LinearLayout android:id="@+id/accept_block"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/circularprogressbarE"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/accept"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:maxLines="3"
-                    android:padding="8dp"
-                    android:text="@string/acc"
-                    android:textColor="#222"
-                    android:textSize="18dp" />
-                <TextView
-                    android:id="@+id/acceptPercent"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:maxLines="3"
-                    android:padding="8dp"
-                    android:textColor="#222"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-
-
-            <LinearLayout android:id="@+id/cancel_block"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/accept_block"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:maxLines="3"
-                    android:padding="8dp"
-                    android:text="@string/can"
-                    android:textColor="#222"
-                    android:textSize="18dp" />
-                <TextView
-                    android:id="@+id/cancelPercent"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:maxLines="3"
-                    android:padding="8dp"
-                    android:textColor="#222"
-                    android:textSize="18dp" />
-            </LinearLayout>
-
-
-
-
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -136,9 +81,6 @@
                 android:textStyle="bold"
                 android:textSize="22dp" />
 
-
-
-
             <LinearLayout android:id="@+id/eTime_block"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -151,7 +93,7 @@
                     android:layout_weight="0.5"
                     android:maxLines="3"
                     android:padding="8dp"
-                    android:text="@string/totalTime"
+                    android:text="เวลาที่ออกกำลังกายต่อสัปดาห์"
                     android:textColor="#222"
                     android:textSize="18dp" />
                 <TextView
@@ -176,9 +118,271 @@
                     android:layout_margin="17dp"
                     android:progressDrawable="@drawable/green_progress"/>
             </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_below="@+id/card_view2">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:text="สถิติการออกกำลังกาย"
+                android:textColor="#222"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout android:id="@+id/eTime_block2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title3"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ettTime2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:text="คอ"/>
+                <TextView
+                    android:id="@+id/etimeFraction2"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eProgress_block2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eTime_block2"
+                android:orientation="horizontal">
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:id="@+id/ebarTime2"
+                    android:layout_margin="17dp"
+                    android:progressDrawable="@drawable/green_progress"
+                    />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/eTime_block3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eProgress_block2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ettTime3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:text="ไหล่"/>
+                <TextView
+                    android:id="@+id/etimeFraction3"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eProgress_block3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eTime_block3"
+                android:orientation="horizontal">
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:id="@+id/ebarTime3"
+                    android:layout_margin="17dp"
+                    android:progressDrawable="@drawable/green_progress"
+                    />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/eTime_block4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eProgress_block3"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ettTime4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:text="อกและหลัง"/>
+                <TextView
+                    android:id="@+id/etimeFraction4"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eProgress_block4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eTime_block4"
+                android:orientation="horizontal">
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:id="@+id/ebarTime4"
+                    android:layout_margin="17dp"
+                    android:progressDrawable="@drawable/green_progress"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eTime_block5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eProgress_block4"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ettTime5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:text="ข้อมือ"/>
+                <TextView
+                    android:id="@+id/etimeFraction5"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eProgress_block5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eTime_block5"
+                android:orientation="horizontal">
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:id="@+id/ebarTime5"
+                    android:layout_margin="17dp"
+                    android:progressDrawable="@drawable/green_progress"
+                    />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/eTime_block6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eProgress_block5"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ettTime6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:text="เอว"/>
+                <TextView
+                    android:id="@+id/etimeFraction6"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eProgress_block6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eTime_block6"
+                android:orientation="horizontal">
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:id="@+id/ebarTime6"
+                    android:layout_margin="17dp"
+                    android:progressDrawable="@drawable/green_progress"
+                    />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/eTime_block7"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eProgress_block6"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/ettTime7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:text="สะโพก ขา และน่อง"/>
+                <TextView
+                    android:id="@+id/etimeFraction7"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eProgress_block7"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eTime_block7"
+                android:orientation="horizontal">
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="3dp"
+                    android:id="@+id/ebarTime7"
+                    android:layout_margin="17dp"
+                    android:progressDrawable="@drawable/green_progress"
+                    />
+            </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
 </LinearLayout>
+</ScrollView>

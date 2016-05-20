@@ -19,16 +19,17 @@ import android.view.ViewGroup;
 public class ProgressActivityFragment extends Fragment {
     //add for progress bar
     //private static final int PROGRESS = 0x1;
-    private ProgressBar timeProgress;
-    private int mProgressStatus = 0;
+    private ProgressBar timeProgress,timeProgressweek;
+    private int mProgressStatus,mProgressStatusweek = 0;
     private Handler mHandler = new Handler();
 
-    TextView timeFrac,accept,cancel;
+    TextView timeFrac,timeFracweek;
     //private int countAccept = 6;
-    private int cancelPercent = 0;
     //private int countTotal = 10;
     private int cirProgressstatus = 0;
-    private int timePerPic = 1;
+    private int timePerPic,timePerPicweek = 1;
+    private int cirProgressstatusweek = 0;
+    private int timeperweek = 1;
     public static ProgressActivityFragment newInstance() {
         // Required empty public constructor
         ProgressActivityFragment fragment = new ProgressActivityFragment();
@@ -45,23 +46,21 @@ public class ProgressActivityFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_progress_activity, container, false);
         //cal % of circular progress
-        HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
-        History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentIdUser());
+        //edit
+        //HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
+       // History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentIdUser());
         //History history = (History) Cache.getInstance().getData("userHistory");
-        if(history != null && history.gettotal()==0){
+       // if(history != null && history.gettotal()==0){
             cirProgressstatus = 0;
-            cancelPercent = 0;
             mProgressStatus = 0;
-        }
-        else{
-            cirProgressstatus = (history.getNumberOfAccept()*100)/history.gettotal();
-            cancelPercent = 100-cirProgressstatus;
-            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.gettotal() * timePerPic);
-        }
-        accept = (TextView) view.findViewById(R.id.acceptPercent);
-        cancel = (TextView) view.findViewById(R.id.cancelPercent);
-        accept.setText(cirProgressstatus + "%");
-        cancel.setText(cancelPercent+"%");
+            mProgressStatusweek = 0;
+            cirProgressstatusweek = 0;
+       // }
+//        else{
+//            cirProgressstatus = (history.getNumberOfAccept()*100)/history.gettotal();
+//            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.gettotal() * timePerPic);
+//            cirProgressstatusweek = 99;
+//        }
 
         final CircularProgressBar c2 = (CircularProgressBar) view.findViewById(R.id.circularprogressbar2);
         c2.animateProgressTo(0, cirProgressstatus, new ProgressAnimationListener() {
@@ -77,20 +76,42 @@ public class ProgressActivityFragment extends Fragment {
 
             @Override
             public void onAnimationFinish() {
-                c2.setSubTitle("accept of activity");
+                //c2.setSubTitle("accept of activity per day");
             }
         });
 
+        final CircularProgressBar c3 = (CircularProgressBar) view.findViewById(R.id.circularprogressbar3);
+        c3.animateProgressTo(0, cirProgressstatusweek, new ProgressAnimationListener() {
+
+            @Override
+            public void onAnimationStart() {
+            }
+
+            @Override
+            public void onAnimationProgress(int progress) {
+                c3.setTitle(progress + "%");
+            }
+
+            @Override
+            public void onAnimationFinish() {
+                //c3.setSubTitle("accept of activity per week");
+            }
+        });
 
         //add for progressbar
         timeProgress = (ProgressBar) view.findViewById(R.id.barTime);
         timeFrac = (TextView) view.findViewById(R.id.timeFraction);
+        timeProgressweek = (ProgressBar) view.findViewById(R.id.barTime1);
+        timeFracweek = (TextView) view.findViewById(R.id.timeFraction1);
 
 
         //set progress bar in each days
         timeProgress.setProgress(mProgressStatus);
+        timeProgressweek.setProgress(mProgressStatusweek);
         // Show the progress on TextView
-        timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.gettotal()*timePerPic)+"min");
+        //timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.gettotal()*timePerPic)+"min");
+        timeFrac.setText((0*timePerPic)+"/"+(0*timePerPic)+"min");
+        timeFracweek.setText((0*timePerPicweek)+"/"+(0*timePerPicweek)+"min");
     return view;
     }
 

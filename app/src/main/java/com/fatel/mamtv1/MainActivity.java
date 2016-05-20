@@ -52,14 +52,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAlarmHelper = new DBAlarmHelper(this);
 
-        if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
+
+      /* if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
         profilepic = (CircleImageView) findViewById(R.id.profile_image);
-
+        */
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
+        /*
         if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
             user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
         else
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
             requestEvent();
-        }
+        }*/
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
+        /*History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
         if(history==null){
             history = new History(UserManage.getInstance(this).getCurrentIdUser());
             history.save(this);
@@ -130,11 +133,10 @@ public class MainActivity extends AppCompatActivity {
         else{
             Cache.getInstance().putData("userHistory", history);
             requestSendUserProgress();
-        }
+        }*/
 //
         //historygroup
-        Log.i("idface",UserManage.getInstance(this).getCurrentFacebookId());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
+        /*Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
         if(historygroup==null&&UserManage.getInstance(this).getCurrentIdGroup()!=0){
             Log.i("historygroup","success");
             historygroup = new Historygroup(UserManage.getInstance(this).getCurrentIdGroup());
@@ -145,6 +147,32 @@ public class MainActivity extends AppCompatActivity {
         else if(UserManage.getInstance(this).getCurrentIdGroup()!=0){
             Cache.getInstance().putData("groupHistory", historygroup);
             requestSendGroupProgress();
+        }
+        */
+
+        if(mAlarmHelper.checkdata()!=1){
+            //switch to AlarmFragment
+            Fragment fragment = null;
+            Class fragmentClass;
+            fragmentClass = AlarmFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
+            FragmentTransaction tx2 = fragmentManager.beginTransaction();
+            tx2.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            tx2.addToBackStack(null);
+            tx2.replace(R.id.container, fragment).commit();
+
+            // Highlight the selected item, update the title, and close the drawer
+            setTitle("ตั้งค่าการแจ้งเตือน");
+            mDrawerLayout.closeDrawers();
+
+            Toast.makeText(this, "กรุณาตั้งค่าการแจ้งเตือนก่อนใช้งาน", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -237,11 +265,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_group_fragment:
                 User currentUser = UserManage.getInstance(this).getCurrentUser();
-                if(currentUser.getIdGroup() == 0)
+                //edit
+                //if(currentUser.getIdGroup() == 0)
                     fragmentClass = GroupFragment.class;
-                else{//มีกลุ่ม
-                    requestGroupInfo(GroupMainActivity.class);
-                }
+//                else{//มีกลุ่ม
+//                    requestGroupInfo(GroupMainActivity.class);
+//                }
                 break;
 
             case R.id.nav_logout_fragment:
@@ -263,9 +292,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-                break;
-            case R.id.nav_set_fragment:
-                fragmentClass = SetFragment.class;
                 break;
             default:
                 fragmentClass = MainFragment.class;
@@ -338,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
-        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือนน");
+        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือน");
         builder.setMessage("ยืนยันการรีเซต?").setPositiveButton("ตกลง", dialogClickListener)
                 .setNegativeButton("ยกเลิก", dialogClickListener).show();
     }
