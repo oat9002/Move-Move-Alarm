@@ -84,10 +84,6 @@ public class ProgressEventFragment extends Fragment {
 //            timeFracE.setText((historygroup.getNumberOfAccept() * timePerPicE) + "/" + (historygroup.gettotal() * timePerPicE) + "min");
 //
 //        }
-        acceptE = (TextView) view.findViewById(R.id.acceptPercent);
-        cancelE = (TextView) view.findViewById(R.id.cancelPercent);
-        acceptE.setText(cirProgressstatusE + "%");
-        cancelE.setText(cancelPercentE + "%");
 
         final CircularProgressBar cE = (CircularProgressBar) view.findViewById(R.id.circularprogressbarE);
         cE.animateProgressTo(0, cirProgressstatusE, new CircularProgressBar.ProgressAnimationListener() {
@@ -102,7 +98,7 @@ public class ProgressEventFragment extends Fragment {
 
             @Override
             public void onAnimationFinish() {
-                cE.setSubTitle("accept of event");
+                //cE.setSubTitle("accept of event");
             }
         });
 
