@@ -12,7 +12,6 @@ public class Posture {
     private int id;
     private int idPosture;
     private int image;
-    private String name;
     private String description;
     private int mode;
 
@@ -23,24 +22,21 @@ public class Posture {
         public static final String ID = BaseColumns._ID;
         public static final String IDPOSTURE = "idPosture";
         public static final String IMAGE= "image";
-        public static final String NAME = "name";
         public static final String DESCRIPTION = "description";
         public static final String MODE = "mode";
     }
 
-    public Posture(int id,int idPosture, int image,String name, String description,int mode){
+    public Posture(int id,int idPosture, int image, String description,int mode){
         this.id=id;
         this.idPosture = idPosture;
         this.image=image;
-        this.name =name;
         this.description=description;
         this.mode = mode;
     }
-    public Posture(int idPosture,int image,String name,String description,int mode){
+    public Posture(int idPosture,int image,String description,int mode){
         this.id=-1;
         this.idPosture = idPosture;
         this.image=image;
-        this.name=name;
         this.description=description;
         this.mode=mode;
     }
@@ -110,13 +106,4 @@ public class Posture {
         this.description = description;
     }
     public void setMode(int mode){ this.mode = mode; }
-
-    public String getName() {
-        return this.name;
-
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

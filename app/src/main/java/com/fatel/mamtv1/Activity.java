@@ -34,13 +34,11 @@ public class Activity extends AppCompatActivity {
     TextView txtR;
     TextView txtA;
     TextView txtDes;
-    TextView txtName;
     ImageView imgView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
     int exerciseImg;
-    String exerciseName;
     String exerciseDes;
     CountDownTimer time1;
     CountDownTimer time2;
@@ -60,18 +58,17 @@ public class Activity extends AppCompatActivity {
         txtR=(TextView) findViewById(R.id.rtime);
         txtA=(TextView) findViewById(R.id.atime);
         txtDes=(TextView) findViewById(R.id.des);
-        txtName=(TextView) findViewById(R.id.imgname);
         imgView=(ImageView) findViewById(R.id.img);
         ActivityHandle activityHandle=new ActivityHandle(this);
         context=getApplicationContext();
         img = activityHandle.getRandomPosture(this);
 
         exerciseImg=(img.get(count)).getImage();
-        exerciseName=(img.get(count)).getName();
+
         exerciseDes=(img.get(count)).getDescription();
 
         txtDes.setText(exerciseDes);
-        txtName.setText(exerciseName);
+
         imgView.setBackgroundResource(exerciseImg);
 
         // Get the background, which has been compiled to an AnimationDrawable object.
@@ -97,10 +94,8 @@ public class Activity extends AppCompatActivity {
                 if(count<img.size()) {
 
                     exerciseImg=(img.get(count)).getImage();
-                    exerciseName=(img.get(count)).getName();
                     exerciseDes=(img.get(count)).getDescription();
                     txtDes.setText(exerciseDes);
-                    txtName.setText(exerciseName);
                     imgView.setBackgroundResource(exerciseImg);
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();

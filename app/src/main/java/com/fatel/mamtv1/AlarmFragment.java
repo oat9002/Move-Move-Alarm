@@ -37,14 +37,12 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
     private CheckBox mChkboxFri;
     private CheckBox mChkboxSat;
     private CheckBox mChkboxSun;
-    private CheckBox mChkboxDA;
     private CheckBox mChkboxM1;
     private CheckBox mChkboxM2;
     private CheckBox mChkboxM3;
     private CheckBox mChkboxM4;
     private CheckBox mChkboxM5;
     private CheckBox mChkboxM6;
-    private CheckBox mChkboxMA;
     private String mdays="";
     private String mModes="";
     private Spinner mFreq;
@@ -83,14 +81,12 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         mChkboxThu = (CheckBox)view.findViewById(R.id.chkboxThu);
         mChkboxFri = (CheckBox)view.findViewById(R.id.chkboxFri);
         mChkboxSat = (CheckBox)view.findViewById(R.id.chkboxSat);
-        mChkboxDA = (CheckBox)view.findViewById(R.id.chkboxDA);
         mChkboxM1 = (CheckBox)view.findViewById(R.id.chkboxM1);
         mChkboxM2 = (CheckBox)view.findViewById(R.id.chkboxM2);
         mChkboxM3 = (CheckBox)view.findViewById(R.id.chkboxM3);
         mChkboxM4 = (CheckBox)view.findViewById(R.id.chkboxM4);
         mChkboxM5 = (CheckBox)view.findViewById(R.id.chkboxM5);
         mChkboxM6 = (CheckBox)view.findViewById(R.id.chkboxM6);
-        mChkboxMA = (CheckBox)view.findViewById(R.id.chkboxMA);
         buttonSet = (Button)view.findViewById(R.id.buttonSet);
         mFreq = createSpinnerFrq(R.id.frq_min, view,mAlarmHelper);
 
@@ -99,236 +95,111 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
             Alarm alarm = mAlarmHelper.getAlarm();
             String day = alarm.getDay();
             String mode = alarm.getMode();
-            if(day.equals("1111111")){
-                mChkboxDA.setChecked(true);
+            if(day.substring(0,1).equals("1"))
                 mChkboxSun.setChecked(true);
+            if(day.substring(1,2).equals("1"))
                 mChkboxMon.setChecked(true);
+            if(day.substring(2,3).equals("1"))
                 mChkboxTue.setChecked(true);
+            if(day.substring(3,4).equals("1"))
                 mChkboxWed.setChecked(true);
+            if(day.substring(4,5).equals("1"))
                 mChkboxThu.setChecked(true);
+            if(day.substring(5,6).equals("1"))
                 mChkboxFri.setChecked(true);
+            if(day.substring(6,7).equals("1"))
                 mChkboxSat.setChecked(true);
-                mChkboxSun.setEnabled(false);
-                mChkboxMon.setEnabled(false);
-                mChkboxTue.setEnabled(false);
-                mChkboxWed.setEnabled(false);
-                mChkboxThu.setEnabled(false);
-                mChkboxFri.setEnabled(false);
-                mChkboxSat.setEnabled(false);
 
-            }
-            else {
-                if (day.substring(0, 1).equals("1"))
-                    mChkboxSun.setChecked(true);
-                if (day.substring(1, 2).equals("1"))
-                    mChkboxMon.setChecked(true);
-                if (day.substring(2, 3).equals("1"))
-                    mChkboxTue.setChecked(true);
-                if (day.substring(3, 4).equals("1"))
-                    mChkboxWed.setChecked(true);
-                if (day.substring(4, 5).equals("1"))
-                    mChkboxThu.setChecked(true);
-                if (day.substring(5, 6).equals("1"))
-                    mChkboxFri.setChecked(true);
-                if (day.substring(6, 7).equals("1"))
-                    mChkboxSat.setChecked(true);
-            }
-            if(mode.equals("111111")){
-                mChkboxMA.setChecked(true);
+            if(mode.substring(0,1).equals("1"))
                 mChkboxM1.setChecked(true);
+            if(mode.substring(1,2).equals("1"))
                 mChkboxM2.setChecked(true);
+            if(mode.substring(2,3).equals("1"))
                 mChkboxM3.setChecked(true);
+            if(mode.substring(3,4).equals("1"))
                 mChkboxM4.setChecked(true);
+            if(mode.substring(4,5).equals("1"))
                 mChkboxM5.setChecked(true);
+            if(mode.substring(5,6).equals("1"))
                 mChkboxM6.setChecked(true);
-                mChkboxM1.setEnabled(false);
-                mChkboxM2.setEnabled(false);
-                mChkboxM3.setEnabled(false);
-                mChkboxM4.setEnabled(false);
-                mChkboxM5.setEnabled(false);
-                mChkboxM6.setEnabled(false);
-            }
-            else {
-                if (mode.substring(0, 1).equals("1"))
-                    mChkboxM1.setChecked(true);
-                if (mode.substring(1, 2).equals("1"))
-                    mChkboxM2.setChecked(true);
-                if (mode.substring(2, 3).equals("1"))
-                    mChkboxM3.setChecked(true);
-                if (mode.substring(3, 4).equals("1"))
-                    mChkboxM4.setChecked(true);
-                if (mode.substring(4, 5).equals("1"))
-                    mChkboxM5.setChecked(true);
-                if (mode.substring(5, 6).equals("1"))
-                    mChkboxM6.setChecked(true);
-            }
         }
         View rootView = inflater.inflate(R.layout.fragment_alarm, container, false);
         context = rootView.getContext();
-
-        mChkboxDA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mChkboxDA.isChecked()){
-                    mChkboxSun.setChecked(true);
-                    mChkboxMon.setChecked(true);
-                    mChkboxTue.setChecked(true);
-                    mChkboxWed.setChecked(true);
-                    mChkboxThu.setChecked(true);
-                    mChkboxFri.setChecked(true);
-                    mChkboxSat.setChecked(true);
-                    mChkboxSun.setEnabled(false);
-                    mChkboxMon.setEnabled(false);
-                    mChkboxTue.setEnabled(false);
-                    mChkboxWed.setEnabled(false);
-                    mChkboxThu.setEnabled(false);
-                    mChkboxFri.setEnabled(false);
-                    mChkboxSat.setEnabled(false);
-
-                }
-                else {
-                    mChkboxSun.setChecked(false);
-                    mChkboxMon.setChecked(false);
-                    mChkboxTue.setChecked(false);
-                    mChkboxWed.setChecked(false);
-                    mChkboxThu.setChecked(false);
-                    mChkboxFri.setChecked(false);
-                    mChkboxSat.setChecked(false);
-                    mChkboxSun.setEnabled(true);
-                    mChkboxMon.setEnabled(true);
-                    mChkboxTue.setEnabled(true);
-                    mChkboxWed.setEnabled(true);
-                    mChkboxThu.setEnabled(true);
-                    mChkboxFri.setEnabled(true);
-                    mChkboxSat.setEnabled(true);
-                }
-            }
-        });
-
-        mChkboxMA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mChkboxMA.isChecked()){
-                    mChkboxMA.setChecked(true);
-                    mChkboxM1.setChecked(true);
-                    mChkboxM2.setChecked(true);
-                    mChkboxM3.setChecked(true);
-                    mChkboxM4.setChecked(true);
-                    mChkboxM5.setChecked(true);
-                    mChkboxM6.setChecked(true);
-                    mChkboxM1.setEnabled(false);
-                    mChkboxM2.setEnabled(false);
-                    mChkboxM3.setEnabled(false);
-                    mChkboxM4.setEnabled(false);
-                    mChkboxM5.setEnabled(false);
-                    mChkboxM6.setEnabled(false);
-                }
-                else {
-                    mChkboxMA.setChecked(false);
-                    mChkboxM1.setChecked(false);
-                    mChkboxM2.setChecked(false);
-                    mChkboxM3.setChecked(false);
-                    mChkboxM4.setChecked(false);
-                    mChkboxM5.setChecked(false);
-                    mChkboxM6.setChecked(false);
-                    mChkboxM1.setEnabled(true);
-                    mChkboxM2.setEnabled(true);
-                    mChkboxM3.setEnabled(true);
-                    mChkboxM4.setEnabled(true);
-                    mChkboxM5.setEnabled(true);
-                    mChkboxM6.setEnabled(true);
-                }
-            }
-        });
-
         Button bt = (Button) view.findViewById(R.id.buttonSet);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if (mChkboxSun.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
+                if (mChkboxMon.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
+                if (mChkboxTue.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
+                if (mChkboxWed.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
+                if (mChkboxThu.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
+                if (mChkboxFri.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
+                if (mChkboxSat.isChecked()) {
+                    mdays += "1";
+                } else {
+                    mdays += "0";
+                }
 
-                if(mChkboxDA.isChecked()){
-                    mdays = "1111111";
+                if (mChkboxM1.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
                 }
-                else {
-                    if (mChkboxSun.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxMon.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxTue.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxWed.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxThu.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxFri.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxSat.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
+                if (mChkboxM2.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
                 }
-                if(mChkboxMA.isChecked()){
-                    mModes = "111111";
+                if (mChkboxM3.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
                 }
-                else {
+                if (mChkboxM4.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM5.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM6.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
 
-                    if (mChkboxM1.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM2.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM3.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM4.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM5.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM6.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                }
                 //keep data
 
-                if (Integer.parseInt(mdays) == 0) {
-                    Toast.makeText(getActivity(), "กรุณาเลือกวันทำงาน", Toast.LENGTH_SHORT).show();
-                }
-                else if (Integer.parseInt(mModes) == 0) {
+                if (Integer.parseInt(mModes) == 0) {
                     Toast.makeText(getActivity(), "กรุณาเลือกหมวดท่าบริหาร", Toast.LENGTH_SHORT).show();
                 }
                 else {

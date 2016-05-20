@@ -19,21 +19,16 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:gravity="center" />
-<ImageView
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="20dp"
-    android:layout_width="100dp"
-    android:layout_height="80dp"
-    android:layout_below="@+id/selectMode"
-    android:src="@drawable/picneck"/>
+
         <Button
         android:id="@+id/mode1"
         android:text="คอ"
-            android:gravity="center"
+        android:gravity="center"
         android:textStyle="bold"
+
         android:textColor="#FF7E3D"
         android:textSize="20sp"
-            android:layout_gravity="center"
+        android:layout_gravity="center"
 
         android:shadowColor="#919191"
         android:shadowDx="3"
@@ -45,174 +40,115 @@
 
         android:background="@drawable/buttonshape3"
 
-            android:layout_marginTop="39dp"
-            android:layout_marginLeft="130dp"
-            android:layout_marginRight="50dp"
-            android:nestedScrollingEnabled="false"
-            android:layout_below="@+id/selectMode"
-
-             />
-
-        <ImageView
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/mode1"
-            android:src="@drawable/picelbow"/>
+            android:layout_below="@+id/selectMode"
+            android:layout_centerHorizontal="true"
+            android:nestedScrollingEnabled="false" />
     <Button
         android:id="@+id/mode2"
         android:layout_below="@+id/mode1"
         android:text="ไหล่"
         android:gravity="center"
         android:textStyle="bold"
+
         android:textColor="#FF7E3D"
         android:textSize="20sp"
         android:layout_gravity="center"
+        android:background="@drawable/buttonshape3"
 
         android:shadowColor="#919191"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="5"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-
-        android:background="@drawable/buttonshape3"
-
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="50dp"
-        android:nestedScrollingEnabled="false"
-        />
-
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/mode2"
-            android:src="@drawable/picbreast"/>
+        android:textAllCaps="false" />
     <Button
         android:id="@+id/mode3"
         android:layout_below="@+id/mode2"
         android:text="อก และหลัง"
         android:gravity="center"
         android:textStyle="bold"
+
         android:textColor="#FF7E3D"
         android:textSize="20sp"
         android:layout_gravity="center"
+        android:background="@drawable/buttonshape3"
 
         android:shadowColor="#919191"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="5"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-
-        android:background="@drawable/buttonshape3"
-
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="50dp"
-        android:nestedScrollingEnabled="false"
-         />
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/mode3"
-            android:src="@drawable/picneckhand"/>
+        android:textAllCaps="false" />
     <Button
         android:id="@+id/mode4"
         android:layout_below="@+id/mode3"
         android:text="ข้อมือ"
         android:gravity="center"
         android:textStyle="bold"
+
         android:textColor="#FF7E3D"
         android:textSize="20sp"
         android:layout_gravity="center"
+        android:background="@drawable/buttonshape3"
 
         android:shadowColor="#919191"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="5"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-
-        android:background="@drawable/buttonshape3"
-
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="50dp"
-        android:nestedScrollingEnabled="false" />
-
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/mode4"
-            android:src="@drawable/piceaw"/>
+        android:textAllCaps="false" />
     <Button
         android:id="@+id/mode5"
         android:layout_below="@+id/mode4"
         android:text="เอว"
         android:gravity="center"
         android:textStyle="bold"
+
         android:textColor="#FF7E3D"
         android:textSize="20sp"
         android:layout_gravity="center"
+        android:background="@drawable/buttonshape3"
 
         android:shadowColor="#919191"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="5"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-
-        android:background="@drawable/buttonshape3"
-
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="50dp"
-        android:nestedScrollingEnabled="false" />
-
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/mode5"
-            android:src="@drawable/picleg"/>
+        android:textAllCaps="false" />
     <Button
         android:id="@+id/mode6"
         android:layout_below="@+id/mode5"
         android:text="สะโพก ขา และน่อง"
         android:gravity="center"
         android:textStyle="bold"
+
         android:textColor="#FF7E3D"
         android:textSize="20sp"
         android:layout_gravity="center"
+        android:background="@drawable/buttonshape3"
 
         android:shadowColor="#919191"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="5"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-
-        android:background="@drawable/buttonshape3"
-
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginRight="50dp"
-        android:nestedScrollingEnabled="false"
         android:layout_marginBottom="50dp" />
 
     </RelativeLayout>

@@ -24,12 +24,11 @@ public class PostureHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_POSTURE_TABLE = String.format("CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s INTEGER)",
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s INTEGER, %s TEXT, %s INTEGER)",
                 Posture.TABLE,
                 Posture.Column.ID,
                 Posture.Column.IDPOSTURE,
                 Posture.Column.IMAGE,
-                Posture.Column.NAME,
                 Posture.Column.DESCRIPTION,
                 Posture.Column.MODE);
         db.execSQL(CREATE_POSTURE_TABLE);
@@ -45,7 +44,6 @@ public class PostureHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(Posture.Column.IDPOSTURE, posture.getIdPosture());
         values.put(Posture.Column.IMAGE, posture.getImage());
-        values.put(Posture.Column.NAME, posture.getName());
         values.put(Posture.Column.DESCRIPTION, posture.getDescription());
         values.put(Posture.Column.MODE, posture.getMode());
         long id =sqLiteDatabase.insert(Posture.TABLE, null, values);
@@ -57,7 +55,6 @@ public class PostureHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(Posture.Column.IDPOSTURE,posture.getIdPosture());
         values.put(Posture.Column.IMAGE,posture.getImage());
-        values.put(Posture.Column.NAME, posture.getName());
         values.put(Posture.Column.DESCRIPTION, posture.getDescription());
         values.put(Posture.Column.MODE, posture.getMode());
         int row = sqLiteDatabase.update(Posture.TABLE,
@@ -69,7 +66,7 @@ public class PostureHelper extends SQLiteOpenHelper {
     public Posture getPosture(int idPosture){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Posture.TABLE, new String[]{Posture.Column.ID,
-                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE,Posture.Column.NAME, Posture.Column.DESCRIPTION, Posture.Column.MODE
+                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE, Posture.Column.DESCRIPTION, Posture.Column.MODE
                 }, Posture.Column.IDPOSTURE + " = ? ",
                 new String[]{String.valueOf(idPosture)}, null, null, null, null);
         Posture posture;
@@ -80,7 +77,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         if(check){
 
             posture = new Posture(cursor.getInt(0), cursor.getInt(1),
-                    cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5));
+                    cursor.getInt(2), cursor.getString(3), cursor.getInt(4));
 
             cursor.close();
             db.close();
@@ -95,7 +92,7 @@ public class PostureHelper extends SQLiteOpenHelper {
     public ArrayList<Posture> getPostureMode(int mode){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Posture.TABLE, new String[]{Posture.Column.ID,
-                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE,Posture.Column.NAME, Posture.Column.DESCRIPTION, Posture.Column.MODE
+                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE, Posture.Column.DESCRIPTION, Posture.Column.MODE
                 }, Posture.Column.MODE + " = ? ",
                 new String[]{String.valueOf(mode)}, null, null, null, null);
         ArrayList<Posture> modePosture = new ArrayList<>();
@@ -103,7 +100,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Posture posture = new Posture(cursor.getInt(0), cursor.getInt(1),
-                        cursor.getInt(2), cursor.getString(3),cursor.getString(4), cursor.getInt(5));
+                        cursor.getInt(2), cursor.getString(3), cursor.getInt(4));
                 modePosture.add(posture);
 
             }while (cursor.moveToNext());

@@ -18,7 +18,6 @@ public class PostureActivity extends AppCompatActivity {
     int mode=1;
     int imgId=0;
     TextView txtDes;
-    TextView txtName;
     ImageView imgView;
     AnimationDrawable frameAnimation;
     Button previous;
@@ -26,7 +25,6 @@ public class PostureActivity extends AppCompatActivity {
     Button next;
     View pre;
     int exerciseImg;
-    String exerciseName;
     String exerciseDes;
     ArrayList<Posture> postureMode;
     public static Context context;
@@ -40,7 +38,6 @@ public class PostureActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_posture);
         txtDes=(TextView) findViewById(R.id.txt);
-        txtName=(TextView) findViewById(R.id.imgname);
         imgView=(ImageView) findViewById(R.id.img);
         home = (Button) findViewById(R.id.homebtn);
         next = (Button) findViewById(R.id.nextbtn);
@@ -50,10 +47,8 @@ public class PostureActivity extends AppCompatActivity {
         final PostureCollection postureCollection = PostureCollection.getInstance(this);
         postureMode = postureCollection.getPostureMode(mode, context);
         exerciseImg = (postureMode.get(imgId)).getImage();
-        exerciseName = (postureMode.get(imgId)).getName();
         exerciseDes = (postureMode.get(imgId)).getDescription();
         txtDes.setText(exerciseDes);
-        txtName.setText(exerciseName);
         imgView.setBackgroundResource(exerciseImg);
         // Get the background, which has been compiled to an AnimationDrawable object.
         frameAnimation = (AnimationDrawable) imgView.getBackground();
@@ -72,10 +67,8 @@ public class PostureActivity extends AppCompatActivity {
                         imgId--;
                     checkVisible();
                     exerciseImg = (postureMode.get(imgId)).getImage();
-                    exerciseName = (postureMode.get(imgId)).getName();
                     exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
-                    txtName.setText(exerciseName);
                     imgView.setBackgroundResource(exerciseImg);
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
@@ -96,10 +89,8 @@ public class PostureActivity extends AppCompatActivity {
                         imgId++;
                     checkVisible();
                     exerciseImg = (postureMode.get(imgId)).getImage();
-                    exerciseName = (postureMode.get(imgId)).getName();
                     exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
-                    txtName.setText(exerciseName);
                     imgView.setBackgroundResource(exerciseImg);
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
