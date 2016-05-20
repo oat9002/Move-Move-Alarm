@@ -170,10 +170,271 @@
                     android:progressDrawable="@drawable/green_progress"
                     />
             </LinearLayout>
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:layout_below="@+id/card_view2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/title3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:padding="8dp"
+                        android:text="สถิติการออกกำลังกาย"
+                        android:textColor="#222"
+                        android:textStyle="bold"
+                        android:textSize="22dp" />
+
+                    <LinearLayout android:id="@+id/Time_block2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title3"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="คอ"/>
+                        <TextView
+                            android:id="@+id/timeFraction2"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block2"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime2"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block2"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="ไหล่"/>
+                        <TextView
+                            android:id="@+id/timeFraction3"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block3"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime3"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block3"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="อกและหลัง"/>
+                        <TextView
+                            android:id="@+id/timeFraction4"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block4"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime4"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Time_block5"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block4"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="ข้อมือ"/>
+                        <TextView
+                            android:id="@+id/timeFraction5"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block5"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block5"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime5"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block6"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block5"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="เอว"/>
+                        <TextView
+                            android:id="@+id/timeFraction6"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block6"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block6"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime6"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block7"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block6"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="สะโพก ขา และน่อง"/>
+                        <TextView
+                            android:id="@+id/timeFraction7"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block7"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block7"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime7"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
         </LinearLayout>
     </LinearLayout>
