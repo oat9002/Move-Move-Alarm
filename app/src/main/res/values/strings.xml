@@ -28,7 +28,7 @@
     <string name="title">การรับการออกกำลังกาย</string>
     <string name="acc">ตกลง</string>
     <string name="can">ยกเลิก</string>
-    <string name="totalTime">เวลาที่ออกกำลังกาย</string>
+    <string name="totalTime">เวลาที่ออกกำลังกายต่อวัน</string>
     <string name="mon">จ.</string>
     <string name="tue">อัง.</string>
     <string name="wed">พ.</string>
