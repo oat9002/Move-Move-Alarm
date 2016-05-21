@@ -50,7 +50,6 @@ public class UserManage {
                         Context context = (Context) Cache.getInstance().getData("loginContext");
                         HashMap<String, Object> data = converter.JSONToHashMap(response); //convert JSON to HashMap format
 
-
                         if((boolean) data.get("status")) {
                             HashMap<String, Object> userData = converter.JSONToHashMap(converter.toString(data.get("user")));
                             HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
@@ -91,7 +90,7 @@ public class UserManage {
                                 Login_Activity.instance.finish();
                         }
                         else {
-                            Toast toast = Toast.makeText(context, converter.toString(data.get("description")), Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(context,  converter.toString(data.get("description")), Toast.LENGTH_SHORT);
                             toast.show();
                         }
 

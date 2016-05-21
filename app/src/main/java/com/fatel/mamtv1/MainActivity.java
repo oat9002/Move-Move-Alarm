@@ -54,15 +54,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAlarmHelper = new DBAlarmHelper(this);
 
-
-      /* if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
+        if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
         profilepic = (CircleImageView) findViewById(R.id.profile_image);
-        */
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
-        /*
+
         if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
             user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
         else
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
             requestEvent();
-        }*/
+        }
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        /*History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
         if(history==null){
             history = new History(UserManage.getInstance(this).getCurrentIdUser());
             history.save(this);
@@ -133,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
         else{
             Cache.getInstance().putData("userHistory", history);
             requestSendUserProgress();
-        }*/
+        }
 //
         //historygroup
-        /*Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
         if(historygroup==null&&UserManage.getInstance(this).getCurrentIdGroup()!=0){
             Log.i("historygroup","success");
             historygroup = new Historygroup(UserManage.getInstance(this).getCurrentIdGroup());
@@ -148,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             Cache.getInstance().putData("groupHistory", historygroup);
             requestSendGroupProgress();
         }
-        */
+
 
         if(mAlarmHelper.checkdata()!=1){
             //switch to AlarmFragment
@@ -379,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
     public void requestGroupInfo(Class nextActivity)
     {
         final Class nxtActivity = nextActivity;
-        String url = "http://161.246.70.77:8080/group/findByID";
+        String url = "http://13.76.94.234:8080/group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
@@ -417,7 +415,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void requestGroupInfo()
     {
-        String url = "http://161.246.70.77:8080/group/findByID";
+        String url = "http://13.76.94.234:8080/group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
