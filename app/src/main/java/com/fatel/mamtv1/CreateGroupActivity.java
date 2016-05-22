@@ -59,7 +59,7 @@ public class CreateGroupActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter Group name at least 6 characters", Toast.LENGTH_SHORT).show();
         }
         else{
-            String url = "http://161.246.70.77:8080/group/createGroup";
+            String url = HttpConnector.URL +"group/createGroup";
             final User user = UserManage.getInstance(CreateGroupActivity.this).getCurrentUser();
 
             StringRequest createGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
