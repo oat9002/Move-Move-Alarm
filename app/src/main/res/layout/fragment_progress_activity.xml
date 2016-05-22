@@ -42,8 +42,19 @@
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="22dp" />
-
-
+            <TextView
+                android:id="@+id/day"
+                android:text="ต่อวัน"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/title1"
+                />
             <com.lylc.widget.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularprogressbar2"
                 style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
@@ -52,8 +63,21 @@
                 circular:cpb_subtitle="accept of activity per day"
                 circular:cpb_title="0%"
                 android:layout_gravity="center"
-                android:layout_below="@+id/title1"
+                android:layout_below="@+id/day"
                 android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/week"
+                android:text="ต่อสัปดาห์"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/circularprogressbar2"
+                />
             <com.lylc.widget.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularprogressbar3"
                 style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
@@ -62,7 +86,7 @@
                 circular:cpb_subtitle="accept of activity per week"
                 circular:cpb_title="0%"
                 android:layout_gravity="center"
-                android:layout_below="@+id/circularprogressbar2"
+                android:layout_below="@+id/week"
                 android:layout_centerHorizontal="true"
                 />
         </RelativeLayout>
@@ -86,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="@string/title2"
+                android:text="เวลาออกกำลังกายสะสม"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="22dp" />
@@ -105,7 +129,7 @@
                     android:padding="8dp"
                     android:textColor="#222"
                     android:textSize="18dp"
-                    android:text="@string/totalTime"/>
+                    android:text="ต่อวัน"/>
                 <TextView
                     android:id="@+id/timeFraction"
                     android:layout_width="95dp"
@@ -145,7 +169,7 @@
                     android:padding="8dp"
                     android:textColor="#222"
                     android:textSize="18dp"
-                    android:text="เวลาที่ออกกำลังกายต่อสัปดาห์"/>
+                    android:text="ต่อสัปดาห์"/>
                 <TextView
                     android:id="@+id/timeFraction1"
                     android:layout_width="95dp"
@@ -190,15 +214,32 @@
                         android:layout_height="wrap_content"
                         android:maxLines="3"
                         android:padding="8dp"
-                        android:text="สถิติการออกกำลังกาย"
+                        android:text="สถิติท่าออกกำลังกาย"
                         android:textColor="#222"
                         android:textStyle="bold"
                         android:textSize="22dp" />
 
-                    <LinearLayout android:id="@+id/Time_block2"
+                    <LinearLayout android:id="@+id/text1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/title3"
+                        android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/day1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:maxLines="3"
+                        android:padding="8dp"
+                        android:textColor="#222"
+                        android:textSize="18dp"
+                        android:layout_marginTop="5dp"
+                        android:text="ต่อวัน" />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Time_block2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text1"
                         android:orientation="horizontal">
                         <TextView
                             android:id="@+id/ttTime2"
@@ -433,6 +474,263 @@
                             android:progressDrawable="@drawable/green_progress"
                             />
                     </LinearLayout>
+
+                    <LinearLayout android:id="@+id/text2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block7"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/day2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="ต่อสัปดาห์" />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Time_block8"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text2"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="คอ"/>
+                        <TextView
+                            android:id="@+id/timeFraction8"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block8"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block8"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime8"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block9"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block8"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="ไหล่"/>
+                        <TextView
+                            android:id="@+id/timeFraction9"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block9"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block9"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime9"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block10"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block9"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="อกและหลัง"/>
+                        <TextView
+                            android:id="@+id/timeFraction10"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block10"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block10"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime10"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Time_block11"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block10"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="ข้อมือ"/>
+                        <TextView
+                            android:id="@+id/timeFraction11"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block11"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block11"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime11"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block12"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block11"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="เอว"/>
+                        <TextView
+                            android:id="@+id/timeFraction12"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block12"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block12"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime12"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout android:id="@+id/Time_block13"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Progress_block12"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/ttTime13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            android:text="สะโพก ขา และน่อง"/>
+                        <TextView
+                            android:id="@+id/timeFraction13"
+                            android:layout_width="95dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:padding="8dp"
+                            android:textColor="#222"
+                            android:textSize="18dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout android:id="@+id/Progress_block13"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Time_block13"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="3dp"
+                            android:id="@+id/barTime13"
+                            android:layout_margin="17dp"
+                            android:progressDrawable="@drawable/green_progress"
+                            />
+                    </LinearLayout>
+
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
