@@ -44,7 +44,19 @@
                 android:textStyle="bold"
                 android:textSize="22dp" />
 
-
+            <TextView
+                android:id="@+id/week3"
+                android:text="ต่อสัปดาห์"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:maxLines="3"
+                android:padding="8dp"
+                android:textColor="#222"
+                android:textSize="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/title1"
+                />
             <com.lylc.widget.circularprogressbar.CircularProgressBar
                 android:id="@+id/circularprogressbarE"
                 style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
@@ -53,7 +65,7 @@
                 circular:cpb_subtitle="accept of event per week"
                 circular:cpb_title="0%"
                 android:layout_gravity="center"
-                android:layout_below="@+id/title1"
+                android:layout_below="@+id/week3"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -76,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="@string/title2"
+                android:text="เวลาออกกำลังกายสะสม"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="22dp" />
@@ -93,7 +105,7 @@
                     android:layout_weight="0.5"
                     android:maxLines="3"
                     android:padding="8dp"
-                    android:text="เวลาที่ออกกำลังกายต่อสัปดาห์"
+                    android:text="ต่อสัปดาห์"
                     android:textColor="#222"
                     android:textSize="18dp" />
                 <TextView
@@ -138,15 +150,31 @@
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="8dp"
-                android:text="สถิติการออกกำลังกาย"
+                android:text="สถิติท่าออกกำลังกาย"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="22dp" />
-
-            <LinearLayout android:id="@+id/eTime_block2"
+                <LinearLayout android:id="@+id/text1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title3"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/week4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="#222"
+                    android:textSize="18dp"
+                    android:layout_marginTop="5dp"
+                    android:text="ต่อสัปดาห์" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/eTime_block2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text1"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/ettTime2"
