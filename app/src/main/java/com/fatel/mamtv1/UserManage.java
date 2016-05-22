@@ -49,7 +49,6 @@ public class UserManage {
                         Converter converter = Converter.getInstance();
                         Context context = (Context) Cache.getInstance().getData("loginContext");
                         HashMap<String, Object> data = converter.JSONToHashMap(response); //convert JSON to HashMap format
-
                         if((boolean) data.get("status")) {
                             HashMap<String, Object> userData = converter.JSONToHashMap(converter.toString(data.get("user")));
                             HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
@@ -90,7 +89,7 @@ public class UserManage {
                                 Login_Activity.instance.finish();
                         }
                         else {
-                            Toast toast = Toast.makeText(context,  converter.toString(data.get("description")), Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(context, converter.toString(data.get("description")), Toast.LENGTH_SHORT);
                             toast.show();
                         }
 
@@ -201,7 +200,7 @@ public class UserManage {
         };
 
         HttpConnector.getInstance(context).addToRequestQueue(loginFBRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
-
+        Log.i("request", loginFBRequest.toString());
     }
     public void logoutUser(Context context){
         currentUser.setLogin(0);
