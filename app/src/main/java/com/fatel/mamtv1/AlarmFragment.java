@@ -2,8 +2,10 @@ package com.fatel.mamtv1;
 
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -365,10 +367,20 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
 
                 }
             }
+        );
 
-            );
-            return view;
-        }
+        Button bt2 = (Button) view.findViewById(R.id.reset);
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linktoreset();
+
+            }
+        });
+
+
+        return view;
+    }
 
     public Spinner createSpinner(int num,int id,boolean isHr,View view,DBAlarmHelper mAlarmHelper,boolean isStart)
     {
@@ -492,6 +504,45 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         b.putString("key", "set");
         i.putExtras(b);
         getActivity().sendBroadcast(i);
+    }
+    public void linktoreset(){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        mAlarmHelper =  new DBAlarmHelper(getActivity());
+                        mAlarmHelper.deleteSetAlarm("1");
+                        Toast.makeText(getActivity(), "รีเซตการตั้งค่าการแจ้งเตือน", Toast.LENGTH_SHORT).show();
+
+                        getFragmentManager().popBackStack();
+
+                        Fragment fragment = null;
+                        Class fragmentClass;
+                        fragmentClass = AlarmFragment.class;
+                        try {
+                            fragment = (Fragment) fragmentClass.newInstance();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        FragmentTransaction tr = getFragmentManager().beginTransaction();
+                        tr.addToBackStack(null);
+                        tr.replace(R.id.container, fragment);
+                        tr.commit();
+
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_DARK);
+        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือน");
+        builder.setMessage("ยืนยันการรีเซต?").setPositiveButton("ตกลง", dialogClickListener)
+                .setNegativeButton("ยกเลิก", dialogClickListener).show();
     }
 
 
