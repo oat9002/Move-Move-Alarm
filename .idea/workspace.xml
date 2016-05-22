@@ -64,39 +64,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="972c4b09-29a2-4cc2-89a5-2adfc5bba85b" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\accessibility_test_framework_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\ant_1_8_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\ant_launcher_1_8_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\asm_5_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\asm_analysis_5_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\asm_commons_5_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\asm_tree_5_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\asm_util_5_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\bcprov_jdk16_1_46.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\hamcrest_core_1_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\icu4j_53_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\junit_4_10.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\maven_ant_tasks_2_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\mockito_core_1_9_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\objenesis_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\robolectric_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\robolectric_annotations_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\robolectric_resources_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\robolectric_utils_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\shadows_core_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\sqlite4java_0_282.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\Movealarm\Move-Move-Alarm\.idea\libraries\vtd_xml_2_11.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/libraries/CircularProgressBar/CircularProgressBar.iml" afterPath="$PROJECT_DIR$/app/libraries/CircularProgressBar/CircularProgressBar.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/CreateGroupActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/CreateGroupActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/HttpConnector.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/HttpConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/cardview_v7_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_23_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_22_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_22_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Move-Move-Alarm.iws" />
@@ -143,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/UserManage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.33136094">
-              <caret line="122" column="25" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="25" />
+              <caret line="122" column="15" selection-start-line="122" selection-start-column="15" selection-end-line="122" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -5038,7 +5005,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fatel/mamtv1/UserManage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33136094">
-          <caret line="122" column="25" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="25" />
+          <caret line="122" column="15" selection-start-line="122" selection-start-column="15" selection-end-line="122" selection-end-column="15" />
           <folding />
         </state>
       </provider>
