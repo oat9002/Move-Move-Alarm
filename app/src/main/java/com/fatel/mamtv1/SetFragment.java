@@ -34,11 +34,11 @@ public class SetFragment extends android.support.v4.app.Fragment implements View
         mySwitch = (Switch) view.findViewById(R.id.mySwitch);
 
         //set the switch to ON
-        //if (UserManage.getInstance(getActivity()).getCurrentStateSw() == 1) {
+        if (UserManage.getInstance(getActivity()).getCurrentStateSw() == 1) {
             mySwitch.setChecked(true);
-//        } else {
-//            mySwitch.setChecked(false);
-//        }
+        } else {
+            mySwitch.setChecked(false);
+        }
         //attach a listener to check for changes in state
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
