@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
     public void requestGroupInfo(Class nextActivity)
     {
         final Class nxtActivity = nextActivity;
-        String url = "http://161.246.70.77:8080/group/findByID";
+        String url = HttpConnector.URL +"group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
@@ -417,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void requestGroupInfo()
     {
-        String url = "http://161.246.70.77:8080/group/findByID";
+        String url = HttpConnector.URL + "group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
