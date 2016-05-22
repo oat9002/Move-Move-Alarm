@@ -344,30 +344,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-    public void linktoreset(View view){
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE:
-                        //Yes button clicked
-                        mAlarmHelper =  new DBAlarmHelper(MainActivity.this);
-                        mAlarmHelper.deleteSetAlarm("1");
-                        mDrawerLayout.closeDrawers();
-                        makeToast("รีเซตการตั้งค่าการแจ้งเตือน");
-                        break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //No button clicked
-                        break;
-                }
-            }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
-        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือน");
-        builder.setMessage("ยืนยันการรีเซต?").setPositiveButton("ตกลง", dialogClickListener)
-                .setNegativeButton("ยกเลิก", dialogClickListener).show();
-    }
 
     public void makeToast(String text)
     {

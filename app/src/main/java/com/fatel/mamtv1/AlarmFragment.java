@@ -2,8 +2,10 @@ package com.fatel.mamtv1;
 
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -243,132 +245,142 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
 
         Button bt = (Button) view.findViewById(R.id.buttonSet);
         bt.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View view) {
+
+
+                                      if(mChkboxDA.isChecked()){
+                                          mdays = "1111111";
+                                      }
+                                      else {
+                                          if (mChkboxSun.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                          if (mChkboxMon.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                          if (mChkboxTue.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                          if (mChkboxWed.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                          if (mChkboxThu.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                          if (mChkboxFri.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                          if (mChkboxSat.isChecked()) {
+                                              mdays += "1";
+                                          } else {
+                                              mdays += "0";
+                                          }
+                                      }
+                                      if(mChkboxMA.isChecked()){
+                                          mModes = "111111";
+                                      }
+                                      else {
+
+                                          if (mChkboxM1.isChecked()) {
+                                              mModes += "1";
+                                          } else {
+                                              mModes += "0";
+                                          }
+                                          if (mChkboxM2.isChecked()) {
+                                              mModes += "1";
+                                          } else {
+                                              mModes += "0";
+                                          }
+                                          if (mChkboxM3.isChecked()) {
+                                              mModes += "1";
+                                          } else {
+                                              mModes += "0";
+                                          }
+                                          if (mChkboxM4.isChecked()) {
+                                              mModes += "1";
+                                          } else {
+                                              mModes += "0";
+                                          }
+                                          if (mChkboxM5.isChecked()) {
+                                              mModes += "1";
+                                          } else {
+                                              mModes += "0";
+                                          }
+                                          if (mChkboxM6.isChecked()) {
+                                              mModes += "1";
+                                          } else {
+                                              mModes += "0";
+                                          }
+                                      }
+                                      //keep data
+
+                                      if (Integer.parseInt(mdays) == 0) {
+                                          Toast.makeText(getActivity(), "กรุณาเลือกวันทำงาน", Toast.LENGTH_SHORT).show();
+                                      }
+                                      else if (Integer.parseInt(mModes) == 0) {
+                                          Toast.makeText(getActivity(), "กรุณาเลือกหมวดท่าบริหาร", Toast.LENGTH_SHORT).show();
+                                      }
+                                      else {
+
+                                          Alarm alarm = new Alarm();
+                                          alarm.setId(1);
+                                          alarm.setStarthr(mStartHr.getSelectedItem().toString());
+                                          alarm.setStartmin(mStartMin.getSelectedItem().toString());
+                                          alarm.setStophr(mFinishHr.getSelectedItem().toString());
+                                          alarm.setStopmin(mFinishMin.getSelectedItem().toString());
+                                          alarm.setStartinterval(mStartAP.getSelectedItem().toString());
+                                          alarm.setStopinterval(mFinishAP.getSelectedItem().toString());
+                                          alarm.setDay(mdays.toString());
+                                          alarm.setFrq(mFreq.getSelectedItem().toString());
+                                          alarm.setMode(mModes.toString());
+                                          if (ID == -1 && (mAlarmHelper.checkdata() == 0)) {
+                                              mAlarmHelper.addAlarm(alarm);
+                                          } else {
+                                              mAlarmHelper.UpdateAlarm(alarm);
+                                          }
+                                          mdays = "";
+                                          Intent mServiceIntent = new Intent(getActivity(), AlarmReceiver.class);
+                                          pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, mServiceIntent, 0);
+                                          start();
+
+                                          Toast.makeText(getActivity(), "ตั้งค่าสำเร็จ", Toast.LENGTH_SHORT).show();
+
+                                          Intent intent = new Intent(context, MainActivity.class);
+                                          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                          startActivity(intent);
+
+                                      }
+
+
+                                  }
+                              }
+        );
+
+        Button bt2 = (Button) view.findViewById(R.id.reset);
+        bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                linktoreset();
 
-
-                if(mChkboxDA.isChecked()){
-                    mdays = "1111111";
-                }
-                else {
-                    if (mChkboxSun.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxMon.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxTue.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxWed.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxThu.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxFri.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                    if (mChkboxSat.isChecked()) {
-                        mdays += "1";
-                    } else {
-                        mdays += "0";
-                    }
-                }
-                if(mChkboxMA.isChecked()){
-                    mModes = "111111";
-                }
-                else {
-
-                    if (mChkboxM1.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM2.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM3.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM4.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM5.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                    if (mChkboxM6.isChecked()) {
-                        mModes += "1";
-                    } else {
-                        mModes += "0";
-                    }
-                }
-                //keep data
-
-                if (Integer.parseInt(mdays) == 0) {
-                    Toast.makeText(getActivity(), "กรุณาเลือกวันทำงาน", Toast.LENGTH_SHORT).show();
-                }
-                else if (Integer.parseInt(mModes) == 0) {
-                    Toast.makeText(getActivity(), "กรุณาเลือกหมวดท่าบริหาร", Toast.LENGTH_SHORT).show();
-                }
-                else {
-
-                    Alarm alarm = new Alarm();
-                    alarm.setId(1);
-                    alarm.setStarthr(mStartHr.getSelectedItem().toString());
-                    alarm.setStartmin(mStartMin.getSelectedItem().toString());
-                    alarm.setStophr(mFinishHr.getSelectedItem().toString());
-                    alarm.setStopmin(mFinishMin.getSelectedItem().toString());
-                    alarm.setStartinterval(mStartAP.getSelectedItem().toString());
-                    alarm.setStopinterval(mFinishAP.getSelectedItem().toString());
-                    alarm.setDay(mdays.toString());
-                    alarm.setFrq(mFreq.getSelectedItem().toString());
-                    alarm.setMode(mModes.toString());
-                    if (ID == -1 && (mAlarmHelper.checkdata() == 0)) {
-                        mAlarmHelper.addAlarm(alarm);
-                    } else {
-                        mAlarmHelper.UpdateAlarm(alarm);
-                    }
-                    mdays = "";
-                    Intent mServiceIntent = new Intent(getActivity(), AlarmReceiver.class);
-                    pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, mServiceIntent, 0);
-                    start();
-
-                    Toast.makeText(getActivity(), "ตั้งค่าสำเร็จ", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-
-                   }
-
-
-                }
             }
+        });
 
-            );
-            return view;
-        }
+
+        return view;
+    }
 
     public Spinner createSpinner(int num,int id,boolean isHr,View view,DBAlarmHelper mAlarmHelper,boolean isStart)
     {
@@ -492,6 +504,45 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         b.putString("key", "set");
         i.putExtras(b);
         getActivity().sendBroadcast(i);
+    }
+    public void linktoreset(){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        mAlarmHelper =  new DBAlarmHelper(getActivity());
+                        mAlarmHelper.deleteSetAlarm("1");
+                        Toast.makeText(getActivity(), "รีเซตการตั้งค่าการแจ้งเตือน", Toast.LENGTH_SHORT).show();
+
+                        getFragmentManager().popBackStack();
+
+                        Fragment fragment = null;
+                        Class fragmentClass;
+                        fragmentClass = AlarmFragment.class;
+                        try {
+                            fragment = (Fragment) fragmentClass.newInstance();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        FragmentTransaction tr = getFragmentManager().beginTransaction();
+                        tr.addToBackStack(null);
+                        tr.replace(R.id.container, fragment);
+                        tr.commit();
+
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_DARK);
+        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือน");
+        builder.setMessage("ยืนยันการรีเซต?").setPositiveButton("ตกลง", dialogClickListener)
+                .setNegativeButton("ยกเลิก", dialogClickListener).show();
     }
 
 
