@@ -137,7 +137,7 @@ public class Login_Activity extends AppCompatActivity {
 
         if(username.getText().toString().equals(""))
         {
-            Toast toast = Toast.makeText(this, "Please enter Username", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, "Please enter Username.", Toast.LENGTH_SHORT);
             toast.show();
         }
         else if(password.getText().toString().equals(""))
