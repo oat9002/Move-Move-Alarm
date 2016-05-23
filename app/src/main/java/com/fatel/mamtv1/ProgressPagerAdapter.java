@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 public class ProgressPagerAdapter extends FragmentPagerAdapter {
     private final int PAGE_NUM = 2;
-    private static final String[] CONTENT = new String[] { "Activity","Event" };
+    private static final String[] CONTENT = new String[] { "ส่วนบุคคล","กลุ่ม" };
     public ProgressPagerAdapter(FragmentManager fm) {
         super(fm);
     }
