@@ -59,7 +59,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     }
     public String getCurrentDay(){
         Calendar now = Calendar.getInstance();
-        String[] strDays = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday"};
+        String[] strDays = new String[]{"วันอาทิตย์", "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัสบดี", "วันศุกร์", "วันเสาร์"};
         //Log.i("Day",now.get(Calendar.DAY_OF_WEEK)+"");
         return strDays[now.get(Calendar.DAY_OF_WEEK) - 1];
     }
