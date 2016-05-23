@@ -47,20 +47,20 @@ public class ProgressActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_progress_activity, container, false);
         //cal % of circular progress
         //edit
-        //HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
-       // History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentIdUser());
+        HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
+        History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentIdUser());
         //History history = (History) Cache.getInstance().getData("userHistory");
-       // if(history != null && history.gettotal()==0){
+        if(history != null && history.gettotal()==0){
             cirProgressstatus = 0;
             mProgressStatus = 0;
             mProgressStatusweek = 0;
             cirProgressstatusweek = 0;
-       // }
-//        else{
-//            cirProgressstatus = (history.getNumberOfAccept()*100)/history.gettotal();
-//            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.gettotal() * timePerPic);
-//            cirProgressstatusweek = 99;
-//        }
+        }
+        else{
+            cirProgressstatus = (history.getNumberOfAccept()*100)/history.gettotal();
+            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.gettotal() * timePerPic);
+            cirProgressstatusweek = 99;
+        }
 
         final CircularProgressBar c2 = (CircularProgressBar) view.findViewById(R.id.circularprogressbar2);
         c2.animateProgressTo(0, cirProgressstatus, new ProgressAnimationListener() {
@@ -109,7 +109,7 @@ public class ProgressActivityFragment extends Fragment {
         timeProgress.setProgress(mProgressStatus);
         timeProgressweek.setProgress(mProgressStatusweek);
         // Show the progress on TextView
-        //timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.gettotal()*timePerPic)+"min");
+        timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.gettotal()*timePerPic)+"min");
         timeFrac.setText((0*timePerPic)+"/"+(0*timePerPic)+"min");
         timeFracweek.setText((0*timePerPicweek)+"/"+(0*timePerPicweek)+"min");
     return view;

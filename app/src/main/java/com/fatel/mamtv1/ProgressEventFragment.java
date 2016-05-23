@@ -53,8 +53,8 @@ public class ProgressEventFragment extends Fragment {
         //edit
         //HistorygroupHelper mhistorygroupHelper = new HistorygroupHelper(getActivity());
         //Log.i("numgroup",""+UserManage.getInstance(getActivity()).getCurrentIdGroup());
-        //Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentIdGroup(),getActivity());
-        //if(historygroup==null){
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentIdGroup(),getActivity());
+        if(historygroup==null){
             cirProgressstatusE = 0;
             cancelPercentE = 0;
             mProgressStatusE = 0;
@@ -63,27 +63,27 @@ public class ProgressEventFragment extends Fragment {
             // Show the progress on TextView
             timeFracE.setText((0 * timePerPicE) + "/" + (0 * timePerPicE) + "min");
 
-//        }
-//        else if(historygroup!=null&&historygroup.gettotal()==0){
-//            cirProgressstatusE = 0;
-//            cancelPercentE = 0;
-//            mProgressStatusE = 0;
-//            //set progress bar in each days
-//            timeProgressE.setProgress(mProgressStatusE);
-//            // Show the progress on TextView
-//            timeFracE.setText((0 * timePerPicE) + "/" + (0 * timePerPicE) + "min");
-//
-//        }
-//        else{
-//            cirProgressstatusE = (historygroup.getNumberOfAccept()*100)/historygroup.gettotal();
-//            cancelPercentE = 100-cirProgressstatusE;
-//            mProgressStatusE = ((historygroup.getNumberOfAccept() * timePerPicE) * 100) / (historygroup.gettotal() * timePerPicE);
-//            //set progress bar in each days
-//            timeProgressE.setProgress(mProgressStatusE);
-//            // Show the progress on TextView
-//            timeFracE.setText((historygroup.getNumberOfAccept() * timePerPicE) + "/" + (historygroup.gettotal() * timePerPicE) + "min");
-//
-//        }
+        }
+        else if(historygroup!=null&&historygroup.gettotal()==0){
+            cirProgressstatusE = 0;
+            cancelPercentE = 0;
+            mProgressStatusE = 0;
+            //set progress bar in each days
+            timeProgressE.setProgress(mProgressStatusE);
+            // Show the progress on TextView
+            timeFracE.setText((0 * timePerPicE) + "/" + (0 * timePerPicE) + "min");
+
+        }
+        else{
+            cirProgressstatusE = (historygroup.getNumberOfAccept()*100)/historygroup.gettotal();
+            cancelPercentE = 100-cirProgressstatusE;
+            mProgressStatusE = ((historygroup.getNumberOfAccept() * timePerPicE) * 100) / (historygroup.gettotal() * timePerPicE);
+            //set progress bar in each days
+            timeProgressE.setProgress(mProgressStatusE);
+            // Show the progress on TextView
+            timeFracE.setText((historygroup.getNumberOfAccept() * timePerPicE) + "/" + (historygroup.gettotal() * timePerPicE) + "min");
+
+        }
 
         final CircularProgressBar cE = (CircularProgressBar) view.findViewById(R.id.circularprogressbarE);
         cE.animateProgressTo(0, cirProgressstatusE, new CircularProgressBar.ProgressAnimationListener() {
