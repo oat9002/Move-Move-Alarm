@@ -30,7 +30,6 @@ public class Login_Activity extends AppCompatActivity {
     private AlarmManager manager;
     private DBAlarmHelper mAlarmHelper;
     public static Login_Activity instance;
-
     CallbackManager callbackManager;
     ProfileTracker profileTracker;
 
@@ -45,7 +44,7 @@ public class Login_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         instance = this;
         super.onCreate(savedInstanceState);
-       // if(UserManage.getInstance(this).checkCurrentLogin(this))
+        if(UserManage.getInstance(this).checkCurrentLogin(this))
         {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

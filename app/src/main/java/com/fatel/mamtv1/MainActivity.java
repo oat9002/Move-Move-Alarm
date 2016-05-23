@@ -55,14 +55,13 @@ public class MainActivity extends AppCompatActivity {
         mAlarmHelper = new DBAlarmHelper(this);
 
 
-      /* if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
+        if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
         profilepic = (CircleImageView) findViewById(R.id.profile_image);
-        */
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
-        /*
+
         if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
             user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
         else
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
             requestEvent();
-        }*/
+        }
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        /*History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
         if(history==null){
             history = new History(UserManage.getInstance(this).getCurrentIdUser());
             history.save(this);
@@ -133,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
         else{
             Cache.getInstance().putData("userHistory", history);
             requestSendUserProgress();
-        }*/
+        }
 //
         //historygroup
-        /*Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
         if(historygroup==null&&UserManage.getInstance(this).getCurrentIdGroup()!=0){
             Log.i("historygroup","success");
             historygroup = new Historygroup(UserManage.getInstance(this).getCurrentIdGroup());
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             Cache.getInstance().putData("groupHistory", historygroup);
             requestSendGroupProgress();
         }
-        */
+
 
         if(mAlarmHelper.checkdata()!=1){
             //switch to AlarmFragment
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
+                                selectDrawerItem(menuItem);
                         return true;
                     }
                 });
@@ -266,11 +265,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_group_fragment:
                 User currentUser = UserManage.getInstance(this).getCurrentUser();
                 //edit
-                //if(currentUser.getIdGroup() == 0)
+                if(currentUser.getIdGroup() == 0)
                     fragmentClass = GroupFragment.class;
-//                else{//มีกลุ่ม
-//                    requestGroupInfo(GroupMainActivity.class);
-//                }
+                else{//มีกลุ่ม
+                    requestGroupInfo(GroupMainActivity.class);
+                }
                 break;
 
             case R.id.nav_logout_fragment:

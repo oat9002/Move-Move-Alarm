@@ -43,21 +43,21 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         firstname = (TextView)view.findViewById(R.id.editproname);
         lastname = (TextView)view.findViewById(R.id.editsurproname);
         editname = (Button)view.findViewById(R.id.edit);
-//        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
-//        if(!tempid.equals("0.0")) {
-//            if(!tempid.equals("0")) {
-//                if(!(tempid.equals("fb0.0"))) {
-//                    Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
-//                }
-//            }
-//        }
-//
-//        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName()+"").equals("null"))
-//            fb.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
-//        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName()+"").equals("null"))
-//            firstname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName());
-//        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName()+"").equals("null"))
-//            lastname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName());
+        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
+        if(!tempid.equals("0.0")) {
+            if(!tempid.equals("0")) {
+                if(!(tempid.equals("fb0.0"))) {
+                    Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
+                }
+            }
+        }
+
+        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName()+"").equals("null"))
+            fb.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
+        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName()+"").equals("null"))
+            firstname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName());
+        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName()+"").equals("null"))
+            lastname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName());
 
         return view;
     }
