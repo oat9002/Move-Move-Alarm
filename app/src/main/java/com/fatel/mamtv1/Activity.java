@@ -147,7 +147,9 @@ public class Activity extends AppCompatActivity {
             time2.cancel();
             time2=null;
         }
+        // update progress call volley
 
+        //
         //history
         History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(), this);
         history.subaccept(1);

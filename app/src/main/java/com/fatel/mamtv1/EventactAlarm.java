@@ -63,6 +63,9 @@ public class EventactAlarm extends AppCompatActivity {
     public void linkActivity(View view){
         //history
         Log.i("linkacti",""+UserManage.getInstance(this).getCurrentIdGroup());
+        // update progress call volley
+
+        //
         Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(), this);
         if(historygroup!=null){
             historygroup.addaccept(1);

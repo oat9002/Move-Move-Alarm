@@ -64,6 +64,9 @@ public class ActAlarm extends AppCompatActivity {
 
     public void linkActivity(View view){
         //history
+        // update progress call volley
+
+        //
         History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(), this);
         history.addaccept(1);
         history.save(this);
@@ -76,6 +79,9 @@ public class ActAlarm extends AppCompatActivity {
 
     public void linkHome(View view){
         //history
+        // update progress call volley
+
+        //
         History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
         history.addcancel(1);
         history.save(this);
