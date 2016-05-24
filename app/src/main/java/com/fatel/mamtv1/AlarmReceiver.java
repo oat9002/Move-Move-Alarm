@@ -26,9 +26,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         if(checkday()){
             //choose day
-            //bug
             if(checkstarttime()&&(temp==null||!temp.equalsIgnoreCase("first"))){
-                //bug
                     if (manager!= null) {
                        manager.cancel(pendingIntent);
                     }
@@ -50,7 +48,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
     public boolean checkday(){
-        //bug start set
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         Alarm alarm = mAlarmHelper.getAlarm();
