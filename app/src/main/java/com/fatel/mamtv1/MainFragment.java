@@ -24,6 +24,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private DBAlarmHelper mAlarmHelper;
     CircleImageView propic;
     TextView score;
+    UserHelper userHelper;
     public MainFragment() {
         // Required empty public constructor
     }
@@ -35,9 +36,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        setDay(view);
-        mAlarmHelper = new DBAlarmHelper(getActivity());
 
+        mAlarmHelper = new DBAlarmHelper(getActivity());
+        setUser(view);
         setTextAlarm(view, mAlarmHelper);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
         String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
@@ -52,17 +53,14 @@ public class MainFragment extends android.support.v4.app.Fragment {
         score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore()+"");
         return view;
     }
-    public void setDay(View view){
-        TextView day = (TextView) view.findViewById(R.id.daycurrent);
-        String days = getCurrentDay();
-        day.setText(days);
+    public void setUser(View view){
+        TextView user = (TextView) view.findViewById(R.id.userinmain);
+//        if(userHelper.checkdata()){
+//            String text = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername();
+//            user.setText(text);
+//        }
     }
-    public String getCurrentDay(){
-        Calendar now = Calendar.getInstance();
-        String[] strDays = new String[]{"วันอาทิตย์", "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัสบดี", "วันศุกร์", "วันเสาร์"};
-        //Log.i("Day",now.get(Calendar.DAY_OF_WEEK)+"");
-        return strDays[now.get(Calendar.DAY_OF_WEEK) - 1];
-    }
+
     public void setTextAlarm(View view,DBAlarmHelper alarmHelper){
         TextView hrstart = (TextView)view.findViewById(R.id.starthr);
         TextView minstart = (TextView)view.findViewById(R.id.startmin);
@@ -70,6 +68,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         TextView minstop = (TextView)view.findViewById(R.id.minstop);
         TextView intervalstart = (TextView)view.findViewById(R.id.intervalstart);
         TextView intervalstop = (TextView)view.findViewById(R.id.intervalstop);
+        TextView freq = (TextView) view.findViewById(R.id.freqinmain);
         if(alarmHelper.checkdata()==1){
             Alarm alarm = new Alarm();
             alarm = alarmHelper.getAlarm();
@@ -79,6 +78,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
             minstop.setText(alarm.getStopmin());
             intervalstart.setText(alarm.getStartinterval());
             intervalstop.setText(alarm.getStopinterval());
+            freq.setText(alarm.getFrq() + " นาที");
+            freq.setTextSize(20);
         }
         else{
 
@@ -88,6 +89,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
             minstop.setText("--");
             intervalstart.setText("");
             intervalstop.setText("");
+            freq.setText("ไม่ได้ตั้งค่า");
         }
     }
 }
