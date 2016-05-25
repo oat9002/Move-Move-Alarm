@@ -1,80 +1,154 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.MainFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fatel.mamtv1.MainFragment"
+    android:background="#E6E6E6">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image_f"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp"
-        android:src="@drawable/test" />
-
+   <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/dummy"
+       >
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="10dp"/>
+   </RelativeLayout>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_viewuser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_below="@+id/dummy"
+        >
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:paddingTop="15dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image_f"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/test"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#ffba91"
+            android:layout_centerHorizontal="true"
+             />
     <LinearLayout
-        android:id="@+id/score"
+        android:id="@+id/layoutuser"
+        android:paddingTop="20dp"
+        android:paddingBottom="15dp"
+        android:layout_below="@+id/profile_image_f"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="97dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="39dp"
-        android:layout_marginEnd="39dp">
+        android:layout_centerHorizontal="true">
         <TextView
-            android:id="@+id/scoreText"
+            android:id="@+id/userinmain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@android:color/black"
-            android:text="คะแนน : " />
+            android:textSize="21sp"
+            android:textColor="#000000"
+            android:text="username"/>
+    </LinearLayout>
+       </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:id="@+id/card_viewscore"
+        android:layout_below="@+id/card_viewuser"
+        >
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/scoreText"
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="21sp"
+            android:textColor="#DF7401"
+            android:text="คะแนน"
+            android:textStyle="bold"/>
         <TextView
             android:layout_alignRight="@id/scoreText"
             android:id="@+id/scoreNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@android:color/black"
-            android:text="00"/>
+            android:textSize="28sp"
+            android:textColor="#000000"
+            android:text="00"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        card_view:contentPaddingTop="10dp"
+        card_view:contentPaddingBottom="10dp"
+        android:id="@+id/card_viewtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_below="@+id/card_viewscore"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <TextView
+        android:text="เวลาทำงาน"
+        android:id="@+id/timeworktext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:textColor="#DF7401" />
     <LinearLayout
         android:id="@+id/nextalarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/score"
+        android:layout_below="@id/timeworktext"
         android:orientation="horizontal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="30dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        >
 
         <TextView
+
             android:id="@+id/nextalarmText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="#000000"
             android:text="เริ่มต้น" />
         <TextView
             android:id="@+id/starthr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textColor="#000000"
             android:text="--"
             android:layout_marginLeft="5dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="#000000"
             android:text=" : "
             android:layout_marginLeft="5dp" />
         <TextView
@@ -82,57 +156,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textColor="#000000"
             android:text="--"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="5dp"/>
         <TextView
             android:id="@+id/intervalstart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="#000000"
             android:text="am"
-            android:layout_marginLeft="5dp"/>
+            />
     </LinearLayout>
-    <TextView
-        android:id="@+id/daycurrent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:text="day"
-        android:layout_marginTop="35dp"
-        android:layout_below="@id/nextalarm"
-        android:layout_centerHorizontal="true" />
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_below="@id/score"
+        android:layout_below="@id/timeworktext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="70dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginTop="15dp"
+        android:paddingRight="25dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="#000000"
             android:text="สิ้นสุด" />
 
         <TextView
             android:id="@+id/hrstop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textColor="#000000"
             android:text="--"
             android:layout_marginLeft="5dp" />
 
@@ -140,35 +204,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="#000000"
             android:text=" : "
             android:layout_marginLeft="5dp" />
         <TextView
             android:id="@+id/minstop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textColor="#000000"
             android:text="--"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="5dp"/>
         <TextView
             android:id="@+id/intervalstop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="#000000"
             android:text="am"
             />
     </LinearLayout>
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:id="@+id/layoutfreq"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/nextalarm"
+                android:layout_centerHorizontal="true">
+                <TextView
 
-    <AnalogClock
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/analogClock"
-        android:layout_below="@id/daycurrent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ความถี่ในการแจ้งเตือน : "
+                    android:textSize="15sp"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:id="@+id/freqinmain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#000000"
+                    android:text="00"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>
