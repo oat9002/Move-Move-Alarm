@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,7 +81,7 @@ public class ShareActivity extends AppCompatActivity {
 
             postPicBtn.setOnClickListener(new View.OnClickListener() {
                 //@override
-                public void onClick (View v){
+                public void onClick(View v) {
                     //showPickPictureDialog();
                     performPublish(PendingAction.POST_PICTURE);
                     Intent intent = new Intent(ShareActivity.this, MainActivity.class);
@@ -145,8 +148,11 @@ public class ShareActivity extends AppCompatActivity {
         private void postPicture(){
             Profile profile = Profile.getCurrentProfile();
             Bitmap picture = BitmapFactory.decodeFile(Imguri.getPath());
+            //Drawable drawable = getResources().getDrawable(getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
+            Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
+            Bitmap test = combineImages(picture,bitmap1);
             SharePhoto pictureToShare = new SharePhoto.Builder()
-                    .setBitmap(picture)
+                    .setBitmap(test)
                     .build();
 
             ArrayList<SharePhoto> pictureList = new ArrayList<>();
@@ -203,7 +209,7 @@ public class ShareActivity extends AppCompatActivity {
                     public void onError(FacebookException error){
                         String title = "เกิดข้อผิดพลาดในการโพสต์";
                         String msg = error.getMessage();
-                        showResult(title,msg);
+                        //showResult(title,msg);
                     }
 
                     @Override
@@ -212,17 +218,17 @@ public class ShareActivity extends AppCompatActivity {
                             String title = "โพสต์ลง Facebook สำเร็จ";
                             String id = result.getPostId();
                             String msg = String.format("Post ID: %s",id);
-                            showResult(title,msg);
+                           // showResult(title,msg);
                         }
                     }
 
-                    private  void showResult(String title,String alertMessage){
-                        new AlertDialog.Builder(ShareActivity.this)
-                                .setTitle(title)
-                                .setMessage(alertMessage)
-                                .setPositiveButton("OK",null)
-                                .show();
-                    }
+//                    private  void showResult(String title,String alertMessage){
+//                        new AlertDialog.Builder(get)
+//                                .setTitle(title)
+//                                .setMessage(alertMessage)
+//                                .setPositiveButton("OK",null)
+//                                .show();
+//                    }
                 };
     public void linkHome(View view){
         Intent i1 = new Intent(ShareActivity.this, MainActivity.class);
@@ -234,7 +240,36 @@ public class ShareActivity extends AppCompatActivity {
         i.putExtras(b);
         sendBroadcast(i);
     }
+    public Bitmap combineImages(Bitmap c, Bitmap s) { // can add a 3rd parameter 'String loc' if you want to save the new image - left some code to do that at the bottom
 
+        int width, height = 0;
 
+        if(c.getWidth() > s.getWidth()) {
+            width = c.getWidth();
+            height = c.getHeight() + s.getHeight();
+        } else {
+            width = s.getWidth();
+            height = c.getHeight() + s.getHeight();
+        }
 
+        Bitmap cs = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+
+        Canvas comboImage = new Canvas(cs);
+
+        comboImage.drawBitmap(c, 0f, 0f, null);
+        comboImage.drawBitmap(s, 0f, c.getHeight(), null);
+
+        // this is an extra bit I added, just incase you want to save the new image somewhere and then return the location
+    /*String tmpImg = String.valueOf(System.currentTimeMillis()) + ".png";
+
+    OutputStream os = null;
+    try {
+      os = new FileOutputStream(loc + tmpImg);
+      cs.compress(CompressFormat.PNG, 100, os);
+    } catch(IOException e) {
+      Log.e("combineImages", "problem combining images", e);
+    }*/
+
+        return cs;
+    }
 }
