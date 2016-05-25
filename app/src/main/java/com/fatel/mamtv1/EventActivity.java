@@ -119,6 +119,9 @@ public class EventActivity extends AppCompatActivity {
 
 
                 //history
+                // update progress call volley
+
+                //
                 //go to main
                 Intent i1 = new Intent(EventActivity.this, MainActivity.class);
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

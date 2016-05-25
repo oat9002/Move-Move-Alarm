@@ -126,6 +126,9 @@ public class Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                // update progress call volley
+
+                //
                 txtA.setText("เสร็จสิ้น!");
                 Intent i1 = new Intent(Activity.this, Camera.class);
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
