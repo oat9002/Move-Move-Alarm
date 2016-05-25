@@ -144,6 +144,10 @@ public class EventActivity extends AppCompatActivity {
         }
         //history
 
+        // update progress call volley
+
+        //
+
             Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(), this);
         if(historygroup!=null) {
             historygroup.subaccept(1);
