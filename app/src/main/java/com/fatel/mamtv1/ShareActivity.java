@@ -149,10 +149,11 @@ public class ShareActivity extends AppCompatActivity {
             Profile profile = Profile.getCurrentProfile();
             Bitmap picture = BitmapFactory.decodeFile(Imguri.getPath());
             //Drawable drawable = getResources().getDrawable(getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
-            Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(),getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
-            Bitmap test = combineImages(picture,bitmap1);
+            Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
+            Bitmap test = combineImages(picture, bitmap1);
             SharePhoto pictureToShare = new SharePhoto.Builder()
                     .setBitmap(test)
+                    .setCaption("Test Application Move Alarm from Computer Engineer Ladkrabang")
                     .build();
 
             ArrayList<SharePhoto> pictureList = new ArrayList<>();
@@ -164,6 +165,7 @@ public class ShareActivity extends AppCompatActivity {
 
             if(profile != null && hasPublishPermission()){
                 ShareApi.share(content, shareCallback);
+                
             }else{
                 pendingAction = pendingAction.POST_PICTURE;
                 LoginManager.getInstance().logInWithPublishPermissions(
