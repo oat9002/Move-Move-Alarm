@@ -24,7 +24,6 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private DBAlarmHelper mAlarmHelper;
     CircleImageView propic;
     TextView score;
-    UserHelper userHelper;
     public MainFragment() {
         // Required empty public constructor
     }
@@ -50,15 +49,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         }
         score = (TextView)view.findViewById(R.id.scoreNum);
-        score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore()+"");
+        score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore() + "");
         return view;
     }
     public void setUser(View view){
         TextView user = (TextView) view.findViewById(R.id.userinmain);
-//        if(userHelper.checkdata()){
-//            String text = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername();
-//            user.setText(text);
-//        }
+        user.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
     }
 
     public void setTextAlarm(View view,DBAlarmHelper alarmHelper){
