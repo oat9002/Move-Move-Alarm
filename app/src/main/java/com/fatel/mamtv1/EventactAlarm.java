@@ -30,10 +30,12 @@ public class EventactAlarm extends AppCompatActivity {
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         long[] pattern = {0, 500, 1000};
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-        m = MediaPlayer.create(this,notification);
-        m.setLooping(true);
-        m.start();
+        if(UserManage.getInstance(EventactAlarm.this).getCurrentStateSw() == 1) {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            m = MediaPlayer.create(this, notification);
+            m.setLooping(true);
+            m.start();
+        }
         v.vibrate(pattern, 0);
 
     }
@@ -77,7 +79,9 @@ public class EventactAlarm extends AppCompatActivity {
         startActivity(intent);
         finish();
         v.cancel();
-        m.reset();
+        if(UserManage.getInstance(EventactAlarm.this).getCurrentStateSw() == 1) {
+            m.reset();
+        }
     }
 
     public void linkHome(View view){
@@ -94,7 +98,9 @@ public class EventactAlarm extends AppCompatActivity {
         startActivity(i1);
         finish();
         v.cancel();
-        m.reset();
+        if(UserManage.getInstance(EventactAlarm.this).getCurrentStateSw() == 1) {
+            m.reset();
+        }
     }
 
 }
