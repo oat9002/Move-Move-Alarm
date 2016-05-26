@@ -14,10 +14,10 @@
         <clip>
             <shape>
                 <gradient
-                    android:startColor="#bada55"
-                    android:centerColor="#bada55"
+                    android:startColor="#f6ab36"
+                    android:centerColor="#f6ab36"
                     android:centerY="0.75"
-                    android:endColor="#bada55"
+                    android:endColor="#f6ab36"
                     android:angle="270"
                     />
             </shape>
