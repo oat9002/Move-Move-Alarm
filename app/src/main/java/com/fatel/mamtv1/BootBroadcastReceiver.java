@@ -23,13 +23,18 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                 AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 int interval = 60*1000*1;
                 manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);*/
-                Intent i = new Intent(context, AlarmReceiver.class);
-                Bundle b = new Bundle();
-                b.putString("key", "first");
-                i.putExtras(b);
-                context.sendBroadcast(i);
-                Toast.makeText(context, "Alarm Set", Toast.LENGTH_SHORT).show();
-                Log.i("Boot", "Boot cpu");
+                if(UserManage.getInstance(context).getCurrentUser()!=null){
+                    Intent i = new Intent(context, AlarmReceiver.class);
+                    Bundle b = new Bundle();
+                    b.putString("key", "first");
+                    i.putExtras(b);
+                    context.sendBroadcast(i);
+                    Log.i("Boot", "Boot cpu complete can set");
+                }
+                else{
+                    Log.i("Boot", "Boot cpu can't set");
+                }
+
             }
         }
 }
