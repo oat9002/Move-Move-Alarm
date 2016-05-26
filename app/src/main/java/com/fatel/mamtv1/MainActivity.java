@@ -193,23 +193,23 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            fragmentClass = SetFragment.class;
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (fragmentClass != null) {
-                // Insert the fragment by replacing any existing fragment
-                FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
-                FragmentTransaction tx = fragmentManager.beginTransaction();
-                tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                tx.addToBackStack(null);
-                tx.replace(R.id.container, fragment).commit();
-            }
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            fragmentClass = SetFragment.class;
+//            try {
+//                fragment = (Fragment) fragmentClass.newInstance();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            if (fragmentClass != null) {
+//                // Insert the fragment by replacing any existing fragment
+//                FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
+//                FragmentTransaction tx = fragmentManager.beginTransaction();
+//                tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//                tx.addToBackStack(null);
+//                tx.replace(R.id.container, fragment).commit();
+//            }
+//            return true;
+//        }
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;

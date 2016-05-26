@@ -10,13 +10,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.content.Intent;
@@ -51,9 +54,9 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
     private String mModes="";
     private Spinner mFreq;
     private Button buttonSet;
+    private Switch mySwitch;
+    private boolean checkswitch = false;
     Context context;
-
-
     private DBAlarmHelper mAlarmHelper;
     private int ID = -1;
 
@@ -95,7 +98,7 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         mChkboxMA = (CheckBox)view.findViewById(R.id.chkboxMA);
         buttonSet = (Button)view.findViewById(R.id.buttonSet);
         mFreq = createSpinnerFrq(R.id.frq_min, view,mAlarmHelper);
-
+        mySwitch = (Switch) view.findViewById(R.id.mySwitch);
         //check checkbox tick
         if(mAlarmHelper.checkdata()==1) {
             Alarm alarm = mAlarmHelper.getAlarm();
@@ -378,6 +381,34 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        if (UserManage.getInstance(getActivity()).getCurrentStateSw() == 1) {
+            mySwitch.setChecked(true);
+        } else {
+            mySwitch.setChecked(false);
+        }
+        //attach a listener to check for changes in state
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if (isChecked) {
+                    //switchStatus.setText("Switch is currently ON");
+                    checkswitch = true;
+                    mySwitch.setChecked(true);
+                    UserManage.getInstance(getActivity()).setStateSw(1, getActivity());
+                    Log.i("state sw", "Switch on");
+                } else {
+                    //switchStatus.setText("Switch is currently OFF");
+                    checkswitch = false;
+                    mySwitch.setChecked(false);
+                    UserManage.getInstance(getActivity()).setStateSw(0, getActivity());
+                    Log.i("state sw", "Switch off");
+                }
+                Cache.getInstance().putData("switch", checkswitch);
+            }
+        });
 
         return view;
     }
