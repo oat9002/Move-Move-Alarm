@@ -149,10 +149,9 @@ public class ShareActivity extends AppCompatActivity {
             Profile profile = Profile.getCurrentProfile();
             Bitmap picture = BitmapFactory.decodeFile(Imguri.getPath());
             //Drawable drawable = getResources().getDrawable(getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
-            Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
-            int id = Activity.getCurrentActivityHandle().getRandomPosture().get(0).getImage();
-            String drawableS = String.valueOf(id);
-            Bitmap bitmap2 =  BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(drawableS, "drawable", getPackageName()));
+            //Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("cameraicon", "drawable", getPackageName()));
+            String res = findImage();
+            Bitmap bitmap2 =  BitmapFactory.decodeResource(getResources(), getResources().getIdentifier(res, "drawable", getPackageName()));
             Bitmap test = combineImages(picture, bitmap2);
             SharePhoto pictureToShare = new SharePhoto.Builder()
                     .setBitmap(test)
@@ -277,4 +276,46 @@ public class ShareActivity extends AppCompatActivity {
 
         return cs;
     }
+    public String findImage(){
+        int id = Activity.getCurrentActivityHandle().getRandomPosture().get(0).getIdPosture();
+        int mode[] = Activity.getCurrentActivityHandle().getModeSelect();
+        if(mode[0]==1){
+            if(id==0) return "p1_1_1";
+            else if(id==1) return "p1_2_1";
+            else if(id==2) return "p1_3_1";
+        }
+        else if(mode[0]==2){
+            if(id==3) return "p2_1_1";
+            else if(id==4) return "p2_2_1";
+        }
+        else if(mode[0]==3){
+            if(id==5) return "p3_1_1";
+            else if(id==6) return "p3_2_1";
+            else if(id==7) return "p3_3_1";
+            else if(id==8) return "p3_4_1";
+            else if(id==9) return "p3_5_1";
+        }
+        else if(mode[0]==4){
+            if(id==10) return "p4_1_1";
+            else if(id==11) return "p4_2_1";
+            else if(id==12) return "p4_3_1";
+        }
+        else if(mode[0]==5){
+            if(id==13) return "p5_1_1";
+            else if(id==14) return "p5_2_1";
+        }
+        else if(mode[0]==6){
+            if(id==15) return "p6_1_1";
+            else if(id==16) return "p6_2_1";
+            else if(id==17)return "p6_3_1";
+            else if(id==18) return "p6_4_1";
+            else if(id==19) return "p6_5_1";
+            else if(id==20) return "p6_6_1";
+            else if(id==21) return "p6_7_1";
+            else if(id==22) return "p6_8_1";
+        }
+        return "p1_1_1";
+    }
+
+
 }
