@@ -57,7 +57,7 @@ public class ProgressActivityFragment extends Fragment {
 
         //
         HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
-        History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentIdUser());
+        History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentUser().getIdUser());
         //History history = (History) Cache.getInstance().getData("userHistory");
         if(history != null && history.gettotal()==0){
             cirProgressstatus = 10;

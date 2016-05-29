@@ -30,7 +30,7 @@ public class EventactAlarm extends AppCompatActivity {
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         long[] pattern = {0, 500, 1000};
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if(UserManage.getInstance(EventactAlarm.this).getCurrentStateSw() == 1) {
+        if(UserManage.getInstance(EventactAlarm.this).getCurrentUser().getStatesw() == 1) {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
             m = MediaPlayer.create(this, notification);
             m.setLooping(true);
@@ -64,11 +64,11 @@ public class EventactAlarm extends AppCompatActivity {
 
     public void linkActivity(View view){
         //history
-        Log.i("linkacti",""+UserManage.getInstance(this).getCurrentIdGroup());
+        Log.i("linkacti",""+UserManage.getInstance(this).getCurrentUser().getIdGroup());
         // update progress call volley
 
         //
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(), this);
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup(), this);
         if(historygroup!=null){
             historygroup.addaccept(1);
             historygroup.save(this);
@@ -79,15 +79,15 @@ public class EventactAlarm extends AppCompatActivity {
         startActivity(intent);
         finish();
         v.cancel();
-        if(UserManage.getInstance(EventactAlarm.this).getCurrentStateSw() == 1) {
+        if(UserManage.getInstance(EventactAlarm.this).getCurrentUser().getStatesw() == 1) {
             m.reset();
         }
     }
 
     public void linkHome(View view){
         //history
-        Log.i("link",""+UserManage.getInstance(this).getCurrentIdGroup());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
+        Log.i("link",""+UserManage.getInstance(this).getCurrentUser().getIdGroup());
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup(),this);
         if(historygroup!=null){
             historygroup.addcancel(1);
             historygroup.save(this);
@@ -98,7 +98,7 @@ public class EventactAlarm extends AppCompatActivity {
         startActivity(i1);
         finish();
         v.cancel();
-        if(UserManage.getInstance(EventactAlarm.this).getCurrentStateSw() == 1) {
+        if(UserManage.getInstance(EventactAlarm.this).getCurrentUser().getIdGroup() == 1) {
             m.reset();
         }
     }

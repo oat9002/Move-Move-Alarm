@@ -165,7 +165,7 @@ public class Login_Activity extends AppCompatActivity {
         if (loggedIn && (profile != null)) {
 
             UserManage.getInstance(this).loginFBUser(profile.getId(), profile.getFirstName(), this);
-            UserManage.getInstance(this).setFacebookLastName(profile.getLastName(), this);
+            UserManage.getInstance(this).getCurrentUser().setFacebookLastName(profile.getLastName());
 
         }
     }

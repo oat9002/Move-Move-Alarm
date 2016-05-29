@@ -381,7 +381,7 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        if (UserManage.getInstance(getActivity()).getCurrentStateSw() == 1) {
+        if (UserManage.getInstance(getActivity()).getCurrentUser().getStatesw() == 1) {
             mySwitch.setChecked(true);
         } else {
             mySwitch.setChecked(false);
@@ -397,13 +397,13 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
                     //switchStatus.setText("Switch is currently ON");
                     checkswitch = true;
                     mySwitch.setChecked(true);
-                    UserManage.getInstance(getActivity()).setStateSw(1, getActivity());
+                    UserManage.getInstance(getActivity()).getCurrentUser().setStatesw(1);
                     Log.i("state sw", "Switch on");
                 } else {
                     //switchStatus.setText("Switch is currently OFF");
                     checkswitch = false;
                     mySwitch.setChecked(false);
-                    UserManage.getInstance(getActivity()).setStateSw(0, getActivity());
+                    UserManage.getInstance(getActivity()).getCurrentUser().setStatesw(0);
                     Log.i("state sw", "Switch off");
                 }
                 Cache.getInstance().putData("switch", checkswitch);

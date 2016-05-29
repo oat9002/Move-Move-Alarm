@@ -66,7 +66,7 @@ public class ProgressEventFragment extends Fragment {
         //edit
         //HistorygroupHelper mhistorygroupHelper = new HistorygroupHelper(getActivity());
         //Log.i("numgroup",""+UserManage.getInstance(getActivity()).getCurrentIdGroup());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentIdGroup(),getActivity());
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentUser().getIdGroup(),getActivity());
         if(historygroup==null){
             cirProgressstatusE = 50;
             mProgressStatusE = 0;
