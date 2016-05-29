@@ -36,7 +36,7 @@ public class UserManage {
     public void setCurrentUser(User user){
        currentUser= user;
     }
-
+    /*
     public void loginUser (String username,String password, final Context context){
 
         String url = HttpConnector.URL + "user/login"; //url of login API
@@ -118,6 +118,7 @@ public class UserManage {
         HttpConnector.getInstance(context).addToRequestQueue(loginRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
 
     }
+    */
     public void loginFBUser(String facebookID,String facebookFirstName,Context context){
 
         String url = HttpConnector.URL + "user/loginFacebook"; //url of login API
@@ -151,12 +152,13 @@ public class UserManage {
                                 UserManage.getInstance(context).setCurrentUser(user);
 
                             }
-                            UserManage.getInstance(context).getCurrentUser().setFirstName(converter.toString(userData.get("firstName")));
-                            UserManage.getInstance(context).getCurrentUser().setLastName(converter.toString(userData.get("lastName")));
-                            UserManage.getInstance(context).getCurrentUser().setUserName(converter.toString(userData.get("userName")));
+                            UserManage.getInstance(context).getCurrentUser().setBirthDay(converter.toString(userData.get("birthDay")));
                             UserManage.getInstance(context).getCurrentUser().setAge(converter.toInt(userData.get("age")));
                             UserManage.getInstance(context).getCurrentUser().setScore(converter.toInt(userData.get("score")));
-                            UserManage.getInstance(context).getCurrentUser().setGender(converter.toInt(userData.get("gender")));
+                            UserManage.getInstance(context).getCurrentUser().setHeight(converter.toInt(userData.get("height")));
+                            UserManage.getInstance(context).getCurrentUser().setWeight(converter.toInt(userData.get("weight")));
+                            UserManage.getInstance(context).getCurrentUser().setWaistline(converter.toInt(userData.get("waistline")));
+                            UserManage.getInstance(context).getCurrentUser().setBmi(converter.toInt(userData.get("bmi")));
                             UserManage.getInstance(context).getCurrentUser().setEmail(converter.toString(userData.get("email")));
                             if(groupData != null)
                                 UserManage.getInstance(context).getCurrentUser().setIdGroup(converter.toInt(groupData.get("id")));
@@ -219,7 +221,7 @@ public class UserManage {
 
     }
 
-
+/*
     public void createNewUser(String username,String password, final Context context){
 
         String url = HttpConnector.URL + "user/createUser";
@@ -275,7 +277,7 @@ public class UserManage {
         }; //end of request's details
         HttpConnector.getInstance(context).addToRequestQueue(stringRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
 
-    }
+    }*/
     private int addNewUserFB(String facebookID,String facebookFirstName){
         return 0;
     }
@@ -343,20 +345,6 @@ public class UserManage {
     public String getCurrentFacebookID(){
         return currentUser.getFacebookID();
     }
-    public void setFirstName(String firstName,Context context){
-        if(currentUser!=null){
-            currentUser.setFirstName(firstName);
-            currentUser.save(context);
-            updateUser(context);
-        }
-    }
-    public void setLastName(String lastName,Context context){
-        if(currentUser!=null){
-            currentUser.setLastName(lastName);
-            currentUser.save(context);
-            updateUser(context);
-        }
-    }
     public void setAge(int age,Context context){
         if(currentUser!=null){
             currentUser.setAge(age);
@@ -364,13 +352,7 @@ public class UserManage {
             updateUser(context);
         }
     }
-    public void setGender(int gender,Context context){
-        if(currentUser!=null){
-            currentUser.setGender(gender);
-            currentUser.save(context);
-            updateUser(context);
-        }
-    }
+
     public void setEmail(String email,Context context){
         if(currentUser!=null){
             currentUser.setEmail(email);
@@ -407,13 +389,6 @@ public class UserManage {
         }
     }
 
-
-    public String getCurrentFirstName (){
-        return currentUser.getFirstName();
-    }
-    public String getCurrentLastName (){
-        return currentUser.getLastName();
-    }
     public int getCurrentProfileImage(){
         return currentUser.getProfileImage();
     }
@@ -423,9 +398,7 @@ public class UserManage {
     public int getCurrentScore(){
         return currentUser.getScore();
     }
-    public int getCurrentGender() {
-        return currentUser.getGender();
-    }
+
     public String getCurrentEmail(){
         return currentUser.getEmail();
     }
@@ -436,7 +409,6 @@ public class UserManage {
         return currentUser.getFacebookLastName();
     }
 public String getCurrentFacebookId(){return currentUser.getFacebookID();}
-public String getCurrentUsername(){return currentUser.getUserName();}
     public int getCurrentIdUser() {
         return currentUser.getIdUser();
     }

@@ -73,18 +73,18 @@ public class ScoreboardUserFragment extends Fragment {
                         user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
                     }
                     else {
-                        user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+                        user0.setText("username");
                     }
                 }
                 else {
-                    user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+                    user0.setText("username");
                 }
             }
             else {
-                user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+                user0.setText("username");
             }
         } else {
-            user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+            user0.setText("username");
         }
         Log.i("score", UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore() + "");
         score0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore() + "");

@@ -62,10 +62,7 @@ public class MainActivity extends AppCompatActivity {
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
 
-        if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
             user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
-        else
-            user.setText(UserManage.getInstance(this).getCurrentUsername());
 
         tempid = UserManage.getInstance(this).getCurrentFacebookID();
         if(!tempid.equals("0.0")) {
@@ -522,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
 
         HttpConnector.getInstance(this).addToRequestQueue(eventRequest);
     }
-
+/*
     public void editname(View view){
         final EditText name = new EditText(this);
         final EditText surname = new EditText(this);
@@ -583,7 +580,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("แก้ไข ชื่อ-นามสุกล").setPositiveButton("ตกลง", dialogClickListener)
                 .setNegativeButton("ยกเลิก", dialogClickListener).show();
 
-    }
+    }*/
     private boolean isEmpty(EditText myeditText) {
         return myeditText.getText().toString().trim().length() == 0;
     }

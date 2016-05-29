@@ -54,10 +54,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName()+"").equals("null"))
             fb.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
-        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName()+"").equals("null"))
-            firstname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName());
-        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName()+"").equals("null"))
-            lastname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName());
+
 
         return view;
     }

@@ -12,12 +12,13 @@ import java.util.HashMap;
 public class User {
     private int id;
     private int idUser;
-    private String firstName;
-    private String lastName;
-    private String userName;
+    private String birthDay;
     private int age;
     private int score;
-    private int gender;
+    private int height;
+    private int weight;
+    private int waistline;
+    private int bmi;
     private String email;
     private String facebookID;
     private String facebookFirstName;
@@ -31,12 +32,13 @@ public class User {
     public class Column{
         public static final String ID = BaseColumns._ID;
         public static final String IDUSER = "iduser";
-        public static final String FIRSTNAME = "firstname";
-        public static final String LASTNAME = "lastname";
-        public static final String USERNAME = "username";
+        public static final String BIRTHDAY = "birthday";
         public static final String AGE = "age";
         public static final String SCORE = "score";
-        public static final String GENDER = "gender";
+        public static final String HEIGHT = "height";
+        public static final String WEIGHT = "weight";
+        public static final String WAISTLINE = "waistline";
+        public static final String BMI = "bmi";
         public static final String EMAIL = "email";
         public static final String FACEBOOKID = "facebookid";
         public static final String FACEBOOKFIRSTNAME = "facebookfirstname";
@@ -48,16 +50,6 @@ public class User {
     }
     public User(){
     }
-    public User(int idUser, String username){
-        this.id=-1;
-        this.score=0;
-        this.login=0;
-        this.facebookID="0";
-        this.idUser = idUser;
-        this.userName = username;
-        this.idGroup=0;
-        this.statesw =1;
-    }
     public User(int idUser,String facebookID,String facebookFirstName){
         this.id=-1;
         this.score=0;
@@ -68,17 +60,18 @@ public class User {
         this.idGroup=0;
         this.statesw =1;
     }
-    public User(int id,int idUser,String firstName, String lastName, String username,int age,int score
-            ,int gender,String email, String facebookID, String facebookFirstName,
+    public User(int id,int idUser,String birthDay,int age,int score
+            ,int height,int weight,int waistline,int bmi,String email, String facebookID, String facebookFirstName,
                 String facebookLastName, int profileImage,int login,int idGroup,int statesw){
         this.id=id;
         this.idUser = idUser;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = username;
+        this.birthDay = birthDay;
         this.age = age;
         this.score = score;
-        this.gender = gender;
+        this.height = height;
+        this.weight = weight;
+        this.waistline = waistline;
+        this.bmi = bmi;
         this.email = email;
         this.facebookID=facebookID;
         this.facebookFirstName=facebookFirstName;
@@ -119,14 +112,8 @@ public class User {
     public int getIdUser(){
         return idUser;
     }
-    public String getFirstName(){
-        return firstName;
-    }
-    public String getLastName(){
-        return lastName;
-    }
-    public String getUserName(){
-        return userName;
+    public String getBirthDay(){
+        return birthDay;
     }
     public int getAge(){
         return age;
@@ -134,9 +121,22 @@ public class User {
     public int getScore(){
         return score;
     }
-    public int getGender(){
-        return gender;
+    public int getHeight(){
+        return height;
     }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public int getWaistline() {
+        return waistline;
+    }
+
+    public int getBmi() {
+        return bmi;
+    }
+
     public String getEmail(){
         return email;
     }
@@ -161,23 +161,32 @@ public class User {
     public void setIdUser(int idUser){
         this.idUser = idUser;
     }
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
     }
-    public void setLastName(String lastName){
-        this.lastName = lastName;
+
+    public void setHeight(int height) {
+        this.height = height;
     }
-    public void setUserName(String userName){
-        this.userName = userName;
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
+
+    public void setWaistline(int waistline) {
+        this.waistline = waistline;
+    }
+
+    public void setBmi(int bmi) {
+        this.bmi = bmi;
+    }
+
     public void setAge(int age){
         this.age = age;
     }
     public void setScore(int score){
         this.score = score;
-    }
-    public void setGender(int gender){
-        this.gender = gender;
     }
     public void setEmail(String email){
         this.email = email;
@@ -211,16 +220,17 @@ public class User {
     {
         HashMap<String, Object> userData = new HashMap<>();
         userData.put("id", this.getIdUser());
-        userData.put("firstName",this.getFirstName());
-        userData.put("lastName",this.getLastName());
-        userData.put("userName",this.getUserName());
+        userData.put("birthDay",this.getBirthDay());
         userData.put("age",this.getAge());
         userData.put("score",this.getScore());
+        userData.put("height",this.getHeight());
+        userData.put("weight",this.getWeight());
+        userData.put("waistline",this.getWaistline());
+        userData.put("bmi",this.getBmi());
         userData.put("profileImage",this.getProfileImage());
         userData.put("facebookID", "fb" + this.getFacebookID());
         userData.put("facebookFirstName",this.getFacebookFirstName());
         userData.put("facebookLastName",this.getFacebookLastName());
-        userData.put("gender",this.getGender());
         userData.put("email",this.getEmail());
 
         return userData;
