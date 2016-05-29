@@ -105,13 +105,19 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                                 }
                                 if (!isEmpty(h)) {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setHeight(Integer.valueOf(h.getText().toString()));
+                                    int currentW =UserManage.getInstance(getActivity()).getCurrentUser().getWeight();
+                                    if(currentW>0) {
+                                        UserManage.getInstance(getActivity()).getCurrentUser().setBmi(BmiCal(0.0+currentW,Double.valueOf(h.getText().toString())));
+                                    }
                                 }
+
                                 if (!isEmpty(w)) {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setWeight(Integer.valueOf(w.getText().toString()));
+                                    int currentH =UserManage.getInstance(getActivity()).getCurrentUser().getHeight();
+                                    if(currentH>0) UserManage.getInstance(getActivity()).getCurrentUser().setBmi(BmiCal(Double.valueOf(w.getText().toString()),currentH));
                                 }
-                                if (!isEmpty(h) && isEmpty(w)) {
-                                    int Calbmi = 0;
-                                    UserManage.getInstance(getActivity()).getCurrentUser().setBmi(Calbmi);
+                                if (!isEmpty(w)&&!isEmpty(h)){
+                                    UserManage.getInstance(getActivity()).getCurrentUser().setBmi(BmiCal(Double.valueOf(w.getText().toString()),Double.valueOf(h.getText().toString())));
                                 }
                                 if (!isEmpty(waist)) {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setWaistline(Integer.valueOf(waist.getText().toString()));
@@ -165,6 +171,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     }
     private boolean isEmpty(EditText myeditText) {
         return myeditText.getText().toString().trim().length() == 0;
+    }
+    private Double BmiCal(double weight,double height){
+        Double hM = height/100;
+        Double Calbmi = weight/(hM*hM);
+        return Calbmi;
     }
 
 
