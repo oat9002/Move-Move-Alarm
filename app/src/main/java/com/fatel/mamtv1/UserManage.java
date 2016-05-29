@@ -158,7 +158,7 @@ public class UserManage {
                             UserManage.getInstance(context).getCurrentUser().setHeight(converter.toInt(userData.get("height")));
                             UserManage.getInstance(context).getCurrentUser().setWeight(converter.toInt(userData.get("weight")));
                             UserManage.getInstance(context).getCurrentUser().setWaistline(converter.toInt(userData.get("waistline")));
-                            UserManage.getInstance(context).getCurrentUser().setBmi(converter.toInt(userData.get("bmi")));
+                            UserManage.getInstance(context).getCurrentUser().setBmi(converter.toDouble(userData.get("bmi")));
                             UserManage.getInstance(context).getCurrentUser().setEmail(converter.toString(userData.get("email")));
                             if(groupData != null)
                                 UserManage.getInstance(context).getCurrentUser().setIdGroup(converter.toInt(groupData.get("id")));

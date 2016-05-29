@@ -79,7 +79,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         if(UserManage.getInstance(getActivity()).getCurrentUser().getWaistline()>0)
             waist.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getWaistline()));
         if(UserManage.getInstance(getActivity()).getCurrentUser().getBmi()>0)
-            bmi.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getBmi()));
+            bmi.setText(String.format("%.2f", UserManage.getInstance(getActivity()).getCurrentUser().getBmi()));
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

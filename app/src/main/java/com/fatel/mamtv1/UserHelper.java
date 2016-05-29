@@ -23,7 +23,7 @@ public class UserHelper extends SQLiteOpenHelper {
         //not sure %s int for image
         String CREATE_USER_TABLE = String.format("CREATE TABLE %s " +
                         "(%s INTEGER PRIMARY KEY  AUTOINCREMENT,%s INTEGER, %s TEXT" +
-                        ",%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER, %s TEXT, %s TEXT,%s TEXT,%s TEXT,%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER)",
+                        ",%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER,%s DOUBLE, %s TEXT, %s TEXT,%s TEXT,%s TEXT,%s INTEGER,%s INTEGER,%s INTEGER,%s INTEGER)",
                 User.TABLE,
                 User.Column.ID,
                 User.Column.IDUSER,
@@ -139,7 +139,7 @@ public class UserHelper extends SQLiteOpenHelper {
 
         user = new User(cursor.getInt(0), cursor.getInt(1),
                 cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5),
-                cursor.getInt(6), cursor.getInt(7), cursor.getInt(8),
+                cursor.getInt(6), cursor.getInt(7), cursor.getDouble(8),
                 cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                 cursor.getInt(13),cursor.getInt(14),cursor.getInt(15),cursor.getInt(16));
 
@@ -187,7 +187,7 @@ public class UserHelper extends SQLiteOpenHelper {
         if(check){
             user = new User(cursor.getInt(0), cursor.getInt(1),
                     cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5),
-                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8),
+                    cursor.getInt(6), cursor.getInt(7), cursor.getDouble(8),
                     cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                     cursor.getInt(13),cursor.getInt(14),cursor.getInt(15),cursor.getInt(16));
 

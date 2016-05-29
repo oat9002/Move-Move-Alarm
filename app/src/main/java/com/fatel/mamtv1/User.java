@@ -18,7 +18,7 @@ public class User {
     private int height;
     private int weight;
     private int waistline;
-    private int bmi;
+    private Double bmi;
     private String email;
     private String facebookID;
     private String facebookFirstName;
@@ -61,7 +61,7 @@ public class User {
         this.statesw =1;
     }
     public User(int id,int idUser,String birthDay,int age,int score
-            ,int height,int weight,int waistline,int bmi,String email, String facebookID, String facebookFirstName,
+            ,int height,int weight,int waistline,double bmi,String email, String facebookID, String facebookFirstName,
                 String facebookLastName, int profileImage,int login,int idGroup,int statesw){
         this.id=id;
         this.idUser = idUser;
@@ -133,7 +133,7 @@ public class User {
         return waistline;
     }
 
-    public int getBmi() {
+    public double getBmi() {
         return bmi;
     }
 
@@ -178,7 +178,7 @@ public class User {
         this.waistline = waistline;
     }
 
-    public void setBmi(int bmi) {
+    public void setBmi(double bmi) {
         this.bmi = bmi;
     }
 
