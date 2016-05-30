@@ -11,16 +11,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
-
+import java.util.GregorianCalendar;
+import java.util.Calendar;
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -70,7 +78,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             name.setText(UserManage.getInstance(getActivity()).getCurrentUser().getFacebookFirstName());
         if(!(UserManage.getInstance(getActivity()).getCurrentUser().getBirthDay()+"").equals("null"))
             birth.setText(UserManage.getInstance(getActivity()).getCurrentUser().getBirthDay());
-        if(UserManage.getInstance(getActivity()).getCurrentUser().getAge()>0)
+        if(UserManage.getInstance(getActivity()).getCurrentUser().getAge()>=0)
             age.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getAge()));
         if(UserManage.getInstance(getActivity()).getCurrentUser().getHeight()>0)
             height.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getHeight()));
@@ -85,11 +93,17 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
 
-                final EditText birthday = new EditText(getActivity());
                 final EditText h = new EditText(getActivity());
                 final EditText w = new EditText(getActivity());
                 final EditText waist = new EditText(getActivity());
-                birthday.setText("");
+                final TextView txtB = new TextView(getActivity());
+                final TextView txtH = new TextView(getActivity());
+                final TextView txtW = new TextView(getActivity());
+                final TextView txtWa = new TextView(getActivity());
+                final DatePicker birthday = new DatePicker(getActivity());
+
+
+
                 h.setText("");
                 w.setText("");
                 waist.setText("");
@@ -98,11 +112,16 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                if (!isEmpty(birthday)) {
-                                    UserManage.getInstance(getActivity()).getCurrentUser().setBirthDay(birthday.getText().toString());
-                                    int Calage = 0;
+                               // if (birthday.isFocusable()) {
+
+                                    int   day  = birthday.getDayOfMonth();
+                                    int   month= birthday.getMonth() + 1;
+                                    int   year = birthday.getYear();
+                                    String date=checkDigit(day)+"/"+checkDigit(month)+"/"+year;
+                                    UserManage.getInstance(getActivity()).getCurrentUser().setBirthDay(date);
+                                    int Calage = getAge(year,month,day);
                                     UserManage.getInstance(getActivity()).getCurrentUser().setAge(Calage);
-                                }
+                                //}
                                 if (!isEmpty(h)) {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setHeight(Integer.valueOf(h.getText().toString()));
                                     int currentW =UserManage.getInstance(getActivity()).getCurrentUser().getWeight();
@@ -122,6 +141,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                                 if (!isEmpty(waist)) {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setWaistline(Integer.valueOf(waist.getText().toString()));
                                 }
+                                UserManage.getInstance(getActivity()).getCurrentUser().save(getActivity());
                                 UserManage.getInstance(getActivity()).updateUser(getActivity());
                                 getFragmentManager().popBackStack();
                                 Fragment fragment = null;
@@ -144,24 +164,46 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                         }
                     }
                 };
-                birthday.setTextColor(Color.WHITE);
-                h.setTextColor(Color.WHITE);
-                w.setTextColor(Color.WHITE);
-                waist.setTextColor(Color.WHITE);
                 LinearLayout layout = new LinearLayout(getActivity());
                 layout.setOrientation(LinearLayout.VERTICAL);
-                birthday.setHint(Html.fromHtml("<font color='#B0B0B0'>วันเกิด</font>"));
+                LinearLayout layh =new LinearLayout(getActivity());
+                layh.setOrientation(LinearLayout.HORIZONTAL);
+
+                layout.setPadding(20,10,20,10);
+                txtH.setText(Html.fromHtml("<font color='#FF9900'>ส่วนสูง</font>"));
+                txtH.setTextSize(20);
+                layh.addView(txtH);
+                h.setHint(Html.fromHtml("<font color='#B0B0B0'>เซนติเมตร</font>"));
+                h.setLayoutParams(new LinearLayout.LayoutParams(250,120));
+                layh.addView(h);
+                //layout.addView(layh);
+                LinearLayout layw =new LinearLayout(getActivity());
+                layw.setOrientation(LinearLayout.HORIZONTAL);
+                txtW.setText(Html.fromHtml("<font color='#FF9900'>น้ำหนัก</font>"));
+                txtW.setTextSize(20);
+                txtW.setPadding(10,0,0,0);
+                layh.addView(txtW);
+                w.setHint(Html.fromHtml("<font color='#B0B0B0'>กิโลกรัม</font>"));
+                w.setLayoutParams(new LinearLayout.LayoutParams(250,120));
+                layh.addView(w);
+                layout.addView(layh);
+                LinearLayout layWa =new LinearLayout(getActivity());
+                layWa.setOrientation(LinearLayout.HORIZONTAL);
+                txtWa.setText(Html.fromHtml("<font color='#FF9900'>รอบเอว</font>"));
+                txtWa.setTextSize(20);
+                layWa.addView(txtWa);
+                waist.setHint(Html.fromHtml("<font color='#B0B0B0'>นิ้ว</font>"));
+                waist.setLayoutParams(new LinearLayout.LayoutParams(300,120));
+                layWa.addView(waist);
+                layout.addView(layWa);
+                txtB.setText(Html.fromHtml("<font color='#FF9900'>วันเกิด</font>"));
+                txtB.setTextSize(20);
+                layout.addView(txtB);
                 layout.addView(birthday);
-                h.setHint(Html.fromHtml("<font color='#B0B0B0'>ส่วนสูง</font>"));
-                layout.addView(h);
-                w.setHint(Html.fromHtml("<font color='#B0B0B0'>น้ำหนัก</font>"));
-                layout.addView(w);
-                waist.setHint(Html.fromHtml("<font color='#B0B0B0'>รอบเอว</font>"));
-                layout.addView(waist);
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_DARK);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
                 builder.setTitle("แก้ไขข้อมูล");
                 builder.setView(layout);
-                builder.setMessage("แก้ไขข้อมูลส่วนตัว").setPositiveButton("ตกลง", dialogClickListener)
+                builder.setPositiveButton("ตกลง", dialogClickListener)
                         .setNegativeButton("ยกเลิก", dialogClickListener).show();
 
             }
@@ -177,6 +219,30 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         Double Calbmi = weight/(hM*hM);
         return Calbmi;
     }
+    private String checkDigit(int number)
+    {
+        return number<=9?"0"+number:String.valueOf(number);
+    }
+    private int getAge (int _year, int _month, int _day) {
+
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        if(a < 0)
+            a=0;
+        return a;
+    }
+
 
 
 }
