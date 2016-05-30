@@ -220,7 +220,7 @@ public class User {
     {
         HashMap<String, Object> userData = new HashMap<>();
         userData.put("id", this.getIdUser());
-        userData.put("birthDay",this.getBirthDay());
+        userData.put("birthday",this.getBirthDay());
         userData.put("age",this.getAge());
         userData.put("score",this.getScore());
         userData.put("height",this.getHeight());
