@@ -44,6 +44,7 @@ public class Activity extends AppCompatActivity {
     String exerciseDes;
     CountDownTimer time1;
     CountDownTimer time2;
+    static ActivityHandle activityHandle;
 
     private static final String FORMAT = "%02d:%02d";
     public static Context context;
@@ -62,9 +63,9 @@ public class Activity extends AppCompatActivity {
         txtDes=(TextView) findViewById(R.id.des);
         txtName=(TextView) findViewById(R.id.imgname);
         imgView=(ImageView) findViewById(R.id.img);
-        ActivityHandle activityHandle=new ActivityHandle(this);
+        activityHandle=new ActivityHandle(this);
         context=getApplicationContext();
-        img = activityHandle.getRandomPosture(this);
+        img = activityHandle.getRandomPosture();
 
         exerciseImg=(img.get(count)).getImage();
         exerciseName=(img.get(count)).getName();
@@ -222,5 +223,10 @@ public class Activity extends AppCompatActivity {
     public void makeToast(String text)
     {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+    public static ActivityHandle getCurrentActivityHandle (){
+        if (activityHandle!=null)
+            return activityHandle;
+        return null;
     }
 }

@@ -11,12 +11,15 @@ public class ActivityHandle {
 
     int[] modeSelect = new int[] {-1,-1};
     int modeCount=0;
+    ArrayList<Posture> randomPosture = new ArrayList<>();
+
 
 
     public ActivityHandle(Context context){
         //use selected mode from alarm
 
         modeRandom(getMode(context));
+        RandomPosture(context);
 
     }
     private void modeRandom(int[] mode){
@@ -44,9 +47,8 @@ public class ActivityHandle {
         return modeDB;
 
     }
-    public ArrayList<Posture> getRandomPosture(Context context){
+    public void RandomPosture(Context context){
         PostureCollection postureCollection= PostureCollection.getInstance(context);
-        ArrayList<Posture> randomPosture = new ArrayList<>();
         for(int i=0;i<2;i++){
             ArrayList<Posture> modePosture = postureCollection.getPostureMode(modeSelect[i], context);
             int x;
@@ -57,7 +59,12 @@ public class ActivityHandle {
             randomPosture.add(modePosture.get(x));
         }
 
-        return  randomPosture;
+    }
+    public ArrayList<Posture> getRandomPosture (){
+        return randomPosture;
+    }
+    public int[] getModeSelect (){
+        return modeSelect;
     }
 
 }
