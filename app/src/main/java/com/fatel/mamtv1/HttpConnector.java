@@ -3,6 +3,7 @@ package com.fatel.mamtv1;
 
 import android.content.Context;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -16,6 +17,7 @@ public class HttpConnector {
     private static Context context;
     private Map<String, Object> cache;
     public static String URL = "http://13.76.94.234:8080/";
+    //public static String URL = "http://192.168.1.40:8080/";
 
     private HttpConnector(Context context) {
         this.context = context;

@@ -1,6 +1,7 @@
 package com.fatel.mamtv1;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public String id;
     String tempid;
     DBAlarmHelper mAlarmHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,28 +58,28 @@ public class MainActivity extends AppCompatActivity {
         mAlarmHelper = new DBAlarmHelper(this);
 
 
-        if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
+        if (UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
         profilepic = (CircleImageView) findViewById(R.id.profile_image);
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
 
-        if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
+        if ((UserManage.getInstance(this).getCurrentUsername() + "").equals("null"))
             user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
         else
             user.setText(UserManage.getInstance(this).getCurrentUsername());
 
         tempid = UserManage.getInstance(this).getCurrentFacebookID();
-        if(!tempid.equals("0.0")) {
-            if(!tempid.equals("0")) {
-                if(!(tempid.equals("fb0.0"))) {
+        if (!tempid.equals("0.0")) {
+            if (!tempid.equals("0")) {
+                if (!(tempid.equals("fb0.0"))) {
                     Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(profilepic);
                 }
             }
         }
 
-        if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
+        if (UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
             requestEvent();
         }
 
@@ -122,34 +125,32 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
-        if(history==null){
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(), this);
+        if (history == null) {
             history = new History(UserManage.getInstance(this).getCurrentIdUser());
             history.save(this);
             Cache.getInstance().putData("userHistory", history);
-            requestUserProgress();
-        }
-        else{
+            requestUserDayProgressActivity();
+        } else {
             Cache.getInstance().putData("userHistory", history);
-            requestSendUserProgress();
+            //requestSendUserProgress();
         }
 //
         //historygroup
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
-        if(historygroup==null&&UserManage.getInstance(this).getCurrentIdGroup()!=0){
-            Log.i("historygroup","success");
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(), this);
+        if (historygroup == null && UserManage.getInstance(this).getCurrentIdGroup() != 0) {
+            Log.i("historygroup", "success");
             historygroup = new Historygroup(UserManage.getInstance(this).getCurrentIdGroup());
             historygroup.save(this);
             Cache.getInstance().putData("groupHistory", historygroup);
-            requestGroupProgress();
-        }
-        else if(UserManage.getInstance(this).getCurrentIdGroup()!=0){
+            requestGroupProgressActivity();
+        } else if (UserManage.getInstance(this).getCurrentIdGroup() != 0) {
             Cache.getInstance().putData("groupHistory", historygroup);
-            requestSendGroupProgress();
+            //requestSendGroupProgress();
         }
 
 
-        if(mAlarmHelper.checkdata()!=1){
+        if (mAlarmHelper.checkdata() != 1) {
             //switch to AlarmFragment
             Fragment fragment = null;
             Class fragmentClass;
@@ -222,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                                selectDrawerItem(menuItem);
+                        selectDrawerItem(menuItem);
                         return true;
                     }
                 });
@@ -244,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_posture_fragment:
                 fragmentClass = ChoosePostureFragment.class;
                 break;
-            case R.id.nav_progress_fragment :
+            case R.id.nav_progress_fragment:
                 fragmentClass = null;
                 mDrawerLayout.closeDrawers();
                 Intent intent4 = new Intent(this, ProgressActivity.class);
@@ -265,19 +266,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_group_fragment:
                 User currentUser = UserManage.getInstance(this).getCurrentUser();
                 //edit
-                if(currentUser.getIdGroup() == 0)
+                if (currentUser.getIdGroup() == 0)
                     fragmentClass = GroupFragment.class;
-                else{//มีกลุ่ม
+                else {//มีกลุ่ม
                     requestGroupInfo(GroupMainActivity.class);
                 }
                 break;
 
             case R.id.nav_logout_fragment:
                 fragmentClass = null;
-                mAlarmHelper =  new DBAlarmHelper(this);
+                mAlarmHelper = new DBAlarmHelper(this);
 
 
-                if(!tempid.equals("0.0")){
+                if (!tempid.equals("0.0")) {
                     FacebookSdk.sdkInitialize(this.getApplicationContext());
                     LoginManager.getInstance().logOut();
                 }
@@ -306,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
             FragmentTransaction tx = fragmentManager.beginTransaction();
             tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-            if(fragmentClass!=MainFragment.class){
+            if (fragmentClass != MainFragment.class) {
                 tx.addToBackStack(null);
             }
             tx.replace(R.id.container, fragment).commit();
@@ -329,15 +330,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void linkCreateGroup(View view)
-    {
+    public void linkCreateGroup(View view) {
 
         Intent intent = new Intent(this, CreateGroupActivity.class);
         startActivity(intent);
     }
 
-    public void linkJoinGroup(View view)
-    {
+    public void linkJoinGroup(View view) {
         Intent intent = new Intent(this, JoinGroupActivity.class);
 
         startActivity(intent);
@@ -345,17 +344,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void makeToast(String text)
-    {
+    public void makeToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
 
-
-    public void requestGroupInfo(Class nextActivity)
-    {
+    public void requestGroupInfo(Class nextActivity) {
         final Class nxtActivity = nextActivity;
-        String url = HttpConnector.URL +"group/findByID";
+        String url = HttpConnector.URL + "group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
@@ -363,12 +359,11 @@ public class MainActivity extends AppCompatActivity {
                         Converter converter = Converter.getInstance();
                         Cache cache = Cache.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
+                        if ((boolean) data.get("status")) {
                             HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
                             cache.putData("groupData", groupData);
                             requestEvent(nxtActivity);
-                        }
-                        else {
+                        } else {
                             makeToast(converter.toString(data.get("description")));
                         }
                     }
@@ -391,8 +386,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(findGroupRequest);
     }
 
-    public void requestGroupInfo()
-    {
+    public void requestGroupInfo() {
         String url = HttpConnector.URL + "group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
@@ -401,12 +395,10 @@ public class MainActivity extends AppCompatActivity {
                         Converter converter = Converter.getInstance();
                         Cache cache = Cache.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
+                        if ((boolean) data.get("status")) {
                             HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
                             cache.putData("groupData", groupData);
-                            makeToast("syncing completed.");
-                        }
-                        else {
+                        } else {
                             makeToast(converter.toString(data.get("description")));
                         }
                     }
@@ -429,8 +421,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(findGroupRequest);
     }
 
-    public void requestEvent()
-    {
+    public void requestEvent() {
         String url = HttpConnector.URL + "event/getEvent";
         StringRequest eventRequest = new StringRequest(Request.Method.GET, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
@@ -439,7 +430,8 @@ public class MainActivity extends AppCompatActivity {
                         Converter converter = Converter.getInstance();
                         Cache cache = Cache.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
+                        if ((boolean) data.get("status")) {
+                            Log.i("event", "" + data.get("event"));
                             HashMap<String, Object> eventData = converter.JSONToHashMap("" + data.get("event"));
                             cache.putData("eventData", eventData);
                             DateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
@@ -450,15 +442,14 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            String time = ""+date.getHours()+"."+date.getMinutes();
+                            String time = "" + date.getHours() + "." + date.getMinutes();
                             Intent intent = new Intent(getBaseContext(), EventReceiver.class);
                             Bundle b = new Bundle();
                             b.putString("event", time);
                             intent.putExtras(b);
                             sendBroadcast(intent);
 
-                        }
-                        else {
+                        } else {
                             makeToast(converter.toString(data.get("description")));
                         }
                     }
@@ -473,8 +464,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(eventRequest);
     }
 
-    public void requestEvent(Class nextActivity)
-    {
+    public void requestEvent(Class nextActivity) {
         final Class nxtActivity = nextActivity;
         String url = HttpConnector.URL + "event/getEvent";
         StringRequest eventRequest = new StringRequest(Request.Method.GET, url, //create new string request with POST method
@@ -485,8 +475,8 @@ public class MainActivity extends AppCompatActivity {
                         Converter converter = Converter.getInstance();
                         Cache cache = Cache.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
-                            Log.i("event" , "" + data.get("event"));
+                        if ((boolean) data.get("status")) {
+                            Log.i("event", "" + data.get("event"));
                             HashMap<String, Object> eventData = converter.JSONToHashMap("" + data.get("event"));
                             cache.putData("eventData", eventData);
                             DateFormat dateFormat = new SimpleDateFormat("HH-mm-ss");
@@ -497,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            String time = ""+date.getHours()+"."+date.getMinutes();
+                            String time = "" + date.getHours() + "." + date.getMinutes();
                             Intent intent = new Intent(getBaseContext(), EventReceiver.class);
                             Bundle b = new Bundle();
                             b.putString("event", time);
@@ -507,8 +497,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent3 = new Intent(MainActivity.this, nxtActivity);
                             startActivity(intent3);
 
-                        }
-                        else {
+                        } else {
                             makeToast(converter.toString(data.get("description")));
                         }
                     }
@@ -523,7 +512,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(eventRequest);
     }
 
-    public void editname(View view){
+    public void editname(View view) {
         final EditText name = new EditText(this);
         final EditText surname = new EditText(this);
         name.setText("");
@@ -531,18 +520,18 @@ public class MainActivity extends AppCompatActivity {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+                switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Log.i("name",""+isEmpty(name));
+                        Log.i("name", "" + isEmpty(name));
                         Log.i("surname", "" + isEmpty(surname));
-                        if(!isEmpty(name)){
+                        if (!isEmpty(name)) {
                             //do
-                            Log.i("name",""+name.getText().toString());
+                            Log.i("name", "" + name.getText().toString());
                             UserManage.getInstance(MainActivity.this).getCurrentUser().setFirstName(name.getText().toString());
                         }
-                        if(!isEmpty(surname)) {
+                        if (!isEmpty(surname)) {
                             //do
-                            Log.i("surname",""+surname.getText().toString());
+                            Log.i("surname", "" + surname.getText().toString());
                             UserManage.getInstance(MainActivity.this).getCurrentUser().setLastName(surname.getText().toString());
                         }
                         UserManage.getInstance(MainActivity.this).updateUser(MainActivity.this);
@@ -584,12 +573,12 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("ยกเลิก", dialogClickListener).show();
 
     }
+
     private boolean isEmpty(EditText myeditText) {
         return myeditText.getText().toString().trim().length() == 0;
     }
 
-    public void requestUserProgress()
-    {
+    public void requestUserProgress() {
         String url = HttpConnector.URL + "userProgress/getByUser";
         StringRequest progressRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
@@ -598,7 +587,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("volley 8", response);
                         Converter converter = Converter.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
+                        if ((boolean) data.get("status")) {
                             HashMap<String, Object> progress = converter.JSONToHashMap(converter.toString(data.get("progress")));
                             HashMap<String, Object> userData = converter.JSONToHashMap(converter.toString(progress.get("user")));
 
@@ -607,9 +596,7 @@ public class MainActivity extends AppCompatActivity {
                             history.setNumberOfAccept(converter.toInt(progress.get("numberOfAccept")));
                             history.setIdUser(converter.toInt(userData.get("id")));
                             history.save(MainActivity.this);
-                            makeToast("syncing completed.");
-                        }
-                        else {
+                        } else {
                             makeToast(converter.toString(data.get("description")));
                         }
                     }
@@ -633,8 +620,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(progressRequest);
     }
 
-    public void requestSendUserProgress()
-    {
+    public void requestSendUserProgress() {
         String url = HttpConnector.URL + "userProgress/save";
         StringRequest progressRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
@@ -643,12 +629,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("volley", response);
                         Converter converter = Converter.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
-                            makeToast("syncing completed.");
-                        }
-                        else {
+                        if (!(boolean) data.get("status"))
                             makeToast(converter.toString(data.get("description")));
-                        }
                     }
                 }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
             @Override
@@ -678,26 +660,28 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(progressRequest);
     }
 
-    public void requestGroupProgress()
-    {
+    public void requestGroupProgressActivity() {
         String url = HttpConnector.URL + "groupProgress/getByGroup";
         StringRequest progressRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
                     public void onResponse(String response) { //when listener is activated
-                        Log.i("volley 9", response);
+                        Log.i("volley", response);
                         Converter converter = Converter.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
+                        if ((boolean) data.get("status")) {
                             HashMap<String, Object> progress = converter.JSONToHashMap("" + data.get("progress"));
-                            HashMap<String, Object> groupData = converter.JSONToHashMap("" + progress.get("group"));
-                            Historygroup history = (Historygroup) Cache.getInstance().getData("groupHistory");
-                            history.setCancelEvent(converter.toInt(progress.get("cancelActivity")));
-                            history.setNumberOfAccept(converter.toInt(progress.get("numberOfAccept")));
-                            history.save(MainActivity.this);
-                            makeToast("syncing completed.");
-                        }
-                        else {
+                            converter.toInt(progress.get("groupID"));
+                            converter.toInt(progress.get("totalExerciseTime"));
+                            converter.toInt(progress.get("totalActivity"));
+                            converter.toInt(progress.get("numberOfAccept"));
+                            converter.toInt(progress.get("neck"));
+                            converter.toInt(progress.get("shoulder"));
+                            converter.toInt(progress.get("chest_back"));
+                            converter.toInt(progress.get("wrist"));
+                            converter.toInt(progress.get("waist"));
+                            converter.toInt(progress.get("hip_leg_calf"));
+                        } else {
                             makeToast(converter.toString(data.get("description")));
                         }
                     }
@@ -724,8 +708,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(progressRequest);
     }
 
-    public void requestSendGroupProgress()
-    {
+    public void requestSendGroupProgress() {
         String url = HttpConnector.URL + "groupProgress/save";
         StringRequest progressRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
@@ -735,12 +718,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("volley", "in sending group request");
                         Converter converter = Converter.getInstance();
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
-                            makeToast("syncing completed.");
-                        }
-                        else {
+                        if (!(boolean) data.get("status"))
                             makeToast(converter.toString(data.get("description")));
-                        }
                     }
                 }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
             @Override
@@ -772,5 +751,108 @@ public class MainActivity extends AppCompatActivity {
         };
 
         HttpConnector.getInstance(this).addToRequestQueue(progressRequest);
+    }
+
+    public void requestUserDayProgressActivity() {
+        final Context context = this.getApplicationContext();
+        final User user = UserManage.getInstance(this).getCurrentUser();
+        final Converter converter = Converter.getInstance();
+        String url = HttpConnector.URL + "userProgress/getByUser"; //url of login API
+        StringRequest progressActRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
+                new Response.Listener<String>() { //create new listener to traces the data
+                    @Override
+                    public void onResponse(String response) { //when listener is activated
+                        HashMap<String, Object> data = converter.JSONToHashMap(response); //convert JSON to HashMap format
+
+                        if ((boolean) data.get("status")) {
+                            HashMap<String, Object> progress = converter.JSONToHashMap(converter.toString(data.get("progress")));
+                            converter.toInt(progress.get("userID"));
+                            converter.toInt(progress.get("totalExerciseTime"));
+                            converter.toInt(progress.get("totalActivity"));
+                            converter.toInt(progress.get("numberOfAccept"));
+                            converter.toInt(progress.get("neck"));
+                            converter.toInt(progress.get("shoulder"));
+                            converter.toInt(progress.get("chest_back"));
+                            converter.toInt(progress.get("wrist"));
+                            converter.toInt(progress.get("waist"));
+                            converter.toInt(progress.get("hip_leg_calf"));
+                        } else {
+                            Toast toast = Toast.makeText(context, converter.toString(data.get("description")), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
+            @Override
+            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
+                Log.i("volley", volleyError.toString()); //throw the error message to the console
+            }
+        }) { //define POST parameters
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> map = new HashMap<>(); //create map to keep variables
+                HashMap<String, Object> JSON = new HashMap<>();
+                JSON.put("user", converter.HashMapToJSON(user.getGeneralValues())); //API variable name
+                JSON.put("type", "0");
+                map.put("JSON", converter.HashMapToJSON(JSON));
+                Log.i("map", map.toString());
+                return map;
+            }
+        };
+
+        HttpConnector.getInstance(context).addToRequestQueue(progressActRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
+        requestUserWeekProgressActivity();
+    }
+
+    public void requestUserWeekProgressActivity() {
+        final Context context = this.getApplicationContext();
+        final User user = UserManage.getInstance(this).getCurrentUser();
+        final Converter converter = Converter.getInstance();
+        String url = HttpConnector.URL + "userProgress/getByUser"; //url of login API
+        StringRequest progressActRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
+                new Response.Listener<String>() { //create new listener to traces the data
+                    @Override
+                    public void onResponse(String response) { //when listener is activated
+                        HashMap<String, Object> data = converter.JSONToHashMap(response); //convert JSON to HashMap format
+
+                        if ((boolean) data.get("status")) {
+                            HashMap<String, Object> progress = converter.JSONToHashMap(converter.toString(data.get("progress")));
+                            converter.toInt(progress.get("userID"));
+                            converter.toInt(progress.get("totalExerciseTime"));
+                            converter.toInt(progress.get("totalActivity"));
+                            converter.toInt(progress.get("numberOfAccept"));
+                            converter.toInt(progress.get("neck"));
+                            converter.toInt(progress.get("shoulder"));
+                            converter.toInt(progress.get("chest_back"));
+                            converter.toInt(progress.get("wrist"));
+                            converter.toInt(progress.get("waist"));
+                            converter.toInt(progress.get("hip_leg_calf"));
+                        } else {
+                            Toast toast = Toast.makeText(context, converter.toString(data.get("description")), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
+            @Override
+            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
+                Log.i("volley", volleyError.toString()); //throw the error message to the console
+            }
+        }) { //define POST parameters
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> map = new HashMap<>(); //create map to keep variables
+                HashMap<String, Object> JSON = new HashMap<>();
+                JSON.put("user", converter.HashMapToJSON(user.getGeneralValues())); //API variable name
+                JSON.put("type", "1");
+                map.put("JSON", converter.HashMapToJSON(JSON));
+                Log.i("map", map.toString());
+                return map;
+            }
+        };
+
+        HttpConnector.getInstance(context).addToRequestQueue(progressActRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
     }
 }
