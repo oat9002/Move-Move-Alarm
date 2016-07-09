@@ -75,7 +75,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         }
 
         if(!(UserManage.getInstance(getActivity()).getCurrentUser().getFacebookFirstName()+"").equals("null"))
-            name.setText(UserManage.getInstance(getActivity()).getCurrentUser().getFacebookFirstName()+UserManage.getInstance(getActivity()).getCurrentUser().getFacebookLastName());
+            name.setText(UserManage.getInstance(getActivity()).getCurrentUser().getFacebookFirstName());
         if(!(UserManage.getInstance(getActivity()).getCurrentUser().getBirthDay()+"").equals("null"))
             birth.setText(UserManage.getInstance(getActivity()).getCurrentUser().getBirthDay());
         if(UserManage.getInstance(getActivity()).getCurrentUser().getAge()>=0)
