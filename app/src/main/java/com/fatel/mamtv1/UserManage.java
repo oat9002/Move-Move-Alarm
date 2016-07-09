@@ -57,30 +57,31 @@ public class UserManage {
                             Cache.getInstance().putData("groupData", groupData);
                             int idUser = converter.toInt(userData.get("id"));
                             String username = converter.toString(userData.get("userName"));
+                            User user;
                             if((User.find(idUser, context))!= null){
-                                User user=User.find(idUser, context);
+                                user=User.find(idUser, context);
                                 UserManage.getInstance(context).setCurrentUser(user);
                             }
                             else{
-                                User user = new User(idUser, username);
+                                user = new User(idUser, username);
                                 UserManage.getInstance(context).setCurrentUser(user);
                             }
-                            UserManage.getInstance(context).getCurrentUser().setFirstName(converter.toString(userData.get("firstName")));
-                            UserManage.getInstance(context).getCurrentUser().setLastName(converter.toString(userData.get("lastName")));
-                            UserManage.getInstance(context).getCurrentUser().setUserName(username);
-                            UserManage.getInstance(context).getCurrentUser().setAge(converter.toInt(userData.get("age")));
-                            UserManage.getInstance(context).getCurrentUser().setScore(converter.toInt(userData.get("score")));
-                            UserManage.getInstance(context).getCurrentUser().setGender(converter.toInt(userData.get("gender")));
-                            UserManage.getInstance(context).getCurrentUser().setEmail(converter.toString(userData.get("email")));
-                            UserManage.getInstance(context).getCurrentUser().setFacebookID(converter.toString(userData.get("facebookID")));
-                            UserManage.getInstance(context).getCurrentUser().setFacebookFirstName(converter.toString(userData.get("facebookFirstName")));
-                            UserManage.getInstance(context).getCurrentUser().setFacebookLastName(converter.toString(userData.get("facebookLastName ")));
+                            user.setFirstName(converter.toString(userData.get("firstName")));
+                            user.setLastName(converter.toString(userData.get("lastName")));
+                            user.setUserName(username);
+                            user.setAge(converter.toInt(userData.get("age")));
+                            user.setScore(converter.toInt(userData.get("score")));
+                            user.setGender(converter.toInt(userData.get("gender")));
+                            user.setEmail(converter.toString(userData.get("email")));
+                            user.setFacebookID(converter.toString(userData.get("facebookID")));
+                            user.setFacebookFirstName(converter.toString(userData.get("facebookFirstName")));
+                            user.setFacebookLastName(converter.toString(userData.get("facebookLastName ")));
 
                             if(groupData != null)
-                                UserManage.getInstance(context).getCurrentUser().setIdGroup(converter.toInt(groupData.get("id")));
+                                user.setIdGroup(converter.toInt(groupData.get("id")));
 
-                            UserManage.getInstance(context).getCurrentUser().setLogin(1);
-                            UserManage.getInstance(context).getCurrentUser().save(context);
+                            user.setLogin(1);
+                            user.save(context);
 
                             Toast toast = Toast.makeText(context, "Hello "+username, Toast.LENGTH_SHORT);
                             toast.show();
@@ -143,36 +144,39 @@ public class UserManage {
                             int idUser = converter.toInt(userData.get("id"));
                             String facebookID = converter.toString(userData.get("facebookID"));
                             String facebookFirstName = converter.toString(userData.get("facebookFirstName"));
-                            if((User.find(idUser, context))!= null){
-                                User user=User.find(idUser, context);
-                                UserManage.getInstance(context).setCurrentUser(user);
+                            User user=User.find(idUser, context);
+                            if(user != null){
+
+                                user = User.find(idUser, context);
                             }
                             else{
-                                User user = new User(idUser, facebookID,facebookFirstName);
-                                UserManage.getInstance(context).setCurrentUser(user);
+                                user = new User(idUser, facebookID,facebookFirstName);
 
                             }
-                            UserManage.getInstance(context).getCurrentUser().setBirthDay(converter.toString(userData.get("birthDay")));
-                            UserManage.getInstance(context).getCurrentUser().setAge(converter.toInt(userData.get("age")));
-                            UserManage.getInstance(context).getCurrentUser().setScore(converter.toInt(userData.get("score")));
-                            UserManage.getInstance(context).getCurrentUser().setHeight(converter.toInt(userData.get("height")));
-                            UserManage.getInstance(context).getCurrentUser().setWeight(converter.toInt(userData.get("weight")));
-                            UserManage.getInstance(context).getCurrentUser().setWaistline(converter.toInt(userData.get("waistline")));
-                            UserManage.getInstance(context).getCurrentUser().setBmi(converter.toDouble(userData.get("bmi")));
-                            UserManage.getInstance(context).getCurrentUser().setEmail(converter.toString(userData.get("email")));
+                            user.setBirthDay(converter.toString(userData.get("birthDay")));
+                            user.setAge(converter.toInt(userData.get("age")));
+                            user.setScore(converter.toInt(userData.get("score")));
+                            user.setHeight(converter.toInt(userData.get("height")));
+                            user.setWeight(converter.toInt(userData.get("weight")));
+                            user.setWaistline(converter.toInt(userData.get("waistline")));
+                            user.setBmi(converter.toDouble(userData.get("bmi")));
+                            user.setEmail(converter.toString(userData.get("email")));
                             if(groupData != null)
-                                UserManage.getInstance(context).getCurrentUser().setIdGroup(converter.toInt(groupData.get("id")));
-                            UserManage.getInstance(context).getCurrentUser().setFacebookID(converter.toString(userData.get("facebookID")).substring(2));
-                            UserManage.getInstance(context).getCurrentUser().setFacebookFirstName(converter.toString(userData.get("facebookFirstName")));
-                            UserManage.getInstance(context).getCurrentUser().setFacebookLastName(converter.toString(userData.get("facebookLastName ")));
-                            UserManage.getInstance(context).getCurrentUser().setLogin(1);
-                            UserManage.getInstance(context).getCurrentUser().save(context);
+                                user.setIdGroup(converter.toInt(groupData.get("id")));
+                            user.setFacebookID(converter.toString(userData.get("facebookID")).substring(2));
+                            user.setFacebookFirstName(converter.toString(userData.get("facebookFirstName")));
+                            user.setFacebookLastName(converter.toString(userData.get("facebookLastName ")));
+                            user.setLogin(1);
+                            user.save(context);
 
-                            Toast toast = Toast.makeText(context, "สวัสดี "+facebookFirstName, Toast.LENGTH_SHORT);
-                            toast.show();
-                            Intent intent = new Intent(context, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            context.startActivity(intent);
+                            if(UserManage.currentUser == null) {
+                                Toast toast = Toast.makeText(context, "สวัสดี " + facebookFirstName, Toast.LENGTH_SHORT);
+                                toast.show();
+                                UserManage.getInstance(context).setCurrentUser(user);
+                                Intent intent = new Intent(context, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                context.startActivity(intent);
+                            }
                             if(Login_Activity.instance != null)
                                 Login_Activity.instance.finish();
                         }
