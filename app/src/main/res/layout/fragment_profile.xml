@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.ProfileFragment">
+    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.ProfileFragment"
+    android:padding="5dp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:text="Facebook"/>
+            android:text="ชื่อ"/>
         <TextView
             android:id="@+id/editFB"
             android:layout_width="wrap_content"
@@ -34,22 +35,22 @@
             android:text="-"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/proname"
+        android:id="@+id/probirthday"
         android:layout_below="@+id/proFB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:paddingTop="10dp">
    <TextView
-       android:id="@+id/textname"
+       android:id="@+id/textbirthday"
        android:paddingLeft="20dp"
        android:layout_width="170dp"
        android:layout_height="wrap_content"
        android:textSize="20sp"
        android:textColor="@android:color/black"
-       android:text="ชื่อ"/>
+       android:text="วันเกิด"/>
     <TextView
-        android:id="@+id/editproname"
+        android:id="@+id/editbirthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -58,23 +59,160 @@
 </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/prosurname"
+        android:id="@+id/proage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_below="@id/proname"
+        android:layout_below="@id/probirthday"
         android:paddingTop="10dp">
         <TextView
-            android:id="@+id/textsurname"
+            android:id="@+id/textage"
             android:paddingLeft="20dp"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:text="นามสกุล"
+            android:text="อายุ"
             />
         <TextView
-            android:id="@+id/editsurproname"
+            android:id="@+id/editage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="ปี"
+            android:layout_marginLeft="50dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/proheight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/proage"
+        android:paddingTop="10dp">
+        <TextView
+            android:id="@+id/textheight"
+            android:paddingLeft="20dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="ส่วนสูง"
+            />
+        <TextView
+            android:id="@+id/editheight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="เซนติเมตร"
+            android:layout_marginLeft="50dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/proweight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/proheight"
+        android:paddingTop="10dp">
+        <TextView
+            android:id="@+id/textweight"
+            android:paddingLeft="20dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="น้ำหนัก"
+            />
+        <TextView
+            android:id="@+id/editweight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="กิโลกรัม"
+            android:layout_marginLeft="50dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/prowaistline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/proweight"
+        android:paddingTop="10dp">
+        <TextView
+            android:id="@+id/textwaistline"
+            android:paddingLeft="20dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="รอบเอว"
+            />
+        <TextView
+            android:id="@+id/editwaistline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="นิ้ว"
+            android:layout_marginLeft="50dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/probmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/prowaistline"
+        android:paddingTop="10dp">
+        <TextView
+            android:id="@+id/textbmi"
+            android:paddingLeft="20dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="BMI"
+            />
+        <TextView
+            android:id="@+id/editbmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -83,15 +221,15 @@
 
     </LinearLayout>
 
-
     <Button
         android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@drawable/selectoredit"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="editname"
-        />
+        android:nestedScrollingEnabled="false"
+        android:layout_margin="10dp" />
+
 </RelativeLayout>

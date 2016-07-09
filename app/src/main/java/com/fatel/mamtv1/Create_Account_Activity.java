@@ -62,13 +62,13 @@ public class Create_Account_Activity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Please enter Username and Password at least 6 characters", Toast.LENGTH_SHORT);
             toast.show();
         }
-
+/*
         else if(password.getText().toString().equals(rePassword.getText().toString()))
         {
 
             //ลงทะเบียน username กับ password ลงฐานข้อมูลก่อนไปหน้า main
             mUserManage.createNewUser(username.getText().toString(),password.getText().toString(),this);
 
-        }
+        }*/
     }
 }

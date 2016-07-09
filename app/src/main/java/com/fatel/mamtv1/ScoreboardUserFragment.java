@@ -63,31 +63,31 @@ public class ScoreboardUserFragment extends Fragment {
         user0 = (TextView) rootView.findViewById(R.id.userscore);
         score0 = (TextView) rootView.findViewById(R.id.scoreuser);
         ranking0 = (TextView) rootView.findViewById(R.id.userranking);
-        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
+        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookID();
         Log.i("iduserscore",tempid);
         //Log.i("username",UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
         if (!tempid.equals("fb0.0")) {
             if (!tempid.equals("fb0")) {
                 if(!tempid.equals("0")){
                     if(!tempid.equals("0.0")){
-                        user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
+                        user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookFirstName());
                     }
                     else {
-                        user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+                        user0.setText("username");
                     }
                 }
                 else {
-                    user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+                    user0.setText("username");
                 }
             }
             else {
-                user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+                user0.setText("username");
             }
         } else {
-            user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+            user0.setText("username");
         }
-        Log.i("score", UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore() + "");
-        score0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore() + "");
+        Log.i("score", UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getScore() + "");
+        score0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getScore() + "");
         String url = HttpConnector.URL + "user/findByRank";
         String url2 = HttpConnector.URL + "user/getUserRank";
 

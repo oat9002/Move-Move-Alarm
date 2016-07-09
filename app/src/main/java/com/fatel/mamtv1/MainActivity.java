@@ -55,19 +55,16 @@ public class MainActivity extends AppCompatActivity {
         mAlarmHelper = new DBAlarmHelper(this);
 
 
-        if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
+        if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
         profilepic = (CircleImageView) findViewById(R.id.profile_image);
         header = (TextView) findViewById(R.id.profile);
         user = (TextView) findViewById(R.id.username);
 
-        if((UserManage.getInstance(this).getCurrentUsername()+"").equals("null"))
-            user.setText(UserManage.getInstance(this).getCurrentFacebookFirstName());
-        else
-            user.setText(UserManage.getInstance(this).getCurrentUsername());
+            user.setText(UserManage.getInstance(this).getCurrentUser().getFacebookFirstName());
 
-        tempid = UserManage.getInstance(this).getCurrentFacebookID();
+        tempid = UserManage.getInstance(this).getCurrentUser().getFacebookID();
         if(!tempid.equals("0.0")) {
             if(!tempid.equals("0")) {
                 if(!(tempid.equals("fb0.0"))) {
@@ -122,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(),this);
         if(history==null){
-            history = new History(UserManage.getInstance(this).getCurrentIdUser());
+            history = new History(UserManage.getInstance(this).getCurrentUser().getIdUser());
             history.save(this);
             Cache.getInstance().putData("userHistory", history);
             requestUserProgress();
@@ -135,15 +132,15 @@ public class MainActivity extends AppCompatActivity {
         }
 //
         //historygroup
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(),this);
-        if(historygroup==null&&UserManage.getInstance(this).getCurrentIdGroup()!=0){
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup(),this);
+        if(historygroup==null&&UserManage.getInstance(this).getCurrentUser().getIdGroup()!=0){
             Log.i("historygroup","success");
-            historygroup = new Historygroup(UserManage.getInstance(this).getCurrentIdGroup());
+            historygroup = new Historygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup());
             historygroup.save(this);
             Cache.getInstance().putData("groupHistory", historygroup);
             requestGroupProgress();
         }
-        else if(UserManage.getInstance(this).getCurrentIdGroup()!=0){
+        else if(UserManage.getInstance(this).getCurrentUser().getIdGroup()!=0){
             Cache.getInstance().putData("groupHistory", historygroup);
             requestSendGroupProgress();
         }
@@ -523,70 +520,7 @@ public class MainActivity extends AppCompatActivity {
         HttpConnector.getInstance(this).addToRequestQueue(eventRequest);
     }
 
-    public void editname(View view){
-        final EditText name = new EditText(this);
-        final EditText surname = new EditText(this);
-        name.setText("");
-        surname.setText("");
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Log.i("name",""+isEmpty(name));
-                        Log.i("surname", "" + isEmpty(surname));
-                        if(!isEmpty(name)){
-                            //do
-                            Log.i("name",""+name.getText().toString());
-                            UserManage.getInstance(MainActivity.this).getCurrentUser().setFirstName(name.getText().toString());
-                        }
-                        if(!isEmpty(surname)) {
-                            //do
-                            Log.i("surname",""+surname.getText().toString());
-                            UserManage.getInstance(MainActivity.this).getCurrentUser().setLastName(surname.getText().toString());
-                        }
-                        UserManage.getInstance(MainActivity.this).updateUser(MainActivity.this);
-                        Fragment fragment = null;
-                        Class fragmentClass;
-                        fragmentClass = ProfileFragment.class;
-                        try {
-                            fragment = (Fragment) fragmentClass.newInstance();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
 
-                        // Insert the fragment by replacing any existing fragment
-                        FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
-                        FragmentTransaction tx = fragmentManager.beginTransaction();
-                        tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                        tx.addToBackStack(null);
-                        tx.replace(R.id.container, fragment).commit();
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //No button clicked
-                        break;
-                }
-            }
-        };
-        name.setTextColor(Color.WHITE);
-        surname.setTextColor(Color.WHITE);
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        name.setHint(Html.fromHtml("<font color='#B0B0B0'>ชื่อ</font>"));
-        layout.addView(name);
-        surname.setHint(Html.fromHtml("<font color='#B0B0B0'>สกุล</font>"));
-        layout.addView(surname);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
-        builder.setTitle("แก้ไขข้อมูล");
-        builder.setView(layout);
-        builder.setMessage("แก้ไข ชื่อ-นามสุกล").setPositiveButton("ตกลง", dialogClickListener)
-                .setNegativeButton("ยกเลิก", dialogClickListener).show();
-
-    }
-    private boolean isEmpty(EditText myeditText) {
-        return myeditText.getText().toString().trim().length() == 0;
-    }
 
     public void requestUserProgress()
     {
@@ -758,7 +692,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("volley", "group request");
 
-                group.put("id", UserManage.getInstance(MainActivity.this).getCurrentIdGroup());
+                group.put("id", UserManage.getInstance(MainActivity.this).getCurrentUser().getIdGroup());
 
                 final Historygroup history = (Historygroup) Cache.getInstance().getData("groupHistory");
 

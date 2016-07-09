@@ -151,7 +151,7 @@ public class EventActivity extends AppCompatActivity {
 
         //
 
-            Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentIdGroup(), this);
+            Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup(), this);
         if(historygroup!=null) {
             historygroup.subaccept(1);
             historygroup.addcancel(1);
@@ -191,7 +191,7 @@ public class EventActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
                 HashMap<String, Object> JSON = new HashMap<>();
                 HashMap<String, Object> groupData = new HashMap<>();
-                groupData.put("id", "" + UserManage.getInstance(EventActivity.this).getCurrentIdGroup());
+                groupData.put("id", "" + UserManage.getInstance(EventActivity.this).getCurrentUser().getIdGroup());
                 int point = 2;
 
                 JSON.put("score", point);

@@ -30,7 +30,7 @@ public class ActAlarm extends AppCompatActivity {
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         long[] pattern = {0, 500, 1000};
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if(UserManage.getInstance(ActAlarm.this).getCurrentStateSw() == 1) {
+        if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
             m = MediaPlayer.create(this, notification);
             // m.reset();
@@ -69,14 +69,14 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(), this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(), this);
         history.addaccept(1);
         history.save(this);
         Intent intent = new Intent(this, Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         v.cancel();
-        if(UserManage.getInstance(ActAlarm.this).getCurrentStateSw() == 1) {
+        if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
             m.reset();
         }
     }
@@ -86,7 +86,7 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(),this);
         history.addcancel(1);
         history.save(this);
         Intent i1 = new Intent(ActAlarm.this, MainActivity.class);
@@ -98,7 +98,7 @@ public class ActAlarm extends AppCompatActivity {
         i.putExtras(b);
         sendBroadcast(i);
         v.cancel();
-        if(UserManage.getInstance(ActAlarm.this).getCurrentStateSw() == 1) {
+        if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
             m.reset();
         }
     }

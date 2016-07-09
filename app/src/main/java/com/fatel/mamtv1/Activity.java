@@ -155,7 +155,7 @@ public class Activity extends AppCompatActivity {
 
         //
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(), this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(), this);
         history.subaccept(1);
         history.addcancel(1);
         history.save(this);

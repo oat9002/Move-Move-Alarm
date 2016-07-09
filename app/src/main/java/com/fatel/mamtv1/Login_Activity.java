@@ -124,7 +124,7 @@ public class Login_Activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+/*
     public void linkMain(View view)
     {
         EditText username;
@@ -155,7 +155,7 @@ public class Login_Activity extends AppCompatActivity {
        }
 
     }
-
+*/
     public void linkWithFB()
     {
         boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
@@ -165,7 +165,6 @@ public class Login_Activity extends AppCompatActivity {
         if (loggedIn && (profile != null)) {
 
             UserManage.getInstance(this).loginFBUser(profile.getId(), profile.getFirstName(), this);
-            UserManage.getInstance(this).setFacebookLastName(profile.getLastName(), this);
 
         }
     }

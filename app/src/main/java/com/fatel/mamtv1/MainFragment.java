@@ -40,7 +40,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         setUser(view);
         setTextAlarm(view, mAlarmHelper);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
-        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId();
+        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookID();
         if(!tempid.equals("0.0")) {
             if (!tempid.equals("0")) {
                 if(!(tempid.equals("fb0.0"))) {
@@ -49,12 +49,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         }
         score = (TextView)view.findViewById(R.id.scoreNum);
-        score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentScore() + "");
+        score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getScore() + "");
         return view;
     }
     public void setUser(View view){
         TextView user = (TextView) view.findViewById(R.id.userinmain);
-        user.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
+        user.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookFirstName());
     }
 
     public void setTextAlarm(View view,DBAlarmHelper alarmHelper){
