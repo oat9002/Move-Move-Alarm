@@ -122,7 +122,7 @@ public class UserManage {
     */
     public void loginFBUser(String facebookID,String facebookFirstName,Context context){
 
-        String url = HttpConnector.URL + "user/loginFacebook"; //url of login API
+        String url = HttpConnector.URL + "login"; //url of login API
         final String id = facebookID;
         final String name = facebookFirstName;
         StringRequest loginFBRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
@@ -132,7 +132,7 @@ public class UserManage {
                         Converter converter = Converter.getInstance();
                         Context context = (Context) Cache.getInstance().getData("loginFBContext");
                         HashMap<String, Object> data = converter.JSONToHashMap(response); //convert JSON to HashMap format
-
+                        Log.i("response", data.toString());
                         if((boolean) data.get("status")) {
                             HashMap<String, Object> userData = converter.JSONToHashMap(converter.toString(data.get("user")));
                             HashMap<String, Object> groupData = null;

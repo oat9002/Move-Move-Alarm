@@ -3,6 +3,7 @@ package com.fatel.mamtv1;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -31,6 +32,7 @@ public class Converter {
 
     public HashMap<String,Object> JSONToHashMap(String json) {
         HashMap<String,Object> map = new HashMap<>();
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
         map = gson.fromJson(json,map.getClass()); //convert from JSON to HashMap
         return map;
     }

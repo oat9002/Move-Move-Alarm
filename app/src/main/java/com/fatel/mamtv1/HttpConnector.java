@@ -16,7 +16,8 @@ public class HttpConnector {
     private RequestQueue requestQueue;
     private static Context context;
     private Map<String, Object> cache;
-    public static String URL = "http://13.76.94.234:8080/";
+    public static String URL = "http://enceladusiapetus.me:8001/";
+    //public static String URL = "http://13.76.94.234:8080/";
     //public static String URL = "http://192.168.1.40:8080/";
 
     private HttpConnector(Context context) {
