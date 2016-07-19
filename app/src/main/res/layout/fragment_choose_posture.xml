@@ -1,11 +1,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.ChoosePostureFragment">
+    android:layout_height="match_parent" tools:context=".Fragment.ChoosePostureFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:context="com.fatel.mamtv1.ChoosePostureFragment"
+        tools:context=".Fragment.ChoosePostureFragment"
         >
 
         <TextView

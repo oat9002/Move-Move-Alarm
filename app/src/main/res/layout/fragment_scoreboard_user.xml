@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fatel.mamtv1.ScoreboardUserFragment"
+    tools:context=".Fragment.ScoreboardUserFragment"
     >
     <TextView
         android:textStyle="bold"

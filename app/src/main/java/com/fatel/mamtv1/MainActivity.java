@@ -1,10 +1,7 @@
 package com.fatel.mamtv1;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,15 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,24 +25,48 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.fatel.mamtv1.Fragment.AboutFragment;
+import com.fatel.mamtv1.Fragment.AlarmFragment;
+import com.fatel.mamtv1.Fragment.ChoosePostureFragment;
+import com.fatel.mamtv1.Fragment.GroupFragment;
+import com.fatel.mamtv1.Fragment.HelpFragment;
+import com.fatel.mamtv1.Fragment.LoadingFragment;
+import com.fatel.mamtv1.Fragment.MainFragment;
+import com.fatel.mamtv1.Fragment.ProfileFragment;
+import com.fatel.mamtv1.Helper.DBAlarmHelper;
+import com.fatel.mamtv1.Model.Event;
+import com.fatel.mamtv1.Model.Group;
+import com.fatel.mamtv1.Model.History;
+import com.fatel.mamtv1.Model.Historygroup;
+import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
+import com.fatel.mamtv1.Service.EventReceiver;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.HttpConnector;
+import com.fatel.mamtv1.Service.UserManage;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-
+import retrofit.Callback;
+import retrofit.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private TextView header;
-    private TextView user;
-    CircleImageView profilepic;
+    @BindView(R.id.profile) TextView header;
+    @BindView(R.id.username) TextView user;
+    @BindView(R.id.profile_image) CircleImageView profilepic;
     public String id;
     String tempid;
     DBAlarmHelper mAlarmHelper;
@@ -55,34 +75,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         mAlarmHelper = new DBAlarmHelper(this);
 
-
-        if(UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0)
+        if (UserManage.getInstance(this).getCurrentUser().getGroupId() != 0)
             requestGroupInfo();
         Cache.getInstance().putData("MainActivityContext", this);
-        profilepic = (CircleImageView) findViewById(R.id.profile_image);
-        header = (TextView) findViewById(R.id.profile);
-        user = (TextView) findViewById(R.id.username);
 
-
-       // if ((UserManage.getInstance(this).getCurrentUser().getUsername() + "").equals("null"))
-            user.setText(UserManage.getInstance(this).getCurrentUser().getFacebookFirstName());
+        // if ((UserManage.getInstance(this).getCurrentUser().getUsername() + "").equals("null"))
+        user.setText(UserManage.getInstance(this).getCurrentUser().getFacebookFirstName());
         //else
         //    user.setText(UserManage.getInstance(this).getCurrentUser().getUsername());
-
-        tempid = UserManage.getInstance(this).getCurrentUser().getFacebookID();
-        if (!tempid.equals("0.0")) {
-            if (!tempid.equals("0")) {
-                if (!(tempid.equals("fb0.0"))) {
-                    Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(profilepic);
-                }
-            }
-        }
-
-        if (UserManage.getInstance(this).getCurrentUser().getIdGroup() != 0) {
-            requestEvent();
-        }
+        User userData = UserManage.getInstance(this).getCurrentUser();
+        tempid = userData.getFacebookId();
+        Log.i("fbid", tempid);
+        Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(profilepic);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
@@ -126,27 +133,25 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(),this);
-        if(history==null){
-            history = new History(UserManage.getInstance(this).getCurrentUser().getIdUser());
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
+        if (history == null) {
+            history = new History(UserManage.getInstance(this).getCurrentUser().getId());
             history.save(this);
             Cache.getInstance().putData("userHistory", history);
             requestUserDayProgressActivity();
         } else {
             Cache.getInstance().putData("userHistory", history);
-            //requestSendUserProgress();
         }
 //
         //historygroup
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup(),this);
-        if(historygroup==null&&UserManage.getInstance(this).getCurrentUser().getIdGroup()!=0){
-            Log.i("historygroup","success");
-            historygroup = new Historygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup());
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
+        if (historygroup == null && UserManage.getInstance(this).getCurrentUser().getGroupId() != 0) {
+            Log.i("historygroup", "success");
+            historygroup = new Historygroup(UserManage.getInstance(this).getCurrentUser().getGroupId());
             historygroup.save(this);
             Cache.getInstance().putData("groupHistory", historygroup);
             requestGroupProgressActivity();
-        }
-        else if(UserManage.getInstance(this).getCurrentUser().getIdGroup()!=0){
+        } else if (UserManage.getInstance(this).getCurrentUser().getGroupId() != 0) {
             Cache.getInstance().putData("groupHistory", historygroup);
             //requestSendGroupProgress();
         }
@@ -194,25 +199,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass = null;
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            fragmentClass = SetFragment.class;
-//            try {
-//                fragment = (Fragment) fragmentClass.newInstance();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            if (fragmentClass != null) {
-//                // Insert the fragment by replacing any existing fragment
-//                FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
-//                FragmentTransaction tx = fragmentManager.beginTransaction();
-//                tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-//                tx.addToBackStack(null);
-//                tx.replace(R.id.container, fragment).commit();
-//            }
-//            return true;
-//        }
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
@@ -267,11 +253,39 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_group_fragment:
                 User currentUser = UserManage.getInstance(this).getCurrentUser();
-                //edit
-                if (currentUser.getIdGroup() == 0)
+                if (currentUser.getGroupId() == 0)
                     fragmentClass = GroupFragment.class;
-                else {//มีกลุ่ม
-                    requestGroupInfo(GroupMainActivity.class);
+                else {
+                    final Context context = this;
+                    final Intent intent = new Intent(this, GroupMainActivity.class);
+                    final Callback<Event> eventDataCallback = new Callback<Event>() {
+                        @Override
+                        public void onResponse(retrofit.Response<Event> response, Retrofit retrofit) {
+                            Cache.getInstance().putData("eventData", response.body().getTime().toString());
+                            intent.putExtra("eventData", response.body());
+                            context.startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+                            Log.i("error", t.getMessage());
+                        }
+                    };
+                    Callback<Group> groupDataCallback = new Callback<Group>() {
+                        @Override
+                        public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
+                            intent.putExtra("groupData", response.body());
+                            Cache.getInstance().putData("groupData", response.body());
+                            EventServiceImp.getInstance().getEvent(eventDataCallback);
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+                            Log.i("error", t.getMessage());
+                        }
+                    };
+                    GroupServiceImp.getInstance().findByUser(currentUser, groupDataCallback);
+                    fragmentClass = LoadingFragment.class;
                 }
                 break;
 
@@ -290,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mAlarmHelper.deleteSetAlarm("1");
                 mDrawerLayout.closeDrawers();
-                Intent intent = new Intent(this, Login_Activity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -308,12 +322,13 @@ public class MainActivity extends AppCompatActivity {
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();//getActivity()
             FragmentTransaction tx = fragmentManager.beginTransaction();
-            tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             if (fragmentClass != MainFragment.class) {
                 tx.addToBackStack(null);
             }
-            tx.replace(R.id.container, fragment).commit();
-
+            if (fragmentClass != LoadingFragment.class) {
+                tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                tx.replace(R.id.container, fragment).commit();
+            }
             // Highlight the selected item, update the title, and close the drawer
 
             if (menuItem.getTitle().equals("Home"))
@@ -364,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
                         if ((boolean) data.get("status")) {
                             HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
                             cache.putData("groupData", groupData);
-                            requestEvent(nxtActivity);
+                            //requestEvent(nxtActivity);
                         } else {
                             makeToast(converter.toString(data.get("description")));
                         }
@@ -379,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>(); //create map to keep variables
-                map.put("id", "" + UserManage.getInstance(MainActivity.this).getCurrentUser().getIdGroup());
+                map.put("id", "" + UserManage.getInstance(MainActivity.this).getCurrentUser().getGroupId());
 
                 return map;
             }
@@ -414,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
-                map.put("id", "" + UserManage.getInstance(MainActivity.this).getCurrentUser().getIdGroup());
+                map.put("id", "" + UserManage.getInstance(MainActivity.this).getCurrentUser().getGroupId());
 
                 return map;
             }
@@ -638,7 +653,7 @@ public class MainActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap<>(); //create map to keep variables
                 HashMap<String, Object> JSON = new HashMap<>();
                 HashMap<String, Object> group = new HashMap<>();
-                group.put("id", currentUser.getIdGroup());
+                group.put("id", currentUser.getGroupId());
                 JSON.put("group", group);
                 map.put("JSON", Converter.getInstance().HashMapToJSON(JSON));
                 return map;
@@ -677,7 +692,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("volley", "group request");
 
-                group.put("id", UserManage.getInstance(MainActivity.this).getCurrentUser().getIdGroup());
+                group.put("id", UserManage.getInstance(MainActivity.this).getCurrentUser().getGroupId());
 
                 final Historygroup history = (Historygroup) Cache.getInstance().getData("groupHistory");
 

@@ -13,12 +13,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.fatel.mamtv1.Cache;
-import com.fatel.mamtv1.Converter;
-import com.fatel.mamtv1.HttpConnector;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.HttpConnector;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.UserManage;
+import com.fatel.mamtv1.Service.UserManage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +69,7 @@ public class ScoreboardUserFragment extends Fragment {
         user0 = (TextView) rootView.findViewById(R.id.userscore);
         score0 = (TextView) rootView.findViewById(R.id.scoreuser);
         ranking0 = (TextView) rootView.findViewById(R.id.userranking);
-        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookID();
+        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookId();
         Log.i("iduserscore",tempid);
         //Log.i("username",UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
         if (!tempid.equals("fb0.0")) {
@@ -166,7 +166,7 @@ public class ScoreboardUserFragment extends Fragment {
                 Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
                 User user = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser();
                 HashMap<String, Object> usermap = new HashMap<>();
-                usermap.put("id", user.getIdUser());
+                usermap.put("id", user.getId());
                 map.put("JSON", Converter.getInstance().HashMapToJSON(usermap));
                 return map;
             }

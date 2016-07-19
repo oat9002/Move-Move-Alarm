@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +14,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.HttpConnector;
+import com.fatel.mamtv1.Service.UserManage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +75,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                             if((boolean) data.get("status")) {
                                 HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
                                 int groupID = converter.toInt(groupData.get("id"));
-                                user.setIdGroup(groupID);
+                                user.setGroupId(groupID);
                                 user.save(CreateGroupActivity.this);
                                 Cache.getInstance().putData("groupData", groupData);
 

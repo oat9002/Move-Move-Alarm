@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.fatel.mamtv1.LoginActivity;
 import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Interface.UserService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,11 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
 
 public class HttpConnector {
     private static HttpConnector instance;
@@ -140,7 +146,7 @@ public class HttpConnector {
         this.addToRequestQueue(test);
     }
 
-    public void loginFBUser(final String facebookID, final String facebookFirstName) {
+    /*public void loginFBUser(final String facebookID, final String facebookFirstName) {
         StringRequest loginFBRequest = new StringRequest(Request.Method.POST, LOGIN, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
@@ -173,11 +179,51 @@ public class HttpConnector {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>(); //create map to keep variables
-                map.put("facebookID", "fb" + facebookID); //API variable name
+                map.put("facebookId", "fb" + facebookID); //API variable name
                 map.put("facebookFirstName", facebookFirstName);
                 return map;
             }
         };
         this.addToRequestQueue(loginFBRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
+    }*/
+
+    public void testLogin() {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://enceladusiapetus.me:8001").addConverterFactory(GsonConverterFactory.create()).build();
+        UserService service = retrofit.create(UserService.class);
+        Call call = service.login("fb1083723354973258", "Pakin");
+        call.enqueue(new Callback<User>() {
+
+            @Override
+            public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+                Log.i("response", "" + response.body().getFacebookFirstName());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.i("error", t.getMessage());
+            }
+        });
+    }
+
+    public void update() {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://enceladusiapetus.me:8001").addConverterFactory(GsonConverterFactory.create()).build();
+        UserService service = retrofit.create(UserService.class);
+        User user = new User();
+        user.setFacebookFirstName("Ice");
+        user.setAge(20);
+        user.setFacebookId("11656516");
+        Call call = service.update("application/json", user);
+        call.enqueue(new Callback<User>() {
+
+            @Override
+            public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+                Log.i("response", "" + response.body().getAge());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.i("error", t.getMessage());
+            }
+        });
     }
 }

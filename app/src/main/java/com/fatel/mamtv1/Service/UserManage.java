@@ -1,14 +1,19 @@
 package com.fatel.mamtv1.Service;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
+import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Model.User;
-import com.fatel.mamtv1.Service.Service.HttpConnector;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 
 import java.util.HashMap;
 
 import lombok.Getter;
 import lombok.Setter;
+import retrofit.Callback;
+import retrofit.Retrofit;
 
 
 @Getter
@@ -34,8 +39,24 @@ public class UserManage {
         return instance;
     }
 
-    public void loginFBUser(String facebookID, String facebookFirstName, Context context) {
-        HttpConnector.getInstance(context).loginFBUser(facebookID, facebookFirstName);
+    public void loginFBUser(String facebookId, String facebookFirstName, final Context context) {
+        UserServiceImp.getInstance().login(facebookId, facebookFirstName, new Callback<User>() {
+            @Override
+            public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+                Log.i("response", "" + response.body().getFacebookFirstName());
+                response.body().setLogin(1);
+                response.body().save(context);
+                UserManage.getInstance(context).setCurrentUser(response.body());
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.i("error", t.getMessage());
+            }
+        });
     }
 
     public void logoutUser(Context context) {
@@ -52,21 +73,24 @@ public class UserManage {
         return false;
     }
 
-    public void updateUser(final Context context) {
-        HttpConnector.getInstance(context).updateUserInfo(currentUser);
+    public void updateUser() {
+        UserServiceImp.getInstance().update(currentUser, new Callback<User>() {
+            @Override
+            public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.i("error", t.getMessage());
+            }
+        });
     }
 
     public void addScore(int score, Context context) {
         if (currentUser != null) {
             currentUser.addScore(score);
             currentUser.save(context);
-            updateUser(context);
+            updateUser();
         }
-    }
-
-    public void setCurrentUserData(HashMap<String, Object> userData, Context context) {
-        if(currentUser == null)
-            currentUser = new User();
-        currentUser.setData(userData, context);
     }
 }

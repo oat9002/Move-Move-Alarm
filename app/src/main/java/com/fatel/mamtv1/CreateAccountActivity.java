@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.fatel.mamtv1.Tools.Cache;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.UserManage;
 
 public class CreateAccountActivity extends AppCompatActivity {
 

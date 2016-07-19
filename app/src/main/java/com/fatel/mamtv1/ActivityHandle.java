@@ -2,6 +2,10 @@ package com.fatel.mamtv1;
 
 import android.content.Context;
 
+import com.fatel.mamtv1.Helper.DBAlarmHelper;
+import com.fatel.mamtv1.Model.Alarm;
+import com.fatel.mamtv1.Model.Posture;
+
 import java.util.ArrayList;
 
 /**

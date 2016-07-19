@@ -4,7 +4,7 @@ import android.content.Context;
 import android.provider.BaseColumns;
 
 import com.fatel.mamtv1.Helper.HistorygroupHelper;
-import com.fatel.mamtv1.Tools.Cache;
+import com.fatel.mamtv1.Service.Cache;
 
 import java.util.HashMap;
 

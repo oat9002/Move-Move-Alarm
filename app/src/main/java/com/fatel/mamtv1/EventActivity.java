@@ -18,6 +18,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.fatel.mamtv1.Model.Historygroup;
+import com.fatel.mamtv1.Model.Posture;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.HttpConnector;
+import com.fatel.mamtv1.Service.UserManage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -151,7 +157,7 @@ public class EventActivity extends AppCompatActivity {
 
         //
 
-            Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getIdGroup(), this);
+            Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
         if(historygroup!=null) {
             historygroup.subaccept(1);
             historygroup.addcancel(1);
@@ -191,7 +197,7 @@ public class EventActivity extends AppCompatActivity {
                 Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
                 HashMap<String, Object> JSON = new HashMap<>();
                 HashMap<String, Object> groupData = new HashMap<>();
-                groupData.put("id", "" + UserManage.getInstance(EventActivity.this).getCurrentUser().getIdGroup());
+                groupData.put("id", "" + UserManage.getInstance(EventActivity.this).getCurrentUser().getGroupId());
                 int point = 2;
 
                 JSON.put("score", point);

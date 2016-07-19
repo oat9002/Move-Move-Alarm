@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fatel.mamtv1.Historygroup;
+import com.fatel.mamtv1.Model.Historygroup;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.UserManage;
+import com.fatel.mamtv1.Service.UserManage;
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
 
 
@@ -68,7 +68,7 @@ public class ProgressEventFragment extends Fragment {
         //edit
         //HistorygroupHelper mhistorygroupHelper = new HistorygroupHelper(getActivity());
         //Log.i("numgroup",""+UserManage.getInstance(getActivity()).getCurrentIdGroup());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentUser().getIdGroup(),getActivity());
+        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentUser().getGroupId(),getActivity());
         if(historygroup==null){
             cirProgressstatusE = 50;
             mProgressStatusE = 0;

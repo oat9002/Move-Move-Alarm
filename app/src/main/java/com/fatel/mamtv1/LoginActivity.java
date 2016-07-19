@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,7 +23,8 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
-import com.fatel.mamtv1.Tools.Cache;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.UserManage;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -89,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
         setContentView(R.layout.login_layout);
+        getSupportActionBar().hide();
         profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile profile, Profile profile1) {
@@ -125,38 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-/*
-    public void linkMain(View view)
-    {
-        EditText username;
-        EditText password;
 
-        username = (EditText)findViewById(R.id.enter_username);
-        password = (EditText)findViewById(R.id.enter_password);
-        Cache.getInstance().putData("loginContext", this);
-
-
-        if(username.getText().toString().equals(""))
-        {
-            Toast toast = Toast.makeText(this, "Please enter Username.", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        else if(password.getText().toString().equals(""))
-        {
-            Toast toast = Toast.makeText(this, "Please enter Password", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        else if((username.getText().toString().length()<6) || (password.getText().toString().length()<6))
-        {
-            Toast toast = Toast.makeText(this, "Please enter Username and Password at least 6 characters", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        else {
-            UserManage.getInstance(this).loginUser(username.getText().toString(), password.getText().toString(), this);
-       }
-
-    }
-*/
     public void linkWithFB()
     {
         boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
@@ -164,10 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Cache.getInstance().putData("loginFBContext", this);
         if (loggedIn && (profile != null)) {
-
             UserManage.getInstance(this).loginFBUser(profile.getId(), profile.getFirstName(), this);
-
         }
     }
-
 }

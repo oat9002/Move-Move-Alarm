@@ -2,6 +2,8 @@ package com.fatel.mamtv1;
 
 import android.content.Context;
 
+import com.fatel.mamtv1.Model.Posture;
+
 import java.util.ArrayList;
 
 /**

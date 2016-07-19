@@ -26,7 +26,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
+import com.fatel.mamtv1.Model.History;
+import com.fatel.mamtv1.Model.Posture;
+import com.fatel.mamtv1.Service.AlarmReceiver;
+import com.fatel.mamtv1.Service.Camera;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.HttpConnector;
+import com.fatel.mamtv1.Service.UserManage;
 
 
 public class Activity extends AppCompatActivity {
@@ -155,7 +162,7 @@ public class Activity extends AppCompatActivity {
 
         //
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(), this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
         history.subaccept(1);
         history.addcancel(1);
         history.save(this);

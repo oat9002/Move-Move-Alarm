@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.fatel.mamtv1.Service.UserManage;
+
 public class IntroActivity extends AppCompatActivity {
 
     @Override

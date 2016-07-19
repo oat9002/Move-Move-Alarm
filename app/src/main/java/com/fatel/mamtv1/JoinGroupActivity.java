@@ -15,11 +15,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.HttpConnector;
+import com.fatel.mamtv1.Service.UserManage;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,7 +75,7 @@ public class JoinGroupActivity extends AppCompatActivity {
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
                         if((boolean) data.get("status")) {
                             HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
-                            UserManage.getInstance(JoinGroupActivity.this).getCurrentUser().setIdGroup(converter.toInt(groupData.get("id")));
+                            UserManage.getInstance(JoinGroupActivity.this).getCurrentUser().setGroupId(converter.toInt(groupData.get("id")));
                             cache.putData("groupData", groupData);
                             JoinGroupActivity.this.requestEvent();
                         }
