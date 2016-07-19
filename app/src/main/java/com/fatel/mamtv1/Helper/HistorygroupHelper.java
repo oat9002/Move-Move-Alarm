@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.fatel.mamtv1.Historygroup;
+import com.fatel.mamtv1.Model.Historygroup;
 import com.fatel.mamtv1.Model.History;
 
 /**

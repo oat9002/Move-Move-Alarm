@@ -18,9 +18,12 @@ import android.widget.TextView;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 import com.bumptech.glide.Glide;
+import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.UserManage;
+import com.fatel.mamtv1.Service.UserManage;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -28,58 +31,30 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends android.support.v4.app.Fragment {
-    CircleImageView propic;
-    TextView name;
-    TextView birth;
-    TextView age;
-    TextView height;
-    TextView weight;
-    TextView waist;
-    TextView bmi;
-    Button edit;
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
+    @BindView(R.id.profile_image_p) CircleImageView propic;
+    @BindView(R.id.editFB) TextView name;
+    @BindView(R.id.editbirthday) TextView birth;
+    @BindView(R.id.editage) TextView age;
+    @BindView(R.id.editheight) TextView height;
+    @BindView(R.id.editweight) TextView weight;
+    @BindView(R.id.editwaistline) TextView waist;
+    @BindView(R.id.editbmi) TextView bmi;
+    @BindView(R.id.edit) Button edit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        propic = (CircleImageView)view.findViewById(R.id.profile_image_p);
-        name = (TextView)view.findViewById(R.id.editFB);
-        birth = (TextView)view.findViewById(R.id.editbirthday);
-        age = (TextView)view.findViewById(R.id.editage);
-        height = (TextView)view.findViewById(R.id.editheight);
-        weight = (TextView)view.findViewById(R.id.editweight);
-        waist = (TextView)view.findViewById(R.id.editwaistline);
-        bmi = (TextView)view.findViewById(R.id.editbmi);
-        edit = (Button)view.findViewById(R.id.edit);
-        String tempid = UserManage.getInstance(getActivity()).getCurrentUser().getFacebookID();
-        if(!tempid.equals("0.0")) {
-            if(!tempid.equals("0")) {
-                if(!(tempid.equals("fb0.0"))) {
-                    Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
-                }
-            }
-        }
-
-        if(!(UserManage.getInstance(getActivity()).getCurrentUser().getFacebookFirstName()+"").equals("null"))
-            name.setText(UserManage.getInstance(getActivity()).getCurrentUser().getFacebookFirstName());
-        if(!(UserManage.getInstance(getActivity()).getCurrentUser().getBirthDay()+"").equals("null"))
-            birth.setText(UserManage.getInstance(getActivity()).getCurrentUser().getBirthDay());
-        if(UserManage.getInstance(getActivity()).getCurrentUser().getAge()>=0)
-            age.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getAge()));
-        if(UserManage.getInstance(getActivity()).getCurrentUser().getHeight()>0)
-            height.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getHeight()));
-        if(UserManage.getInstance(getActivity()).getCurrentUser().getWeight()>0)
-            weight.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getWeight()));
-        if(UserManage.getInstance(getActivity()).getCurrentUser().getWaistline()>0)
-            waist.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getWaistline()));
-        if(UserManage.getInstance(getActivity()).getCurrentUser().getBmi()>0)
-            bmi.setText(String.format("%.2f", UserManage.getInstance(getActivity()).getCurrentUser().getBmi()));
-
+        ButterKnife.bind(this, view);
+        User user = UserManage.getInstance(getActivity()).getCurrentUser();
+        Glide.with(this).load("https://graph.facebook.com/" + user.getFacebookId() + "/picture?type=large").into(propic);
+        name.setText(user.getFacebookFirstName());
+        birth.setText((!user.getBirthdate().equals("null")) ? user.getBirthdate() : "-" );
+        age.setText((user.getAge() >= 0) ? "" + user.getAge() : "0");
+        height.setText((user.getHeight() >= 0) ? "" + user.getHeight() : "0");
+        weight.setText((user.getWeight() >= 0) ? "" + user.getWeight() : "0");
+        waist.setText((user.getWaistline() >= 0) ? "" + user.getWaistline() : "0");
+        bmi.setText(String.format("%.2f", (user.getBmi() >= 0) ? user.getBmi() : 0));
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,8 +67,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                 final TextView txtW = new TextView(getActivity());
                 final TextView txtWa = new TextView(getActivity());
                 final DatePicker birthday = new DatePicker(getActivity());
-
-
 
                 h.setText("");
                 w.setText("");
@@ -109,7 +82,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                                     int   month= birthday.getMonth() + 1;
                                     int   year = birthday.getYear();
                                     String date=checkDigit(day)+"/"+checkDigit(month)+"/"+year;
-                                    UserManage.getInstance(getActivity()).getCurrentUser().setBirthDay(date);
+                                    UserManage.getInstance(getActivity()).getCurrentUser().setBirthdate(date);
                                     int Calage = getAge(year,month,day);
                                     UserManage.getInstance(getActivity()).getCurrentUser().setAge(Calage);
                                 //}
@@ -133,7 +106,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setWaistline(Integer.valueOf(waist.getText().toString()));
                                 }
                                 UserManage.getInstance(getActivity()).getCurrentUser().save(getActivity());
-                                UserManage.getInstance(getActivity()).updateUser(getActivity());
+                                UserManage.getInstance(getActivity()).updateUser();
                                 getFragmentManager().popBackStack();
                                 Fragment fragment = null;
                                 Class fragmentClass;

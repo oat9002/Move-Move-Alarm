@@ -45,7 +45,7 @@
                 </LinearLayout>
                     <TextView
                         android:gravity="center"
-                        android:id="@+id/textView22"
+                        android:id="@+id/groupMain_groupCode"
                         android:text="-"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
@@ -78,7 +78,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/groupMain_groupName"
                     android:text="-"
                     android:gravity="center"
                     android:layout_width="150dp"
@@ -116,7 +116,7 @@
 
                 <TextView
                     android:gravity="center"
-                    android:id="@+id/textView42"
+                    android:id="@+id/groupMain_adminName"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:textSize="20sp"
@@ -152,7 +152,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/score"
+                    android:id="@+id/groupMain_groupScore"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
@@ -190,7 +190,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/getEvent"
+                    android:id="@+id/groupMain_event"
                     android:text="-"
                     android:gravity="center"
                     android:layout_width="wrap_content"
@@ -257,7 +257,7 @@
         android:layout_below="@id/relativeLayout"
         android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/mem"
-        android:id="@+id/amount"
+        android:id="@+id/groupMain_amountMember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -266,7 +266,7 @@
     <TextView
         android:layout_marginTop="30dp"
         android:id="@+id/slash"
-        android:layout_toRightOf="@id/amount"
+        android:layout_toRightOf="@id/groupMain_amountMember"
         android:layout_below="@id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

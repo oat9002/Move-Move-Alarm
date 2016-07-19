@@ -22,13 +22,13 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.fatel.mamtv1.AlarmReceiver;
-import com.fatel.mamtv1.Cache;
-import com.fatel.mamtv1.DBAlarmHelper;
+import com.fatel.mamtv1.Service.AlarmReceiver;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Helper.DBAlarmHelper;
 import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Model.Alarm;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.UserManage;
+import com.fatel.mamtv1.Service.UserManage;
 
 
 /**

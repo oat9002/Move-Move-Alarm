@@ -22,7 +22,7 @@ public class ChoosePostureFragment extends android.support.v4.app.Fragment  {
 
     Context context;
     public ChoosePostureFragment() {
-        // Required empty public constructor
+
     }
 
 

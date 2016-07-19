@@ -16,7 +16,6 @@ import android.util.Log;
 
 import com.fatel.mamtv1.EventActAlarm;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.Service.Service.Cache;
 
 import java.text.DateFormat;
 import java.text.ParseException;

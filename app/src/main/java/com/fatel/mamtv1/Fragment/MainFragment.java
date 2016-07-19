@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.fatel.mamtv1.Cache;
-import com.fatel.mamtv1.DBAlarmHelper;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Helper.DBAlarmHelper;
 import com.fatel.mamtv1.Model.Alarm;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.UserManage;
+import com.fatel.mamtv1.Service.UserManage;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,7 +41,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         setUser(view);
         setTextAlarm(view, mAlarmHelper);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
-        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookID();
+        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookId();
         if(!tempid.equals("0.0")) {
             if (!tempid.equals("0")) {
                 if(!(tempid.equals("fb0.0"))) {

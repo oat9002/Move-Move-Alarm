@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fatel.mamtv1.Model.Posture;
+
 import java.util.ArrayList;
 
 public class PostureActivity extends AppCompatActivity {

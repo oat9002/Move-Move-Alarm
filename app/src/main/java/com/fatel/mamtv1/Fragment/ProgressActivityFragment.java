@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fatel.mamtv1.HistoryHelper;
+import com.fatel.mamtv1.Helper.HistoryHelper;
 import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.UserManage;
+import com.fatel.mamtv1.Service.UserManage;
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
 import com.lylc.widget.circularprogressbar.CircularProgressBar.ProgressAnimationListener;
 import android.support.v4.app.Fragment;
@@ -62,9 +62,9 @@ public class ProgressActivityFragment extends Fragment {
 
         //
         HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
-        History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentUser().getIdUser());
+        History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentUser().getId());
         //History history = (History) Cache.getInstance().getData("userHistory");
-        if(history != null && history.gettotal()==0){
+        if(history != null && history.getTotal()==0){
             cirProgressstatus = 10;
             cirProgressstatusweek = 70;
             mProgressStatus = 70;
@@ -84,8 +84,8 @@ public class ProgressActivityFragment extends Fragment {
 
         }
         else{
-            cirProgressstatus = (history.getNumberOfAccept()*100)/history.gettotal();
-            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.gettotal() * timePerPic);
+            cirProgressstatus = (history.getNumberOfAccept()*100)/history.getTotal();
+            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.getTotal() * timePerPic);
             cirProgressstatusweek = 99;
             mProgressStatusweek = 50;
             barneck = 100;
@@ -185,7 +185,7 @@ public class ProgressActivityFragment extends Fragment {
         progresstimeoflegweek.setProgress(barlegweek);
 
         // Show the progress on TextView
-        //timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.gettotal()*timePerPic)+"min");
+        //timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.getTotal()*timePerPic)+"min");
         timeFrac.setText((10*timePerPic)+" นาที");
         timeFracweek.setText((10*timePerPicweek)+" นาที");
         numberfracneck.setText((1*numberofneck)+" ครั้ง");

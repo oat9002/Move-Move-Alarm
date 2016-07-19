@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.fatel.mamtv1.Adapter.ProgressPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
 public class ProgressActivity extends AppCompatActivity {

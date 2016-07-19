@@ -7,7 +7,7 @@
     <string name="drawer_open">Open Navigation drawer</string>
     <string name="drawer_close">Close Navigation drawer</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_">Move Alarm</string>
     <string name="title_activity_act_alarm">Move Alarm</string>
     <string name="title_activity_intro_">Move Alarm</string>
@@ -44,7 +44,7 @@
 
     <string name="Hello">สวัสดี </string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_event">EventActivity</string>
     <string name="title_activity_eventact_alarm">EventactAlarm</string>

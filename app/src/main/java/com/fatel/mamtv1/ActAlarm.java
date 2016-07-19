@@ -15,6 +15,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.os.Vibrator;
 
+import com.fatel.mamtv1.Model.History;
+import com.fatel.mamtv1.Service.AlarmReceiver;
+import com.fatel.mamtv1.Service.UserManage;
 
 
 public class ActAlarm extends AppCompatActivity {
@@ -69,7 +72,7 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(), this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
         history.addaccept(1);
         history.save(this);
         Intent intent = new Intent(this, Activity.class);
@@ -86,7 +89,7 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getIdUser(),this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(),this);
         history.addcancel(1);
         history.save(this);
         Intent i1 = new Intent(ActAlarm.this, MainActivity.class);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fatel.mamtv1" >
+    package="com.fatel.mamtv1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,42 +23,38 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activity"
             android:label="@string/title_activity_"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ActAlarm"
             android:label="@string/title_activity_act_alarm"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
-        <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".Service.AlarmReceiver" />
         <receiver
-            android:name=".BootBroadcastReceiver"
-            android:enabled="true" >
+            android:name=".Service.BootBroadcastReceiver"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".EventReceiver" />
+        <receiver android:name=".Service.EventReceiver" />
 
         <activity
-            android:name=".Intro_Activity"
+            android:name=".IntroActivity"
             android:label="@string/title_activity_intro_"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Login_Activity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_intro_"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,29 +62,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Create_Account_Activity"
+            android:name=".CreateAccountActivity"
             android:label="@string/title_activity_create__account_"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ShareActivity"
             android:label="@string/title_activity_shared"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Camera"
+            android:name=".Service.Camera"
             android:label="@string/title_activity_pre"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".PostureActivity"
             android:label="@string/title_activity_posture"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ScoreboardActivity"
-            android:label="@string/title_activity_scoreboard" >
-        </activity>
+            android:label="@string/title_activity_scoreboard"></activity>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -106,32 +97,25 @@
 
         <activity
             android:name=".CreateGroupActivity"
-            android:label="@string/title_activity_create_group" >
-        </activity>
+            android:label="@string/title_activity_create_group"></activity>
         <activity
             android:name=".JoinGroupActivity"
-            android:label="@string/title_activity_join_group" >
-        </activity>
+            android:label="@string/title_activity_join_group"></activity>
         <activity
             android:name=".GroupMainActivity"
-            android:label="@string/title_activity_group_main" >
-        </activity>
+            android:label="@string/title_activity_group_main"></activity>
         <activity
             android:name=".MemberGroupActivity"
-            android:label="@string/title_activity_member_group" >
-        </activity>
+            android:label="@string/title_activity_member_group"></activity>
         <activity
             android:name=".ProgressActivity"
-            android:label="@string/title_activity_progress" >
-        </activity>
+            android:label="@string/title_activity_progress"></activity>
         <activity
             android:name=".EventActivity"
-            android:label="@string/title_activity_event" >
-        </activity>
+            android:label="@string/title_activity_event"></activity>
         <activity
-            android:name=".EventactAlarm"
-            android:label="@string/title_activity_eventact_alarm" >
-        </activity>
+            android:name=".EventActAlarm"
+            android:label="@string/title_activity_eventact_alarm"></activity>
     </application>
 
 </manifest>

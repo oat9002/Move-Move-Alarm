@@ -53,8 +53,8 @@ public class UserHelper extends SQLiteOpenHelper {
     public int addUser(User user) {
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(User.Column.IDUSER, user.getIdUser());
-        values.put(User.Column.BIRTHDAY,user.getBirthDay());
+        values.put(User.Column.IDUSER, user.getId());
+        values.put(User.Column.BIRTHDAY,user.getBirthdate());
         values.put(User.Column.AGE, user.getAge());
         values.put(User.Column.SCORE, user.getScore());
         values.put(User.Column.HEIGHT,user.getHeight());
@@ -62,12 +62,12 @@ public class UserHelper extends SQLiteOpenHelper {
         values.put(User.Column.WAISTLINE,user.getWaistline());
         values.put(User.Column.BMI,user.getBmi());
         values.put(User.Column.EMAIL, user.getEmail());
-        values.put(User.Column.FACEBOOKID, user.getFacebookID());
+        values.put(User.Column.FACEBOOKID, user.getFacebookId());
         values.put(User.Column.FACEBOOKFIRSTNAME, user.getFacebookFirstName());
         values.put(User.Column.FACEBOOKLASTNAME, user.getFacebookLastName());
         values.put(User.Column.PROFILEIMAGE,user.getProfileImage());
         values.put(User.Column.LOGIN, user.getLogin());
-        values.put(User.Column.IDGROUP,user.getIdGroup());
+        values.put(User.Column.IDGROUP,user.getGroupId());
         values.put(User.Column.STATESW,user.getStatesw());
         long id = sqLiteDatabase.insert(User.TABLE, null, values);
         sqLiteDatabase.close();
@@ -76,8 +76,8 @@ public class UserHelper extends SQLiteOpenHelper {
     public void updateUser(User user){
         sqLiteDatabase  = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(User.Column.IDUSER, user.getIdUser());
-        values.put(User.Column.BIRTHDAY,user.getBirthDay());
+        values.put(User.Column.IDUSER, user.getId());
+        values.put(User.Column.BIRTHDAY,user.getBirthdate());
         values.put(User.Column.AGE, user.getAge());
         values.put(User.Column.SCORE, user.getScore());
         values.put(User.Column.HEIGHT,user.getHeight());
@@ -85,17 +85,17 @@ public class UserHelper extends SQLiteOpenHelper {
         values.put(User.Column.WAISTLINE,user.getWaistline());
         values.put(User.Column.BMI,user.getBmi());
         values.put(User.Column.EMAIL, user.getEmail());
-        values.put(User.Column.FACEBOOKID, user.getFacebookID());
+        values.put(User.Column.FACEBOOKID, user.getFacebookId());
         values.put(User.Column.FACEBOOKFIRSTNAME, user.getFacebookFirstName());
         values.put(User.Column.FACEBOOKLASTNAME, user.getFacebookLastName());
         values.put(User.Column.PROFILEIMAGE,user.getProfileImage());
         values.put(User.Column.LOGIN, user.getLogin());
-        values.put(User.Column.IDGROUP,user.getIdGroup());
+        values.put(User.Column.IDGROUP,user.getGroupId());
         values.put(User.Column.STATESW,user.getStatesw());
         int row = sqLiteDatabase.update(User.TABLE,
                 values,
                 User.Column.ID + " = ? ",
-                new String[] { String.valueOf(user.getId())});
+                new String[] { String.valueOf(user.getInternalId())});
         sqLiteDatabase.close();
     }
     public boolean checkdata(){

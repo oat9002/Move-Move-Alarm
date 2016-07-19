@@ -4,11 +4,15 @@ import android.content.Context;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import com.fatel.mamtv1.Converter;
-import com.fatel.mamtv1.UserHelper;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Helper.UserHelper;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,23 +21,44 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class User {
+public class User implements Serializable{
+
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @Expose
     private int id;
-    private int idUser;
-    private String birthDay;
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private int internalId;
+
+    @Expose
+    private String birthdate;
+    @Expose
     private int age;
+    @Expose
     private int score;
+    @Expose
     private int height;
+    @Expose
     private int weight;
+    @Expose
     private int waistline;
+    @Expose
     private Double bmi;
+    @Expose
     private String email;
-    private String facebookID;
+    @SerializedName("facebook_id")
+    public String facebookId;
+    @Expose
     private String facebookFirstName;
+    @Expose
     private String facebookLastName;
+    @Expose
     private int profileImage;
+    @SerializedName("group_id")
+    private int groupId;
+
     private int login;
-    private int idGroup;
     private int statesw;
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE = "user";
@@ -61,23 +86,23 @@ public class User {
     public User() {
     }
 
-    public User(int idUser, String facebookID, String facebookFirstName) {
-        this.id = -1;
+    public User(int userId, String facebookId, String facebookFirstName) {
+        this.internalId = -1;
         this.score = 0;
         this.login = 0;
-        this.idUser = idUser;
-        this.facebookID = facebookID;
+        this.id = userId;
+        this.facebookId = facebookId;
         this.facebookFirstName = facebookFirstName;
-        this.idGroup = 0;
+        this.groupId = 0;
         this.statesw = 1;
     }
 
-    public User(int id, int idUser, String birthDay, int age, int score
-            , int height, int weight, int waistline, double bmi, String email, String facebookID, String facebookFirstName,
-                String facebookLastName, int profileImage, int login, int idGroup, int statesw) {
-        this.id = id;
-        this.idUser = idUser;
-        this.birthDay = birthDay;
+    public User(int id, int idUser, String birthdate, int age, int score
+            , int height, int weight, int waistline, double bmi, String email, String facebookId, String facebookFirstName,
+                String facebookLastName, int profileImage, int login, int groupId, int statesw) {
+        this.internalId = id;
+        this.id = idUser;
+        this.birthdate = birthdate;
         this.age = age;
         this.score = score;
         this.height = height;
@@ -85,33 +110,33 @@ public class User {
         this.waistline = waistline;
         this.bmi = bmi;
         this.email = email;
-        this.facebookID = facebookID;
+        this.facebookId = facebookId;
         this.facebookFirstName = facebookFirstName;
         this.facebookLastName = facebookLastName;
         this.profileImage = profileImage;
         this.login = login;
-        this.idGroup = idGroup;
+        this.groupId = groupId;
         this.statesw = statesw;
     }
 
     public void save(Context context) {
 
         UserHelper userHelper = new UserHelper(context);
-        if (this.id == -1) {
-            this.id = userHelper.addUser(this);
-            Log.i("User", "funh savenew :" + id);
+        if (this.internalId == -1) {
+            this.internalId = userHelper.addUser(this);
+            Log.i("User", "funh savenew :" + internalId);
         } else {
             userHelper.updateUser(this);
-            Log.i("User", "funh saveold :" + id);
+            Log.i("User", "funh saveold :" + internalId);
         }
     }
 
-    public static User find(int idUser, Context context) {
+    public static User find(int id, Context context) {
         UserHelper userHelper = new UserHelper(context);
-        if (userHelper.getUser(idUser) == null) {
+        if (userHelper.getUser(id) == null) {
             return null;
         } else
-            return userHelper.getUser(idUser);
+            return userHelper.getUser(id);
     }
 
     public static User checkLogin(Context context) {
@@ -121,8 +146,8 @@ public class User {
 
     public HashMap<String, Object> getGeneralValues() {
         HashMap<String, Object> userData = new HashMap<>();
-        userData.put("id", this.getIdUser());
-        userData.put("birthday", this.getBirthDay());
+        userData.put("id", this.getId());
+        userData.put("birthday", this.getBirthdate());
         userData.put("age", this.getAge());
         userData.put("score", this.getScore());
         userData.put("height", this.getHeight());
@@ -130,7 +155,7 @@ public class User {
         userData.put("waistline", this.getWaistline());
         userData.put("bmi", this.getBmi());
         userData.put("profileImage", this.getProfileImage());
-        userData.put("facebookID", "fb" + this.getFacebookID());
+        userData.put("facebookId", "fb" + this.getFacebookId());
         userData.put("facebookFirstName", this.getFacebookFirstName());
         userData.put("facebookLastName", this.getFacebookLastName());
         userData.put("email", this.getEmail());
@@ -138,22 +163,19 @@ public class User {
         return userData;
     }
 
-    public User setData(HashMap<String, Object> userData, Context context) {
-        Converter converter = Converter.getInstance();
-        this.setBirthDay(converter.toString(userData.get("birthDay")));
-        this.setAge(converter.toInt(userData.get("age")));
-        this.setScore(converter.toInt(userData.get("score")));
-        this.setHeight(converter.toInt(userData.get("height")));
-        this.setWeight(converter.toInt(userData.get("weight")));
-        this.setWaistline(converter.toInt(userData.get("waistline")));
-        this.setBmi(converter.toDouble(userData.get("bmi")));
-        this.setEmail(converter.toString(userData.get("email")));
-        this.setIdGroup(converter.toInt(userData.get("groupId")));
-        this.setFacebookID(converter.toString(userData.get("facebookID")).substring(2));
-        this.setFacebookFirstName(converter.toString(userData.get("facebookFirstName")));
-        this.setFacebookLastName(converter.toString(userData.get("facebookLastName ")));
-        this.setLogin(1);
-        this.save(context);
-        return this;
+    public void addScore(int score){
+        this.score+=score;
+    }
+
+    public int getInternalId() {
+        return internalId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
