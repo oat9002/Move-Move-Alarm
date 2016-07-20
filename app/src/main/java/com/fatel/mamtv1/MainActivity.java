@@ -256,36 +256,11 @@ public class MainActivity extends AppCompatActivity {
                 if (currentUser.getGroupId() == 0)
                     fragmentClass = GroupFragment.class;
                 else {
-                    final Context context = this;
-                    final Intent intent = new Intent(this, GroupMainActivity.class);
-                    final Callback<Event> eventDataCallback = new Callback<Event>() {
-                        @Override
-                        public void onResponse(retrofit.Response<Event> response, Retrofit retrofit) {
-                            Cache.getInstance().putData("eventData", response.body().getTime().toString());
-                            intent.putExtra("eventData", response.body());
-                            context.startActivity(intent);
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {
-                            Log.i("error", t.getMessage());
-                        }
-                    };
-                    Callback<Group> groupDataCallback = new Callback<Group>() {
-                        @Override
-                        public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
-                            intent.putExtra("groupData", response.body());
-                            Cache.getInstance().putData("groupData", response.body());
-                            EventServiceImp.getInstance().getEvent(eventDataCallback);
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {
-                            Log.i("error", t.getMessage());
-                        }
-                    };
-                    GroupServiceImp.getInstance().findByUser(currentUser, groupDataCallback);
-                    fragmentClass = LoadingFragment.class;
+                    Intent intent = new Intent(this, GroupMainActivity.class);
+                    intent.putExtra("groupData", (Group) Cache.getInstance().getData("groupData"));
+                    Cache cache = Cache.getInstance();
+                    intent.putExtra("eventData", (Event) Cache.getInstance().getData("eventData"));
+                    startActivity(intent);
                 }
                 break;
 

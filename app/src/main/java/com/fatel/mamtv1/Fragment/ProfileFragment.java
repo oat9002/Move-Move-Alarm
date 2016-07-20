@@ -49,7 +49,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         User user = UserManage.getInstance(getActivity()).getCurrentUser();
         Glide.with(this).load("https://graph.facebook.com/" + user.getFacebookId() + "/picture?type=large").into(propic);
         name.setText(user.getFacebookFirstName());
-        birth.setText((!user.getBirthdate().equals("null")) ? user.getBirthdate() : "-" );
+        birth.setText((user.getBirthdate() != null && !user.getBirthdate().equals("null")) ? user.getBirthdate() : "-" );
         age.setText((user.getAge() >= 0) ? "" + user.getAge() : "0");
         height.setText((user.getHeight() >= 0) ? "" + user.getHeight() : "0");
         weight.setText((user.getWeight() >= 0) ? "" + user.getWeight() : "0");

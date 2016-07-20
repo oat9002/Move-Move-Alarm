@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,23 +15,36 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.fatel.mamtv1.Model.Event;
+import com.fatel.mamtv1.Model.Group;
+import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.Converter;
 import com.fatel.mamtv1.Service.HttpConnector;
 import com.fatel.mamtv1.Service.UserManage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.Retrofit;
+
 public class CreateGroupActivity extends AppCompatActivity {
-    EditText gName;
+    @BindView(R.id.edit_message) EditText gName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
-        gName = (EditText)findViewById(R.id.edit_message);
-
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -42,13 +56,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -58,92 +66,37 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     public void linkGroup(View view)
     {
-        if(gName.length()<6)
-        {
-            Toast.makeText(this, "Please enter Group name at least 6 characters", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            String url = HttpConnector.URL +"group/createGroup";
+        if(gName.length()<6) {
+            Toast.makeText(this, "จำนวนตัวอักษรขั้นต่ำ 6 ตัวอักษร", Toast.LENGTH_SHORT).show();
+        } else {
             final User user = UserManage.getInstance(CreateGroupActivity.this).getCurrentUser();
-
-            StringRequest createGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
-                    new Response.Listener<String>() { //create new listener to traces the data
-                        @Override
-                        public void onResponse(String response) { //when listener is activated
-                            Converter converter = Converter.getInstance();
-                            HashMap<String, Object> data = converter.JSONToHashMap(response);
-                            if((boolean) data.get("status")) {
-                                HashMap<String, Object> groupData = converter.JSONToHashMap(converter.toString(data.get("group")));
-                                int groupID = converter.toInt(groupData.get("id"));
-                                user.setGroupId(groupID);
-                                user.save(CreateGroupActivity.this);
-                                Cache.getInstance().putData("groupData", groupData);
-
-                                requestEvent();
-                            }
-                            else {
-                                makeToast(converter.toString(data.get("description")));
-                            }
-                        }
-                    }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
+            final Group group = new Group(gName.getText().toString(), user);
+            GroupServiceImp.getInstance().createGroup(group, new Callback<StatusDescription>() {
                 @Override
-                public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
-                    makeToast("Cannot connect to server or internal server error.");
+                public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                    if(response.body().isSuccess()) {
+                        user.setGroupId(Converter.toInt(response.body().getData().get("id")));
+                        group.setId(Converter.toInt(response.body().getData().get("id")));
+                        user.save(CreateGroupActivity.this);
+                        Cache.getInstance().putData("groupData", group);
+                        Intent intent = new Intent(CreateGroupActivity.this, GroupMainActivity.class);
+                        intent.putExtra("groupData", group);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        makeToast("เกิดปัญหาการเชื่อมต่อกับเซิร์ฟเวอร์");
+                    }
                 }
-            }) { //define POST parameters
+
                 @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
-                    HashMap<String, Object> JSON = new HashMap<>();
-                    HashMap<String, Object> userData = user.getGeneralValues();
-                    HashMap<String, Object> groupData = new HashMap<>();
-
-                    groupData.put("admin", userData);
-                    groupData.put("name", gName.getText().toString());
-
-                    JSON.put("group", groupData);
-                    map.put("JSON", Converter.getInstance().HashMapToJSON(JSON));
-
-                    return map;
+                public void onFailure(Throwable t) {
+                    Log.i("error", t.toString());
                 }
-            };
-
-            HttpConnector.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).addToRequestQueue(createGroupRequest);
+            });
         }
     }
     public void makeToast(String text)
     {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
-
-    public void requestEvent()
-    {
-        String url = HttpConnector.URL + "event/getEvent";
-        StringRequest eventRequest = new StringRequest(Request.Method.GET, url, //create new string request with POST method
-                new Response.Listener<String>() { //create new listener to traces the data
-                    @Override
-                    public void onResponse(String response) { //when listener is activated
-                        Converter converter = Converter.getInstance();
-                        Cache cache = Cache.getInstance();
-                        HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
-                            HashMap<String, Object> eventData = converter.JSONToHashMap("" + data.get("event"));
-                            cache.putData("eventData", eventData);
-
-                            startActivity(new Intent(CreateGroupActivity.this, GroupMainActivity.class));
-                            finish();
-                        }
-                        else {
-                            makeToast(converter.toString(data.get("description")));
-                        }
-                    }
-                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
-            @Override
-            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
-                makeToast("Cannot connect to server. Please check the Internet setting.");
-            }
-        });
-
-        HttpConnector.getInstance(this).addToRequestQueue(eventRequest);
     }
 }

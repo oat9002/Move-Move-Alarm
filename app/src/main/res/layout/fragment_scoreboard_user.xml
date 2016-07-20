@@ -7,7 +7,7 @@
     >
     <TextView
         android:textStyle="bold"
-        android:id="@+id/userscore"
+        android:id="@+id/current_user_name"
         android:text="ผู้ใช้"
         android:textSize="25sp"
         android:layout_marginTop="60dp"
@@ -30,7 +30,7 @@
         <TextView
             android:layout_marginLeft="20dp"
             android:textSize="20sp"
-            android:id="@+id/scoreuser"
+            android:id="@+id/current_user_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00"/>
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/userranking"
+            android:id="@+id/current_user_rank"
             android:layout_marginLeft="20dp"
             android:text="00"
             android:textSize="20sp"
@@ -146,7 +146,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/user_no1_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -160,7 +160,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/user_no1_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -192,7 +192,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/user_no2_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -206,7 +206,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/user_no2_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -244,7 +244,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView42"
+            android:id="@+id/user_no3_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -258,7 +258,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView43"
+            android:id="@+id/user_no3_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -295,7 +295,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView52"
+            android:id="@+id/user_no4_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -309,7 +309,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView53"
+            android:id="@+id/user_no4_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -346,7 +346,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView62"
+            android:id="@+id/user_no5_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -360,7 +360,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView63"
+            android:id="@+id/user_no5_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -397,7 +397,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView72"
+            android:id="@+id/user_no6_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -411,7 +411,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView73"
+            android:id="@+id/user_no6_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -448,7 +448,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView82"
+            android:id="@+id/user_no7_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -462,7 +462,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView83"
+            android:id="@+id/user_no7_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -499,7 +499,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView92"
+            android:id="@+id/user_no8_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -513,7 +513,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView93"
+            android:id="@+id/user_no8_score"
             android:padding="5dp"
             android:text="0"
             android:gravity="center"
@@ -550,7 +550,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView102"
+            android:id="@+id/user_no9_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -564,7 +564,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView103"
+            android:id="@+id/user_no9_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"
@@ -601,7 +601,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView112"
+            android:id="@+id/user_no10_name"
             android:padding="5dp"
             android:gravity="center"
             android:text="-"
@@ -615,7 +615,7 @@
             <View style="@style/Divider" />
         </LinearLayout>
         <TextView
-            android:id="@+id/textView113"
+            android:id="@+id/user_no10_score"
             android:padding="5dp"
             android:gravity="center"
             android:text="0"

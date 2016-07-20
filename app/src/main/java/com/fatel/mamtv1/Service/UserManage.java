@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.fatel.mamtv1.MainActivity;
+import com.fatel.mamtv1.Model.Event;
+import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 
 import java.util.HashMap;
@@ -50,6 +54,29 @@ public class UserManage {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
+                GroupServiceImp.getInstance().findByUser(currentUser, new Callback<Group>() {
+                    @Override
+                    public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
+                        Cache.getInstance().putData("groupData", response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.i("error", t.getMessage());
+                    }
+                });
+
+                EventServiceImp.getInstance().getEvent(new Callback<Event>() {
+                    @Override
+                    public void onResponse(retrofit.Response<Event> response, Retrofit retrofit) {
+                        Cache.getInstance().putData("eventData", response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.i("error", t.getMessage());
+                    }
+                });
             }
 
             @Override

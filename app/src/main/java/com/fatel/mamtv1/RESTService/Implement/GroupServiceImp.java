@@ -12,6 +12,11 @@ import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.RESTService.Interface.GroupService;
 import com.fatel.mamtv1.Service.Cache;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
@@ -42,5 +47,28 @@ public class GroupServiceImp {
     public void findByUser(User user, Callback callback) {
         Call call = service.findByUser("applicatipn/json", user);
         call.enqueue(callback);
+    }
+
+    public void createGroup(Group group, Callback callback) {
+        service.create("application/json", group).enqueue(callback);
+    }
+
+    public void joinGroup(int groupCode, User user, Callback callback) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("user", user);
+        map.put("code", groupCode);
+        service.join("applicatipn/json", map).enqueue(callback);
+    }
+
+    public void getTopRank(int max, Callback callback) {
+        service.getTopRank(max).enqueue(callback);
+    }
+
+    public void getRank(Group group, Callback callback) {
+        service.getRank("applicatipn/json", group).enqueue(callback);
+    }
+
+    public void getRankByUser(User user, Callback callback) {
+        service.getRankByUser("applicatipn/json", user).enqueue(callback);
     }
 }
