@@ -1,9 +1,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".Fragment.ProfileFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.ProfileFragment"
     android:padding="5dp">
 
-
+<android.support.v7.widget.CardView
+    android:id="@+id/cardview_profile_image"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    card_view:cardElevation="5dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image_p"
@@ -11,24 +24,37 @@
         android:layout_height="150dp"
         android:src="@drawable/test"
         android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="40dp"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/cardview_profile_image"
+        card_view:cardElevation="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/proFB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textFB"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:text="ชื่อ"/>
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -46,19 +72,18 @@
         android:layout_below="@+id/proFB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:paddingTop="10dp">
    <TextView
        android:id="@+id/textbirthday"
-       android:paddingLeft="20dp"
+       android:paddingLeft="30dp"
        android:layout_width="100dp"
        android:layout_height="wrap_content"
        android:textSize="20sp"
        android:textColor="@android:color/black"
        android:text="วันเกิด"/>
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -76,12 +101,11 @@
         android:id="@+id/proage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@id/probirthday"
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textage"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -89,8 +113,8 @@
             android:text="อายุ"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -110,19 +134,18 @@
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:text="ปี"
-            android:layout_marginLeft="50dp" />
+            android:layout_marginLeft="40dp" />
 
     </LinearLayout>
     <LinearLayout
         android:id="@+id/proheight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@id/proage"
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textheight"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -130,8 +153,8 @@
             android:text="ส่วนสูง"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -151,19 +174,18 @@
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:text="เซนติเมตร"
-            android:layout_marginLeft="50dp" />
+            android:layout_marginLeft="40dp" />
 
     </LinearLayout>
     <LinearLayout
         android:id="@+id/proweight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@id/proheight"
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textweight"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -171,8 +193,8 @@
             android:text="น้ำหนัก"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -192,19 +214,18 @@
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:text="กิโลกรัม"
-            android:layout_marginLeft="50dp" />
+            android:layout_marginLeft="40dp" />
 
     </LinearLayout>
     <LinearLayout
         android:id="@+id/prowaistline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@id/proweight"
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textwaistline"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -212,8 +233,8 @@
             android:text="รอบเอว"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -233,7 +254,7 @@
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:text="นิ้ว"
-            android:layout_marginLeft="50dp" />
+            android:layout_marginLeft="40dp" />
 
     </LinearLayout>
 
@@ -241,12 +262,11 @@
         android:id="@+id/probmi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@id/prowaistline"
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textbmi"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -254,8 +274,8 @@
             android:text="BMI"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -272,13 +292,19 @@
 
     <Button
         android:id="@+id/edit"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/selectoredit"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:nestedScrollingEnabled="false"
-        android:layout_margin="10dp" />
-
+        android:layout_margin="5dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/probmi"
+            android:text=" "/>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>
