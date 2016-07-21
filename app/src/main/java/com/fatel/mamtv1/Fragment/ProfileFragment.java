@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                 final DatePicker birthday = new DatePicker(getActivity());
 
                 h.setText("");
+                h.setInputType(InputType.TYPE_CLASS_NUMBER);
                 w.setText("");
+                w.setInputType(InputType.TYPE_CLASS_NUMBER);
                 waist.setText("");
+                waist.setInputType(InputType.TYPE_CLASS_NUMBER);
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
