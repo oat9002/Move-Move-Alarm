@@ -1,6 +1,8 @@
 package com.fatel.mamtv1;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -85,5 +87,25 @@ public class GroupMainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, MemberGroupActivity.class);
         startActivity(intent);
+    }
+    public void leaveGroup(View view)
+    {
+        //call api to leavegroup
+
+        //go to fragment_group
+
+//        Fragment fragment = null;
+//        Class fragmentClass;
+//        fragmentClass = GroupFragment.class;
+//        try {
+//            fragment = (Fragment) fragmentClass.newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        FragmentTransaction tr = getFragmentManager().beginTransaction();
+//        tr.addToBackStack(null);
+//        tr.replace(R.id.container, fragment);
+//        tr.commit();
+
     }
 }
