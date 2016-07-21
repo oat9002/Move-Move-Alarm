@@ -52,8 +52,8 @@
             android:textColor="@android:color/black"
             android:text="ชื่อ"/>
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -74,15 +74,15 @@
         android:paddingTop="10dp">
    <TextView
        android:id="@+id/textbirthday"
-       android:paddingLeft="20dp"
+       android:paddingLeft="30dp"
        android:layout_width="100dp"
        android:layout_height="wrap_content"
        android:textSize="20sp"
        android:textColor="@android:color/black"
        android:text="วันเกิด"/>
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -104,7 +104,7 @@
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textage"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -112,8 +112,8 @@
             android:text="อายุ"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -144,7 +144,7 @@
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textheight"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -152,8 +152,8 @@
             android:text="ส่วนสูง"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -184,7 +184,7 @@
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textweight"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -192,8 +192,8 @@
             android:text="น้ำหนัก"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -224,7 +224,7 @@
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textwaistline"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -232,8 +232,8 @@
             android:text="รอบเอว"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -265,7 +265,7 @@
         android:paddingTop="10dp">
         <TextView
             android:id="@+id/textbmi"
-            android:paddingLeft="20dp"
+            android:paddingLeft="30dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -273,8 +273,8 @@
             android:text="BMI"
             />
         <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="70dp"
+            android:paddingLeft="30dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
