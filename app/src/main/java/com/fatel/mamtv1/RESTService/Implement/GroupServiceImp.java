@@ -71,4 +71,12 @@ public class GroupServiceImp {
     public void getRankByUser(User user, Callback callback) {
         service.getRankByUser("applicatipn/json", user).enqueue(callback);
     }
+
+    public void leaveGroup(User user, Callback callback) {
+        service.leaveGroup("application/json", user).enqueue(callback);
+    }
+
+    public void deleteGroup(User user, Callback callback) {
+        service.deleteGroup("application/json", user).enqueue(callback);
+    }
 }

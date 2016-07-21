@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
+import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.UserManage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -57,7 +60,7 @@ public class GroupMainActivity extends AppCompatActivity {
             groupCode.setText(code);
             groupName.setText(groupData.getName());
             adminName.setText(groupData.getAdmin().getFacebookFirstName());
-            amountMember.setText("" + groupData.getAmountMember());
+            amountMember.setText("" + groupData.getMembers().size());
             groupScore.setText("" + groupData.getScore());
         } catch (Exception e) {
             Log.i("setup group", e.toString());

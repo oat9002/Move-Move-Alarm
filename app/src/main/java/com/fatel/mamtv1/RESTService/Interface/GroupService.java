@@ -38,4 +38,10 @@ public interface GroupService {
 
     @POST("/group/rankByUser")
     Call<Integer> getRankByUser(@Header("Content-Type") String content, @Body User user);
+
+    @POST("/group/leave")
+    Call<StatusDescription> leaveGroup(@Header("Content-Type") String content, @Body User user);
+
+    @POST("/group/delete")
+    Call<StatusDescription> deleteGroup(@Header("Content-Type") String content, @Body User user);
 }
