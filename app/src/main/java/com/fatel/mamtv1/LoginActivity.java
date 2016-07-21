@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         instance = this;
         super.onCreate(savedInstanceState);
+        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin(this)+"");
         if(UserManage.getInstance(this).checkCurrentLogin(this))
         {
             Intent intent = new Intent(this, MainActivity.class);
