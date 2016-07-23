@@ -154,6 +154,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
                     User user = response.body();
+                    if(user == null)
+                        return;
+                    Log.i("response", response.raw().toString());
                     user.setLogin(1);
                     user.save(getApplicationContext());
                     UserManage.getInstance(getApplicationContext()).setCurrentUser(user);
