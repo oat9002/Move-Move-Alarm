@@ -7,42 +7,41 @@ import android.content.Intent;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.CountDownTimer;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.Posture;
+import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.AlarmReceiver;
 import com.fatel.mamtv1.Service.Camera;
 import com.fatel.mamtv1.Service.Cache;
-import com.fatel.mamtv1.Service.Converter;
-import com.fatel.mamtv1.Service.HttpConnector;
 import com.fatel.mamtv1.Service.UserManage;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.Retrofit;
 
 
 public class Activity extends AppCompatActivity {
 
-    TextView txtR;
-    TextView txtA;
-    TextView txtDes;
-    TextView txtName;
-    ImageView imgView;
+    @BindView(R.id.rtime) TextView txtR;
+    @BindView(R.id.atime) TextView txtA;
+    @BindView(R.id.des) TextView txtDes;
+    @BindView(R.id.imgname) TextView txtName;
+    @BindView(R.id.img) ImageView imgView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
@@ -60,16 +59,13 @@ public class Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
+        ButterKnife.bind(this);
+
         final Window win= getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         img = new ArrayList<>();
-        txtR=(TextView) findViewById(R.id.rtime);
-        txtA=(TextView) findViewById(R.id.atime);
-        txtDes=(TextView) findViewById(R.id.des);
-        txtName=(TextView) findViewById(R.id.imgname);
-        imgView=(ImageView) findViewById(R.id.img);
         activityHandle=new ActivityHandle(this);
         context=getApplicationContext();
         img = activityHandle.getRandomPosture();
@@ -121,10 +117,7 @@ public class Activity extends AppCompatActivity {
             }
         }.start();
 
-
-
         time2 = new CountDownTimer(120000, 1000) {
-
             public void onTick(long millisUntilFinished) {
                 txtA.setText("เวลากิจกรรม   "+String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
@@ -134,14 +127,24 @@ public class Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                // update progress call volley
-
-                //
                 txtA.setText("เสร็จสิ้น!");
                 Intent i1 = new Intent(Activity.this, Camera.class);
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i1);
-                requestAddScore();
+                User currentUser = UserManage.getCurrentUser();
+                currentUser.addScore(1);
+                makeSnackbar("ทำกิจกรรมสำเร็จ รับ 1 คะแนน!");
+                UserServiceImp.getInstance().update(currentUser, new Callback<StatusDescription>() {
+                    @Override
+                    public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                        //TODO ถ้า add score บน server เสร็จ จะทำอะไรต่อ
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        makeSnackbar("ไม่สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                    }
+                });
             }
         }.start();
 
@@ -158,10 +161,8 @@ public class Activity extends AppCompatActivity {
             time2.cancel();
             time2=null;
         }
-        // update progress call volley
+        // TODO update progress
 
-        //
-        //history
         History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
         history.subaccept(1);
         history.addcancel(1);
@@ -181,56 +182,11 @@ public class Activity extends AppCompatActivity {
         finish();
     }
 
-    public void requestAddScore()
+    public void makeSnackbar(String text)
     {
-        final Converter converter = Converter.getInstance();
-        String url = HttpConnector.URL + "user/increaseScore";
-        StringRequest eventRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
-                new Response.Listener<String>() { //create new listener to traces the data
-                    @Override
-                    public void onResponse(String response) { //when listener is activated
-
-
-                        HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
-                            makeToast("ทำกิจกรรมสำเร็จ รับ 1 คะแนน!");
-                            UserManage.getInstance(Activity.this).addScore(1, Activity.this);
-                        }
-                        else {
-                            makeToast(converter.toString(data.get("description")));
-                        }
-                    }
-                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
-            @Override
-            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
-                Log.i("volley", volleyError.toString());
-                makeToast("Cannot connect to server or internal server error.");
-            }
-        }) { //define POST parameters
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
-                HashMap<String, Object> JSON = new HashMap<>();
-                HashMap<String, Object> userData = UserManage.getInstance(Activity.this).getCurrentUser().getGeneralValues();
-                int point = 1;
-
-                JSON.put("score", point);
-                JSON.put("user", userData);
-                JSON.put("description", "Done activity! Get 1 point.");
-
-                map.put("JSON", converter.HashMapToJSON(JSON));
-
-                return map;
-            }
-        };
-
-        HttpConnector.getInstance(this).addToRequestQueue(eventRequest);
+        Snackbar.make(txtR, text, Snackbar.LENGTH_SHORT).show();
     }
 
-    public void makeToast(String text)
-    {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
     public static ActivityHandle getCurrentActivityHandle (){
         if (activityHandle!=null)
             return activityHandle;

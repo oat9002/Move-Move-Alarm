@@ -31,32 +31,21 @@ public class User implements Serializable{
     @Setter(AccessLevel.NONE)
     private int internalId;
 
-    @Expose
-    private String birthdate;
-    @Expose
-    private int age;
-    @Expose
-    private int score;
-    @Expose
-    private int height;
-    @Expose
-    private int weight;
-    @Expose
-    private int waistline;
-    @Expose
-    private Double bmi;
-    @Expose
-    private String email;
-    @SerializedName("facebook_id")
-    public String facebookId;
-    @Expose
-    private String facebookFirstName;
-    @Expose
-    private String facebookLastName;
-    @Expose
-    private int profileImage;
-    @SerializedName("group_id")
-    private int groupId;
+    @Expose private String birthdate;
+    @Expose private int age;
+    @Expose private int score;
+    @Expose private int height;
+    @Expose private int weight;
+    @Expose private int waistline;
+    @Expose private Double bmi;
+    @Expose private String email;
+    @SerializedName("facebook_id") public String facebookId;
+    @Expose private String facebookFirstName;
+    @Expose private String facebookLastName;
+    @Expose private int profileImage;
+    @SerializedName("group_id") private int groupId;
+    @SerializedName("daily_progress") private UserProgress dailyProgress;
+    @SerializedName("weekly_progress") private UserProgress weeklyProgress;
 
     private int login;
     private int statesw;
@@ -84,6 +73,8 @@ public class User implements Serializable{
     }
 
     public User() {
+        dailyProgress = new UserProgress();
+        weeklyProgress = new UserProgress();
     }
 
     public User(int userId, String facebookId, String facebookFirstName) {
@@ -95,6 +86,8 @@ public class User implements Serializable{
         this.facebookFirstName = facebookFirstName;
         this.groupId = 0;
         this.statesw = 1;
+        dailyProgress = new UserProgress();
+        weeklyProgress = new UserProgress();
     }
 
     public User(int id, int idUser, String birthdate, int age, int score
@@ -117,6 +110,8 @@ public class User implements Serializable{
         this.login = login;
         this.groupId = groupId;
         this.statesw = statesw;
+        dailyProgress = new UserProgress();
+        weeklyProgress = new UserProgress();
     }
 
     public void save(Context context) {

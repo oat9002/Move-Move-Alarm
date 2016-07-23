@@ -11,10 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.StatusDescription;
@@ -23,7 +19,6 @@ import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.Converter;
-import com.fatel.mamtv1.Service.HttpConnector;
 import com.fatel.mamtv1.Service.UserManage;
 
 import org.json.JSONException;

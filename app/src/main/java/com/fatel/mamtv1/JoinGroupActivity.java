@@ -1,6 +1,5 @@
 package com.fatel.mamtv1;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,21 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.Converter;
-import com.fatel.mamtv1.Service.HttpConnector;
 import com.fatel.mamtv1.Service.UserManage;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Retrofit;
 

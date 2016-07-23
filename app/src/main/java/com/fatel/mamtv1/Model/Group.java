@@ -7,25 +7,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Group implements Serializable{
-    @Expose
     private int id;
-    @Expose
     private String name;
-    @Expose
     private String status;
-    @Expose
     private int score;
-    @SerializedName("member")
-    private int amountMember;
-    @Expose
     private User admin;
-    @Expose
+    private GroupProgress progress;
     private List<User> members = new ArrayList<>();
 
     public Group(String name, User admin)
@@ -38,6 +32,7 @@ public class Group implements Serializable{
     public void addMember(User user)
     {
         members.add(user);
-        amountMember++;
     }
+
+    public void addScore(int score) { this.score += score; }
 }

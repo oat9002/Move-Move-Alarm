@@ -1,6 +1,8 @@
 package com.fatel.mamtv1.RESTService.Interface;
 
+import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.Model.UserProgress;
 
 
 import org.json.JSONArray;
@@ -22,13 +24,10 @@ import retrofit.http.Query;
 public interface UserService {
     @FormUrlEncoded
     @POST("/login")
-    Call<User> login(@Field("facebookId") String facebookID, @Field("facebookFirstName") String facebookFirstName);
+    Call<User> login(@Field("facebook_id") String facebookID, @Field("facebook_firstName") String facebookFirstName);
 
     @POST("/user/update")
-    Call<User> update(@Header("Content-Type") String content, @Body User user);
-
-    @POST("/user/getGroup")
-    Call<JSONArray> getGroupMember(@Header("Content-Type") String content, @Body User user);
+    Call<StatusDescription> update(@Header("Content-Type") String content, @Body User user);
 
     @GET("/user/topRank")
     Call<List<User>> getTopRank(@Query("max") int max);

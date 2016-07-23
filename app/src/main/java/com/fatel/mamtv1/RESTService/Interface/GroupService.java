@@ -3,6 +3,7 @@ package com.fatel.mamtv1.RESTService.Interface;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.Model.UserProgress;
 
 import org.json.JSONObject;
 
@@ -27,6 +28,9 @@ public interface GroupService {
     @POST("/group/create")
     Call<StatusDescription> create(@Header("Content-Type") String content, @Body Group group);
 
+    @POST("/group/update")
+    Call<StatusDescription> update(@Header("Content-Type") String content, @Body Group group);
+
     @POST("/group/join")
     Call<Group> join(@Header("Content-Type") String content, @Body HashMap map);
 
@@ -37,11 +41,20 @@ public interface GroupService {
     Call<Integer> getRank(@Header("Content-Type") String content, @Body Group group);
 
     @POST("/group/rankByUser")
-    Call<Integer> getRankByUser(@Header("Content-Type") String content, @Body User user);
+    Call<Integer> getRank(@Header("Content-Type") String content, @Body User user);
 
     @POST("/group/leave")
     Call<StatusDescription> leaveGroup(@Header("Content-Type") String content, @Body User user);
 
     @POST("/group/delete")
     Call<StatusDescription> deleteGroup(@Header("Content-Type") String content, @Body User user);
+
+    @POST("/group/progress/get")
+    Call<UserProgress> getProgress(@Header("Content-Type") String content, @Body User user);
+
+    @POST("/group/progress/get")
+    Call<UserProgress> getProgress(@Header("Content-Type") String content, @Body Group group);
+
+    @POST("/group/progress/update")
+    Call<StatusDescription> updateProgress(@Header("Content-Type") String content, @Body UserProgress progress);
 }

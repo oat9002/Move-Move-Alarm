@@ -11,7 +11,7 @@ import java.util.HashMap;
 /**
  * Created by Monthon on 17/11/2558.
  */
-public class Historygroup {
+public class GroupHistory {
     private int id;
     private int idGroup;
     private int numberOfAccept;
@@ -27,18 +27,18 @@ public class Historygroup {
         public static final String CANCEL = "cancelevent";
     }
 
-    public Historygroup() {
+    public GroupHistory() {
 
     }
 
-    public Historygroup(int idGroup) {
+    public GroupHistory(int idGroup) {
         this.id = -1;
         this.idGroup = idGroup;
         this.numberOfAccept = 0;
         this.cancelEvent = 0;
     }
 
-    public Historygroup(int id, int idGroup, int numberOfAccept, int cancelEvent) {
+    public GroupHistory(int id, int idGroup, int numberOfAccept, int cancelEvent) {
         this.id = id;
         this.idGroup = idGroup;
         this.numberOfAccept = numberOfAccept;
@@ -106,7 +106,7 @@ public class Historygroup {
         }
     }
 
-    public static Historygroup findHistorygroup(int idGroup,Context context){
+    public static GroupHistory findHistorygroup(int idGroup, Context context){
         HistorygroupHelper historygroupHelper = new HistorygroupHelper(context);
         return historygroupHelper.getHistoryGroup(idGroup);
     }

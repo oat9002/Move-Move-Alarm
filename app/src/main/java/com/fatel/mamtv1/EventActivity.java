@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.CountDownTimer;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,15 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.fatel.mamtv1.Model.Historygroup;
+import com.fatel.mamtv1.Model.Group;
+import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.Posture;
+import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.Service.Cache;
-import com.fatel.mamtv1.Service.Converter;
-import com.fatel.mamtv1.Service.HttpConnector;
 import com.fatel.mamtv1.Service.UserManage;
 
 import java.util.ArrayList;
@@ -30,12 +28,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.Retrofit;
+
 public class EventActivity extends AppCompatActivity {
 
-    TextView txtR;
-    TextView txtA;
-    TextView txtDes;
-    ImageView imgView;
+    @BindView(R.id.rtime) TextView txtR;
+    @BindView(R.id.atime) TextView txtA;
+    @BindView(R.id.des) TextView txtDes;
+    @BindView(R.id.img) ImageView imgView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
@@ -51,15 +54,13 @@ public class EventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
+        ButterKnife.bind(this);
+
         final Window win= getWindow();
         win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         img = new ArrayList<>();
-        txtR=(TextView) findViewById(R.id.rtime);
-        txtA=(TextView) findViewById(R.id.atime);
-        txtDes=(TextView) findViewById(R.id.des);
-        imgView=(ImageView) findViewById(R.id.img);
         ActivityHandle activityHandle=new ActivityHandle(this);
         context=getApplicationContext();
         img = activityHandle.getRandomPosture();
@@ -125,7 +126,7 @@ public class EventActivity extends AppCompatActivity {
 
 
                 //history
-                // update progress call volley
+                // TODO update progress
 
                 //
                 //go to main
@@ -133,7 +134,19 @@ public class EventActivity extends AppCompatActivity {
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i1);
                 //send score to back
-                requesAddscore();
+                Group group = (Group) Cache.getInstance().getData("groupData");
+                group.addScore(2);
+                GroupServiceImp.getInstance().updateGroup(group, new Callback<StatusDescription>() {
+                    @Override
+                    public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                        //TODO add group score แล้วจะทำอะไรต่อ
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        makeSnackbar("ไม่สามารถอัปเดตข้อมูลกับเซิร์ฟเวอร์ได้");
+                    }
+                });
                 finish();
             }
         }.start();
@@ -153,67 +166,23 @@ public class EventActivity extends AppCompatActivity {
         }
         //history
 
-        // update progress call volley
+        // TODO update progress
 
         //
 
-            Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
-        if(historygroup!=null) {
-            historygroup.subaccept(1);
-            historygroup.addcancel(1);
-             historygroup.save(this);
+            GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
+        if(groupHistory !=null) {
+            groupHistory.subaccept(1);
+            groupHistory.addcancel(1);
+             groupHistory.save(this);
         }
         Intent i1 = new Intent(EventActivity.this, MainActivity.class);
         i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i1);
     }
 
-    public void requesAddscore()
+    public void makeSnackbar(String text)
     {
-        final Converter converter = Converter.getInstance();
-        String url = HttpConnector.URL + "group/increaseScore";
-        StringRequest eventRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
-                new Response.Listener<String>() { //create new listener to traces the data
-                    @Override
-                    public void onResponse(String response) { //when listener is activated
-
-                        HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        if((boolean) data.get("status")) {
-                            makeToast("Group Event! Score x2");
-                        }
-                        else {
-                            makeToast(converter.toString(data.get("description")));
-                        }
-                    }
-                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
-            @Override
-            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
-                Log.i("volley", volleyError.toString());
-                makeToast("Cannot connect to server or internal server error.");
-            }
-        }) { //define POST parameters
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
-                HashMap<String, Object> JSON = new HashMap<>();
-                HashMap<String, Object> groupData = new HashMap<>();
-                groupData.put("id", "" + UserManage.getInstance(EventActivity.this).getCurrentUser().getGroupId());
-                int point = 2;
-
-                JSON.put("score", point);
-                JSON.put("group", groupData);
-                JSON.put("description", "Group Event! Score x2");
-                map.put("JSON", converter.HashMapToJSON(JSON));
-
-                return map;
-            }
-        };
-
-        HttpConnector.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).addToRequestQueue(eventRequest);
-    }
-
-    public void makeToast(String text)
-    {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        Snackbar.make(txtA, text, Snackbar.LENGTH_LONG).show();
     }
 }
