@@ -48,4 +48,12 @@ public class UserServiceImp {
         Call call = service.update("application/json", user);
         call.enqueue(callback);
     }
+
+    public void getTopRank(int max, Callback callback) {
+        service.getTopRank(max).enqueue(callback);
+    }
+
+    public void getRank(User user, Callback callback) {
+        service.getRank("applicatipn/json", user).enqueue(callback);
+    }
 }

@@ -11,12 +11,21 @@ import android.widget.TextView;
 
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
+import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
+import com.fatel.mamtv1.Service.Cache;
+import com.fatel.mamtv1.Service.Converter;
+import com.fatel.mamtv1.Service.UserManage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class GroupMainActivity extends AppCompatActivity {
     @BindView(R.id.groupMain_groupCode) TextView groupCode;
@@ -33,17 +42,26 @@ public class GroupMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_main);
         ButterKnife.bind(this);
         groupData = (Group) getIntent().getSerializableExtra("groupData");
-        Event eventData = (Event) getIntent().getSerializableExtra("eventData");
+        EventServiceImp.getInstance().getEvent(new Callback<Event>() {
+            @Override
+            public void onResponse(Response<Event> response, Retrofit retrofit) {
+                DateFormat dateFormat = new SimpleDateFormat("hh : mm  aa");
+                event.setText(dateFormat.format(response.body().getTime().getTime()));
+                Cache.getInstance().putData("eventData", response.body());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
         try {
-            DateFormat dateFormat = new SimpleDateFormat("hh : mm  aa");
-            String groupID = "" + groupData.getId();
-            String code = String.format("%0" + (4 - groupID.length()) + "d%s", 0, groupID);
+            String code = String.format("%0" + (4 - Converter.toString(groupData.getId()).length()) + "d%s", 0, groupData.getId());
             groupCode.setText(code);
             groupName.setText(groupData.getName());
             adminName.setText(groupData.getAdmin().getFacebookFirstName());
-            amountMember.setText("" + groupData.getAmountMember());
+            amountMember.setText("" + groupData.getMembers().size());
             groupScore.setText("" + groupData.getScore());
-            event.setText(dateFormat.format(eventData.getTime().getTime()));
         } catch (Exception e) {
             Log.i("setup group", e.toString());
         }

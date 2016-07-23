@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         User user = UserManage.getInstance(getActivity()).getCurrentUser();
         Glide.with(this).load("https://graph.facebook.com/" + user.getFacebookId() + "/picture?type=large").into(propic);
         name.setText(user.getFacebookFirstName());
-        birth.setText((!user.getBirthdate().equals("null")) ? user.getBirthdate() : "-" );
+        birth.setText((user.getBirthdate() != null && !user.getBirthdate().equals("null")) ? user.getBirthdate() : "-" );
         age.setText((user.getAge() >= 0) ? "" + user.getAge() : "0");
         height.setText((user.getHeight() >= 0) ? "" + user.getHeight() : "0");
         weight.setText((user.getWeight() >= 0) ? "" + user.getWeight() : "0");
@@ -69,8 +70,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                 final DatePicker birthday = new DatePicker(getActivity());
 
                 h.setText("");
+                h.setInputType(InputType.TYPE_CLASS_NUMBER);
                 w.setText("");
+                w.setInputType(InputType.TYPE_CLASS_NUMBER);
                 waist.setText("");
+                waist.setInputType(InputType.TYPE_CLASS_NUMBER);
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

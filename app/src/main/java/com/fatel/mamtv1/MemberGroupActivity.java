@@ -20,20 +20,11 @@ public class MemberGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_group);
-        ArrayList<TextView> membersView = new ArrayList<>();
-        membersView.add((TextView) findViewById(R.id.groupMember_member1));
-        membersView.add((TextView)findViewById(R.id.groupMember_member2));
-        membersView.add((TextView)findViewById(R.id.groupMember_member3));
-        membersView.add((TextView)findViewById(R.id.groupMember_member4));
-        membersView.add((TextView)findViewById(R.id.groupMember_member5));
-        membersView.add((TextView)findViewById(R.id.groupMember_member6));
-        membersView.add((TextView)findViewById(R.id.groupMember_member7));
-        membersView.add((TextView)findViewById(R.id.groupMember_member8));
-        membersView.add((TextView)findViewById(R.id.groupMember_member9));
-        membersView.add((TextView)findViewById(R.id.groupMember_member10));
         Group groupData = (Group) getIntent().getSerializableExtra("groupData");
-        for(int i = 0; i < groupData.getAmountMember(); i++)
-            membersView.get(i).setText(groupData.getMembers().get(i).getFacebookFirstName());
+        for(int i = 1; i <= groupData.getMembers().size(); i++) {
+            int groupMemberId = getResources().getIdentifier("groupMember_member" + i, "id", this.getPackageName());
+            ((TextView) findViewById(groupMemberId)).setText(groupData.getMembers().get(i - 1).getFacebookFirstName());
+        }
     }
 
     @Override

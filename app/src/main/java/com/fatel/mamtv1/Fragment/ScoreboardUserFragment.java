@@ -1,6 +1,5 @@
 package com.fatel.mamtv1.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,33 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.fatel.mamtv1.Service.Cache;
-import com.fatel.mamtv1.Service.Converter;
-import com.fatel.mamtv1.Service.HttpConnector;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.Retrofit;
 
 
 public class ScoreboardUserFragment extends Fragment {
 
-    TextView user0;
-    TextView score0;
-    TextView ranking0;
-
-    public ScoreboardUserFragment() {
-    }
+    @BindView(R.id.current_user_name) TextView currentUserName;
+    @BindView(R.id.current_user_score) TextView currentUserScore;
+    @BindView(R.id.current_user_rank) TextView currentUserRank;
 
     public static ScoreboardUserFragment newInstance() {
-        // Required empty public constructor
         ScoreboardUserFragment fragment = new ScoreboardUserFragment();
         return fragment;
     }
@@ -43,137 +35,39 @@ public class ScoreboardUserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_scoreboard_user, container, false);
-        final ArrayList<TextView> usersTextView = new ArrayList<>();
-        final ArrayList<TextView> scoresTextView = new ArrayList<>();
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView22));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView32));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView42));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView52));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView62));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView72));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView82));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView92));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView102));
-        usersTextView.add((TextView) rootView.findViewById(R.id.textView112));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView23));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView33));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView43));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView53));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView63));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView73));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView83));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView93));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView103));
-        scoresTextView.add((TextView) rootView.findViewById(R.id.textView113));
-        user0 = (TextView) rootView.findViewById(R.id.userscore);
-        score0 = (TextView) rootView.findViewById(R.id.scoreuser);
-        ranking0 = (TextView) rootView.findViewById(R.id.userranking);
-        String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookId();
-        Log.i("iduserscore",tempid);
-        //Log.i("username",UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
-        if (!tempid.equals("fb0.0")) {
-            if (!tempid.equals("fb0")) {
-                if(!tempid.equals("0")){
-                    if(!tempid.equals("0.0")){
-                        user0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookFirstName());
-                    }
-                    else {
-                        user0.setText("username");
-                    }
-                }
-                else {
-                    user0.setText("username");
+        final View rootView = inflater.inflate(R.layout.fragment_scoreboard_user, container, false);
+        ButterKnife.bind(this, rootView);
+        currentUserScore.setText("" + UserManage.getCurrentUser().getScore());
+        currentUserName.setText(UserManage.getCurrentUser().getFacebookFirstName());
+
+        UserServiceImp.getInstance().getTopRank(10, new Callback<List<User>>() {
+            @Override
+            public void onResponse(retrofit.Response<List<User>> response, Retrofit retrofit) {
+                for (int i = 1; i <= response.body().size(); i++) {
+                    int groupNameId = getResources().getIdentifier("user_no" + i + "_name", "id", getActivity().getPackageName());
+                    int groupScoreId = getResources().getIdentifier("user_no" + i + "_score", "id", getActivity().getPackageName());
+                    ((TextView) rootView.findViewById(groupNameId)).setText(response.body().get(i - 1).getFacebookFirstName());
+                    ((TextView) rootView.findViewById(groupScoreId)).setText("" + response.body().get(i - 1).getScore());
                 }
             }
-            else {
-                user0.setText("username");
-            }
-        } else {
-            user0.setText("username");
-        }
-        Log.i("score", UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getScore() + "");
-        score0.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getScore() + "");
-        String url = HttpConnector.URL + "user/findByRank";
-        String url2 = HttpConnector.URL + "user/getUserRank";
 
-        StringRequest userScoreboardRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
-                new Response.Listener<String>() { //create new listener to traces the data
-                    @Override
-                    public void onResponse(String response) { //when listener is activated
-                        Log.i("volley", response);
-                        Converter converter = Converter.getInstance();
-                        HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        try {
-                            if ((boolean) data.get("status")) {
-                                ArrayList<HashMap<String, Object>> users = converter.toHashMapArrayList(data.get("users"));
-                                int size = users.size();
-                                Log.i("amount", "" + size);
-                                for (int i = 0; i < size; i++) {
-                                    HashMap<String, Object> userData = users.get(i);
-                                    String userName = converter.toString(userData.get("userName"));
-                                    String name = (userName == null || userName.equals("")) ? converter.toString(userData.get("facebookFirstName")) : userName;
-                                    int score = converter.toInt(userData.get("score"));
-                                    usersTextView.get(i).setText(name);
-                                    scoresTextView.get(i).setText("" + score);
-                                }
-                            }
-                        } catch (Exception e) {
-                            Log.i("error", e.toString());
-                        }
-                    }
-                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
             @Override
-            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
-                Log.i("volley", volleyError.toString());
+            public void onFailure(Throwable t) {
+                Log.i("error", t.toString());
             }
-        }) { //define POST parameters
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
-                map.put("startRank", "1");
-                map.put("endRank", "10");
-                return map;
-            }
-        };
-        HttpConnector.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).addToRequestQueue(userScoreboardRequest);
+        });
 
-        StringRequest userRankingRequest = new StringRequest(Request.Method.POST, url2, //create new string request with POST method
-                new Response.Listener<String>() { //create new listener to traces the data
-                    @Override
-                    public void onResponse(String response) { //when listener is activated
-                        Log.i("volley", response);
-                        Converter converter = Converter.getInstance();
-                        Log.i("res", response);
-                        // HashMap<String, Object> data = converter.JSONToHashMap(response);
-                        try {
-                            //if((boolean) data.get("status"))
-                            //{
-                            ranking0.setText(response);
-                            //}
-                        } catch (Exception e) {
-                            Log.i("scoreboard error", e.toString());
-                        }
-                    }
-                }, new Response.ErrorListener() { //create error listener to trace an error if download process fail
+        UserServiceImp.getInstance().getRank(UserManage.getCurrentUser(), new Callback<Integer>() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
-                Log.i("volley", volleyError.toString());
+            public void onResponse(retrofit.Response<Integer> response, Retrofit retrofit) {
+                currentUserRank.setText("" + response.body());
             }
-        }) { //define POST parameters
+
             @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> map = new HashMap<String, String>(); //create map to keep variables
-                User user = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser();
-                HashMap<String, Object> usermap = new HashMap<>();
-                usermap.put("id", user.getId());
-                map.put("JSON", Converter.getInstance().HashMapToJSON(usermap));
-                return map;
+            public void onFailure(Throwable t) {
+
             }
-        };
-        HttpConnector.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).addToRequestQueue(userRankingRequest);
-
-
+        });
         return rootView;
     }
 

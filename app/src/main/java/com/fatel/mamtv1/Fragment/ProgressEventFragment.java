@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fatel.mamtv1.Model.Historygroup;
+import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
@@ -68,8 +68,8 @@ public class ProgressEventFragment extends Fragment {
         //edit
         //HistorygroupHelper mhistorygroupHelper = new HistorygroupHelper(getActivity());
         //Log.i("numgroup",""+UserManage.getInstance(getActivity()).getCurrentIdGroup());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentUser().getGroupId(),getActivity());
-        if(historygroup==null){
+        GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentUser().getGroupId(),getActivity());
+        if(groupHistory ==null){
             cirProgressstatusE = 50;
             mProgressStatusE = 0;
             barneckweek = 70;
@@ -96,7 +96,7 @@ public class ProgressEventFragment extends Fragment {
             numberfraclegweek.setText((1 * numberoflegweek) + " ครั้ง");
 
         }
-        else if(historygroup!=null&&historygroup.gettotal()==0){
+        else if(groupHistory !=null&& groupHistory.gettotal()==0){
             cirProgressstatusE = 0;
             mProgressStatusE = 0;
             barneckweek = 70;
@@ -123,8 +123,8 @@ public class ProgressEventFragment extends Fragment {
             numberfraclegweek.setText((1 * numberoflegweek) + " ครั้ง");
         }
         else{
-            cirProgressstatusE = (historygroup.getNumberOfAccept()*100)/historygroup.gettotal();
-            mProgressStatusE = ((historygroup.getNumberOfAccept() * timePerPicE) * 100) / (historygroup.gettotal() * timePerPicE);
+            cirProgressstatusE = (groupHistory.getNumberOfAccept()*100)/ groupHistory.gettotal();
+            mProgressStatusE = ((groupHistory.getNumberOfAccept() * timePerPicE) * 100) / (groupHistory.gettotal() * timePerPicE);
             barneckweek = 70;
             barshoulerweek = 80;
             barbreastbackweek = 90;
@@ -134,7 +134,7 @@ public class ProgressEventFragment extends Fragment {
             //set progress bar in each days
             timeProgressE.setProgress(mProgressStatusE);
             // Show the progress on TextView
-            timeFracE.setText((historygroup.getNumberOfAccept() * timePerPicE) + "/" + (historygroup.gettotal() * timePerPicE) + " นาที");
+            timeFracE.setText((groupHistory.getNumberOfAccept() * timePerPicE) + "/" + (groupHistory.gettotal() * timePerPicE) + " นาที");
             progresstimeofneckweek.setProgress(barneckweek);
             progresstimeofshoulderweek.setProgress(barshoulerweek);
             progresstimeofbreastbackweek.setProgress(barbreastbackweek);

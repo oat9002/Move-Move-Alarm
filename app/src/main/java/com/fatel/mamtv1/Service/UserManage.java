@@ -2,10 +2,16 @@ package com.fatel.mamtv1.Service;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.fatel.mamtv1.MainActivity;
+import com.fatel.mamtv1.Model.Event;
+import com.fatel.mamtv1.Model.Group;
+import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 
 import java.util.HashMap;
@@ -13,6 +19,7 @@ import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
 import retrofit.Callback;
+import retrofit.Response;
 import retrofit.Retrofit;
 
 
@@ -40,23 +47,7 @@ public class UserManage {
     }
 
     public void loginFBUser(String facebookId, String facebookFirstName, final Context context) {
-        UserServiceImp.getInstance().login(facebookId, facebookFirstName, new Callback<User>() {
-            @Override
-            public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
-                Log.i("response", "" + response.body().getFacebookFirstName());
-                response.body().setLogin(1);
-                response.body().save(context);
-                UserManage.getInstance(context).setCurrentUser(response.body());
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
-            }
 
-            @Override
-            public void onFailure(Throwable t) {
-                Log.i("error", t.getMessage());
-            }
-        });
     }
 
     public void logoutUser(Context context) {
@@ -84,13 +75,5 @@ public class UserManage {
                 Log.i("error", t.getMessage());
             }
         });
-    }
-
-    public void addScore(int score, Context context) {
-        if (currentUser != null) {
-            currentUser.addScore(score);
-            currentUser.save(context);
-            updateUser();
-        }
     }
 }

@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.fatel.mamtv1.Model.Historygroup;
+import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Service.UserManage;
 
 public class EventActAlarm extends AppCompatActivity {
@@ -71,10 +71,10 @@ public class EventActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
-        if(historygroup!=null){
-            historygroup.addaccept(1);
-            historygroup.save(this);
+        GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
+        if(groupHistory !=null){
+            groupHistory.addaccept(1);
+            groupHistory.save(this);
         }
 
         Intent intent = new Intent(this, EventActivity.class);
@@ -90,10 +90,10 @@ public class EventActAlarm extends AppCompatActivity {
     public void linkHome(View view){
         //history
         Log.i("link",""+UserManage.getInstance(this).getCurrentUser().getGroupId());
-        Historygroup historygroup = Historygroup.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(),this);
-        if(historygroup!=null){
-            historygroup.addcancel(1);
-            historygroup.save(this);
+        GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(),this);
+        if(groupHistory !=null){
+            groupHistory.addcancel(1);
+            groupHistory.save(this);
         }
 
         Intent i1 = new Intent(EventActAlarm.this, MainActivity.class);

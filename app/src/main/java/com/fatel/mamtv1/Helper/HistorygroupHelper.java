@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.fatel.mamtv1.Model.Historygroup;
+import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.History;
 
 /**
@@ -22,45 +22,45 @@ public class HistorygroupHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         String CREATE_HISTORYGROUP_TEBLE = String.format("CREATE TABLE %s"+
                         "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER,%s INTEGER,%s INTEGER)",
-                Historygroup.TABLE,
-                Historygroup.Column.ID,
-                Historygroup.Column.IDGROUP,
-                Historygroup.Column.NUMACCEPT,
-                Historygroup.Column.CANCEL);
+                GroupHistory.TABLE,
+                GroupHistory.Column.ID,
+                GroupHistory.Column.IDGROUP,
+                GroupHistory.Column.NUMACCEPT,
+                GroupHistory.Column.CANCEL);
         db.execSQL(CREATE_HISTORYGROUP_TEBLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
-        String DROP_HISTORYGROUP_TABLE ="DROP TABLE IF EXISTS"+Historygroup.TABLE;
+        String DROP_HISTORYGROUP_TABLE ="DROP TABLE IF EXISTS"+ GroupHistory.TABLE;
         db.execSQL(DROP_HISTORYGROUP_TABLE);
         onCreate(db);
     }
-    public int addHistoryGroup(Historygroup history){
+    public int addHistoryGroup(GroupHistory history){
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Historygroup.Column.IDGROUP,history.getIdGroup());
-        values.put(Historygroup.Column.NUMACCEPT,history.getNumberOfAccept());
-        values.put(Historygroup.Column.CANCEL, history.getCancelEvent());
-        long id = sqLiteDatabase.insert(Historygroup.TABLE,null,values);
+        values.put(GroupHistory.Column.IDGROUP,history.getIdGroup());
+        values.put(GroupHistory.Column.NUMACCEPT,history.getNumberOfAccept());
+        values.put(GroupHistory.Column.CANCEL, history.getCancelEvent());
+        long id = sqLiteDatabase.insert(GroupHistory.TABLE,null,values);
         sqLiteDatabase.close();
         return ((int)id);
     }
-    public void updateHistoryGroup(Historygroup history){
+    public void updateHistoryGroup(GroupHistory history){
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Historygroup.Column.IDGROUP,history.getIdGroup());
-        values.put(Historygroup.Column.NUMACCEPT,history.getNumberOfAccept());
-        values.put(Historygroup.Column.CANCEL, history.getCancelEvent());
-        int row = sqLiteDatabase.update(Historygroup.TABLE,
+        values.put(GroupHistory.Column.IDGROUP,history.getIdGroup());
+        values.put(GroupHistory.Column.NUMACCEPT,history.getNumberOfAccept());
+        values.put(GroupHistory.Column.CANCEL, history.getCancelEvent());
+        int row = sqLiteDatabase.update(GroupHistory.TABLE,
                 values,
-                Historygroup.Column.ID + " = ? ",
+                GroupHistory.Column.ID + " = ? ",
                 new String[] {String.valueOf(history.getId())});
         sqLiteDatabase.close();
     }
     public boolean checkdata(){
         sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query
-                (Historygroup.TABLE, null, null, null, null, null, null);
+                (GroupHistory.TABLE, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             return true;
         }
@@ -68,19 +68,19 @@ public class HistorygroupHelper extends SQLiteOpenHelper{
         //Log.d("temp", temp + "");
         return false;
     }
-    public Historygroup getHistoryGroup(int idGroup){
+    public GroupHistory getHistoryGroup(int idGroup){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(Historygroup.TABLE, new String[]{Historygroup.Column.ID,
-                Historygroup.Column.IDGROUP, Historygroup.Column.NUMACCEPT, Historygroup.Column.CANCEL
-        }, Historygroup.Column.IDGROUP + " = ? ", new String[]
+        Cursor cursor = db.query(GroupHistory.TABLE, new String[]{GroupHistory.Column.ID,
+                GroupHistory.Column.IDGROUP, GroupHistory.Column.NUMACCEPT, GroupHistory.Column.CANCEL
+        }, GroupHistory.Column.IDGROUP + " = ? ", new String[]
                 {String.valueOf(idGroup)}, null, null, null, null);
-        Historygroup history = null;
+        GroupHistory history = null;
         boolean check = false;
         if(cursor != null){
             check = cursor.moveToFirst();
         }
         if(check){
-            history = new Historygroup(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getInt(3));
+            history = new GroupHistory(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),cursor.getInt(3));
             cursor.close();
         }
         db.close();
@@ -90,7 +90,7 @@ public class HistorygroupHelper extends SQLiteOpenHelper{
 
         sqLiteDatabase = this.getWritableDatabase();
 
-        sqLiteDatabase.delete(Historygroup.TABLE, Historygroup.Column.ID + " = ? ",
+        sqLiteDatabase.delete(GroupHistory.TABLE, GroupHistory.Column.ID + " = ? ",
                 new String[] { String.valueOf(id) });
         //  sqLiteDatabase.delete(History.TABLE, History.Column.ID + " = " + id, null);
 

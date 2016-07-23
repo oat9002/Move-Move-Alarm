@@ -58,7 +58,7 @@ public class Converter {
         return temp;
     }
 
-    public String toString(Object value)
+    public static String toString(Object value)
     {
         if(value != null) {
             return value.toString();
@@ -68,7 +68,7 @@ public class Converter {
         }
     }
 
-    public int toInt(Object value)
+    public static int toInt(Object value)
     {
         try {
             String temp = "" + value.toString();
@@ -81,7 +81,7 @@ public class Converter {
         }
     }
 
-    public double toDouble(Object value) {
+    public static double toDouble(Object value) {
         try {
             String temp = "" + value.toString();
             Double temp2 = Double.parseDouble(temp);
