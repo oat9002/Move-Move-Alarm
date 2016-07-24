@@ -1,19 +1,25 @@
 package com.fatel.mamtv1;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.Converter;
 import com.fatel.mamtv1.Service.UserManage;
@@ -34,7 +40,10 @@ public class GroupMainActivity extends AppCompatActivity {
     @BindView(R.id.groupMain_amountMember) TextView amountMember;
     @BindView(R.id.groupMain_groupScore) TextView groupScore;
     @BindView(R.id.groupMain_event) TextView event;
+    @BindView(R.id.exitGroup) Button exitGroup;
     private Group groupData;
+    UserManage userManage ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,7 @@ public class GroupMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_main);
         ButterKnife.bind(this);
         groupData = (Group) getIntent().getSerializableExtra("groupData");
+        userManage = UserManage.getInstance(this);
         EventServiceImp.getInstance().getEvent(new Callback<Event>() {
             @Override
             public void onResponse(Response<Event> response, Retrofit retrofit) {
@@ -62,6 +72,13 @@ public class GroupMainActivity extends AppCompatActivity {
             adminName.setText(groupData.getAdmin().getFacebookFirstName());
             amountMember.setText("" + groupData.getMembers().size());
             groupScore.setText("" + groupData.getScore());
+
+            if(groupData.getAdmin().getId() == userManage.getCurrentUser().getId()){
+                exitGroup.setBackgroundResource(R.drawable.deletegroup);
+            }
+            else {
+                exitGroup.setBackgroundResource(R.drawable.leavegroup);
+            }
         } catch (Exception e) {
             Log.i("setup group", e.toString());
         }
@@ -87,5 +104,54 @@ public class GroupMainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MemberGroupActivity.class);
         intent.putExtra("groupData", groupData);
         startActivity(intent);
+    }
+    public void leaveGroup(View view)
+    {
+
+        if(groupData.getAdmin().getId() == userManage.getCurrentUser().getId()) {
+
+            GroupServiceImp.getInstance().deleteGroup(userManage.getCurrentUser(), new Callback<User>() {
+
+                @Override
+                public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+
+                    userManage.getCurrentUser().setGroupId(0);
+                    Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
+                    Cache.getInstance().putData("groupData",null);
+                    startActivity(intent2);
+                    Log.i("response", response.raw().toString());
+
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    Log.i("error", t.getMessage());
+                    Snackbar.make(exitGroup, "ไม่สามารถลบกลุ่มได้", Snackbar.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else {
+
+            GroupServiceImp.getInstance().leaveGroup(userManage.getCurrentUser(), new Callback<User>() {
+
+                @Override
+                public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
+
+                    userManage.getCurrentUser().setGroupId(0);
+                    Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
+                    Cache.getInstance().putData("groupData",null);
+                    startActivity(intent2);
+                    Log.i("response", response.raw().toString());
+
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    Log.i("error", t.getMessage());
+                    Snackbar.make(exitGroup, "ไม่สามารถออกจากกลุ่มได้", Snackbar.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 }

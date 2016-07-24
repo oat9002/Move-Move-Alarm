@@ -189,16 +189,6 @@
                     <View style="@style/Divider" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/groupMain_event"
-                    android:text="-"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:textSize="20sp"
-                    android:textColor="#ffffff"
-                    />
-
 
             </TableRow>
 
@@ -295,6 +285,30 @@
 
         android:background="@drawable/selectormem"
         android:onClick="linkMember"
-         />
+        android:id="@+id/button3" />
+
+    <Button
+        android:layout_marginTop="68dp"
+        android:layout_width="110dp"
+        android:layout_height="35dp"
+        android:background="@drawable/leavegroup"
+        android:id="@+id/exitGroup"
+        android:layout_below="@+id/button3"
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignEnd="@+id/button3"
+        android:nestedScrollingEnabled="false"
+        android:onClick="leaveGroup" />
+
+    <TextView
+        android:id="@+id/groupMain_event"
+        android:text="-"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_alignTop="@+id/button3"
+        android:layout_toRightOf="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout" />
 
 </RelativeLayout>
