@@ -115,9 +115,9 @@ public class GroupMainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
 
-
+                    userManage.getCurrentUser().setGroupId(0);
                     Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
-                    intent2.putExtra("groupData", "");
+                    Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
                     Log.i("response", response.raw().toString());
 
@@ -137,9 +137,9 @@ public class GroupMainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
 
-
+                    userManage.getCurrentUser().setGroupId(0);
                     Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
-                    intent2.putExtra("groupData", "");
+                    Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
                     Log.i("response", response.raw().toString());
 
