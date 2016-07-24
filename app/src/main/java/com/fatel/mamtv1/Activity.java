@@ -86,11 +86,11 @@ public class Activity extends AppCompatActivity {
         time1 = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtR.setText("เวลาท่าบริหาร   " + String.format(FORMAT,
+                txtR.setText("เวลาท่าบริหาร  :    " + String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))) + " นาที");
 
             }
 
@@ -119,11 +119,11 @@ public class Activity extends AppCompatActivity {
 
         time2 = new CountDownTimer(120000, 1000) {
             public void onTick(long millisUntilFinished) {
-                txtA.setText("เวลากิจกรรม   "+String.format(FORMAT,
+                txtA.setText("เวลากิจกรรม    :    "+String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))) + " นาที");
             }
 
             public void onFinish() {
