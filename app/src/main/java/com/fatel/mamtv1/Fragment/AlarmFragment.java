@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.fatel.mamtv1.Service.AlarmReceiver;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
@@ -59,7 +60,7 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
     private String mdays="";
     private String mModes="";
     private Spinner mFreq;
-    private Button buttonSet;
+    private BootstrapButton buttonSet;
     private Switch mySwitch;
     private boolean checkswitch = false;
     Context context;
@@ -102,7 +103,7 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         mChkboxM5 = (CheckBox)view.findViewById(R.id.chkboxM5);
         mChkboxM6 = (CheckBox)view.findViewById(R.id.chkboxM6);
         mChkboxMA = (CheckBox)view.findViewById(R.id.chkboxMA);
-        buttonSet = (Button)view.findViewById(R.id.buttonSet);
+        buttonSet = (BootstrapButton)view.findViewById(R.id.buttonSet);
         mFreq = createSpinnerFrq(R.id.frq_min, view,mAlarmHelper);
         mySwitch = (Switch) view.findViewById(R.id.mySwitch);
         //check checkbox tick
@@ -252,7 +253,7 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        Button bt = (Button) view.findViewById(R.id.buttonSet);
+        BootstrapButton bt = (BootstrapButton) view.findViewById(R.id.buttonSet);
         bt.setOnClickListener(new View.OnClickListener() {
                                   @Override
                                   public void onClick(View view) {
@@ -378,7 +379,7 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
                               }
         );
 
-        Button bt2 = (Button) view.findViewById(R.id.reset);
+        BootstrapButton bt2 = (BootstrapButton) view.findViewById(R.id.reset);
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

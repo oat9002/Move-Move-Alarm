@@ -364,13 +364,13 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp">
 
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:text="บันทึก"
                 android:gravity="center"
                 android:textColor="#FFF5F5"
                 android:textSize="20sp"
                 android:layout_gravity="center"
-                android:background="@drawable/buttonshape3"
                 android:shadowColor="#919191"
                 android:shadowDx="3"
                 android:shadowDy="3"
@@ -381,14 +381,19 @@
                 android:textAllCaps="false"
                 android:id="@+id/buttonSet"
                 android:textStyle="bold"
-                android:layout_below="@id/mode_blk" />
+                android:layout_below="@id/mode_blk"
+                app:bootstrapBrand="success"
+                app:bootstrapSize="lg"
+                app:buttonMode="regular"
+                app:showOutline="false"
+                app:roundedCorners="true"/>
 
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/reset"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:background="@drawable/buttonshape3"
                 android:layout_below="@+id/buttonSet"
                 android:layout_centerHorizontal="true"
                 android:text="รีเช็ต"
@@ -400,7 +405,12 @@
                 android:singleLine="false"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                app:bootstrapBrand="danger"
+                app:bootstrapSize="lg"
+                app:buttonMode="regular"
+                app:showOutline="false"
+                app:roundedCorners="true" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
