@@ -18,10 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
+
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
+import com.beardedhen.androidbootstrap.BootstrapThumbnail;
 import com.bumptech.glide.Glide;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +36,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends android.support.v4.app.Fragment {
-    @BindView(R.id.profile_image_p) CircleImageView propic;
+    @BindView(R.id.profile_image_p)
+    BootstrapThumbnail propic;
     @BindView(R.id.editFB) TextView name;
     @BindView(R.id.editbirthday) TextView birth;
     @BindView(R.id.editage) TextView age;
@@ -48,7 +53,8 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
         User user = UserManage.getInstance(getActivity()).getCurrentUser();
-        Glide.with(this).load("https://graph.facebook.com/" + user.getFacebookId() + "/picture?type=large").into(propic);
+        Picasso.with(getContext()).load("https://graph.facebook.com/" + user.getFacebookId() + "/picture?type=large").into(propic);
+        //Glide.with(this).load("https://graph.facebook.com/" + user.getFacebookId() + "/picture?type=large").into(propic);
         name.setText(user.getFacebookFirstName());
         birth.setText((user.getBirthdate() != null && !user.getBirthdate().equals("null")) ? user.getBirthdate() : "-" );
         age.setText((user.getAge() >= 0) ? "" + user.getAge() : "0");
@@ -210,7 +216,5 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             a=0;
         return a;
     }
-
-
 
 }

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 import com.bumptech.glide.Glide;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -35,6 +36,7 @@ import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.UserManage;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     @BindView(R.id.profile) TextView header;
     @BindView(R.id.username) TextView user;
-    @BindView(R.id.profile_image) CircleImageView profilepic;
+    @BindView(R.id.profile_image)
+    BootstrapCircleThumbnail profilepic;
     public String id;
     String tempid;
     DBAlarmHelper mAlarmHelper;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         User userData = UserManage.getInstance(this).getCurrentUser();
         tempid = userData.getFacebookId();
         Log.i("fbid", tempid);
-        Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(profilepic);
+        Picasso.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(profilepic);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
