@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.fatel.mamtv1..HelpFragment">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.Fragment.AlarmFragment">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -8,13 +9,22 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context=".Fragment.AlarmFragment">
-
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardview_time_working"
+            android:layout_below="@+id/onoff"
+            card_view:cardElevation="5dp"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
         <LinearLayout
             android:id="@+id/start_blk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="25dp">
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,13 +136,23 @@
                     />
             </LinearLayout>
         </LinearLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardview_day_exercise"
+            android:layout_below="@id/cardview_time_working"
+            android:layout_marginTop="20dp"
+            card_view:cardElevation="5dp">
+
         <LinearLayout
+            android:padding="10dp"
             android:id="@+id/day_blk"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/finish_blk">
+            >
             <TextView
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
@@ -207,13 +227,20 @@
 
             </LinearLayout>
         </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardview_freq"
+            android:layout_below="@+id/cardview_day_exercise"
+            android:layout_marginTop="20dp"
+            card_view:cardElevation="5dp">
         <LinearLayout
+            android:padding="10dp"
             android:id="@+id/seq_blk"
-            android:layout_below="@+id/day_blk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -247,17 +274,20 @@
                     android:textSize="15sp"/>
             </LinearLayout>
         </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardview_freq"
+            android:id="@+id/cardview_mode_posture"
+            android:layout_marginTop="20dp"
+            card_view:cardElevation="5dp">
         <LinearLayout
+            android:padding="10dp"
             android:id="@+id/mode_blk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/seq_blk"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/mode"
                 android:layout_width="wrap_content"
@@ -326,7 +356,7 @@
 
             </LinearLayout>
         </LinearLayout>
-
+        </android.support.v7.widget.CardView>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -359,7 +389,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/mode_blk"
+            android:layout_below="@+id/cardview_mode_posture"
             android:id="@+id/btn"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp">
