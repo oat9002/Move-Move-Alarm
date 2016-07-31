@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.fatel.mamtv1.Helper.HistoryHelper;
 import com.fatel.mamtv1.Model.History;
+import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
@@ -64,10 +65,11 @@ public class ProgressActivityFragment extends Fragment {
         HistoryHelper mhistoryHelper = new HistoryHelper(getActivity());
         History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(getActivity()).getCurrentUser().getId());
         //History history = (History) Cache.getInstance().getData("userHistory");
-        if(history != null && history.getTotal()==0){
-            cirProgressstatus = 10;
-            cirProgressstatusweek = 70;
-            mProgressStatus = 70;
+        User user = UserManage.getCurrentUser();
+        if(user!=null){
+            cirProgressstatus = (user.getDailyProgress().getAcceptation()*100)/user.getDailyProgress().getTotalActivity();
+            cirProgressstatusweek = (user.getWeeklyProgress().getAcceptation()*100)/user.getDailyProgress().getTotalActivity();
+            mProgressStatus = (user.getDailyProgress().getExerciseTime()*100);
             mProgressStatusweek = 50;
             barneck = 10;
             barshouler = 20;
@@ -84,11 +86,11 @@ public class ProgressActivityFragment extends Fragment {
 
         }
         else{
-            cirProgressstatus = (history.getNumberOfAccept()*100)/history.getTotal();
-            mProgressStatus = ((history.getNumberOfAccept() * timePerPic) * 100) / (history.getTotal() * timePerPic);
-            cirProgressstatusweek = 99;
-            mProgressStatusweek = 50;
-            barneck = 100;
+            cirProgressstatus = 0;
+            mProgressStatus = 0;
+            cirProgressstatusweek = 0;
+            mProgressStatusweek = 0;
+            barneck = 0;
             barshouler = 0;
             barbreastback = 0;
             barwrist = 0;
