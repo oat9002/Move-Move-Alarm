@@ -29,19 +29,19 @@ public class ProgressActivityFragment extends Fragment {
     private int mProgressStatus = 0,mProgressStatusweek = 0;
     private Handler mHandler = new Handler();
 
-    TextView timeFrac,timeFracweek;
+    TextView timeFrac, timeFracWeek;
     private int cirProgressstatus = 0;
     private int timePerPic = 1,timePerPicweek = 1;
     private int cirProgressstatusweek = 0;
     // statistic exercise
     private int numberofneck = 1,numberofshoulder = 1,numberofbreastback = 1,numberofwrist = 1,numberofwaist = 1,numberofleg = 1;
     private int numberofneckweek = 1,numberofshoulderweek = 1,numberofbreastbackweek = 1,numberofwristweek = 1,numberofwaistweek = 1,numberoflegweek = 1;
-    private int barneck = 0,barshouler = 0,barbreastback = 0,barwrist = 0,barwaist = 0,barleg = 0;
-    private int barneckweek = 0,barshoulerweek = 0,barbreastbackweek = 0,barwristweek = 0,barwaistweek = 0,barlegweek = 0;
+    private int barNeck = 0, barShoulder = 0, barChestBack = 0, barWrist = 0,barwaist = 0, barHipLegCalfWeek = 0;
+    private int barNeckWeek = 0, barShoulderWeek = 0, barChestBackWeek = 0, barWristWeek = 0, barWaistWeek = 0,barlegweek = 0;
     private ProgressBar progresstimeofneck,progresstimeofshoulder,progresstimeofbreastback,progresstimeofwrist,progresstimeofwaist,progresstimeofleg;
     private ProgressBar progresstimeofneckweek,progresstimeofshoulderweek,progresstimeofbreastbackweek,progresstimeofwristweek,progresstimeofwaistweek,progresstimeoflegweek;
-    TextView numberfracneck,numberfracshoulder,numberfracbreastback,numberfracwrist,numberfracwaist,numberfracleg,
-            numberfracneckweek,numberfracshoulderweek,numberfracbreastbackweek,numberfracwristweek,numberfracwaistweek,numberfraclegweek;
+    TextView numberFracNeck, numberFracShoulder, numberFracChestBack, numberFracWrist, numberFracWaist, numberFracHipLegCalf,
+            numberFracNeckWeek, numberFracShoulderWeek, numberFracChestBackWeek, numberFracWristWeek, numberFracWaistWeek, numberFracHipLegCalfWeek;
     public static ProgressActivityFragment newInstance() {
         // Required empty public constructor
         ProgressActivityFragment fragment = new ProgressActivityFragment();
@@ -67,22 +67,40 @@ public class ProgressActivityFragment extends Fragment {
         //History history = (History) Cache.getInstance().getData("userHistory");
         User user = UserManage.getCurrentUser();
         if(user!=null){
-            cirProgressstatus = (user.getDailyProgress().getAcceptation()*100)/user.getDailyProgress().getTotalActivity();
-            cirProgressstatusweek = (user.getWeeklyProgress().getAcceptation()*100)/user.getDailyProgress().getTotalActivity();
-            mProgressStatus = (user.getDailyProgress().getExerciseTime()*100);
-            mProgressStatusweek = 50;
-            barneck = 10;
-            barshouler = 20;
-            barbreastback = 30;
-            barwrist = 40;
-            barwaist = 50;
-            barleg = 60;
-            barneckweek = 70;
-            barshoulerweek = 80;
-            barbreastbackweek = 90;
-            barwristweek = 90;
-            barwaistweek = 90;
-            barlegweek = 90;
+            int totalExerciseTime_daily =  user.getDailyProgress().getNeck() + user.getDailyProgress().getShoulder() +
+                                           user.getDailyProgress().getChestBack() + user.getDailyProgress().getWrist() +
+                                           user.getDailyProgress().getWaist() + user.getDailyProgress().getHipLegCalf();
+            int totalExerciseTime_week = user.getWeeklyProgress().getNeck() + user.getWeeklyProgress().getShoulder() +
+                                         user.getWeeklyProgress().getChestBack() + user.getWeeklyProgress().getWrist() +
+                                         user.getWeeklyProgress().getWaist() + user.getWeeklyProgress().getHipLegCalf();
+            int totalActivity_daily = user.getDailyProgress().getTotalActivity();
+            int totalActivity_week = user.getWeeklyProgress().getTotalActivity();
+            if(totalExerciseTime_daily == 0  ) {
+                totalExerciseTime_daily = 1;
+            }
+            if(totalExerciseTime_week == 0) {
+                totalExerciseTime_week = 1;
+            }
+            if(totalActivity_daily == 0) {
+                totalActivity_daily = 1;
+            }
+            if(totalActivity_week == 0) {
+                totalActivity_week = 1;
+            }
+            cirProgressstatus = (user.getDailyProgress().getAcceptation() * 100) / totalActivity_daily;
+            cirProgressstatusweek = (user.getWeeklyProgress().getAcceptation() * 100) / totalActivity_week;
+            barNeck = (user.getDailyProgress().getNeck() * 100) / totalExerciseTime_daily;
+            barShoulder = (user.getDailyProgress().getShoulder() * 100) / totalExerciseTime_daily;
+            barChestBack = (user.getDailyProgress().getChestBack() * 100) / totalExerciseTime_daily;
+            barWrist = (user.getDailyProgress().getWrist() * 100) / totalExerciseTime_daily;
+            barwaist = (user.getDailyProgress().getWaist() * 100) / totalExerciseTime_daily;
+            barHipLegCalfWeek = (user.getDailyProgress().getHipLegCalf() * 100) / totalExerciseTime_daily;
+            barNeckWeek = (user.getWeeklyProgress().getNeck() * 100) / totalExerciseTime_week;
+            barShoulderWeek = (user.getWeeklyProgress().getShoulder() * 100) / totalExerciseTime_week;
+            barChestBackWeek = (user.getWeeklyProgress().getChestBack() * 100) / totalExerciseTime_week;
+            barWristWeek = (user.getWeeklyProgress().getWrist() * 100) / totalExerciseTime_week;
+            barWaistWeek = (user.getWeeklyProgress().getWaist() * 100) / totalExerciseTime_week;
+            barHipLegCalfWeek = (user.getWeeklyProgress().getWaist() * 100) / totalExerciseTime_week;
 
         }
         else{
@@ -90,17 +108,17 @@ public class ProgressActivityFragment extends Fragment {
             mProgressStatus = 0;
             cirProgressstatusweek = 0;
             mProgressStatusweek = 0;
-            barneck = 0;
-            barshouler = 0;
-            barbreastback = 0;
-            barwrist = 0;
+            barNeck = 0;
+            barShoulder = 0;
+            barChestBack = 0;
+            barWrist = 0;
             barwaist = 0;
-            barleg = 0;
-            barneckweek = 0;
-            barshoulerweek = 0;
-            barbreastbackweek = 0;
-            barwristweek = 0;
-            barwaistweek = 0;
+            barHipLegCalfWeek = 0;
+            barNeckWeek = 0;
+            barShoulderWeek = 0;
+            barChestBackWeek = 0;
+            barWristWeek = 0;
+            barWaistWeek = 0;
             barlegweek = 0;
         }
 
@@ -144,19 +162,19 @@ public class ProgressActivityFragment extends Fragment {
         timeProgress = (ProgressBar) view.findViewById(R.id.barTime);
         timeFrac = (TextView) view.findViewById(R.id.timeFraction);
         timeProgressweek = (ProgressBar) view.findViewById(R.id.barTime1);
-        timeFracweek = (TextView) view.findViewById(R.id.timeFraction1);
-        numberfracneck = (TextView) view.findViewById(R.id.timeFraction2);
-        numberfracshoulder = (TextView) view.findViewById(R.id.timeFraction3);
-        numberfracbreastback = (TextView) view.findViewById(R.id.timeFraction4);
-        numberfracwrist = (TextView) view.findViewById(R.id.timeFraction5);
-        numberfracwaist = (TextView) view.findViewById(R.id.timeFraction6);
-        numberfracleg = (TextView) view.findViewById(R.id.timeFraction7);
-        numberfracneckweek = (TextView) view.findViewById(R.id.timeFraction8);
-        numberfracshoulderweek = (TextView) view.findViewById(R.id.timeFraction9);
-        numberfracbreastbackweek = (TextView) view.findViewById(R.id.timeFraction10);
-        numberfracwristweek = (TextView) view.findViewById(R.id.timeFraction11);
-        numberfracwaistweek = (TextView) view.findViewById(R.id.timeFraction12);
-        numberfraclegweek = (TextView) view.findViewById(R.id.timeFraction13);
+        timeFracWeek = (TextView) view.findViewById(R.id.timeFraction1);
+        numberFracNeck = (TextView) view.findViewById(R.id.timeFraction2);
+        numberFracShoulder = (TextView) view.findViewById(R.id.timeFraction3);
+        numberFracChestBack = (TextView) view.findViewById(R.id.timeFraction4);
+        numberFracWrist = (TextView) view.findViewById(R.id.timeFraction5);
+        numberFracWaist = (TextView) view.findViewById(R.id.timeFraction6);
+        numberFracHipLegCalf = (TextView) view.findViewById(R.id.timeFraction7);
+        numberFracNeckWeek = (TextView) view.findViewById(R.id.timeFraction8);
+        numberFracShoulderWeek = (TextView) view.findViewById(R.id.timeFraction9);
+        numberFracChestBackWeek = (TextView) view.findViewById(R.id.timeFraction10);
+        numberFracWristWeek = (TextView) view.findViewById(R.id.timeFraction11);
+        numberFracWaistWeek = (TextView) view.findViewById(R.id.timeFraction12);
+        numberFracHipLegCalfWeek = (TextView) view.findViewById(R.id.timeFraction13);
         progresstimeofneck = (ProgressBar) view.findViewById(R.id.barTime2);
         progresstimeofshoulder = (ProgressBar) view.findViewById(R.id.barTime3);
         progresstimeofbreastback = (ProgressBar) view.findViewById(R.id.barTime4);
@@ -173,35 +191,35 @@ public class ProgressActivityFragment extends Fragment {
         //set progress bar in each days
         timeProgress.setProgress(mProgressStatus);
         timeProgressweek.setProgress(mProgressStatusweek);
-        progresstimeofneck.setProgress(barneck);
-        progresstimeofshoulder.setProgress(barshouler);
-        progresstimeofbreastback.setProgress(barbreastback);
-        progresstimeofwrist.setProgress(barwrist);
+        progresstimeofneck.setProgress(barNeck);
+        progresstimeofshoulder.setProgress(barShoulder);
+        progresstimeofbreastback.setProgress(barChestBack);
+        progresstimeofwrist.setProgress(barWrist);
         progresstimeofwaist.setProgress(barwaist);
-        progresstimeofleg.setProgress(barleg);
-        progresstimeofneckweek.setProgress(barneckweek);
-        progresstimeofshoulderweek.setProgress(barshoulerweek);
-        progresstimeofbreastbackweek.setProgress(barbreastbackweek);
-        progresstimeofwristweek.setProgress(barwristweek);
-        progresstimeofwaistweek.setProgress(barwaistweek);
+        progresstimeofleg.setProgress(barHipLegCalfWeek);
+        progresstimeofneckweek.setProgress(barNeckWeek);
+        progresstimeofshoulderweek.setProgress(barShoulderWeek);
+        progresstimeofbreastbackweek.setProgress(barChestBackWeek);
+        progresstimeofwristweek.setProgress(barWristWeek);
+        progresstimeofwaistweek.setProgress(barWaistWeek);
         progresstimeoflegweek.setProgress(barlegweek);
 
         // Show the progress on TextView
         //timeFrac.setText((history.getNumberOfAccept()*timePerPic)+"/"+(history.getTotal()*timePerPic)+"min");
-        timeFrac.setText((10*timePerPic)+" นาที");
-        timeFracweek.setText((10*timePerPicweek)+" นาที");
-        numberfracneck.setText((1*numberofneck)+" ครั้ง");
-        numberfracshoulder.setText((1*numberofshoulder)+" ครั้ง");
-        numberfracbreastback.setText((1*numberofbreastback)+" ครั้ง");
-        numberfracwrist.setText((1*numberofwrist)+" ครั้ง");
-        numberfracwaist.setText((1*numberofwaist)+" ครั้ง");
-        numberfracleg.setText((1*numberofleg)+" ครั้ง");
-        numberfracneckweek.setText((1*numberofneckweek)+" ครั้ง");
-        numberfracshoulderweek.setText((1*numberofshoulderweek)+" ครั้ง");
-        numberfracbreastbackweek.setText((1*numberofbreastbackweek)+" ครั้ง");
-        numberfracwristweek.setText((1*numberofwristweek)+" ครั้ง");
-        numberfracwaistweek.setText((1*numberofwaistweek)+" ครั้ง");
-        numberfraclegweek.setText((1*numberoflegweek)+" ครั้ง");
+        timeFrac.setText((user.getDailyProgress().getAcceptation())+" นาที");
+        timeFracWeek.setText((user.getWeeklyProgress().getAcceptation())+" นาที");
+        numberFracNeck.setText((user.getDailyProgress().getNeck())+" ครั้ง");
+        numberFracShoulder.setText((user.getDailyProgress().getShoulder())+" ครั้ง");
+        numberFracChestBack.setText((user.getDailyProgress().getChestBack())+" ครั้ง");
+        numberFracWrist.setText((user.getDailyProgress().getWrist())+" ครั้ง");
+        numberFracWaist.setText((user.getDailyProgress().getWaist())+" ครั้ง");
+        numberFracHipLegCalf.setText((user.getDailyProgress().getHipLegCalf())+" ครั้ง");
+        numberFracNeckWeek.setText((user.getWeeklyProgress().getNeck())+" ครั้ง");
+        numberFracShoulderWeek.setText((user.getWeeklyProgress().getShoulder())+" ครั้ง");
+        numberFracChestBackWeek.setText((user.getWeeklyProgress().getChestBack())+" ครั้ง");
+        numberFracWristWeek.setText((user.getWeeklyProgress().getWrist())+" ครั้ง");
+        numberFracWaistWeek.setText((user.getWeeklyProgress().getWaist())+" ครั้ง");
+        numberFracHipLegCalfWeek.setText((user.getWeeklyProgress().getHipLegCalf())+" ครั้ง");
     return view;
     }
 
