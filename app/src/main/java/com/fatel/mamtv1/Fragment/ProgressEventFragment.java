@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fatel.mamtv1.Model.GroupHistory;
+import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.R;
-import com.fatel.mamtv1.Service.UserManage;
+import com.fatel.mamtv1.Service.Cache;
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
 
 
@@ -22,16 +22,14 @@ import com.lylc.widget.circularprogressbar.CircularProgressBar;
 public class ProgressEventFragment extends Fragment {
     //add for progress bar
     // private static final int PROGRESS = 0x1;
-    private ProgressBar timeProgressE;
-    private int mProgressStatusE = 0;
     private Handler mHandler = new Handler();
 
     TextView timeFracE;
     private int cirProgressstatusE = 0;
-    private int timePerPicE = 1;
     // statistic exercise
-    private int numberofneckweek = 1,numberofshoulderweek = 1,numberofbreastbackweek = 1,numberofwristweek = 1,numberofwaistweek = 1,numberoflegweek = 1;
-    private int barneckweek = 0,barshoulerweek = 0,barbreastbackweek = 0,barwristweek = 0,barwaistweek = 0,barlegweek = 0;
+    private int timePerPicE = 0;
+    private int numberofneckweek = 0,numberofshoulderweek = 0,numberofbreastbackweek = 0,numberofwristweek = 0,numberofwaistweek = 0,numberoflegweek = 0;
+    private int barneckweek = 0, barshoulderweek = 0, barchestback = 0,barwristweek = 0,barwaistweek = 0, barHipLegCalfweek = 0;
     private ProgressBar progresstimeofneckweek,progresstimeofshoulderweek,progresstimeofbreastbackweek,progresstimeofwristweek,progresstimeofwaistweek,progresstimeoflegweek;
     TextView numberfracneckweek,numberfracshoulderweek,numberfracbreastbackweek,numberfracwristweek,numberfracwaistweek,numberfraclegweek;
     public static ProgressEventFragment newInstance() {
@@ -49,104 +47,35 @@ public class ProgressEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_progress_event, container, false);
-        //add for progressbar
-        timeProgressE = (ProgressBar) view.findViewById(R.id.barTimeE);
-        timeFracE = (TextView) view.findViewById(R.id.timeFractionE);
-        numberfracneckweek = (TextView) view.findViewById(R.id.etimeFraction2);
-        numberfracshoulderweek = (TextView) view.findViewById(R.id.etimeFraction3);
-        numberfracbreastbackweek = (TextView) view.findViewById(R.id.etimeFraction4);
-        numberfracwristweek = (TextView) view.findViewById(R.id.etimeFraction5);
-        numberfracwaistweek = (TextView) view.findViewById(R.id.etimeFraction6);
-        numberfraclegweek = (TextView) view.findViewById(R.id.etimeFraction7);
-        progresstimeofneckweek = (ProgressBar) view.findViewById(R.id.ebarTime2);
-        progresstimeofshoulderweek = (ProgressBar) view.findViewById(R.id.ebarTime3);
-        progresstimeofbreastbackweek = (ProgressBar) view.findViewById(R.id.ebarTime4);
-        progresstimeofwristweek = (ProgressBar) view.findViewById(R.id.ebarTime5);
-        progresstimeofwaistweek = (ProgressBar) view.findViewById(R.id.ebarTime6);
-        progresstimeoflegweek = (ProgressBar) view.findViewById(R.id.ebarTime7);
         //cal % of circular progress
         //edit
-        //HistorygroupHelper mhistorygroupHelper = new HistorygroupHelper(getActivity());
-        //Log.i("numgroup",""+UserManage.getInstance(getActivity()).getCurrentIdGroup());
-        GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(getActivity()).getCurrentUser().getGroupId(),getActivity());
-        if(groupHistory ==null){
-            cirProgressstatusE = 50;
-            mProgressStatusE = 0;
-            barneckweek = 70;
-            barshoulerweek = 80;
-            barbreastbackweek = 90;
-            barwristweek = 90;
-            barwaistweek = 90;
-            barlegweek = 90;
-            //set progress bar in each days
-            timeProgressE.setProgress(mProgressStatusE);
-            // Show the progress on TextView
-            timeFracE.setText((0 * timePerPicE) + "/" + (0 * timePerPicE) + " นาที");
-            progresstimeofneckweek.setProgress(barneckweek);
-            progresstimeofshoulderweek.setProgress(barshoulerweek);
-            progresstimeofbreastbackweek.setProgress(barbreastbackweek);
-            progresstimeofwristweek.setProgress(barwristweek);
-            progresstimeofwaistweek.setProgress(barwaistweek);
-            progresstimeoflegweek.setProgress(barlegweek);
-            numberfracneckweek.setText((1 * numberofneckweek) + " ครั้ง");
-            numberfracshoulderweek.setText((1 * numberofshoulderweek) + " ครั้ง");
-            numberfracbreastbackweek.setText((1 * numberofbreastbackweek) + " ครั้ง");
-            numberfracwristweek.setText((1 * numberofwristweek) + " ครั้ง");
-            numberfracwaistweek.setText((1 * numberofwaistweek) + " ครั้ง");
-            numberfraclegweek.setText((1 * numberoflegweek) + " ครั้ง");
-
-        }
-        else if(groupHistory !=null&& groupHistory.gettotal()==0){
-            cirProgressstatusE = 0;
-            mProgressStatusE = 0;
-            barneckweek = 70;
-            barshoulerweek = 80;
-            barbreastbackweek = 90;
-            barwristweek = 90;
-            barwaistweek = 90;
-            barlegweek = 90;
-            //set progress bar in each days
-            timeProgressE.setProgress(mProgressStatusE);
-            // Show the progress on TextView
-            timeFracE.setText((0 * timePerPicE) + "/" + (0 * timePerPicE) + " นาที");
-            progresstimeofneckweek.setProgress(barneckweek);
-            progresstimeofshoulderweek.setProgress(barshoulerweek);
-            progresstimeofbreastbackweek.setProgress(barbreastbackweek);
-            progresstimeofwristweek.setProgress(barwristweek);
-            progresstimeofwaistweek.setProgress(barwaistweek);
-            progresstimeoflegweek.setProgress(barlegweek);
-            numberfracneckweek.setText((1 * numberofneckweek) + " ครั้ง");
-            numberfracshoulderweek.setText((1 * numberofshoulderweek) + " ครั้ง");
-            numberfracbreastbackweek.setText((1 * numberofbreastbackweek) + " ครั้ง");
-            numberfracwristweek.setText((1 * numberofwristweek) + " ครั้ง");
-            numberfracwaistweek.setText((1 * numberofwaistweek) + " ครั้ง");
-            numberfraclegweek.setText((1 * numberoflegweek) + " ครั้ง");
-        }
-        else{
-            cirProgressstatusE = (groupHistory.getNumberOfAccept()*100)/ groupHistory.gettotal();
-            mProgressStatusE = ((groupHistory.getNumberOfAccept() * timePerPicE) * 100) / (groupHistory.gettotal() * timePerPicE);
-            barneckweek = 70;
-            barshoulerweek = 80;
-            barbreastbackweek = 90;
-            barwristweek = 90;
-            barwaistweek = 90;
-            barlegweek = 90;
-            //set progress bar in each days
-            timeProgressE.setProgress(mProgressStatusE);
-            // Show the progress on TextView
-            timeFracE.setText((groupHistory.getNumberOfAccept() * timePerPicE) + "/" + (groupHistory.gettotal() * timePerPicE) + " นาที");
-            progresstimeofneckweek.setProgress(barneckweek);
-            progresstimeofshoulderweek.setProgress(barshoulerweek);
-            progresstimeofbreastbackweek.setProgress(barbreastbackweek);
-            progresstimeofwristweek.setProgress(barwristweek);
-            progresstimeofwaistweek.setProgress(barwaistweek);
-            progresstimeoflegweek.setProgress(barlegweek);
-            numberfracneckweek.setText((1*numberofneckweek)+" ครั้ง");
-            numberfracshoulderweek.setText((1*numberofshoulderweek)+" ครั้ง");
-            numberfracbreastbackweek.setText((1*numberofbreastbackweek)+" ครั้ง");
-            numberfracwristweek.setText((1*numberofwristweek)+" ครั้ง");
-            numberfracwaistweek.setText((1*numberofwaistweek)+" ครั้ง");
-            numberfraclegweek.setText((1*numberoflegweek)+" ครั้ง");
+        Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        if(groupuser != null){
+            int totalExerciseTime_week = groupuser.getProgress().getNeck()+
+                    groupuser.getProgress().getShoulder()+groupuser.getProgress().getChestBack()+
+                    groupuser.getProgress().getWrist()+groupuser.getProgress().getWaist()+
+                    groupuser.getProgress().getHipLegCalf();
+            int totalActivity_week = groupuser.getProgress().getTotalActivity();
+            if(totalExerciseTime_week == 0){
+                totalExerciseTime_week = 1;
+            }
+            if(totalActivity_week == 0){
+                totalActivity_week = 1;
+            }
+            cirProgressstatusE = (groupuser.getProgress().getAcceptation()*100)/totalActivity_week;
+            barneckweek = (groupuser.getProgress().getNeck()*100)/totalExerciseTime_week;
+            barshoulderweek = (groupuser.getProgress().getShoulder()*100)/totalExerciseTime_week;
+            barchestback = (groupuser.getProgress().getChestBack()*100)/totalExerciseTime_week;;
+            barwristweek = (groupuser.getProgress().getWrist()*100)/totalExerciseTime_week;
+            barwaistweek = (groupuser.getProgress().getWaist()*100)/totalExerciseTime_week;
+            barHipLegCalfweek = (groupuser.getProgress().getHipLegCalf()*100)/totalExerciseTime_week;
+            timePerPicE = groupuser.getProgress().getExerciseTime();
+            numberofneckweek = groupuser.getProgress().getNeck();
+            numberofshoulderweek = groupuser.getProgress().getChestBack();
+            numberofbreastbackweek = groupuser.getProgress().getChestBack();
+            numberofwristweek = groupuser.getProgress().getWrist();
+            numberofwaistweek = groupuser.getProgress().getWaist();
+            numberoflegweek = groupuser.getProgress().getHipLegCalf();
         }
 
         final CircularProgressBar cE = (CircularProgressBar) view.findViewById(R.id.circularprogressbarE);
@@ -166,12 +95,37 @@ public class ProgressEventFragment extends Fragment {
             }
         });
 
+        //add for progressbar
+        timeFracE = (TextView) view.findViewById(R.id.timeFractionE);
+        numberfracneckweek = (TextView) view.findViewById(R.id.etimeFraction2);
+        numberfracshoulderweek = (TextView) view.findViewById(R.id.etimeFraction3);
+        numberfracbreastbackweek = (TextView) view.findViewById(R.id.etimeFraction4);
+        numberfracwristweek = (TextView) view.findViewById(R.id.etimeFraction5);
+        numberfracwaistweek = (TextView) view.findViewById(R.id.etimeFraction6);
+        numberfraclegweek = (TextView) view.findViewById(R.id.etimeFraction7);
+        progresstimeofneckweek = (ProgressBar) view.findViewById(R.id.ebarTime2);
+        progresstimeofshoulderweek = (ProgressBar) view.findViewById(R.id.ebarTime3);
+        progresstimeofbreastbackweek = (ProgressBar) view.findViewById(R.id.ebarTime4);
+        progresstimeofwristweek = (ProgressBar) view.findViewById(R.id.ebarTime5);
+        progresstimeofwaistweek = (ProgressBar) view.findViewById(R.id.ebarTime6);
+        progresstimeoflegweek = (ProgressBar) view.findViewById(R.id.ebarTime7);
 
+        //set progress bar in each days
+        // Show the progress on TextView
 
-
-
+        progresstimeofneckweek.setProgress(barneckweek);
+        progresstimeofshoulderweek.setProgress(barshoulderweek);
+        progresstimeofbreastbackweek.setProgress(barchestback);
+        progresstimeofwristweek.setProgress(barwristweek);
+        progresstimeofwaistweek.setProgress(barwaistweek);
+        progresstimeoflegweek.setProgress(barHipLegCalfweek);
+        timeFracE.setText(timePerPicE + " นาที");
+        numberfracneckweek.setText(numberofneckweek + " ครั้ง");
+        numberfracshoulderweek.setText(numberofshoulderweek + " ครั้ง");
+        numberfracbreastbackweek.setText(numberofbreastbackweek + " ครั้ง");
+        numberfracwristweek.setText(numberofwristweek + " ครั้ง");
+        numberfracwaistweek.setText(numberofwaistweek + " ครั้ง");
+        numberfraclegweek.setText(numberoflegweek + " ครั้ง");
         return view;
     }
-
-
 }
