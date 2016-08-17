@@ -282,6 +282,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (menuItem.getTitle().equals("Home"))
                 setTitle("Move Alarm");
+            else if(menuItem.getTitle().equals("Posture"))
+                setTitle("หมวดท่าบริหาร");
             else
                 setTitle(menuItem.getTitle());
             mDrawerLayout.closeDrawers();
