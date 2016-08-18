@@ -3,16 +3,21 @@ package com.fatel.mamtv1.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
+import com.beardedhen.androidbootstrap.BootstrapThumbnail;
 import com.bumptech.glide.Glide;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
 import com.fatel.mamtv1.Model.Alarm;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
+import com.squareup.picasso.Picasso;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -23,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MainFragment extends android.support.v4.app.Fragment {
     private DBAlarmHelper mAlarmHelper;
-    CircleImageView propic;
+    BootstrapThumbnail propic;
     TextView score;
     public MainFragment() {
         // Required empty public constructor
@@ -40,15 +45,17 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mAlarmHelper = new DBAlarmHelper(getActivity());
         setUser(view);
         setTextAlarm(view, mAlarmHelper);
-        propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
+        propic = (BootstrapThumbnail) view.findViewById(R.id.profile_image_f);
         String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookId();
-        if(!tempid.equals("0.0")) {
-            if (!tempid.equals("0")) {
-                if(!(tempid.equals("fb0.0"))) {
-                    Glide.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
-                }
-            }
-        }
+        Log.i("temp id",tempid);
+//        if(!tempid.equals("0.0")) {
+//            if (!tempid.equals("0")) {
+//                if(!(tempid.equals("fb0.0"))) {
+                    Picasso.with(getContext()).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
+                    Log.i("in the if","");
+//                }
+//            }
+//        }
         score = (TextView)view.findViewById(R.id.scoreNum);
         score.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getScore() + "");
         return view;
