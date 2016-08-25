@@ -21,6 +21,7 @@ import lombok.Setter;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import com.activeandroid.query.Select;
 
 
 @Getter
@@ -39,7 +40,8 @@ public class UserManage {
     public static UserManage getInstance(Context context) {
         if (instance == null) {
             instance = new UserManage();
-            User user = User.checkLogin(context);
+            User user = Select().from(User.class).where("login = ?", String.valueOf(1)).executeSingle();
+            //User user = User.checkLogin(context);
             if (user != null)
                 currentUser = user;
         }
@@ -52,12 +54,13 @@ public class UserManage {
 
     public void logoutUser(Context context) {
         currentUser.setLogin(0);
-        currentUser.save(context);
+        currentUser.save();
         currentUser = null;
     }
 
     public boolean checkCurrentLogin(Context context) {
-        User user = User.checkLogin(context);
+        User user = Select().from(User.class).where("login = ?", String.valueOf(1)).executeSingle();
+        //User user = User.checkLogin(context);
         if (user != null)
             return true;
 

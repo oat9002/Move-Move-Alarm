@@ -39,6 +39,7 @@ import com.fatel.mamtv1.Service.UserManage;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import com.activeandroid.ActiveAndroid;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mAlarmHelper = new DBAlarmHelper(this);

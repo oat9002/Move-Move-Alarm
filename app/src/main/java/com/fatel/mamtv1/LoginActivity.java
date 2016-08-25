@@ -159,7 +159,8 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     Log.i("response", response.raw().toString());
                     user.setLogin(1);
-                    user.save(getApplicationContext());
+
+                    user.save();
                     UserManage.getInstance(getApplicationContext()).setCurrentUser(user);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -16,39 +16,62 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
+
 /**
  * Created by Monthon on 3/11/2558.
  */
+@Table(name = "User")
 @Getter
 @Setter
-public class User implements Serializable{
+public class User extends Model {
 
+    @Column(name = "Id")
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @Expose
     private int id;
+    @Column(name = "internalId")
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private int internalId;
-
+    @Column(name = "birthdate")
     @Expose private String birthdate;
+    @Column(name = "age")
     @Expose private int age;
+    @Column(name = "score")
     @Expose private int score;
+    @Column(name = "height")
     @Expose private int height;
+    @Column(name = "weight")
     @Expose private int weight;
+    @Column(name = "waistline")
     @Expose private int waistline;
+    @Column(name = "bmi")
     @Expose private Double bmi;
+    @Column(name = "email")
     @Expose private String email;
+    @Column(name = "facebookId")
     @SerializedName("facebook_id") public String facebookId;
+    @Column(name = "facebookFirstName")
     @Expose private String facebookFirstName;
+    @Column(name = "facebookLastName")
     @Expose private String facebookLastName;
+    @Column(name = "profileImage")
     @Expose private int profileImage;
+    @Column(name = "groupId")
     @SerializedName("group_id") private int groupId;
     @SerializedName("daily_progress") private UserProgress dailyProgress;
     @SerializedName("weekly_progress") private UserProgress weeklyProgress;
-
+    @Column(name = "login")
     private int login;
+    @Column(name = "statesw")
     private int statesw;
+
+
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE = "user";
 
@@ -73,11 +96,13 @@ public class User implements Serializable{
     }
 
     public User() {
+        super();
         dailyProgress = new UserProgress();
         weeklyProgress = new UserProgress();
     }
 
     public User(int userId, String facebookId, String facebookFirstName) {
+        super();
         this.internalId = -1;
         this.score = 0;
         this.login = 0;
@@ -93,6 +118,7 @@ public class User implements Serializable{
     public User(int id, int idUser, String birthdate, int age, int score
             , int height, int weight, int waistline, double bmi, String email, String facebookId, String facebookFirstName,
                 String facebookLastName, int profileImage, int login, int groupId, int statesw) {
+        super();
         this.internalId = id;
         this.id = idUser;
         this.birthdate = birthdate;
@@ -114,30 +140,30 @@ public class User implements Serializable{
         weeklyProgress = new UserProgress();
     }
 
-    public void save(Context context) {
-
-        UserHelper userHelper = new UserHelper(context);
-        if (this.internalId == -1) {
-            this.internalId = userHelper.addUser(this);
-            Log.i("User", "funh savenew :" + internalId);
-        } else {
-            userHelper.updateUser(this);
-            Log.i("User", "funh saveold :" + internalId);
-        }
-    }
-
-    public static User find(int id, Context context) {
-        UserHelper userHelper = new UserHelper(context);
-        if (userHelper.getUser(id) == null) {
-            return null;
-        } else
-            return userHelper.getUser(id);
-    }
-
-    public static User checkLogin(Context context) {
-        UserHelper userHelper = new UserHelper(context);
-        return userHelper.checkLoginUser();
-    }
+//    public void save(Context context) {
+//
+//        UserHelper userHelper = new UserHelper(context);
+//        if (this.internalId == -1) {
+//            this.internalId = userHelper.addUser(this);
+//
+//        } else {
+//            userHelper.updateUser(this);
+//
+//        }
+//    }
+//
+//    public static User find(int id, Context context) {
+//        UserHelper userHelper = new UserHelper(context);
+//        if (userHelper.getUser(id) == null) {
+//            return null;
+//        } else
+//            return userHelper.getUser(id);
+//    }
+//
+//    public static User checkLogin(Context context) {
+//        UserHelper userHelper = new UserHelper(context);
+//        return userHelper.checkLoginUser();
+//    }
 
     public HashMap<String, Object> getGeneralValues() {
         HashMap<String, Object> userData = new HashMap<>();
@@ -157,20 +183,20 @@ public class User implements Serializable{
 
         return userData;
     }
-
-    public void addScore(int score){
-        this.score+=score;
-    }
-
-    public int getInternalId() {
-        return internalId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//
+//    public void addScore(int score){
+//        this.score+=score;
+//    }
+//
+//    public int getInternalId() {
+//        return internalId;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 }
