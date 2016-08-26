@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
         android:layout_width="76dp"
@@ -14,7 +14,10 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp" />
+        android:layout_marginStart="24dp"
+        app:bootstrapBrand="info"
+        app:hasBorder="false"
+        />
 
     <TextView
         android:id="@+id/username"
