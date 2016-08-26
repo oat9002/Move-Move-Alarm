@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,10 +15,22 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.os.Vibrator;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.History;
+import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.AlarmReceiver;
 import com.fatel.mamtv1.Service.UserManage;
+
+import java.util.List;
+
+import butterknife.BindView;
+import retrofit.Callback;
+import retrofit.Retrofit;
 
 
 public class ActAlarm extends AppCompatActivity {
@@ -36,8 +49,6 @@ public class ActAlarm extends AppCompatActivity {
         if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
             m = MediaPlayer.create(this, notification);
-            // m.reset();
-            //m = MediaPlayer.create(this,notification);
             m.setLooping(true);
             m.start();
         }
@@ -104,6 +115,33 @@ public class ActAlarm extends AppCompatActivity {
         if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
             m.reset();
         }
+        updatecancel();
     }
-
+    public void updatecancel(){
+        User user = UserManage.getCurrentUser();
+        if(user!=null){
+            int cancel = user.getDailyProgress().getDeclination()+1;
+            int total = user.getDailyProgress().getTotalActivity()+1;
+            user.getDailyProgress().setDeclination(cancel);
+            user.getDailyProgress().setTotalActivity(total);
+            int cancelweek = user.getWeeklyProgress().getDeclination()+1;
+            int totalweek = user.getWeeklyProgress().getDeclination()+1;
+            user.getWeeklyProgress().setDeclination(cancelweek);
+            user.getWeeklyProgress().setTotalActivity(totalweek);
+            UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {
+                @Override
+                public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                }
+                @Override
+                public void onFailure(Throwable t) {
+                    makeSnackbar("ไม่สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                }
+            });
+        }
+    }
+    public void makeSnackbar(String text)
+    {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    }
 }

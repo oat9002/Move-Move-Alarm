@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.Posture;
@@ -133,11 +134,12 @@ public class Activity extends AppCompatActivity {
                 startActivity(i1);
                 User currentUser = UserManage.getCurrentUser();
                 currentUser.addScore(1);
+                updateActivity(img, currentUser);
                 makeSnackbar("ทำกิจกรรมสำเร็จ รับ 1 คะแนน!");
                 UserServiceImp.getInstance().update(currentUser, new Callback<StatusDescription>() {
                     @Override
                     public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                        //TODO ถ้า add score บน server เสร็จ จะทำอะไรต่อ
+                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -162,7 +164,7 @@ public class Activity extends AppCompatActivity {
             time2=null;
         }
         // TODO update progress
-
+        updatecancel();
         History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
         history.subaccept(1);
         history.addcancel(1);
@@ -191,5 +193,61 @@ public class Activity extends AppCompatActivity {
         if (activityHandle!=null)
             return activityHandle;
         return null;
+    }
+    public void updatecancel(){
+        User user = UserManage.getCurrentUser();
+        if(user!=null){
+            int cancel = user.getDailyProgress().getDeclination()+1;
+            int total = user.getDailyProgress().getTotalActivity()+1;
+            user.getDailyProgress().setDeclination(cancel);
+            user.getDailyProgress().setTotalActivity(total);
+            int cancelweek = user.getWeeklyProgress().getDeclination()+1;
+            int totalweek = user.getWeeklyProgress().getDeclination()+1;
+            user.getWeeklyProgress().setDeclination(cancelweek);
+            user.getWeeklyProgress().setTotalActivity(totalweek);
+            UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {
+                @Override
+                public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    makeSnackbar("ไม่สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                }
+            });
+        }
+    }
+    public void updateActivity(ArrayList<Posture> mode,User user){
+        int numberofimg = mode.size();
+        if(user!=null) {
+            for (int i = 0; i < numberofimg; i++) {
+                if ((mode.get(i)).getMode()==1){
+                    user.getDailyProgress().setNeck(user.getDailyProgress().getNeck() + 1);
+                    user.getWeeklyProgress().setNeck(user.getWeeklyProgress().getNeck() + 1);}
+                else if((mode.get(i)).getMode()==2){
+                    user.getDailyProgress().setShoulder(user.getDailyProgress().getShoulder() + 1);
+                    user.getWeeklyProgress().setShoulder(user.getWeeklyProgress().getShoulder() + 1);}
+                else if((mode.get(i)).getMode()==3){
+                    user.getDailyProgress().setChestBack(user.getDailyProgress().getChestBack() + 1);
+                    user.getWeeklyProgress().setChestBack(user.getWeeklyProgress().getChestBack() + 1);}
+                else if((mode.get(i)).getMode() == 4) {
+                    user.getDailyProgress().setWrist(user.getDailyProgress().getWrist() + 1);
+                    user.getWeeklyProgress().setWrist(user.getWeeklyProgress().getWrist() + 1);}
+                else if((mode.get(i)).getMode() == 5) {
+                    user.getDailyProgress().setWaist(user.getDailyProgress().getWaist() + 1);
+                    user.getWeeklyProgress().setWaist(user.getWeeklyProgress().getWaist() + 1);}
+                else if((mode.get(i)).getMode()==6){
+                    user.getDailyProgress().setHipLegCalf(user.getDailyProgress().getHipLegCalf() + 1);
+                    user.getWeeklyProgress().setHipLegCalf(user.getWeeklyProgress().getHipLegCalf() + 1);}
+
+            }
+            user.getDailyProgress().setAcceptation(user.getDailyProgress().getAcceptation()+1);
+            user.getDailyProgress().setTotalActivity(user.getDailyProgress().getTotalActivity()+1);
+            user.getDailyProgress().setExerciseTime(user.getDailyProgress().getExerciseTime()+(1*numberofimg));
+            user.getWeeklyProgress().setAcceptation(user.getWeeklyProgress().getAcceptation()+1);
+            user.getWeeklyProgress().setTotalActivity(user.getWeeklyProgress().getTotalActivity()+1);
+            user.getWeeklyProgress().setExerciseTime(user.getWeeklyProgress().getExerciseTime()+(1*numberofimg));
+        }
     }
 }

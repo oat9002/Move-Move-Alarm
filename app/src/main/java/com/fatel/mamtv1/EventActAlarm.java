@@ -15,9 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.GroupHistory;
+import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
+import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.UserManage;
+
+import retrofit.Callback;
+import retrofit.Retrofit;
 
 public class EventActAlarm extends AppCompatActivity {
 
@@ -104,6 +114,30 @@ public class EventActAlarm extends AppCompatActivity {
         if(UserManage.getInstance(EventActAlarm.this).getCurrentUser().getGroupId() == 1) {
             m.reset();
         }
+        updatecancel();
     }
+    public void updatecancel(){
+        Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        if(groupuser!=null){
+            int cancelweek = groupuser.getProgress().getDeclination()+1;
+            int totalweek = groupuser.getProgress().getDeclination()+1;
+            groupuser.getProgress().setDeclination(cancelweek);
+            groupuser.getProgress().setTotalActivity(totalweek);
+            GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
+                @Override
+                public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                }
 
+                @Override
+                public void onFailure(Throwable t) {
+                    makeSnackbar("ไม่สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                }
+            });
+        }
+    }
+    public void makeSnackbar(String text)
+    {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    }
 }
