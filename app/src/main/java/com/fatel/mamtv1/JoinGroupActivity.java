@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.Service.Cache;
@@ -45,7 +46,7 @@ public class JoinGroupActivity extends AppCompatActivity {
     }
 
     public void joinGroup(View view) {
-        EditText groupCode = (EditText) findViewById(R.id.edit_message);
+        BootstrapEditText groupCode = (BootstrapEditText) findViewById(R.id.edit_message);
 
         if(groupCode.getText().toString().length() < 4) {
             makeToast("กรุณาใส่ให้ครบ 4 จำนวน");

@@ -62,7 +62,7 @@ public class ChoosePostureFragment extends android.support.v4.app.Fragment  {
             imageList.add(image);
         }
         recyclerView.setAdapter(mAdapter);
-        
+
         return view;
 
     }

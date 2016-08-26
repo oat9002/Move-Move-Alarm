@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.StatusDescription;
@@ -33,7 +34,8 @@ import retrofit.Callback;
 import retrofit.Retrofit;
 
 public class CreateGroupActivity extends AppCompatActivity {
-    @BindView(R.id.edit_message) EditText gName;
+    @BindView(R.id.edit_message)
+    BootstrapEditText gName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
