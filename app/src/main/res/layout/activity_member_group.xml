@@ -24,12 +24,13 @@ android:layout_height="match_parent">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:stretchColumns="*" >
+    android:stretchColumns="2"
+    >
 
 
     <TableRow
         android:id="@+id/tableRow1"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#CD6600" >
 
@@ -37,6 +38,7 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/textView11"
             android:paddingBottom="10dp"
+            android:layout_width="100dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="10dp"
@@ -47,20 +49,21 @@ android:layout_height="match_parent">
 
 
         <LinearLayout
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent" >
             <View style="@style/Divider" />
 
         </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
             android:id="@+id/textView12"
             android:paddingBottom="10dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="10dp"
-            android:gravity="center"
             android:text="รายชื่อ"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -84,11 +87,11 @@ android:layout_height="match_parent">
             android:textSize="18sp" />
 
         <LinearLayout
-            android:layout_width="1dp"
-            android:layout_height="match_parent" >
-
+    android:layout_width="1dp"
+    android:layout_height="match_parent" >
             <View style="@style/Divider" />
-        </LinearLayout>
+
+</LinearLayout>
 
         <TextView
             android:id="@+id/groupMember_member1"
@@ -124,8 +127,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member2"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -157,8 +160,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member3"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -189,8 +192,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member4"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -221,8 +224,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member5"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -252,8 +255,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member6"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -348,8 +351,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member9"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -380,8 +383,8 @@ android:layout_height="match_parent">
         <TextView
             android:id="@+id/groupMember_member10"
             android:padding="5dp"
-            android:gravity="center"
             android:text="-"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 

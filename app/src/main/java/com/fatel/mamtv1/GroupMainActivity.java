@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.fatel.mamtv1.Model.Event;
@@ -40,7 +41,8 @@ public class GroupMainActivity extends AppCompatActivity {
     @BindView(R.id.groupMain_amountMember) TextView amountMember;
     @BindView(R.id.groupMain_groupScore) TextView groupScore;
     @BindView(R.id.groupMain_event) TextView event;
-    @BindView(R.id.exitGroup) Button exitGroup;
+    @BindView(R.id.exitGroup)
+    BootstrapButton exitGroup;
     private Group groupData;
     UserManage userManage ;
 
@@ -74,10 +76,10 @@ public class GroupMainActivity extends AppCompatActivity {
             groupScore.setText("" + groupData.getScore());
 
             if(groupData.getAdmin().getId() == userManage.getCurrentUser().getId()){
-                exitGroup.setBackgroundResource(R.drawable.deletegroup);
+                exitGroup.setText("ลบกลุ่ม");
             }
             else {
-                exitGroup.setBackgroundResource(R.drawable.leavegroup);
+                exitGroup.setText("ออกจากกลุ่ม");
             }
         } catch (Exception e) {
             Log.i("setup group", e.toString());
