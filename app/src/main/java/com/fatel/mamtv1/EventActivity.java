@@ -19,7 +19,9 @@ import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.Posture;
 import com.fatel.mamtv1.Model.StatusDescription;
+import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
+import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.UserManage;
 
@@ -127,7 +129,6 @@ public class EventActivity extends AppCompatActivity {
 
                 //history
                 // TODO update progress
-
                 //
                 //go to main
                 Intent i1 = new Intent(EventActivity.this, MainActivity.class);
@@ -136,10 +137,11 @@ public class EventActivity extends AppCompatActivity {
                 //send score to back
                 Group group = (Group) Cache.getInstance().getData("groupData");
                 group.addScore(2);
+                updateEvent(img,group);
                 GroupServiceImp.getInstance().updateGroup(group, new Callback<StatusDescription>() {
                     @Override
                     public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                        //TODO add group score แล้วจะทำอะไรต่อ
+                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -167,7 +169,7 @@ public class EventActivity extends AppCompatActivity {
         //history
 
         // TODO update progress
-
+        updatecancel();
         //
 
             GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
@@ -184,5 +186,47 @@ public class EventActivity extends AppCompatActivity {
     public void makeSnackbar(String text)
     {
         Snackbar.make(txtA, text, Snackbar.LENGTH_LONG).show();
+    }
+    public void updatecancel(){
+        Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        if(groupuser!=null){
+            int cancelweek = groupuser.getProgress().getDeclination()+1;
+            int totalweek = groupuser.getProgress().getDeclination()+1;
+            groupuser.getProgress().setDeclination(cancelweek);
+            groupuser.getProgress().setTotalActivity(totalweek);
+            GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
+                @Override
+                public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    makeSnackbar("ไม่สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+                }
+            });
+        }
+    }
+    public void updateEvent(ArrayList<Posture> mode,Group group){
+        int numberofimg = mode.size();
+        if(group!=null) {
+            for (int i = 0; i < numberofimg; i++) {
+                if ((mode.get(i)).getMode()==1){
+                    group.getProgress().setNeck(group.getProgress().getNeck() + 1);}
+                else if((mode.get(i)).getMode()==2){
+                    group.getProgress().setShoulder(group.getProgress().getShoulder() + 1);}
+                else if((mode.get(i)).getMode()==3){
+                    group.getProgress().setChestBack(group.getProgress().getChestBack() + 1);}
+                else if((mode.get(i)).getMode() == 4) {
+                    group.getProgress().setWrist(group.getProgress().getWrist() + 1);}
+                else if((mode.get(i)).getMode() == 5) {
+                    group.getProgress().setWaist(group.getProgress().getWaist() + 1);}
+                else if((mode.get(i)).getMode()==6){
+                    group.getProgress().setHipLegCalf(group.getProgress().getHipLegCalf() + 1);}
+            }
+            group.getProgress().setAcceptation(group.getProgress().getAcceptation()+1);
+            group.getProgress().setTotalActivity(group.getProgress().getTotalActivity()+1);
+            group.getProgress().setExerciseTime(group.getProgress().getExerciseTime()+(1*numberofimg));
+        }
     }
 }
