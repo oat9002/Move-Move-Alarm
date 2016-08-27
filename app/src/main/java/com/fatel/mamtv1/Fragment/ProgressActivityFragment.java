@@ -36,8 +36,8 @@ public class ProgressActivityFragment extends Fragment {
     // statistic exercise
     private int numberofneck = 0,numberofshoulder = 0,numberofbreastback = 0,numberofwrist = 0,numberofwaist = 0,numberofleg = 0;
     private int numberofneckweek = 0,numberofshoulderweek = 0,numberofbreastbackweek = 0,numberofwristweek = 0,numberofwaistweek = 0,numberoflegweek = 0;
-    private int barNeck = 0, barShoulder = 0, barChestBack = 0, barWrist = 0,barwaist = 0, barHipLegCalfWeek = 0;
-    private int barNeckWeek = 0, barShoulderWeek = 0, barChestBackWeek = 0, barWristWeek = 0, barWaistWeek = 0,barlegweek = 0;
+    private int barNeck = 0, barShoulder = 0, barChestBack = 0, barWrist = 0,barwaist = 0, barHipLegCalf = 0;
+    private int barNeckWeek = 0, barShoulderWeek = 0, barChestBackWeek = 0, barWristWeek = 0, barWaistWeek = 0,barHipLegCalfWeek = 0;
     private ProgressBar progresstimeofneck,progresstimeofshoulder,progresstimeofbreastback,progresstimeofwrist,progresstimeofwaist,progresstimeofleg;
     private ProgressBar progresstimeofneckweek,progresstimeofshoulderweek,progresstimeofbreastbackweek,progresstimeofwristweek,progresstimeofwaistweek,progresstimeoflegweek;
     TextView numberFracNeck, numberFracShoulder, numberFracChestBack, numberFracWrist, numberFracWaist, numberFracHipLegCalf,
@@ -89,13 +89,13 @@ public class ProgressActivityFragment extends Fragment {
             barChestBack = (user.getDailyProgress().getChestBack() * 100) / totalExerciseTime_daily;
             barWrist = (user.getDailyProgress().getWrist() * 100) / totalExerciseTime_daily;
             barwaist = (user.getDailyProgress().getWaist() * 100) / totalExerciseTime_daily;
-            barHipLegCalfWeek = (user.getDailyProgress().getHipLegCalf() * 100) / totalExerciseTime_daily;
+            barHipLegCalf = (user.getDailyProgress().getHipLegCalf() * 100) / totalExerciseTime_daily;
             barNeckWeek = (user.getWeeklyProgress().getNeck() * 100) / totalExerciseTime_week;
             barShoulderWeek = (user.getWeeklyProgress().getShoulder() * 100) / totalExerciseTime_week;
             barChestBackWeek = (user.getWeeklyProgress().getChestBack() * 100) / totalExerciseTime_week;
             barWristWeek = (user.getWeeklyProgress().getWrist() * 100) / totalExerciseTime_week;
             barWaistWeek = (user.getWeeklyProgress().getWaist() * 100) / totalExerciseTime_week;
-            barHipLegCalfWeek = (user.getWeeklyProgress().getWaist() * 100) / totalExerciseTime_week;
+            barHipLegCalfWeek = (user.getWeeklyProgress().getHipLegCalf() * 100) / totalExerciseTime_week;
             timePerPic = user.getDailyProgress().getExerciseTime();
             timePerPicweek = user.getWeeklyProgress().getExerciseTime();
             numberofneck = user.getDailyProgress().getNeck();
@@ -182,13 +182,13 @@ public class ProgressActivityFragment extends Fragment {
         progresstimeofbreastback.setProgress(barChestBack);
         progresstimeofwrist.setProgress(barWrist);
         progresstimeofwaist.setProgress(barwaist);
-        progresstimeofleg.setProgress(barHipLegCalfWeek);
+        progresstimeofleg.setProgress(barHipLegCalf);
         progresstimeofneckweek.setProgress(barNeckWeek);
         progresstimeofshoulderweek.setProgress(barShoulderWeek);
         progresstimeofbreastbackweek.setProgress(barChestBackWeek);
         progresstimeofwristweek.setProgress(barWristWeek);
         progresstimeofwaistweek.setProgress(barWaistWeek);
-        progresstimeoflegweek.setProgress(barlegweek);
+        progresstimeoflegweek.setProgress(barHipLegCalfWeek);
 
         // Show the progress on TextView
         timeFrac.setText(timePerPic+" นาที");
