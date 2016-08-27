@@ -10,11 +10,16 @@ android:layout_height="match_parent">
     android:textColor="#CD6600"
     android:textSize="30sp"
     android:textStyle="bold"
-    android:layout_marginTop="45dp"
+    android:layout_marginTop="30dp"
     android:layout_centerHorizontal="true"
     android:text="สมาชิกกลุ่ม"/>
 
-
+<ImageView
+    android:layout_above="@+id/table"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_marginBottom="15dp"
+    android:src="@drawable/member4"/>
 
 
 <TableLayout

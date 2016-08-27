@@ -23,7 +23,7 @@ tools:context=".Service.Camera">
     android:layout_below="@id/btn_capturePic"
     android:textSize="25sp"
     android:textStyle="bold"
-    android:text="ถ่ายรูป"
+    android:text="กดเพื่อถ่ายรูป"
     android:layout_centerHorizontal="true"
     />
 

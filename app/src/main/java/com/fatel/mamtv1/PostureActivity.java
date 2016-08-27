@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.fatel.mamtv1.Model.Posture;
 
 import java.util.ArrayList;
@@ -23,9 +24,9 @@ public class PostureActivity extends AppCompatActivity {
     TextView txtName;
     ImageView imgView;
     AnimationDrawable frameAnimation;
-    Button previous;
-    Button home;
-    Button next;
+    BootstrapButton previous;
+    BootstrapButton home;
+    BootstrapButton next;
     View pre;
     int exerciseImg;
     String exerciseName;
@@ -44,9 +45,9 @@ public class PostureActivity extends AppCompatActivity {
         txtDes=(TextView) findViewById(R.id.txt);
         txtName=(TextView) findViewById(R.id.imgname);
         imgView=(ImageView) findViewById(R.id.img);
-        home = (Button) findViewById(R.id.homebtn);
-        next = (Button) findViewById(R.id.nextbtn);
-        previous = (Button) findViewById(R.id.previousbtn);
+        home = (BootstrapButton) findViewById(R.id.homebtn);
+        next = (BootstrapButton) findViewById(R.id.nextbtn);
+        previous = (BootstrapButton) findViewById(R.id.previousbtn);
         context=getApplicationContext();
 
         final PostureCollection postureCollection = PostureCollection.getInstance(this);

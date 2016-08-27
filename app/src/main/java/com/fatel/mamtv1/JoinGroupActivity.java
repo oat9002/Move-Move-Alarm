@@ -48,7 +48,7 @@ public class JoinGroupActivity extends AppCompatActivity {
     public void joinGroup(View view) {
         BootstrapEditText groupCode = (BootstrapEditText) findViewById(R.id.edit_message);
 
-        if(groupCode.getText().toString().length() < 4) {
+        if(groupCode==null || groupCode.getText().toString().length() < 4) {
             makeToast("กรุณาใส่ให้ครบ 4 จำนวน");
             return;
         }

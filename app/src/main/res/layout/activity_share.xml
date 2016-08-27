@@ -24,12 +24,28 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_cancel"
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:text="ยกเลิก"
+            android:textColor="#FFF5F5"
+            android:shadowColor="#919191"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:singleLine="false"
+            app:bootstrapBrand="danger"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"
+            android:id="@+id/btn_cancel"
             android:onClick="linkHome"
-            android:background="@drawable/selectorcancel"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cardview_time_left"
+            />
+
 
         <Button
             android:layout_marginLeft="20dp"
