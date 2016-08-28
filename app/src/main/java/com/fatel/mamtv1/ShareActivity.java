@@ -43,10 +43,12 @@ public class ShareActivity extends AppCompatActivity {
 
 
     private ImageView imgPreview;
+    private ImageView loading;
     private Button postPicBtn;
     private Bitmap mainpic = null;
     private Bitmap pictureuser = null;
     private Bitmap pictureexercise = null;
+    private Bitmap picview = null;
     Uri Imguri = null;
     private static final String PERMISSION = "publish_actions";
     /**
@@ -130,7 +132,8 @@ public class ShareActivity extends AppCompatActivity {
         }
 
         imgPreview = (ImageView) findViewById(R.id.imgNxtPreview);
-        previewCapturedImage(Imguri);
+        loading = (ImageView)findViewById(R.id.loading);
+        //previewCapturedImage(Imguri);
         //Picture from Glide
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -158,7 +161,12 @@ public class ShareActivity extends AppCompatActivity {
                             asBitmap().
                             into(-1,-1).
                             get();
-
+                    picview = Glide.
+                            with(getApplicationContext()).
+                            load(Imguri.getPath()).
+                            asBitmap().
+                            into(-1,-1).
+                            get();
                 } catch (final ExecutionException e) {
                     Log.i("error", "bitmap");
                 } catch (final InterruptedException e) {
@@ -174,8 +182,14 @@ public class ShareActivity extends AppCompatActivity {
                     pictureexercise = Bitmap.createScaledBitmap(pictureexercise,220,289,true);
                     mainpic = combineImages(mainpic,pictureuser,pictureexercise);
                     postPicBtn.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "พร้อมส่งรูปภาพ", Toast.LENGTH_SHORT).show();
-                };
+                    Toast.makeText(getApplicationContext(), "พร้อมแชร์รูปภาพ", Toast.LENGTH_SHORT).show();
+                }
+                if(null != picview){
+                    picview = Bitmap.createScaledBitmap(picview,800,600,true);
+                    loading.setVisibility(View.GONE);
+                    imgPreview.setImageBitmap(picview);
+                    imgPreview.setVisibility(View.VISIBLE);
+                }
             }
         }.execute();
         //add for activity_share facebook
