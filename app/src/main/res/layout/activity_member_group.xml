@@ -7,18 +7,20 @@ android:layout_height="match_parent">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:textColor="#CD6600"
     android:textSize="30sp"
     android:textStyle="bold"
-    android:layout_marginTop="30dp"
+    android:layout_above="@+id/pic_mem"
     android:layout_centerHorizontal="true"
     android:text="สมาชิกกลุ่ม"/>
 
 <ImageView
+    android:id="@+id/pic_mem"
     android:layout_above="@+id/table"
     android:layout_width="match_parent"
     android:layout_height="110dp"
-    android:layout_marginBottom="15dp"
+    android:layout_marginBottom="10dp"
     android:src="@drawable/member4"/>
 
 
