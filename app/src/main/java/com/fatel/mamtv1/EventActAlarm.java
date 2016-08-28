@@ -74,7 +74,26 @@ public class EventActAlarm extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i1 = new Intent(EventActAlarm.this, MainActivity.class);
+        i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i1);
+        finish();
+        v.cancel();
+        if(UserManage.getInstance(EventActAlarm.this).getCurrentUser().getGroupId() == 1) {
+            m.reset();
+        }
+        updatecancel();
+    }
+    @Override
+    protected void onStop() {
+        v.cancel();
+        if(UserManage.getInstance(EventActAlarm.this).getCurrentUser().getGroupId() == 1) {
+            m.reset();
+        }
+        super.onStop();
+    }
     public void linkActivity(View view){
         //history
         Log.i("linkacti",""+UserManage.getInstance(this).getCurrentUser().getGroupId());
