@@ -77,7 +77,30 @@ public class ActAlarm extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i1 = new Intent(ActAlarm.this, MainActivity.class);
+        i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i1);
+        Intent i = new Intent(getBaseContext(), AlarmReceiver.class);
+        Bundle b = new Bundle();
+        b.putString("key", "first");
+        i.putExtras(b);
+        sendBroadcast(i);
+        v.cancel();
+        if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
+            m.reset();
+        }
+        updatecancel();
+    }
+    @Override
+    protected void onStop() {
+        v.cancel();
+        if(UserManage.getInstance(ActAlarm.this).getCurrentUser().getStatesw() == 1) {
+            m.reset();
+        }
+        super.onStop();
+    }
     public void linkActivity(View view){
         //history
         // update progress call volley

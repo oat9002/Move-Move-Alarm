@@ -165,6 +165,7 @@ public class Activity extends AppCompatActivity {
         }
         // TODO update progress
         updatecancel();
+
         History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
         history.subaccept(1);
         history.addcancel(1);
