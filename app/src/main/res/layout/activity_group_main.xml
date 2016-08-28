@@ -37,7 +37,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            android:stretchColumns="*" >
+            android:stretchColumns="*"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp">
 
 
             <!-- display this button in 3rd column via layout_column(zero based) -->
@@ -53,7 +55,7 @@
                     android:text="  รหัสกลุ่ม  "
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"/>
 
 
@@ -70,7 +72,7 @@
                         android:text="-"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textColor="#ffffff"/>
             </TableRow>
 
@@ -85,7 +87,7 @@
                     android:text="  ชื่อกลุ่ม  "
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"/>
 
 
@@ -104,7 +106,7 @@
                     android:gravity="center"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"/>
 
 
@@ -123,7 +125,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:text="  ผู้ตั้งกลุ่ม   "
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"/>
 
 
@@ -140,7 +142,7 @@
                     android:id="@+id/groupMain_adminName"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"
                     android:text="-"
                     />
@@ -161,7 +163,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:text="  คะแนน   "
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"/>
 
 
@@ -177,7 +179,7 @@
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"
                     android:text="0"
                     android:layout_column="2" />
@@ -197,7 +199,7 @@
                     android:text="  เวลากิจกรรม\n  พิเศษ"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#ffffff"/>
                 <LinearLayout
                     android:layout_width="1dp"
@@ -218,7 +220,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="30dp"
         android:id="@+id/mem"
-        android:layout_width="150dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="#ff8c00"
@@ -260,10 +262,9 @@
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:nestedScrollingEnabled="false"
         app:bootstrapBrand="primary"
         app:bootstrapText="สมาชิก"
@@ -272,16 +273,14 @@
         android:onClick="linkMember"
         android:id="@+id/button3"
         android:layout_alignTop="@+id/all"
-        android:layout_marginRight="22dp"
-        android:layout_marginEnd="22dp"
         android:layout_alignLeft="@+id/all"
         android:layout_marginLeft="50dp"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
     <com.beardedhen.androidbootstrap.BootstrapButton
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:text="ลบกลุ่ม"
         android:textColor="#FFF5F5"
