@@ -130,11 +130,30 @@ public class ShareActivity extends AppCompatActivity {
             //Imguri = Uri.parse(uri_Str);
             Imguri = getIntent().getParcelableExtra("uri");
         }
-
+        Toast.makeText(getApplicationContext(), "กำลังเตรียมรูปภาพสำหรับการแชร์", Toast.LENGTH_SHORT).show();
         imgPreview = (ImageView) findViewById(R.id.imgNxtPreview);
         loading = (ImageView)findViewById(R.id.loading);
         //previewCapturedImage(Imguri);
         //Picture from Glide
+        //add for activity_share facebook
+        postPicBtn = (Button) findViewById(R.id.btn_share);  //btn_postPic    btn_share
+        postPicBtn.setVisibility(View.GONE);
+        postPicBtn.setOnClickListener(new View.OnClickListener() {
+            //@override
+            public void onClick(View v) {
+                //showPickPictureDialog();
+                try {
+                    performPublish(PendingAction.POST_PICTURE);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(ShareActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -192,27 +211,6 @@ public class ShareActivity extends AppCompatActivity {
                 }
             }
         }.execute();
-        //add for activity_share facebook
-        postPicBtn = (Button) findViewById(R.id.btn_share);  //btn_postPic    btn_share
-        postPicBtn.setVisibility(View.GONE);
-        postPicBtn.setOnClickListener(new View.OnClickListener() {
-            //@override
-            public void onClick(View v) {
-                //showPickPictureDialog();
-                try {
-                    performPublish(PendingAction.POST_PICTURE);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(ShareActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
