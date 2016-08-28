@@ -4,55 +4,74 @@ android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizo
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:paddingBottom="@dimen/activity_vertical_margin"  tools:context=".EventActAlarm">
-
-
-<LinearLayout
-    android:id="@+id/LaIn"
-    android:orientation="horizontal"
-    android:layout_centerHorizontal="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="185dp"
-    >
-
+    <com.beardedhen.androidbootstrap.BootstrapLabel
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bootstrapBrand="warning"
+        app:bootstrapHeading="h1"
+        app:roundedCorners="true"
+        android:text="กิจกรรมพิเศษ!"
+        />
     <LinearLayout
         android:orientation="vertical"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
 
-        <Button
-            android:id="@+id/apt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:text = "ยอมรับ"
+            android:gravity="center"
+            android:textColor="#FFF5F5"
             android:textSize="21dp"
-            android:textColor="#000000"
-
-            android:background="@drawable/buttonshape2"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
+            android:layout_gravity="center"
+            android:shadowColor="#919191"
+            android:shadowDx="3"
+            android:shadowDy="3"
             android:shadowRadius="5"
+            android:layout_centerHorizontal="true"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:textAllCaps="false"
+            android:id="@+id/apt"
+            android:textStyle="bold"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"
             android:onClick="linkActivity"/>
-        <Button
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/can"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/apt"
-            android:text ="ปฏิเสธ"
-            android:textSize="21dp"
-            android:textColor="#000000"
-
-            android:background="@drawable/buttonshape2"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_below="@+id/buttonSet"
+            android:layout_centerHorizontal="true"
+            android:text="ปฏิเสธ"
+            android:textColor="#FFF5F5"
+            android:shadowColor="#919191"
+            android:shadowDx="3"
+            android:shadowDy="3"
             android:shadowRadius="5"
+            android:singleLine="false"
+            android:textStyle="bold"
+            android:textSize="21dp"
+            android:layout_marginTop="20dp"
+            app:bootstrapBrand="danger"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"
             android:onClick="linkHome"/>
+
     </LinearLayout>
-</LinearLayout>
-
-
 </RelativeLayout>

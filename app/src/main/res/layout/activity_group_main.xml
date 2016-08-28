@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             app:bootstrapBrand="warning"
             app:bootstrapHeading="h3"
-            app:roundedCorners="true"
             android:layout_centerHorizontal="true"
             android:text="รายละเอียดกลุ่ม" />
         <TableLayout
@@ -194,7 +193,7 @@
 
                 <TextView
                     android:id="@+id/Event"
-                    android:text="  เวลากิจกรรม\n  พิเศษ"
+                    android:text="  เวลากิจกรรม"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:textSize="20sp"
@@ -205,7 +204,15 @@
 
                     <View style="@style/Divider" />
                 </LinearLayout>
-
+                <TextView
+                    android:id="@+id/groupMain_event"
+                    android:text="-"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="20sp"
+                    android:textColor="#ffffff"
+                    />
 
             </TableRow>
 
@@ -304,16 +311,6 @@
         android:nestedScrollingEnabled="false"
         android:onClick="leaveGroup"/>
 
-    <TextView
-        android:id="@+id/groupMain_event"
-        android:text="-"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:layout_alignTop="@+id/button3"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_toEndOf="@+id/relativeLayout" />
+
 
 </RelativeLayout>

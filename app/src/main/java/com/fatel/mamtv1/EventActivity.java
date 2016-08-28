@@ -40,11 +40,13 @@ public class EventActivity extends AppCompatActivity {
     @BindView(R.id.rtime) TextView txtR;
     @BindView(R.id.atime) TextView txtA;
     @BindView(R.id.des) TextView txtDes;
+    @BindView(R.id.imgname) TextView txtName;
     @BindView(R.id.img) ImageView imgView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
     int exerciseImg;
+    String exerciseName;
     String exerciseDes;
     CountDownTimer time1;
     CountDownTimer time2;
@@ -67,9 +69,10 @@ public class EventActivity extends AppCompatActivity {
         context=getApplicationContext();
         img = activityHandle.getRandomPosture();
         exerciseImg=(img.get(count)).getImage();
+        exerciseName=(img.get(count)).getName();
         exerciseDes=(img.get(count)).getDescription();
         txtDes.setText(exerciseDes);
-
+        txtName.setText(exerciseName);
         imgView.setBackgroundResource(exerciseImg);
 
         // Get the background, which has been compiled to an AnimationDrawable object.
@@ -78,10 +81,10 @@ public class EventActivity extends AppCompatActivity {
         // Start the animation (looped playback by default).
         frameAnimation.start();
 
-        time1 =new CountDownTimer(15000, 1000) {
+        time1 =new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtR.setText("Remain Time   " + String.format(FORMAT,
+                txtR.setText("เวลาท่าบริหาร   " + String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
@@ -93,11 +96,12 @@ public class EventActivity extends AppCompatActivity {
                 txtR.setText("Remain Time done!");
                 frameAnimation.stop();
                 count++;
-                if(count<4) {
-
+                if(count<img.size()) {
+                    exerciseName=(img.get(count)).getName();
                     exerciseImg=(img.get(count)).getImage();
                     exerciseDes=(img.get(count)).getDescription();
                     txtDes.setText(exerciseDes);
+                    txtName.setText(exerciseName);
                     imgView.setBackgroundResource(exerciseImg);
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
@@ -115,7 +119,7 @@ public class EventActivity extends AppCompatActivity {
         time2 =new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtA.setText("Activity Time   "+String.format(FORMAT,
+                txtA.setText("เวลากิจกรรม   "+String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
