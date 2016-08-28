@@ -6,284 +6,285 @@
     android:paddingTop="6dp"
     android:paddingBottom="6dp"
     tools:context="com.fatel.mamtv1.GroupMainActivity">
-<android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="7dp"
-    card_view:cardElevation="5dp">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <RelativeLayout
-        android:padding="10dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
-        <com.beardedhen.androidbootstrap.BootstrapLabel
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/label"
+        android:layout_margin="7dp"
+        card_view:cardElevation="5dp">
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:bootstrapBrand="warning"
-            app:bootstrapHeading="h3"
-            android:layout_centerHorizontal="true"
-            android:text="รายละเอียดกลุ่ม" />
-        <TableLayout
-            android:id="@+id/table"
-            android:layout_below="@+id/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:stretchColumns="*"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-
-
-            <!-- display this button in 3rd column via layout_column(zero based) -->
-
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:background="#FF8C00" >
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:text="  รหัสกลุ่ม  "
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"/>
-
-
-                <LinearLayout
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayout">
+                <com.beardedhen.androidbootstrap.BootstrapLabel
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:bootstrapBrand="warning"
+                    app:bootstrapHeading="h3"
+                    android:layout_centerHorizontal="true"
+                    android:text="รายละเอียดกลุ่ม" />
+                <TableLayout
+                    android:id="@+id/table"
+                    android:layout_below="@+id/label"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:stretchColumns="3" >
 
-                    <View style="@style/Divider" />
-                </LinearLayout>
-                    <TextView
-                        android:gravity="center"
-                        android:id="@+id/groupMain_groupCode"
-                        android:text="-"
+
+                    <!-- display this button in 3rd column via layout_column(zero based) -->
+
+                    <TableRow
+                        android:id="@+id/tableRow2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="#FF8C00" >
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:text="  รหัสกลุ่ม  "
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:gravity="center"
+                            android:id="@+id/groupMain_groupCode"
+                            android:text="-"
+                            android:layout_width="220dp"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tableRow3"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
-                        android:textSize="18sp"
-                        android:textColor="#ffffff"/>
-            </TableRow>
+                        android:background="#FFA500" >
 
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:background="#FFA500" >
-
-                <TextView
-                    android:id="@+id/textView31"
-                    android:text="  ชื่อกลุ่ม  "
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"/>
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:text="  ชื่อกลุ่ม  "
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
 
 
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    >
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            >
 
-                    <View style="@style/Divider" />
-                </LinearLayout>
+                            <View style="@style/Divider" />
+                        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/groupMain_groupName"
-                    android:text="-"
-                    android:gravity="center"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"/>
+                        <TextView
+                            android:id="@+id/groupMain_groupName"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_width="220dp"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
 
 
 
-            </TableRow>
+                    </TableRow>
 
 
-            <TableRow
-                android:id="@+id/tableRow4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FF8C00" >
+                    <TableRow
+                        android:id="@+id/tableRow4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FF8C00" >
 
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:text="  ผู้ตั้งกลุ่ม   "
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"/>
-
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
-
-                <TextView
-                    android:gravity="center"
-                    android:id="@+id/groupMain_adminName"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"
-                    android:text="-"
-                    />
+                        <TextView
+                            android:id="@+id/textView41"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="  ผู้ตั้งกลุ่ม   "
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
 
 
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
-            </TableRow>
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:gravity="center"
+                            android:id="@+id/groupMain_adminName"
+                            android:layout_width="220dp"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"
+                            android:text="-"
+                            />
 
 
 
-            <TableRow
-                android:id="@+id/tableRow6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFA500" >
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:text="  คะแนน   "
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"/>
-
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent" >
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/groupMain_groupScore"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"
-                    android:text="0"
-                    android:layout_column="2" />
-
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FF8C00" >
-
-
-                <TextView
-                    android:id="@+id/Event"
-                    android:text="  เวลากิจกรรม"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff"/>
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent" >
-
-                    <View style="@style/Divider" />
-                </LinearLayout>
-                <TextView
-                    android:id="@+id/groupMain_event"
-                    android:text="-"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:textSize="20sp"
-                    android:textColor="#ffffff"
-                    />
-
-            </TableRow>
-
-
-        </TableLayout>
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/mem"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#ff8c00"
-        android:text="สมาชิก : "
-        android:layout_below="@id/relativeLayout"/>
+                    </TableRow>
 
 
 
-    <TextView
-        android:layout_below="@id/relativeLayout"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@id/mem"
-        android:id="@+id/groupMain_amountMember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#ff8c00"
-        android:text="0"/>
-    <TextView
-        android:layout_marginTop="30dp"
-        android:id="@+id/slash"
-        android:layout_toRightOf="@id/groupMain_amountMember"
-        android:layout_below="@id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#ff8c00"
-        android:text=" / "/>
-    <TextView
-        android:layout_marginTop="30dp"
-        android:id="@+id/all"
-        android:layout_toRightOf="@id/slash"
-        android:layout_below="@id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#ff8c00"
-        android:text="10"/>
+                    <TableRow
+                        android:id="@+id/tableRow6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FFA500" >
 
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:nestedScrollingEnabled="false"
-        app:bootstrapBrand="primary"
-        app:bootstrapText="สมาชิก"
-        app:buttonMode="regular"
-        app:roundedCorners="true"
-        android:onClick="linkMember"
-        android:id="@+id/button3"
-        android:layout_alignTop="@+id/all"
-        android:layout_alignLeft="@+id/all"
-        android:layout_marginLeft="50dp"/>
-    </RelativeLayout>
-</android.support.v7.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="  คะแนน   "
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
+
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/groupMain_groupScore"
+                            android:gravity="center"
+                            android:layout_width="220dp"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"
+                            android:text="0"
+                            android:layout_column="2" />
+
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tableRow7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FF8C00" >
+
+
+                        <TextView
+                            android:id="@+id/Event"
+                            android:text="  เวลากิจกรรม  "
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"/>
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent" >
+
+                            <View style="@style/Divider" />
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/groupMain_event"
+                            android:text="-"
+                            android:gravity="center"
+                            android:layout_width="220dp"
+                            android:layout_height="50dp"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"
+                            />
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/mem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#ff8c00"
+                android:text="สมาชิก :  "
+                android:layout_below="@id/relativeLayout"/>
+
+
+
+            <TextView
+                android:layout_below="@id/relativeLayout"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@id/mem"
+                android:id="@+id/groupMain_amountMember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#ff8c00"
+                android:text="0"/>
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/slash"
+                android:layout_toRightOf="@id/groupMain_amountMember"
+                android:layout_below="@id/relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#ff8c00"
+                android:text=" / "/>
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/all"
+                android:layout_toRightOf="@id/slash"
+                android:layout_below="@id/relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#ff8c00"
+                android:text="10"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:nestedScrollingEnabled="false"
+                app:bootstrapBrand="primary"
+                app:bootstrapText="สมาชิก"
+                app:buttonMode="regular"
+                app:roundedCorners="true"
+                android:onClick="linkMember"
+                android:id="@+id/button3"
+                android:layout_alignTop="@+id/all"
+                android:layout_marginRight="22dp"
+                android:layout_marginEnd="22dp"
+                android:layout_alignLeft="@+id/all"
+                android:layout_marginLeft="50dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
     <com.beardedhen.androidbootstrap.BootstrapButton
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="200dp"
