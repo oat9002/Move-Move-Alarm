@@ -114,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
 
         //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getUserId(), this);
         if (history == null) {
-            history = new History(UserManage.getInstance(this).getCurrentUser().getId());
+            history = new History(UserManage.getInstance(this).getCurrentUser().getUserId());
             history.save(this);
             Cache.getInstance().putData("userHistory", history);
         } else {
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                     LoginManager.getInstance().logOut();
                 }
 
-                UserManage.getInstance(this).logoutUser(this);
+                UserManage.getInstance(this).logoutUser();
 
 
                 mAlarmHelper.deleteSetAlarm("1");

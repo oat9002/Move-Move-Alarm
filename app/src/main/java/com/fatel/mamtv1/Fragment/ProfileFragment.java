@@ -141,7 +141,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                                 if (!isEmpty(waist)) {
                                     UserManage.getInstance(getActivity()).getCurrentUser().setWaistline(Integer.valueOf(waist.getText().toString()));
                                 }
-                                UserManage.getInstance(getActivity()).getCurrentUser().save(getActivity());
+                                UserManage.getInstance(getActivity()).getCurrentUser().save();
                                 UserManage.getInstance(getActivity()).updateUser();
                                 getFragmentManager().popBackStack();
                                 Fragment fragment = null;

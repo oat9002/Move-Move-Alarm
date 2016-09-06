@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -24,6 +25,7 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
+import com.fatel.mamtv1.Helper.UserHelper;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.User;
@@ -60,8 +62,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         instance = this;
         super.onCreate(savedInstanceState);
-        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin(this)+"");
-        if(UserManage.getInstance(this).checkCurrentLogin(this))
+        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin()+"");
+        Toast.makeText(this, "user login"+UserManage.getInstance(this).checkCurrentLogin(), Toast.LENGTH_LONG).show();
+        if(UserManage.getInstance(this).checkCurrentLogin())
         {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -148,6 +151,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
         Profile profile = Profile.getCurrentProfile();
+        UserHelper userHelper = new UserHelper();
 
         Cache.getInstance().putData("loginFBContext", this);
         if (loggedIn && (profile != null)) {
@@ -159,7 +163,8 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     Log.i("response", response.raw().toString());
                     user.setLogin(1);
-                    user.save(getApplicationContext());
+                    UserHelper.addUser(user);
+                    Toast.makeText(getApplicationContext(), "user login "+user.getId()+" "+UserHelper.findUser(user.getUserId()), Toast.LENGTH_LONG).show();
                     UserManage.getInstance(getApplicationContext()).setCurrentUser(user);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

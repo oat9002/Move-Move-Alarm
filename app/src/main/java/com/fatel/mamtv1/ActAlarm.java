@@ -106,7 +106,7 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getUserId(), this);
         history.addaccept(1);
         history.save(this);
         Intent intent = new Intent(this, Activity.class);
@@ -123,7 +123,7 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(),this);
+        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getUserId(),this);
         history.addcancel(1);
         history.save(this);
         Intent i1 = new Intent(ActAlarm.this, MainActivity.class);

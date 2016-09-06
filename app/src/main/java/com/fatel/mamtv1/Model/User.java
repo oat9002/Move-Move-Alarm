@@ -1,11 +1,13 @@
 package com.fatel.mamtv1.Model;
 
-import android.content.Context;
-import android.provider.BaseColumns;
-import android.util.Log;
+/**
+ * Created by Forunh on 02-Sep-16.
+ */
 
-import com.fatel.mamtv1.Service.Converter;
-import com.fatel.mamtv1.Helper.UserHelper;
+
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,72 +18,66 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Created by Monthon on 3/11/2558.
- */
 @Getter
 @Setter
-public class User implements Serializable{
+@Table(name = "Book")
+public class User extends Model implements Serializable {
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    @Expose
-    private int id;
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    private int internalId;
-
+//    @Getter(AccessLevel.NONE)
+//    @Setter(AccessLevel.NONE)
+    @SerializedName("id")
+    @Column(name = "userId")
+    private int userId;
+//    @Getter(AccessLevel.NONE)
+//    @Setter(AccessLevel.NONE)
+//    private int internalId;
+    @Column(name = "birthdate")
     @Expose private String birthdate;
+    @Column(name = "age")
     @Expose private int age;
+    @Column(name = "score")
     @Expose private int score;
+    @Column(name = "height")
     @Expose private int height;
+    @Column(name = "weight")
     @Expose private int weight;
+    @Column(name = "waistline")
     @Expose private int waistline;
+    @Column(name = "bmi")
     @Expose private Double bmi;
+    @Column(name = "email")
     @Expose private String email;
+    @Column(name = "facebookId")
     @SerializedName("facebook_id") public String facebookId;
+    @Column(name = "facebookFirstName")
     @Expose private String facebookFirstName;
+    @Column(name = "facebookLastName")
     @Expose private String facebookLastName;
+    @Column(name = "profileImage")
     @Expose private int profileImage;
+    @Column(name = "groupId")
     @SerializedName("group_id") private int groupId;
+    @Column(name = "dailyProgress")
     @SerializedName("daily_progress") private UserProgress dailyProgress;
+    @Column(name = "weeklyProgress")
     @SerializedName("weekly_progress") private UserProgress weeklyProgress;
-
+    @Column(name = "login")
     private int login;
+    @Column(name = "statesw")
     private int statesw;
-    public static final int DATABASE_VERSION = 1;
-    public static final String TABLE = "user";
-
-    public class Column {
-        public static final String ID = BaseColumns._ID;
-        public static final String IDUSER = "iduser";
-        public static final String BIRTHDAY = "birthday";
-        public static final String AGE = "age";
-        public static final String SCORE = "score";
-        public static final String HEIGHT = "height";
-        public static final String WEIGHT = "weight";
-        public static final String WAISTLINE = "waistline";
-        public static final String BMI = "bmi";
-        public static final String EMAIL = "email";
-        public static final String FACEBOOKID = "facebookid";
-        public static final String FACEBOOKFIRSTNAME = "facebookfirstname";
-        public static final String FACEBOOKLASTNAME = "facebooklastname";
-        public static final String PROFILEIMAGE = "profileimage";
-        public static final String LOGIN = "login";
-        public static final String IDGROUP = "idgroup";
-        public static final String STATESW = "statesw";
-    }
 
     public User() {
+        super();
         dailyProgress = new UserProgress();
         weeklyProgress = new UserProgress();
     }
 
-    public User(int userId, String facebookId, String facebookFirstName) {
-        this.internalId = -1;
+    public User(String facebookId, String facebookFirstName) {
+        super();
+//        this.internalId = -1;
         this.score = 0;
         this.login = 0;
-        this.id = userId;
+        this.userId = -1;
         this.facebookId = facebookId;
         this.facebookFirstName = facebookFirstName;
         this.groupId = 0;
@@ -90,11 +86,11 @@ public class User implements Serializable{
         weeklyProgress = new UserProgress();
     }
 
-    public User(int id, int idUser, String birthdate, int age, int score
+    public User(int id, String birthdate, int age, int score
             , int height, int weight, int waistline, double bmi, String email, String facebookId, String facebookFirstName,
                 String facebookLastName, int profileImage, int login, int groupId, int statesw) {
-        this.internalId = id;
-        this.id = idUser;
+        super();
+        this.userId = id;
         this.birthdate = birthdate;
         this.age = age;
         this.score = score;
@@ -112,31 +108,6 @@ public class User implements Serializable{
         this.statesw = statesw;
         dailyProgress = new UserProgress();
         weeklyProgress = new UserProgress();
-    }
-
-    public void save(Context context) {
-
-        UserHelper userHelper = new UserHelper(context);
-        if (this.internalId == -1) {
-            this.internalId = userHelper.addUser(this);
-            Log.i("User", "funh savenew :" + internalId);
-        } else {
-            userHelper.updateUser(this);
-            Log.i("User", "funh saveold :" + internalId);
-        }
-    }
-
-    public static User find(int id, Context context) {
-        UserHelper userHelper = new UserHelper(context);
-        if (userHelper.getUser(id) == null) {
-            return null;
-        } else
-            return userHelper.getUser(id);
-    }
-
-    public static User checkLogin(Context context) {
-        UserHelper userHelper = new UserHelper(context);
-        return userHelper.checkLoginUser();
     }
 
     public HashMap<String, Object> getGeneralValues() {
@@ -157,20 +128,9 @@ public class User implements Serializable{
 
         return userData;
     }
-
     public void addScore(int score){
         this.score+=score;
+        this.save();
     }
 
-    public int getInternalId() {
-        return internalId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

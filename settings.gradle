@@ -1,2 +1,2 @@
-include ':app:libraries:CircularProgressBar'
+include ':app:libraries:CircularProgressBar', ':activeandroid-3.0'
 include ':app:libraries:volley'

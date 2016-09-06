@@ -74,7 +74,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                     if(response.body().isSuccess()) {
                         user.setGroupId(Converter.toInt(response.body().getData().get("id")));
                         group.setId(Converter.toInt(response.body().getData().get("id")));
-                        user.save(CreateGroupActivity.this);
+                        user.save();
                         Cache.getInstance().putData("groupData", group);
                         Intent intent = new Intent(CreateGroupActivity.this, GroupMainActivity.class);
                         intent.putExtra("groupData", group);

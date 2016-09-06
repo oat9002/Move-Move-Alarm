@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 
+import com.fatel.mamtv1.Helper.UserHelper;
 import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
@@ -31,6 +32,7 @@ public class UserManage {
     @Setter
     private static User currentUser = null;
     private static UserManage instance = null;
+    private UserHelper userHelper = new UserHelper();
 
     private UserManage() {
 
@@ -39,25 +41,25 @@ public class UserManage {
     public static UserManage getInstance(Context context) {
         if (instance == null) {
             instance = new UserManage();
-            User user = User.checkLogin(context);
+            User user = UserHelper.checkLoginUser();
             if (user != null)
                 currentUser = user;
         }
         return instance;
     }
 
-    public void loginFBUser(String facebookId, String facebookFirstName, final Context context) {
+//    public void loginFBUser(String facebookId, String facebookFirstName, final Context context) {
+//
+//    }
 
-    }
-
-    public void logoutUser(Context context) {
+    public void logoutUser() {
         currentUser.setLogin(0);
-        currentUser.save(context);
+        currentUser.save();
         currentUser = null;
     }
 
-    public boolean checkCurrentLogin(Context context) {
-        User user = User.checkLogin(context);
+    public boolean checkCurrentLogin() {
+        User user = UserHelper.checkLoginUser();
         if (user != null)
             return true;
 
