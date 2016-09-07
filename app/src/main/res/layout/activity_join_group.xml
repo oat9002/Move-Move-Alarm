@@ -58,7 +58,6 @@
         android:layout_centerHorizontal="true"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:background="@drawable/creatbtn"
         android:text="เข้าร่วมกลุ่ม"
         app:bootstrapBrand="primary"
         app:bootstrapSize="lg"

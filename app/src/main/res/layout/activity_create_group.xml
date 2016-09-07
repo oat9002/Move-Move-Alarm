@@ -58,7 +58,6 @@
             android:id="@+id/joinsbtn"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:background="@drawable/creatbtn"
             android:text="สร้างกลุ่ม"
             app:bootstrapBrand="primary"
             app:bootstrapSize="lg"
