@@ -1,3 +1,7 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.Fragment.AboutFragment"
+    android:padding="5dp">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -6,77 +10,195 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Fragment.AboutFragment">
 
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="180dp"
-        android:src="@drawable/logo_no"
-
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imageView" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:text="Move Alarm"
-        android:textSize="32dp"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textIsSelectable="true"
-        android:textStyle="bold" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout2">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/about" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/version"
-            android:text="Version : "
-            android:textSize="20dp"
-            android:layout_marginTop="5dp" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="เกี่ยวกับเรา"
+            android:id="@+id/about1"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/number"
-            android:text="1 "
-            android:textSize="20dp"
-            android:layout_alignTop="@+id/version"
-            android:layout_toRightOf="@+id/version"
-            android:layout_marginLeft="20dp" />
-    </RelativeLayout>
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Move Alarm เป็นแอพพลิเคชั่นบนอุปกรณ์สมาร์ทโฟนหรือแท็บเล็ต เพื่อช่วยในการสร้างเสริมและเฝ้าระวังสุขภาพของประชากรกลุ่มวัยทำงาน โดยเน้นให้มีองค์ความรู้ในการดูแลสุขภาพการประเมินสถานะสุขภาพ รวมทั้งเฝ้าระวังสุขภาพของตนเอง เช่น การยืดเหยียดกล้ามเนื้อ การรับประทานอาหารตามหลักโภชนาการ เป็นต้น มีคำแนะนำในแต่ละเรื่องตามข้อมูลที่ผู้ใช้ได้มีการป้อนเข้ามาในแอพพลิเคชั่น"
+            android:id="@+id/about2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true" />
 
-    <TextView
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/thank"
+        android:layout_below="@+id/about"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="ขอขอบคุณ"
+            android:id="@+id/thanks1"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     เจ้าหน้าที่ของกรมอนามัย กระทรวงสาธารณสุข ที่วิเคราะห์ ออกแบบ และรวบรวมองค์ความรู้ด้านสุขภาพวัยทำงานเพื่อนำมาใช้ในระบบ สถาบันเชนจ์ฟิวชั่นที่เป็นที่ปรึกษาโครงการ และคณาจารย์และนักศึกษาสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบังที่ร่วมมือในการพัฒนาโปรแกรม รวมทั้งสำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพที่สนับสนุนงบประมาณ"
+            android:id="@+id/thanks2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/by"
+        android:layout_below="@+id/thank"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="พัฒนาโดย"
+            android:id="@+id/by1"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="กรมอนามัย กระทรวงสาธารณสุข"
+            android:id="@+id/by2"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง"
+            android:id="@+id/by3"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="สถาบันเชนจ์ฟิวชั่น"
+            android:id="@+id/by4"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/support"
+        android:layout_below="@+id/by"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="สนับสนุนทุนในการพัฒนาโดย"
+            android:id="@+id/support1"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ"
+            android:id="@+id/support2"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/about2"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="สนับสนุนโดย"
-        android:textSize="24dp"
-        android:id="@+id/txt"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="5dp" />
-
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:id="@+id/doh"
-        android:src="@drawable/doh"
-        android:layout_alignParentBottom="false"
+        android:id="@+id/pic"
+        android:layout_below="@+id/support"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/txt"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/doh"
+            android:src="@drawable/doh"
+            android:layout_below="@+id/support"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="120dp"
+            android:id="@+id/sss"
+            android:src="@drawable/sss"
+            android:layout_below="@+id/support"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pic2"
+        android:layout_below="@+id/pic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/kmitl"
+            android:src="@drawable/kmitl"
+            android:layout_below="@+id/support"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            android:id="@+id/changefusion"
+            android:src="@drawable/changefusion"
+            android:layout_below="@+id/support"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
-
+</ScrollView>
