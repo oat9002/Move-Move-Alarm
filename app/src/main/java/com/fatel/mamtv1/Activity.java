@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.Posture;
@@ -43,6 +44,7 @@ public class Activity extends AppCompatActivity {
     @BindView(R.id.des) TextView txtDes;
     @BindView(R.id.imgname) TextView txtName;
     @BindView(R.id.img) ImageView imgView;
+    @BindView(R.id.vdo) VideoView vdoView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;

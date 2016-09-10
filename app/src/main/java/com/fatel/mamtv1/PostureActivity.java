@@ -3,6 +3,7 @@ package com.fatel.mamtv1;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.fatel.mamtv1.Model.Posture;
@@ -23,6 +26,7 @@ public class PostureActivity extends AppCompatActivity {
     TextView txtDes;
     TextView txtName;
     ImageView imgView;
+    VideoView vdoView;
     AnimationDrawable frameAnimation;
     BootstrapButton previous;
     BootstrapButton home;
@@ -45,19 +49,45 @@ public class PostureActivity extends AppCompatActivity {
         txtDes=(TextView) findViewById(R.id.txt);
         txtName=(TextView) findViewById(R.id.imgname);
         imgView=(ImageView) findViewById(R.id.img);
+        vdoView = (VideoView) findViewById(R.id.vdo);
         home = (BootstrapButton) findViewById(R.id.homebtn);
         next = (BootstrapButton) findViewById(R.id.nextbtn);
         previous = (BootstrapButton) findViewById(R.id.previousbtn);
         context=getApplicationContext();
 
         final PostureCollection postureCollection = PostureCollection.getInstance(this);
+        vdoView.stopPlayback();
         postureMode = postureCollection.getPostureMode(mode, context);
         exerciseImg = (postureMode.get(imgId)).getImage();
         exerciseName = (postureMode.get(imgId)).getName();
         exerciseDes = (postureMode.get(imgId)).getDescription();
         txtDes.setText(exerciseDes);
         txtName.setText(exerciseName);
-        imgView.setBackgroundResource(exerciseImg);
+
+        if(mode==1&&imgId==1){
+            vdoView.setVisibility(View.VISIBLE);
+            imgView.setVisibility(View.INVISIBLE);
+            vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_2));
+            vdoView.setMediaController(new MediaController(getApplicationContext()));
+            vdoView.requestFocus();
+            vdoView.start();
+        }
+        else if(mode==1&&imgId==2){
+            vdoView.setVisibility(View.VISIBLE);
+            imgView.setVisibility(View.INVISIBLE);
+            vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_3));
+            vdoView.setMediaController(new MediaController(getApplicationContext()));
+            vdoView.requestFocus();
+            vdoView.start();
+        }
+        else{
+
+            vdoView.setBackgroundResource(0);
+            vdoView.setVisibility(View.INVISIBLE);
+            imgView.setVisibility(View.VISIBLE);
+            imgView.setBackgroundResource(exerciseImg);
+
+        }
         // Get the background, which has been compiled to an AnimationDrawable object.
         frameAnimation = (AnimationDrawable) imgView.getBackground();
         // Start the animation (looped playback by default).
@@ -74,12 +104,36 @@ public class PostureActivity extends AppCompatActivity {
                     if(imgId>0)
                         imgId--;
                     checkVisible();
+                    vdoView.stopPlayback();
                     exerciseImg = (postureMode.get(imgId)).getImage();
                     exerciseName = (postureMode.get(imgId)).getName();
                     exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
                     txtName.setText(exerciseName);
-                    imgView.setBackgroundResource(exerciseImg);
+
+                    if(mode==1&&imgId==1){
+                        vdoView.setVisibility(View.VISIBLE);
+                        imgView.setVisibility(View.INVISIBLE);
+                        vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_2));
+                        vdoView.setMediaController(new MediaController(getApplicationContext()));
+                        vdoView.requestFocus();
+                        vdoView.start();
+                    }
+                    else if(mode==1&&imgId==2){
+                        vdoView.setVisibility(View.VISIBLE);
+                        imgView.setVisibility(View.INVISIBLE);
+                        vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_3));
+                        vdoView.setMediaController(new MediaController(getApplicationContext()));
+                        vdoView.requestFocus();
+                        vdoView.start();
+                    }
+                    else{
+                        vdoView.setBackgroundResource(0);
+                        vdoView.setVisibility(View.INVISIBLE);
+                        imgView.setVisibility(View.VISIBLE);
+                        imgView.setBackgroundResource(exerciseImg);
+
+                    }
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
                     // Start the animation (looped playback by default).
@@ -98,12 +152,35 @@ public class PostureActivity extends AppCompatActivity {
                     if(imgId < postureMode.size()-1)
                         imgId++;
                     checkVisible();
+                    vdoView.stopPlayback();
                     exerciseImg = (postureMode.get(imgId)).getImage();
                     exerciseName = (postureMode.get(imgId)).getName();
                     exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
                     txtName.setText(exerciseName);
-                    imgView.setBackgroundResource(exerciseImg);
+                    if(mode==1&&imgId==1){
+                        vdoView.setVisibility(View.VISIBLE);
+                        imgView.setVisibility(View.INVISIBLE);
+                        vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_2));
+                        vdoView.setMediaController(new MediaController(getApplicationContext()));
+                        vdoView.requestFocus();
+                        vdoView.start();
+                    }
+                    else if(mode==1&&imgId==2){
+                        vdoView.setVisibility(View.VISIBLE);
+                        imgView.setVisibility(View.INVISIBLE);
+                        vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_3));
+                        vdoView.setMediaController(new MediaController(getApplicationContext()));
+                        vdoView.requestFocus();
+                        vdoView.start();
+                    }
+                    else{
+                        vdoView.setBackgroundResource(0);
+                        vdoView.setVisibility(View.INVISIBLE);
+                        imgView.setVisibility(View.VISIBLE);
+                        imgView.setBackgroundResource(exerciseImg);
+
+                    }
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
                     // Start the animation (looped playback by default).
