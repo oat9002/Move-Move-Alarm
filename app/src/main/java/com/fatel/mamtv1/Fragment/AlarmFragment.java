@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -583,5 +584,11 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
                 .setNegativeButton("ยกเลิก", dialogClickListener).show();
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar mActionBar = ((MainActivity) getActivity()).getsupportactionbar();
+        if(mActionBar !=null)
+            mActionBar .setTitle("ตั้งค่าการเตือน");
+    }
 }

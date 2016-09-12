@@ -3,6 +3,7 @@ package com.fatel.mamtv1.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 import com.beardedhen.androidbootstrap.BootstrapThumbnail;
 import com.bumptech.glide.Glide;
+import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
 import com.fatel.mamtv1.Model.Alarm;
@@ -95,5 +97,13 @@ public class MainFragment extends android.support.v4.app.Fragment {
             intervalstop.setText("");
             freq.setText("ไม่ได้ตั้งค่า");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar mActionBar = ((MainActivity) getActivity()).getsupportactionbar();
+        if(mActionBar !=null)
+            mActionBar .setTitle("หน้าหลัก");
     }
 }
