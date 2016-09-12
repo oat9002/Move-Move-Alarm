@@ -6,8 +6,11 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
@@ -29,6 +32,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 import com.beardedhen.androidbootstrap.BootstrapThumbnail;
 import com.bumptech.glide.Glide;
+import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
@@ -243,4 +247,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         return a;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar mActionBar = ((MainActivity) getActivity()).getsupportactionbar();
+        if(mActionBar !=null)
+            mActionBar .setTitle("ประวัติส่วนตัว");
+    }
 }

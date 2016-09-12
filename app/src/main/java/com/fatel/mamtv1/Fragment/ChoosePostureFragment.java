@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.fatel.mamtv1.Adapter.PostureTypeAdapter;
+import com.fatel.mamtv1.MainActivity;
 import com.fatel.mamtv1.Model.PostureType;
 import com.fatel.mamtv1.PostureActivity;
 import com.fatel.mamtv1.R;
@@ -67,5 +69,11 @@ public class ChoosePostureFragment extends android.support.v4.app.Fragment  {
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar mActionBar = ((MainActivity) getActivity()).getsupportactionbar();
+        if(mActionBar !=null)
+            mActionBar .setTitle("หมวดท่าบริหาร");
+    }
 }

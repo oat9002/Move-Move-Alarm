@@ -5,6 +5,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 tx.replace(R.id.container, fragment).commit();
 
                 // Highlight the selected item, update the title, and close the drawer
-                setTitle("Profile");
+                //setTitle("Profile");
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -309,5 +310,10 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
 
+    }
+
+    public ActionBar getsupportactionbar() {
+        ActionBar mActionBar = getSupportActionBar();
+        return mActionBar;
     }
 }
