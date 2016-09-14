@@ -1,7 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent" tools:context="com.fatel.mamtv1.Fragment.AlarmFragment">
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
+    android:layout_height="wrap_content" tools:context="com.fatel.mamtv1.Fragment.AlarmFragment">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:layout_below="@+id/agree_detail"
             android:layout_centerHorizontal="true">
 
@@ -53,9 +52,8 @@
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:textAllCaps="false"
-                android:id="@+id/buttonSet"
+                android:id="@+id/agree"
                 android:textStyle="bold"
-                android:layout_below="@id/mode_blk"
                 app:bootstrapBrand="success"
                 app:bootstrapSize="lg"
                 app:buttonMode="regular"
@@ -64,11 +62,10 @@
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/reset"
+                android:id="@+id/cancel"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_below="@+id/buttonSet"
                 android:layout_centerHorizontal="true"
                 android:text="ยกเลิก"
                 android:textColor="#FFF5F5"
@@ -86,5 +83,6 @@
                 app:roundedCorners="true"
                 android:layout_marginLeft="30dp" />
         </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>
