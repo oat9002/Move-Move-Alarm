@@ -148,7 +148,7 @@ public class ActAlarm extends AppCompatActivity {
             user.getDailyProgress().setDeclination(cancel);
             user.getDailyProgress().setTotalActivity(total);
             int cancelweek = user.getWeeklyProgress().getDeclination()+1;
-            int totalweek = user.getWeeklyProgress().getDeclination()+1;
+            int totalweek = user.getWeeklyProgress().getTotalActivity()+1;
             user.getWeeklyProgress().setDeclination(cancelweek);
             user.getWeeklyProgress().setTotalActivity(totalweek);
             UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {

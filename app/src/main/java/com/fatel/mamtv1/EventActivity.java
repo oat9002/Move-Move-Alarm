@@ -195,7 +195,7 @@ public class EventActivity extends AppCompatActivity {
         Group groupuser = (Group) Cache.getInstance().getData("groupData");
         if(groupuser!=null){
             int cancelweek = groupuser.getProgress().getDeclination()+1;
-            int totalweek = groupuser.getProgress().getDeclination()+1;
+            int totalweek = groupuser.getProgress().getTotalActivity()+1;
             groupuser.getProgress().setDeclination(cancelweek);
             groupuser.getProgress().setTotalActivity(totalweek);
             GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
