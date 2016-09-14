@@ -77,9 +77,11 @@ public class CreateGroupActivity extends AppCompatActivity {
                         user.save(CreateGroupActivity.this);
                         Cache.getInstance().putData("groupData", group);
                         Intent intent = new Intent(CreateGroupActivity.this, GroupMainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("groupData", group);
                         startActivity(intent);
                         finish();
+
                     } else {
                         makeToast("เกิดปัญหาการเชื่อมต่อกับเซิร์ฟเวอร์");
                     }

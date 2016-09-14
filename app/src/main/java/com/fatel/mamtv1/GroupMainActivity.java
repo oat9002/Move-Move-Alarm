@@ -122,6 +122,7 @@ public class GroupMainActivity extends AppCompatActivity {
                     Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
                     Log.i("response", response.raw().toString());
+                    Snackbar.make(exitGroup, "ลบกลุ่มสำเร็จ", Snackbar.LENGTH_SHORT).show();
 
                 }
 
@@ -144,6 +145,7 @@ public class GroupMainActivity extends AppCompatActivity {
                     Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
                     Log.i("response", response.raw().toString());
+                    Snackbar.make(exitGroup, "ออกจากกลุ่มสำเร็จ", Snackbar.LENGTH_SHORT).show();
 
                 }
 
