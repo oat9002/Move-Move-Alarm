@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                     user.setLogin(1);
                     user.save(getApplicationContext());
                     UserManage.getInstance(getApplicationContext()).setCurrentUser(user);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), AgreementActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     getApplicationContext().startActivity(intent);
                     GroupServiceImp.getInstance().findByUser(user, new Callback<Group>() {
