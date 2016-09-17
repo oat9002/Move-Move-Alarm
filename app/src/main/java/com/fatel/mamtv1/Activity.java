@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.Posture;
@@ -43,12 +45,14 @@ public class Activity extends AppCompatActivity {
     @BindView(R.id.des) TextView txtDes;
     @BindView(R.id.imgname) TextView txtName;
     @BindView(R.id.img) ImageView imgView;
+    @BindView(R.id.vdo) VideoView vdoView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
     int exerciseImg;
     String exerciseName;
     String exerciseDes;
+    int exerciseVdo;
     CountDownTimer time1;
     CountDownTimer time2;
     static ActivityHandle activityHandle;
@@ -74,16 +78,30 @@ public class Activity extends AppCompatActivity {
         exerciseImg=(img.get(count)).getImage();
         exerciseName=(img.get(count)).getName();
         exerciseDes=(img.get(count)).getDescription();
+        exerciseVdo=(img.get(count)).getVdo();
 
         txtDes.setText(exerciseDes);
         txtName.setText(exerciseName);
-        imgView.setBackgroundResource(exerciseImg);
 
-        // Get the background, which has been compiled to an AnimationDrawable object.
-        frameAnimation = (AnimationDrawable) imgView.getBackground();
+        if(exerciseVdo != -1){
+            vdoView.setVisibility(View.VISIBLE);
+            imgView.setVisibility(View.INVISIBLE);
+            vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+exerciseVdo));
+            vdoView.start();
+        }
+        else{
 
-        // Start the animation (looped playback by default).
-        frameAnimation.start();
+            vdoView.setBackgroundResource(0);
+            vdoView.setVisibility(View.INVISIBLE);
+            imgView.setVisibility(View.VISIBLE);
+            imgView.setBackgroundResource(exerciseImg);
+            // Get the background, which has been compiled to an AnimationDrawable object.
+            frameAnimation = (AnimationDrawable) imgView.getBackground();
+            // Start the animation (looped playback by default).
+            frameAnimation.start();
+
+        }
+
         time1 = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -97,20 +115,38 @@ public class Activity extends AppCompatActivity {
 
             public void onFinish() {
                 txtR.setText("เสร็จสิ้น!");
-                frameAnimation.stop();
+                if(exerciseVdo == -1)
+                    frameAnimation.stop();
+                else
+                    vdoView.stopPlayback();
                 count++;
                 if(count<img.size()) {
 
                     exerciseImg=(img.get(count)).getImage();
                     exerciseName=(img.get(count)).getName();
                     exerciseDes=(img.get(count)).getDescription();
+                    exerciseVdo=(img.get(count)).getVdo();
+
                     txtDes.setText(exerciseDes);
                     txtName.setText(exerciseName);
-                    imgView.setBackgroundResource(exerciseImg);
-                    // Get the background, which has been compiled to an AnimationDrawable object.
-                    frameAnimation = (AnimationDrawable) imgView.getBackground();
-                    // Start the animation (looped playback by default).
-                    frameAnimation.start();
+                    if(exerciseVdo != -1){
+                        vdoView.setVisibility(View.VISIBLE);
+                        imgView.setVisibility(View.INVISIBLE);
+                        vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+exerciseVdo));
+                        vdoView.start();
+                    }
+                    else{
+
+                        vdoView.setBackgroundResource(0);
+                        vdoView.setVisibility(View.INVISIBLE);
+                        imgView.setVisibility(View.VISIBLE);
+                        imgView.setBackgroundResource(exerciseImg);
+                        // Get the background, which has been compiled to an AnimationDrawable object.
+                        frameAnimation = (AnimationDrawable) imgView.getBackground();
+                        // Start the animation (looped playback by default).
+                        frameAnimation.start();
+
+                    }
 
                     start();
                 }
@@ -129,6 +165,10 @@ public class Activity extends AppCompatActivity {
 
             public void onFinish() {
                 txtA.setText("เสร็จสิ้น!");
+                if(exerciseVdo == -1)
+                    frameAnimation.stop();
+                else
+                    vdoView.stopPlayback();
                 Intent i1 = new Intent(Activity.this, Camera.class);
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i1);
@@ -154,7 +194,10 @@ public class Activity extends AppCompatActivity {
 
     public void linkHome(View view)
     {
-        frameAnimation.stop();
+        if(exerciseVdo == -1)
+            frameAnimation.stop();
+        else
+            vdoView.stopPlayback();
         if(time1!=null){
             time1.cancel();
             time1=null;

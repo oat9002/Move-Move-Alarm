@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.renderscript.Sampler;
 
 import com.fatel.mamtv1.Model.Posture;
 
@@ -26,10 +27,11 @@ public class PostureHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_POSTURE_TABLE = String.format("CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s INTEGER)",
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER,%s INTEGER, %s INTEGER, %s TEXT, %s TEXT, %s INTEGER)",
                 Posture.TABLE,
                 Posture.Column.ID,
                 Posture.Column.IDPOSTURE,
+                Posture.Column.VDO,
                 Posture.Column.IMAGE,
                 Posture.Column.NAME,
                 Posture.Column.DESCRIPTION,
@@ -46,6 +48,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Posture.Column.IDPOSTURE, posture.getIdPosture());
+        values.put(Posture.Column.VDO,posture.getVdo());
         values.put(Posture.Column.IMAGE, posture.getImage());
         values.put(Posture.Column.NAME, posture.getName());
         values.put(Posture.Column.DESCRIPTION, posture.getDescription());
@@ -58,6 +61,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Posture.Column.IDPOSTURE,posture.getIdPosture());
+        values.put(Posture.Column.VDO,posture.getVdo());
         values.put(Posture.Column.IMAGE,posture.getImage());
         values.put(Posture.Column.NAME, posture.getName());
         values.put(Posture.Column.DESCRIPTION, posture.getDescription());
@@ -71,7 +75,7 @@ public class PostureHelper extends SQLiteOpenHelper {
     public Posture getPosture(int idPosture){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Posture.TABLE, new String[]{Posture.Column.ID,
-                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE,Posture.Column.NAME, Posture.Column.DESCRIPTION, Posture.Column.MODE
+                        Posture.Column.IDPOSTURE, Posture.Column.VDO, Posture.Column.IMAGE,Posture.Column.NAME, Posture.Column.DESCRIPTION, Posture.Column.MODE
                 }, Posture.Column.IDPOSTURE + " = ? ",
                 new String[]{String.valueOf(idPosture)}, null, null, null, null);
         Posture posture;
@@ -82,7 +86,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         if(check){
 
             posture = new Posture(cursor.getInt(0), cursor.getInt(1),
-                    cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5));
+                    cursor.getInt(2),cursor.getInt(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6));
 
             cursor.close();
             db.close();
@@ -97,7 +101,7 @@ public class PostureHelper extends SQLiteOpenHelper {
     public ArrayList<Posture> getPostureMode(int mode){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Posture.TABLE, new String[]{Posture.Column.ID,
-                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE,Posture.Column.NAME, Posture.Column.DESCRIPTION, Posture.Column.MODE
+                        Posture.Column.IDPOSTURE, Posture.Column.VDO, Posture.Column.IMAGE,Posture.Column.NAME, Posture.Column.DESCRIPTION, Posture.Column.MODE
                 }, Posture.Column.MODE + " = ? ",
                 new String[]{String.valueOf(mode)}, null, null, null, null);
         ArrayList<Posture> modePosture = new ArrayList<>();
@@ -105,7 +109,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Posture posture = new Posture(cursor.getInt(0), cursor.getInt(1),
-                        cursor.getInt(2), cursor.getString(3),cursor.getString(4), cursor.getInt(5));
+                        cursor.getInt(2),cursor.getInt(3), cursor.getString(4),cursor.getString(5), cursor.getInt(6));
                 modePosture.add(posture);
 
             }while (cursor.moveToNext());
