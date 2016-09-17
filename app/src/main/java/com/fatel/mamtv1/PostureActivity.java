@@ -31,7 +31,6 @@ public class PostureActivity extends AppCompatActivity {
     BootstrapButton previous;
     BootstrapButton home;
     BootstrapButton next;
-    View pre;
     int exerciseImg;
     String exerciseName;
     String exerciseDes;
@@ -40,11 +39,11 @@ public class PostureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
-        if(bundle!=null)
-        {
-            mode = bundle.getInt("value");
-        }
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle!=null)
+//        {
+//            mode = bundle.getInt("value");
+//        }
         setContentView(R.layout.activity_posture);
         txtDes=(TextView) findViewById(R.id.txt);
         txtName=(TextView) findViewById(R.id.imgname);
@@ -56,7 +55,6 @@ public class PostureActivity extends AppCompatActivity {
         context=getApplicationContext();
 
         final PostureCollection postureCollection = PostureCollection.getInstance(this);
-        vdoView.stopPlayback();
         postureMode = postureCollection.getPostureMode(mode, context);
         exerciseImg = (postureMode.get(imgId)).getImage();
         exerciseName = (postureMode.get(imgId)).getName();
@@ -68,8 +66,6 @@ public class PostureActivity extends AppCompatActivity {
             vdoView.setVisibility(View.VISIBLE);
             imgView.setVisibility(View.INVISIBLE);
             vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_2));
-            vdoView.setMediaController(new MediaController(getApplicationContext()));
-            vdoView.requestFocus();
             vdoView.start();
         }
         else if(mode==1&&imgId==2){
@@ -115,16 +111,12 @@ public class PostureActivity extends AppCompatActivity {
                         vdoView.setVisibility(View.VISIBLE);
                         imgView.setVisibility(View.INVISIBLE);
                         vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_2));
-                        vdoView.setMediaController(new MediaController(getApplicationContext()));
-                        vdoView.requestFocus();
                         vdoView.start();
                     }
                     else if(mode==1&&imgId==2){
                         vdoView.setVisibility(View.VISIBLE);
                         imgView.setVisibility(View.INVISIBLE);
                         vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_3));
-                        vdoView.setMediaController(new MediaController(getApplicationContext()));
-                        vdoView.requestFocus();
                         vdoView.start();
                     }
                     else{
@@ -158,20 +150,16 @@ public class PostureActivity extends AppCompatActivity {
                     exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
                     txtName.setText(exerciseName);
-                    if(mode==1&&imgId==1){
+                    if(mode==1&&imgId==1||mode==1&&imgId==0){
                         vdoView.setVisibility(View.VISIBLE);
                         imgView.setVisibility(View.INVISIBLE);
                         vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_2));
-                        vdoView.setMediaController(new MediaController(getApplicationContext()));
-                        vdoView.requestFocus();
                         vdoView.start();
                     }
                     else if(mode==1&&imgId==2){
                         vdoView.setVisibility(View.VISIBLE);
                         imgView.setVisibility(View.INVISIBLE);
                         vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.vpos1_3));
-                        vdoView.setMediaController(new MediaController(getApplicationContext()));
-                        vdoView.requestFocus();
                         vdoView.start();
                     }
                     else{
@@ -194,6 +182,7 @@ public class PostureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 frameAnimation.stop();
+                vdoView.stopPlayback();
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
