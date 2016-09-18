@@ -105,11 +105,34 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                 final TextView txtWa = new TextView(getActivity());
                 final DatePicker birthday = new DatePicker(getActivity());
 
-                h.setText("");
+                if(UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate()!=null || UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate()!=""){
+                    String birth = UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate();
+                    int   day  = Integer.parseInt(birth.substring(0,2));
+                    int   month= Integer.parseInt(birth.substring(3,5));
+                    int   year = Integer.parseInt(birth.substring(6,10));
+                    birthday.updateDate(year,month,day);
+                }
+                if(UserManage.getInstance(getActivity()).getCurrentUser().getHeight()!=0){
+                    h.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getHeight()));
+                }
+                else {
+                    h.setText("");
+                }
                 h.setInputType(InputType.TYPE_CLASS_NUMBER);
-                w.setText("");
+
+                if(UserManage.getInstance(getActivity()).getCurrentUser().getWeight()!=0){
+                    w.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getWeight()));
+                }
+                else {
+                    w.setText("");
+                }
                 w.setInputType(InputType.TYPE_CLASS_NUMBER);
-                waist.setText("");
+                if(UserManage.getInstance(getActivity()).getCurrentUser().getWaistline()!=0){
+                    waist.setText(Integer.toString(UserManage.getInstance(getActivity()).getCurrentUser().getWaistline()));
+                }
+                else {
+                    waist.setText("");
+                }
                 waist.setInputType(InputType.TYPE_CLASS_NUMBER);
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
