@@ -32,8 +32,6 @@ import com.fatel.mamtv1.Fragment.ProfileFragment;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
-import com.fatel.mamtv1.Model.History;
-import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.UserManage;
@@ -114,26 +112,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-        //history
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
-        if (history == null) {
-            history = new History(UserManage.getInstance(this).getCurrentUser().getId());
-            history.save(this);
-            Cache.getInstance().putData("userHistory", history);
-        } else {
-            Cache.getInstance().putData("userHistory", history);
-        }
-//
-        //historygroup
-        GroupHistory historygroup = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
-        if (historygroup == null && UserManage.getInstance(this).getCurrentUser().getGroupId() != 0) {
-            Log.i("historygroup", "success");
-            historygroup = new GroupHistory(UserManage.getInstance(this).getCurrentUser().getGroupId());
-            historygroup.save(this);
-            Cache.getInstance().putData("groupHistory", historygroup);
-        } else if (UserManage.getInstance(this).getCurrentUser().getGroupId() != 0) {
-            Cache.getInstance().putData("groupHistory", historygroup);
-        }
 
 
         if (mAlarmHelper.checkdata() != 1) {

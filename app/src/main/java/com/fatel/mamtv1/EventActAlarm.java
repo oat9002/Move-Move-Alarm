@@ -18,11 +18,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.fatel.mamtv1.Model.Group;
-import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.StatusDescription;
-import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
-import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.Cache;
 import com.fatel.mamtv1.Service.UserManage;
 
@@ -99,12 +96,6 @@ public class EventActAlarm extends AppCompatActivity {
         Log.i("linkacti",""+UserManage.getInstance(this).getCurrentUser().getGroupId());
         // update progress call volley
 
-        //
-        GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
-        if(groupHistory !=null){
-            groupHistory.addaccept(1);
-            groupHistory.save(this);
-        }
 
         Intent intent = new Intent(this, EventActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -117,13 +108,6 @@ public class EventActAlarm extends AppCompatActivity {
     }
 
     public void linkHome(View view){
-        //history
-        Log.i("link",""+UserManage.getInstance(this).getCurrentUser().getGroupId());
-        GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(),this);
-        if(groupHistory !=null){
-            groupHistory.addcancel(1);
-            groupHistory.save(this);
-        }
 
         Intent i1 = new Intent(EventActAlarm.this, MainActivity.class);
         i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

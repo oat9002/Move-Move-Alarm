@@ -15,20 +15,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.os.Vibrator;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fatel.mamtv1.Model.Group;
-import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.AlarmReceiver;
 import com.fatel.mamtv1.Service.UserManage;
 
-import java.util.List;
-
-import butterknife.BindView;
 import retrofit.Callback;
 import retrofit.Retrofit;
 
@@ -106,9 +100,6 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
-        history.addaccept(1);
-        history.save(this);
         Intent intent = new Intent(this, Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -123,9 +114,6 @@ public class ActAlarm extends AppCompatActivity {
         // update progress call volley
 
         //
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(),this);
-        history.addcancel(1);
-        history.save(this);
         Intent i1 = new Intent(ActAlarm.this, MainActivity.class);
         i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i1);

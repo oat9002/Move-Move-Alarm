@@ -9,7 +9,6 @@ import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,18 +18,12 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.fatel.mamtv1.Model.Group;
-import com.fatel.mamtv1.Model.GroupHistory;
 import com.fatel.mamtv1.Model.Posture;
 import com.fatel.mamtv1.Model.StatusDescription;
-import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
-import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
 import com.fatel.mamtv1.Service.Cache;
-import com.fatel.mamtv1.Service.UserManage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -224,12 +217,6 @@ public class EventActivity extends AppCompatActivity {
         updatecancel();
         //
 
-            GroupHistory groupHistory = GroupHistory.findHistorygroup(UserManage.getInstance(this).getCurrentUser().getGroupId(), this);
-        if(groupHistory !=null) {
-            groupHistory.subaccept(1);
-            groupHistory.addcancel(1);
-             groupHistory.save(this);
-        }
         Intent i1 = new Intent(EventActivity.this, MainActivity.class);
         i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i1);

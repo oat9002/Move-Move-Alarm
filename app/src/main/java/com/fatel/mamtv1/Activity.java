@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.Posture;
 import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
@@ -221,10 +220,6 @@ public class Activity extends AppCompatActivity {
         }
         // TODO update progress
         updatecancel();
-        History history = History.findHistory(UserManage.getInstance(this).getCurrentUser().getId(), this);
-        history.subaccept(1);
-        history.addcancel(1);
-        history.save(this);
 
         Intent i1 = new Intent(Activity.this, MainActivity.class);
         i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

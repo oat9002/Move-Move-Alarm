@@ -2,13 +2,10 @@ package com.fatel.mamtv1.Fragment;
 
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.fatel.mamtv1.Helper.HistoryHelper;
-import com.fatel.mamtv1.Model.History;
 import com.fatel.mamtv1.Model.User;
 import com.fatel.mamtv1.R;
 import com.fatel.mamtv1.Service.UserManage;
