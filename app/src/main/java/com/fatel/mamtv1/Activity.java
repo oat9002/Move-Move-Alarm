@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
@@ -178,7 +179,15 @@ public class Activity extends AppCompatActivity {
                 startActivity(i1);
                 User currentUser = UserManage.getCurrentUser();
                 currentUser.addScore(1);
+                Log.i("User","funh be"+currentUser.getDailyProgress().getAcceptation());
+
                 updateActivity(img, currentUser);
+                Log.i("User","funh af accept "+currentUser.getDailyProgress().getAcceptation());
+                Log.i("User","funh af time "+currentUser.getDailyProgress().getExerciseTime());
+                Log.i("User","funh af total "+currentUser.getDailyProgress().getTotalActivity());
+
+                currentUser.save(context);
+
                 makeSnackbar("ทำกิจกรรมสำเร็จ รับ 1 คะแนน!");
                 UserServiceImp.getInstance().update(currentUser, new Callback<StatusDescription>() {
                     @Override
@@ -255,7 +264,7 @@ public class Activity extends AppCompatActivity {
             UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "อัปเดตข้อมูลไปยังเซิร์ฟเวอร์สำเร็จ", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -296,6 +305,7 @@ public class Activity extends AppCompatActivity {
             user.getWeeklyProgress().setTotalActivity(user.getWeeklyProgress().getTotalActivity()+1);
             user.getWeeklyProgress().setExerciseTime(user.getWeeklyProgress().getExerciseTime()+(1*numberofimg));
         }
+
     }
     public void playBell(){
 

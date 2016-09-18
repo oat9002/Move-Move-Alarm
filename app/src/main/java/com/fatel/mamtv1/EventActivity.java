@@ -3,6 +3,8 @@ package com.fatel.mamtv1;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.GroupHistory;
@@ -42,17 +45,22 @@ public class EventActivity extends AppCompatActivity {
     @BindView(R.id.des) TextView txtDes;
     @BindView(R.id.imgname) TextView txtName;
     @BindView(R.id.img) ImageView imgView;
+    @BindView(R.id.vdo) VideoView vdoView;
     AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
     int exerciseImg;
     String exerciseName;
     String exerciseDes;
+    int exerciseVdo;
+
     CountDownTimer time1;
     CountDownTimer time2;
 
     private static final String FORMAT = "%02d:%02d";
     public static Context context;
+    private MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +79,31 @@ public class EventActivity extends AppCompatActivity {
         exerciseImg=(img.get(count)).getImage();
         exerciseName=(img.get(count)).getName();
         exerciseDes=(img.get(count)).getDescription();
+        exerciseVdo=(img.get(count)).getVdo();
+
         txtDes.setText(exerciseDes);
         txtName.setText(exerciseName);
-        imgView.setBackgroundResource(exerciseImg);
 
-        // Get the background, which has been compiled to an AnimationDrawable object.
-        frameAnimation = (AnimationDrawable) imgView.getBackground();
+        if(exerciseVdo != -1){
+            vdoView.setVisibility(View.VISIBLE);
+            imgView.setVisibility(View.INVISIBLE);
+            vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+exerciseVdo));
+            vdoView.start();
+        }
+        else{
 
-        // Start the animation (looped playback by default).
-        frameAnimation.start();
+            vdoView.setBackgroundResource(0);
+            vdoView.setVisibility(View.INVISIBLE);
+            imgView.setVisibility(View.VISIBLE);
+            imgView.setBackgroundResource(exerciseImg);
+            // Get the background, which has been compiled to an AnimationDrawable object.
+            frameAnimation = (AnimationDrawable) imgView.getBackground();
+            // Start the animation (looped playback by default).
+            frameAnimation.start();
 
-        time1 =new CountDownTimer(30000, 1000) {
+        }
+
+        time1 =new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtR.setText("เวลาท่าบริหาร   " + String.format(FORMAT,
@@ -93,8 +115,12 @@ public class EventActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                txtR.setText("Remain Time done!");
-                frameAnimation.stop();
+                playBell();
+                txtR.setText("เสร็จสิ้น!");
+                if(exerciseVdo == -1)
+                    frameAnimation.stop();
+                else
+                    vdoView.stopPlayback();
                 count++;
                 if(count<img.size()) {
                     exerciseName=(img.get(count)).getName();
@@ -102,12 +128,24 @@ public class EventActivity extends AppCompatActivity {
                     exerciseDes=(img.get(count)).getDescription();
                     txtDes.setText(exerciseDes);
                     txtName.setText(exerciseName);
-                    imgView.setBackgroundResource(exerciseImg);
-                    // Get the background, which has been compiled to an AnimationDrawable object.
-                    frameAnimation = (AnimationDrawable) imgView.getBackground();
-                    // Start the animation (looped playback by default).
-                    frameAnimation.start();
+                    if(exerciseVdo != -1){
+                        vdoView.setVisibility(View.VISIBLE);
+                        imgView.setVisibility(View.INVISIBLE);
+                        vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+exerciseVdo));
+                        vdoView.start();
+                    }
+                    else{
 
+                        vdoView.setBackgroundResource(0);
+                        vdoView.setVisibility(View.INVISIBLE);
+                        imgView.setVisibility(View.VISIBLE);
+                        imgView.setBackgroundResource(exerciseImg);
+                        // Get the background, which has been compiled to an AnimationDrawable object.
+                        frameAnimation = (AnimationDrawable) imgView.getBackground();
+                        // Start the animation (looped playback by default).
+                        frameAnimation.start();
+
+                    }
                     start();
                 }
 
@@ -116,7 +154,7 @@ public class EventActivity extends AppCompatActivity {
 
 
 
-        time2 =new CountDownTimer(60000, 1000) {
+        time2 =new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtA.setText("เวลากิจกรรม   "+String.format(FORMAT,
@@ -127,7 +165,13 @@ public class EventActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                txtA.setText("Activity Time done!");
+                playBell();
+                txtA.setText("เสร็จสิ้น!");
+
+                if(exerciseVdo == -1)
+                    frameAnimation.stop();
+                else
+                    vdoView.stopPlayback();
                 //sent data to serve
 
 
@@ -162,6 +206,10 @@ public class EventActivity extends AppCompatActivity {
 
     public void linkHome(View view)
     {
+        if(exerciseVdo == -1)
+            frameAnimation.stop();
+        else
+            vdoView.stopPlayback();
         if(time1!=null){
             time1.cancel();
             time1=null;
@@ -232,5 +280,14 @@ public class EventActivity extends AppCompatActivity {
             group.getProgress().setTotalActivity(group.getProgress().getTotalActivity()+1);
             group.getProgress().setExerciseTime(group.getProgress().getExerciseTime()+(1*numberofimg));
         }
+    }
+    public void playBell(){
+
+        if(mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(this,R.raw.bell);
+        mediaPlayer.start();
     }
 }
