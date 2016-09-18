@@ -15,7 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
 import android.widget.TextView;
-
+import android.media.MediaPlayer;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import android.widget.ImageView;
@@ -59,6 +59,7 @@ public class Activity extends AppCompatActivity {
 
     private static final String FORMAT = "%02d:%02d";
     public static Context context;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,7 @@ public class Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                playBell();
                 txtR.setText("เสร็จสิ้น!");
                 if(exerciseVdo == -1)
                     frameAnimation.stop();
@@ -164,7 +166,9 @@ public class Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                playBell();
                 txtA.setText("เสร็จสิ้น!");
+
                 if(exerciseVdo == -1)
                     frameAnimation.stop();
                 else
@@ -292,5 +296,14 @@ public class Activity extends AppCompatActivity {
             user.getWeeklyProgress().setTotalActivity(user.getWeeklyProgress().getTotalActivity()+1);
             user.getWeeklyProgress().setExerciseTime(user.getWeeklyProgress().getExerciseTime()+(1*numberofimg));
         }
+    }
+    public void playBell(){
+
+        if(mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(this,R.raw.bell);
+        mediaPlayer.start();
     }
 }
