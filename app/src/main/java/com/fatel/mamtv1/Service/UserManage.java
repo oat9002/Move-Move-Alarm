@@ -10,6 +10,7 @@ import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.StatusDescription;
 import com.fatel.mamtv1.Model.User;
+import com.fatel.mamtv1.Model.UserProgress;
 import com.fatel.mamtv1.RESTService.Implement.EventServiceImp;
 import com.fatel.mamtv1.RESTService.Implement.GroupServiceImp;
 import com.fatel.mamtv1.RESTService.Implement.UserServiceImp;
@@ -40,8 +41,15 @@ public class UserManage {
         if (instance == null) {
             instance = new UserManage();
             User user = User.checkLogin(context);
-            if (user != null)
+            if (user != null){
                 currentUser = user;
+                if(UserProgress.getProgressByUserId(context,currentUser.getId(),1)!=null)
+                    currentUser.setDailyProgress(UserProgress.getProgressByUserId(context,currentUser.getId(),1));
+                if(UserProgress.getProgressByUserId(context,currentUser.getId(),0)!=null)
+                    currentUser.setWeeklyProgress(UserProgress.getProgressByUserId(context,currentUser.getId(),0));
+
+            }
+
         }
         return instance;
     }

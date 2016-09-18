@@ -179,6 +179,7 @@ public class Activity extends AppCompatActivity {
                 User currentUser = UserManage.getCurrentUser();
                 currentUser.addScore(1);
                 Log.i("User","funh be"+currentUser.getDailyProgress().getAcceptation());
+                Log.i("User","funh be total "+currentUser.getDailyProgress().getTotalActivity());
 
                 updateActivity(img, currentUser);
                 Log.i("User","funh af accept "+currentUser.getDailyProgress().getAcceptation());
@@ -186,6 +187,8 @@ public class Activity extends AppCompatActivity {
                 Log.i("User","funh af total "+currentUser.getDailyProgress().getTotalActivity());
 
                 currentUser.save(context);
+                currentUser.getDailyProgress().save(context,1);
+                currentUser.getWeeklyProgress().save(context,0);
 
                 makeSnackbar("ทำกิจกรรมสำเร็จ รับ 1 คะแนน!");
                 UserServiceImp.getInstance().update(currentUser, new Callback<StatusDescription>() {
