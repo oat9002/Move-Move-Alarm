@@ -24,6 +24,7 @@ import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.fatel.mamtv1.Helper.DBAlarmHelper;
+import com.fatel.mamtv1.Helper.UserHelper;
 import com.fatel.mamtv1.Model.Event;
 import com.fatel.mamtv1.Model.Group;
 import com.fatel.mamtv1.Model.User;
@@ -161,6 +162,8 @@ public class LoginActivity extends AppCompatActivity {
                     user.setLogin(1);
                     user.save(getApplicationContext());
                     UserManage.getInstance(getApplicationContext()).setCurrentUser(user);
+                    UserHelper userHelper = new UserHelper(getApplicationContext());
+
                     Intent intent = new Intent(getApplicationContext(), AgreementActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     getApplicationContext().startActivity(intent);

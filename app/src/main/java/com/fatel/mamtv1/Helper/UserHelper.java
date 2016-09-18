@@ -178,23 +178,29 @@ public class UserHelper extends SQLiteOpenHelper {
                 }, User.Column.LOGIN + " = ? ",
                 new String[]{String.valueOf(1)}, null, null, null, null);
 
-
-        User user=null;
+        User user;
         boolean check=false;
         if (cursor != null) {
             check = cursor.moveToFirst();
         }
         if(check){
+
             user = new User(cursor.getInt(0), cursor.getInt(1),
                     cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5),
                     cursor.getInt(6), cursor.getInt(7), cursor.getDouble(8),
                     cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
                     cursor.getInt(13),cursor.getInt(14),cursor.getInt(15),cursor.getInt(16));
 
+
+
             cursor.close();
+            db.close();
+            return user;
         }
-        db.close();
-        return user;
+        else {
+            db.close();
+            return null;
+        }
 
     }
     public void deleteUser(int id) {

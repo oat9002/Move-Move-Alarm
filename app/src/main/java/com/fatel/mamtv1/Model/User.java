@@ -115,23 +115,23 @@ public class User implements Serializable{
     }
 
     public void save(Context context) {
-
         UserHelper userHelper = new UserHelper(context);
-        if (this.internalId == -1) {
+        User checkUser = userHelper.getUser(id);
+        if (checkUser == null) {
             this.internalId = userHelper.addUser(this);
-            Log.i("User", "funh savenew :" + internalId);
         } else {
+            this.internalId = checkUser.getInternalId();
             userHelper.updateUser(this);
-            Log.i("User", "funh saveold :" + internalId);
         }
     }
 
     public static User find(int id, Context context) {
         UserHelper userHelper = new UserHelper(context);
-        if (userHelper.getUser(id) == null) {
+        User user = userHelper.getUser(id);
+        if (user == null) {
             return null;
         } else
-            return userHelper.getUser(id);
+            return user;
     }
 
     public static User checkLogin(Context context) {
