@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                     user.setLogin(1);
                     user.save(getApplicationContext());
                     user.getDailyProgress().save(getApplicationContext(),1);
-                    user.getWeeklyProgress().save(getApplicationContext(),2);
+                    user.getWeeklyProgress().save(getApplicationContext(),0);
 
                     UserManage.getInstance(getApplicationContext()).setCurrentUser(user);
                     UserHelper userHelper = new UserHelper(getApplicationContext());
