@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -182,6 +183,7 @@ public class EventActivity extends AppCompatActivity {
                 GroupServiceImp.getInstance().updateGroup(group, new Callback<StatusDescription>() {
                     @Override
                     public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
+                        Log.i("response from server", response.body().toString());
                         Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
                     }
 

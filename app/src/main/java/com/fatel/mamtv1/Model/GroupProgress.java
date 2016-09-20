@@ -22,12 +22,15 @@ public class GroupProgress implements Serializable{
     int exerciseTime;
     int acceptation;
     int declination;
+    @SerializedName("total_activity")
     int totalActivity;
     int neck;
     int shoulder;
+    @SerializedName("chest_back")
     int chestBack;
     int wrist;
     int waist;
+    @SerializedName("hip_leg_calf")
     int hipLegCalf;
 
     public static final int DATABASE_VERSION = 1;

@@ -106,7 +106,7 @@
                 android:paddingLeft="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:gravity="left"
-                android:textColor="#808080"
+                android:textColor="#FFFFFF"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
