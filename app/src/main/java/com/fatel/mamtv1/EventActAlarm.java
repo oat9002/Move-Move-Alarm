@@ -125,7 +125,7 @@ public class EventActAlarm extends AppCompatActivity {
             int cancelweek = groupuser.getProgress().getDeclination()+1;
             int totalweek = groupuser.getProgress().getTotalActivity()+1;
             groupuser.getProgress().setDeclination(cancelweek);
-            groupuser.getProgress().setTotalActivity(10);
+            groupuser.getProgress().setTotalActivity(totalweek);
             GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
