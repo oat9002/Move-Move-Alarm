@@ -138,7 +138,7 @@ public class ActAlarm extends AppCompatActivity {
             UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+//                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
                 }
                 @Override
                 public void onFailure(Throwable t) {

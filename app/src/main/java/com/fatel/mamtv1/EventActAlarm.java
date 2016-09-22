@@ -130,7 +130,7 @@ public class EventActAlarm extends AppCompatActivity {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
                     Log.i("response from server", response.body().toString());
-                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
+//                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
                 }
 
                 @Override

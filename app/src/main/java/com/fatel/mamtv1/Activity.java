@@ -194,7 +194,7 @@ public class Activity extends AppCompatActivity {
                 UserServiceImp.getInstance().update(currentUser, new Callback<StatusDescription>() {
                     @Override
                     public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
                     }
 
                     @Override

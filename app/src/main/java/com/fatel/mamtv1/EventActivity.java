@@ -238,7 +238,7 @@ public class EventActivity extends AppCompatActivity {
             GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
