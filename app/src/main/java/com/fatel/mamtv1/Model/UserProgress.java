@@ -20,6 +20,7 @@ public class UserProgress implements Serializable {
     int userId;
     @SerializedName("exercise_time")
     int exerciseTime;
+    @SerializedName("accept")
     int acceptation;
     int declination;
     @SerializedName("total_activity")

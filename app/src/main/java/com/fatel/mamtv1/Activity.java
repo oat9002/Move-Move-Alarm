@@ -259,10 +259,13 @@ public class Activity extends AppCompatActivity {
             int totalweek = user.getWeeklyProgress().getTotalActivity()+1;
             user.getWeeklyProgress().setDeclination(cancelweek);
             user.getWeeklyProgress().setTotalActivity(totalweek);
+            user.save(context);
+            user.getDailyProgress().save(context,1);
+            user.getWeeklyProgress().save(context,0);
             UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                    Toast.makeText(getApplicationContext(), "อัปเดตข้อมูลไปยังเซิร์ฟเวอร์สำเร็จ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "อัปเดตข้อมูลไปยังเซิร์ฟเวอร์สำเร็จ", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

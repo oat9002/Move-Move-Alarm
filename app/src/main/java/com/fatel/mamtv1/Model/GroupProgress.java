@@ -5,6 +5,7 @@ import android.provider.BaseColumns;
 
 import com.fatel.mamtv1.Helper.GroupProgressHelper;
 import com.fatel.mamtv1.Helper.UserHelper;
+import com.fatel.mamtv1.Helper.UserProgressHelper;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class GroupProgress implements Serializable{
     int groupId;
     @SerializedName("exercise_time")
     int exerciseTime;
+    @SerializedName("accept")
     int acceptation;
     int declination;
     @SerializedName("total_activity")
@@ -89,6 +91,10 @@ public class GroupProgress implements Serializable{
             this.id = groupProgress.getId();
             groupProgressHelper.updateGroupProgress(this);
         }
+    }
+    public static GroupProgress getProgressByGroupId(Context context,int groupId){
+        GroupProgressHelper groupProgressHelper = new GroupProgressHelper(context);
+        return groupProgressHelper.getGroupProgress(groupId);
     }
 }
 

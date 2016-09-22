@@ -132,9 +132,15 @@ public class ActAlarm extends AppCompatActivity {
     }
     public void updatecancel(){
         User user = UserManage.getCurrentUser();
+        Context context = getApplicationContext();
         if(user!=null){
             user.getDailyProgress().setTotalActivity(user.getDailyProgress().getTotalActivity()+1);
             user.getWeeklyProgress().setTotalActivity(user.getWeeklyProgress().getTotalActivity()+1);
+
+            user.save(context);
+            user.getDailyProgress().save(context,1);
+            user.getWeeklyProgress().save(context,0);
+
             UserServiceImp.getInstance().update(user, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
