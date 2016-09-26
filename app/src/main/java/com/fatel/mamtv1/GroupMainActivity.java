@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,7 +82,7 @@ public class GroupMainActivity extends AppCompatActivity {
                 exitGroup.setText("ออกจากกลุ่ม");
             }
         } catch (Exception e) {
-            Log.i("setup group", e.toString());
+//            Log.i("setup group", e.toString());
         }
     }
 
@@ -121,14 +121,14 @@ public class GroupMainActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
                     Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
-                    Log.i("response", response.raw().toString());
+//                    Log.i("response", response.raw().toString());
                     Snackbar.make(exitGroup, "ลบกลุ่มสำเร็จ", Snackbar.LENGTH_SHORT).show();
 
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Log.i("error", t.getMessage());
+//                    Log.i("error", t.getMessage());
                     Snackbar.make(exitGroup, "ไม่สามารถลบกลุ่มได้", Snackbar.LENGTH_SHORT).show();
                 }
             });
@@ -144,14 +144,14 @@ public class GroupMainActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
                     Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
-                    Log.i("response", response.raw().toString());
+//                    Log.i("response", response.raw().toString());
                     Snackbar.make(exitGroup, "ออกจากกลุ่มสำเร็จ", Snackbar.LENGTH_SHORT).show();
 
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Log.i("error", t.getMessage());
+//                    Log.i("error", t.getMessage());
                     Snackbar.make(exitGroup, "ไม่สามารถออกจากกลุ่มได้", Snackbar.LENGTH_SHORT).show();
                 }
             });

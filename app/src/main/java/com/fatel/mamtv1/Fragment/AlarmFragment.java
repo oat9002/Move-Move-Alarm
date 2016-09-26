@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -406,13 +406,13 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
                     checkswitch = true;
                     mySwitch.setChecked(true);
                     UserManage.getInstance(getActivity()).getCurrentUser().setStatesw(1);
-                    Log.i("state sw", "Switch on");
+//                    Log.i("state sw", "Switch on");
                 } else {
                     //switchStatus.setText("Switch is currently OFF");
                     checkswitch = false;
                     mySwitch.setChecked(false);
                     UserManage.getInstance(getActivity()).getCurrentUser().setStatesw(0);
-                    Log.i("state sw", "Switch off");
+//                    Log.i("state sw", "Switch off");
                 }
                 Cache.getInstance().putData("switch", checkswitch);
             }

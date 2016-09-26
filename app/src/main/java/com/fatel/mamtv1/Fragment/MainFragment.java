@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +49,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
         setTextAlarm(view, mAlarmHelper);
         propic = (BootstrapThumbnail) view.findViewById(R.id.profile_image_f);
         String tempid = UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUser().getFacebookId();
-        Log.i("temp id",tempid);
+//        Log.i("temp id",tempid);
 //        if(!tempid.equals("0.0")) {
 //            if (!tempid.equals("0")) {
 //                if(!(tempid.equals("fb0.0"))) {
                     Picasso.with(getContext()).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(propic);
-                    Log.i("in the if","");
+//                    Log.i("in the if","");
 //                }
 //            }
 //        }

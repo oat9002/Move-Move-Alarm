@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 
 /**
  * Created by Monthon on 25/10/2558.
@@ -26,10 +26,10 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
                     b.putString("key", "first");
                     i.putExtras(b);
                     context.sendBroadcast(i);
-                    Log.i("Boot", "Boot cpu complete can set");
+//                    Log.i("Boot", "Boot cpu complete can set");
                 }
                 else{
-                    Log.i("Boot", "Boot cpu can't set");
+//                    Log.i("Boot", "Boot cpu can't set");
                 }
 
             }

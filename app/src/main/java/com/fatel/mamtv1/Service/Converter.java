@@ -1,6 +1,6 @@
 package com.fatel.mamtv1.Service;
 
-import android.util.Log;
+//import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -76,7 +76,7 @@ public class Converter {
             return temp2.intValue();
         }
         catch (Exception e) {
-            Log.i("conversion error", e.toString());
+//            Log.i("conversion error", e.toString());
             return -1;
         }
     }

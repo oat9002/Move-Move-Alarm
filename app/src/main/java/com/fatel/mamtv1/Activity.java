@@ -11,7 +11,7 @@ import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
@@ -178,13 +178,8 @@ public class Activity extends AppCompatActivity {
                 startActivity(i1);
                 User currentUser = UserManage.getCurrentUser();
                 currentUser.addScore(1);
-                Log.i("User","funh be"+currentUser.getDailyProgress().getAcceptation());
-                Log.i("User","funh be total "+currentUser.getDailyProgress().getTotalActivity());
 
                 updateActivity(img, currentUser);
-                Log.i("User","funh af accept "+currentUser.getDailyProgress().getAcceptation());
-                Log.i("User","funh af time "+currentUser.getDailyProgress().getExerciseTime());
-                Log.i("User","funh af total "+currentUser.getDailyProgress().getTotalActivity());
 
                 currentUser.save(context);
                 currentUser.getDailyProgress().save(context,1);

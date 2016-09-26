@@ -2,7 +2,7 @@ package com.fatel.mamtv1.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +51,7 @@ public class ScoreboardGroupFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.i("error", t.toString());
+//                Log.i("error", t.toString());
             }
         });
 
@@ -67,7 +67,7 @@ public class ScoreboardGroupFragment extends Fragment {
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Log.i("error", t.toString());
+//                    Log.i("error", t.toString());
                 }
             });
         }

@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,7 +93,7 @@ public class EventActAlarm extends AppCompatActivity {
     }
     public void linkActivity(View view){
         //history
-        Log.i("linkacti",""+UserManage.getInstance(this).getCurrentUser().getGroupId());
+//        Log.i("linkacti",""+UserManage.getInstance(this).getCurrentUser().getGroupId());
         // update progress call volley
 
 
@@ -129,7 +129,7 @@ public class EventActAlarm extends AppCompatActivity {
             GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
-                    Log.i("response from server", response.body().toString());
+//                    Log.i("response from server", response.body().toString());
 //                    makeSnackbar("สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้");
                 }
 

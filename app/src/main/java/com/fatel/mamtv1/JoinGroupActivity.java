@@ -3,7 +3,7 @@ package com.fatel.mamtv1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,7 +57,7 @@ public class JoinGroupActivity extends AppCompatActivity {
         GroupServiceImp.getInstance().joinGroup(groupID, UserManage.getCurrentUser(), new Callback<Group>() {
             @Override
             public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
-                Log.i("raw json", response.raw().toString());
+//                Log.i("raw json", response.raw().toString());
                 UserManage.getCurrentUser().setGroupId(response.body().getId());
                 Group group = response.body();
                 Cache.getInstance().putData("groupData", group);

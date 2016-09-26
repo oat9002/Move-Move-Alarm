@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,7 +89,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Log.i("error", t.toString());
+//                    Log.i("error", t.toString());
                 }
             });
         }

@@ -12,7 +12,7 @@ import android.os.AsyncTask;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -187,9 +187,9 @@ public class ShareActivity extends AppCompatActivity {
                             into(-1,-1).
                             get();
                 } catch (final ExecutionException e) {
-                    Log.i("error", "bitmap");
+//                    Log.i("error", "bitmap");
                 } catch (final InterruptedException e) {
-                    Log.i("error", "bitmap");
+//                    Log.i("error", "bitmap");
                 }
                 return null;
             }

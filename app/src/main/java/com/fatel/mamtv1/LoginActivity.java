@@ -10,7 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         instance = this;
         super.onCreate(savedInstanceState);
-        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin(this)+"");
+//        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin(this)+"");
         if(UserManage.getInstance(this).checkCurrentLogin(this))
         {
             Intent intent = new Intent(this, MainActivity.class);
@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body();
                     if(user == null)
                         return;
-                    Log.i("response", response.raw().toString());
+//                    Log.i("response", response.raw().toString());
                     user.setLogin(1);
                     user.save(getApplicationContext());
                     user.getDailyProgress().save(getApplicationContext(),1);
@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable t) {
-                            Log.i("error", t.getMessage());
+//                            Log.i("error", t.getMessage());
                         }
                     });
 
@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable t) {
-                            Log.i("error", t.getMessage());
+//                            Log.i("error", t.getMessage());
                             Snackbar.make(findViewById(R.id.fb_btn), CANNOT_LOGIN, Snackbar.LENGTH_SHORT).show();
                         }
                     });
@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Log.i("error", t.getMessage());
+//                    Log.i("error", t.getMessage());
                     Snackbar.make(findViewById(R.id.fb_btn), CANNOT_LOGIN, Snackbar.LENGTH_SHORT).show();
                 }
             });

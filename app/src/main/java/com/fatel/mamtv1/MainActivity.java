@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //    user.setText(UserManage.getInstance(this).getCurrentUser().getUsername());
         User userData = UserManage.getInstance(this).getCurrentUser();
         tempid = userData.getFacebookId();
-        Log.i("fbid", tempid);
+//        Log.i("fbid", tempid);
         Picasso.with(this).load("https://graph.facebook.com/" + tempid + "/picture?type=large").into(profilepic);
 
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
