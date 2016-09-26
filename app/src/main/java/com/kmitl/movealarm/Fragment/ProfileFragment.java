@@ -83,7 +83,9 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         height.setText((user.getHeight() >= 0) ? "" + user.getHeight() : "0");
         weight.setText((user.getWeight() >= 0) ? "" + user.getWeight() : "0");
         waist.setText((user.getWaistline() >= 0) ? "" + user.getWaistline() : "0");
-        bmi.setText(String.format("%.2f", (user.getBmi() >= 0) ? user.getBmi() : 0));
+        bmi.setText((user.getBmi() >= 0) ? String.format("%.2f",user.getBmi()) : "0");
+
+
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +99,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                 final TextView txtWa = new TextView(getActivity());
                 final DatePicker birthday = new DatePicker(getActivity());
 
-                if(UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate()!=null || UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate()!=""){
+                if(UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate()!=null && UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate()!=""){
                     String birth = UserManage.getInstance(getActivity()).getCurrentUser().getBirthdate();
                     int   day  = Integer.parseInt(birth.substring(0,2));
                     int   month= Integer.parseInt(birth.substring(3,5));
