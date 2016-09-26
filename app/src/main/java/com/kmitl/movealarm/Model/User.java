@@ -8,6 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import lombok.AccessLevel;
@@ -130,6 +131,11 @@ public class User implements Serializable{
             return null;
         } else
             return user;
+    }
+
+    public static ArrayList<User> getGroupMembers(int groupId,Context context){
+        UserHelper userHelper =new UserHelper(context);
+        return userHelper.getGroupMembers(groupId);
     }
 
     public static User checkLogin(Context context) {

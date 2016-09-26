@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.kmitl.movealarm.Model.User;
 
+import java.util.ArrayList;
+
 /**
  * Created by Monthon on 3/11/2558.
  */
@@ -148,6 +150,55 @@ public class UserHelper extends SQLiteOpenHelper {
         cursor.close();
             db.close();
             return user;
+        }
+        else {
+            db.close();
+            return null;
+        }
+
+    }
+
+    public ArrayList<User> getGroupMembers(int groupId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(User.TABLE, new String[]{ User.Column.ID,
+                        User.Column.IDUSER,
+                        User.Column.BIRTHDAY,
+                        User.Column.AGE,
+                        User.Column.SCORE,
+                        User.Column.HEIGHT,
+                        User.Column.WEIGHT,
+                        User.Column.WAISTLINE,
+                        User.Column.BMI,
+                        User.Column.EMAIL,
+                        User.Column.FACEBOOKID,
+                        User.Column.FACEBOOKFIRSTNAME,
+                        User.Column.FACEBOOKLASTNAME,
+                        User.Column.PROFILEIMAGE,
+                        User.Column.LOGIN,
+                        User.Column.IDGROUP,
+                        User.Column.STATESW
+                }, User.Column.IDGROUP + " = ? ",
+                new String[]{String.valueOf(groupId)}, null, null, null, null);
+
+        ArrayList<User> members = new ArrayList<>();
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        if(cursor.getCount() > 0){
+
+            do {
+                User user = new User(cursor.getInt(0), cursor.getInt(1),
+                        cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5),
+                        cursor.getInt(6), cursor.getInt(7), cursor.getDouble(8),
+                        cursor.getString(9), cursor.getString(10), cursor.getString(11), cursor.getString(12),
+                        cursor.getInt(13), cursor.getInt(14), cursor.getInt(15), cursor.getInt(16));
+                members.add(user);
+
+            }while(cursor.moveToNext());
+
+            cursor.close();
+            db.close();
+            return members;
         }
         else {
             db.close();

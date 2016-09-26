@@ -57,7 +57,7 @@ public class JoinGroupActivity extends AppCompatActivity {
             @Override
             public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
 //                Log.i("raw json", response.raw().toString());
-                UserManage.getCurrentUser().setGroupId(response.body().getId());
+                UserManage.getCurrentUser().setGroupId(response.body().getGroupId());
                 Group group = response.body();
                 Cache.getInstance().putData("groupData", group);
                 Intent intent = new Intent(JoinGroupActivity.this, GroupMainActivity.class);

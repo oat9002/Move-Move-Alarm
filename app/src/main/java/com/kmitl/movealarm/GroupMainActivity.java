@@ -63,7 +63,7 @@ public class GroupMainActivity extends AppCompatActivity {
             }
         });
         try {
-            String code = String.format("%0" + (4 - Converter.toString(groupData.getId()).length()) + "d%s", 0, groupData.getId());
+            String code = String.format("%0" + (4 - Converter.toString(groupData.getGroupId()).length()) + "d%s", 0, groupData.getGroupId());
             groupCode.setText(code);
             groupName.setText(groupData.getName());
             adminName.setText(groupData.getAdmin().getFacebookFirstName());

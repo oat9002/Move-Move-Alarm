@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.fatel.mamtv1",
+                    "com.kmitl.movealarm",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
@@ -172,7 +172,12 @@ public class LoginActivity extends AppCompatActivity {
                     GroupServiceImp.getInstance().findByUser(user, new Callback<Group>() {
                         @Override
                         public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
-                            Cache.getInstance().putData("groupData", response.body());
+                            Group group = response.body();
+                            if(group == null)
+                                return;
+                            Cache.getInstance().putData("groupData", group);
+                            group.save(getApplicationContext());
+                            group.getProgress().save(getApplicationContext());
                         }
 
                         @Override

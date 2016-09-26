@@ -63,8 +63,9 @@ public class CreateGroupActivity extends AppCompatActivity {
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
                     if(response.body().isSuccess()) {
                         user.setGroupId(Converter.toInt(response.body().getData().get("id")));
-                        group.setId(Converter.toInt(response.body().getData().get("id")));
+                        group.setGroupId(Converter.toInt(response.body().getData().get("id")));
                         user.save(CreateGroupActivity.this);
+                        group.save(CreateGroupActivity.this);
                         Cache.getInstance().putData("groupData", group);
                         Intent intent = new Intent(CreateGroupActivity.this, GroupMainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
