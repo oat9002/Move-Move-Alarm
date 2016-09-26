@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fatel.mamtv1">
+    package="com.kmitl.movealarm">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -25,34 +25,34 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.kmitl.movealarm.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Activity"
+            android:name="com.kmitl.movealarm.Activity"
             android:label="@string/title_activity_"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ActAlarm"
+            android:name="com.kmitl.movealarm.ActAlarm"
             android:label="@string/title_activity_act_alarm"
             android:screenOrientation="portrait"></activity>
 
-        <receiver android:name=".Service.AlarmReceiver" />
+        <receiver android:name="com.kmitl.movealarm.Service.AlarmReceiver" />
         <receiver
-            android:name=".Service.BootBroadcastReceiver"
+            android:name="com.kmitl.movealarm.Service.BootBroadcastReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Service.EventReceiver" />
+        <receiver android:name="com.kmitl.movealarm.Service.EventReceiver" />
 
         <activity
-            android:name=".IntroActivity"
+            android:name="com.kmitl.movealarm.IntroActivity"
             android:label="@string/title_activity_intro_"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.kmitl.movealarm.LoginActivity"
             android:label="@string/title_activity_intro_"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -62,23 +62,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateAccountActivity"
+            android:name="com.kmitl.movealarm.CreateAccountActivity"
             android:label="@string/title_activity_create__account_"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ShareActivity"
+            android:name="com.kmitl.movealarm.ShareActivity"
             android:label="@string/title_activity_shared"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Service.Camera"
+            android:name="com.kmitl.movealarm.Service.Camera"
             android:label="@string/title_activity_pre"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".PostureActivity"
+            android:name="com.kmitl.movealarm.PostureActivity"
             android:label="@string/title_activity_posture"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ScoreboardActivity"
+            android:name="com.kmitl.movealarm.ScoreboardActivity"
             android:label="@string/title_activity_scoreboard"></activity>
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -96,28 +96,28 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".CreateGroupActivity"
+            android:name="com.kmitl.movealarm.CreateGroupActivity"
             android:label="@string/title_activity_create_group"></activity>
         <activity
-            android:name=".JoinGroupActivity"
+            android:name="com.kmitl.movealarm.JoinGroupActivity"
             android:label="@string/title_activity_join_group"></activity>
         <activity
-            android:name=".GroupMainActivity"
+            android:name="com.kmitl.movealarm.GroupMainActivity"
             android:label="@string/title_activity_group_main"></activity>
         <activity
-            android:name=".MemberGroupActivity"
+            android:name="com.kmitl.movealarm.MemberGroupActivity"
             android:label="@string/title_activity_member_group"></activity>
         <activity
-            android:name=".ProgressActivity"
+            android:name="com.kmitl.movealarm.ProgressActivity"
             android:label="@string/title_activity_progress"></activity>
         <activity
-            android:name=".EventActivity"
+            android:name="com.kmitl.movealarm.EventActivity"
             android:label="@string/title_activity_event"></activity>
         <activity
-            android:name=".EventActAlarm"
+            android:name="com.kmitl.movealarm.EventActAlarm"
             android:label="@string/title_activity_eventact_alarm"></activity>
         <activity
-            android:name=".AgreementActivity"
+            android:name="com.kmitl.movealarm.AgreementActivity"
             android:label="@string/title_activity_agreement"></activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

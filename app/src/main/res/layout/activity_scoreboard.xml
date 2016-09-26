@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/scoreboardbg"
-    tools:context="com.fatel.mamtv1.ScoreboardActivity">
+    tools:context="com.kmitl.movealarm.ScoreboardActivity">
 
     <android.support.v4.view.ViewPager
     android:id="@+id/pager"
