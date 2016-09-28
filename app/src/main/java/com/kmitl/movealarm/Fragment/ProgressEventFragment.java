@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.kmitl.movealarm.Model.Group;
 import com.kmitl.movealarm.R;
 import com.kmitl.movealarm.Service.Cache;
+import com.kmitl.movealarm.Service.MyApplication;
+import com.kmitl.movealarm.Service.UserManage;
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
 
 
@@ -49,7 +51,9 @@ public class ProgressEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_progress_event, container, false);
         //cal % of circular progress
         //edit
-        Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        //Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        Group groupuser = Group.find(UserManage.getCurrentUser().getGroupId(), MyApplication.getAppContext());
+
         if(groupuser != null){
             int totalExerciseTime_week = groupuser.getProgress().getNeck()+
                     groupuser.getProgress().getShoulder()+groupuser.getProgress().getChestBack()+

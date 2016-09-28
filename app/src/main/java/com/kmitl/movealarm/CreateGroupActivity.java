@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.util.Log;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.kmitl.movealarm.Model.Group;
+import com.kmitl.movealarm.Model.GroupProgress;
 import com.kmitl.movealarm.Model.StatusDescription;
 import com.kmitl.movealarm.Model.User;
 import com.kmitl.movealarm.RESTService.Implement.GroupServiceImp;
@@ -66,6 +68,8 @@ public class CreateGroupActivity extends AppCompatActivity {
                         group.setGroupId(Converter.toInt(response.body().getData().get("id")));
                         user.save(CreateGroupActivity.this);
                         group.save(CreateGroupActivity.this);
+                        group.setProgress(new GroupProgress(group.getGroupId()));
+                        group.getProgress().save(CreateGroupActivity.this);
                         Cache.getInstance().putData("groupData", group);
                         Intent intent = new Intent(CreateGroupActivity.this, GroupMainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

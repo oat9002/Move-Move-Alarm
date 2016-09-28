@@ -60,6 +60,8 @@ public class JoinGroupActivity extends AppCompatActivity {
                 UserManage.getCurrentUser().setGroupId(response.body().getGroupId());
                 Group group = response.body();
                 Cache.getInstance().putData("groupData", group);
+                group.save(JoinGroupActivity.this);
+                group.getProgress().save(JoinGroupActivity.this);
                 Intent intent = new Intent(JoinGroupActivity.this, GroupMainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("groupData", group);

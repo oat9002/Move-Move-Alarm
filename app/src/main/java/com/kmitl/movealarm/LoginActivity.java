@@ -176,8 +176,8 @@ public class LoginActivity extends AppCompatActivity {
                             if(group == null)
                                 return;
                             Cache.getInstance().putData("groupData", group);
-                            group.save(getApplicationContext());
-                            group.getProgress().save(getApplicationContext());
+//                            group.save(getApplicationContext());
+//                            group.getProgress().save(getApplicationContext());
                         }
 
                         @Override

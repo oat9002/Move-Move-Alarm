@@ -21,6 +21,7 @@ import com.kmitl.movealarm.Model.Group;
 import com.kmitl.movealarm.Model.StatusDescription;
 import com.kmitl.movealarm.RESTService.Implement.GroupServiceImp;
 import com.kmitl.movealarm.Service.Cache;
+import com.kmitl.movealarm.Service.MyApplication;
 import com.kmitl.movealarm.Service.UserManage;
 
 import retrofit.Callback;
@@ -120,12 +121,14 @@ public class EventActAlarm extends AppCompatActivity {
         updatecancel();
     }
     public void updatecancel(){
-        Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        final Group groupuser = Group.find(UserManage.getCurrentUser().getGroupId(),EventActAlarm.this);
+//        Group groupuser = (Group) Cache.getInstance().getData("groupData");
         if(groupuser!=null){
             int cancelweek = groupuser.getProgress().getDeclination()+1;
             int totalweek = groupuser.getProgress().getTotalActivity()+1;
             groupuser.getProgress().setDeclination(cancelweek);
             groupuser.getProgress().setTotalActivity(totalweek);
+            groupuser.getProgress().save(MyApplication.getAppContext());
             GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {

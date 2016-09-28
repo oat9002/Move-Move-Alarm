@@ -47,7 +47,8 @@ public class GroupMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_main);
         ButterKnife.bind(this);
-        groupData = (Group) getIntent().getSerializableExtra("groupData");
+//        groupData = (Group) getIntent().getSerializableExtra("groupData");
+        groupData = Group.find(UserManage.getCurrentUser().getGroupId(),getApplicationContext());
         userManage = UserManage.getInstance(this);
         EventServiceImp.getInstance().getEvent(new Callback<Event>() {
             @Override

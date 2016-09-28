@@ -23,12 +23,13 @@ public class Group implements Serializable{
     private String name;
     private String status;
     private int score;
+    //private int adminId;
     private User admin;
     private GroupProgress progress;
     private List<User> members = new ArrayList<>();
 
     public static final int DATABASE_VERSION = 1;
-    public static final String TABLE = "group";
+    public static final String TABLE = "grouptable";
 
     public class Column{
         public static final String ID = BaseColumns._ID;
@@ -39,11 +40,12 @@ public class Group implements Serializable{
         public static final String ADMINID = "adminid";
     }
     public Group(){
-        progress = new GroupProgress();
+
     }
     public Group(String name, User admin)
     {
         this.name = name;
+       // this.adminId = admin.getId();
         this.admin = admin;
         addMember(admin);
 
@@ -54,8 +56,10 @@ public class Group implements Serializable{
         this.name = name;
         this.status = status;
         this.score = score;
+        //this.adminId= adminId;
         this.admin = User.find(adminId, MyApplication.getAppContext());
         this.members = User.getGroupMembers(groupId,MyApplication.getAppContext());
+        this.progress = GroupProgress.getProgressByGroupId(MyApplication.getAppContext(),groupId);
     }
 
     public void save(Context context) {
@@ -81,8 +85,11 @@ public class Group implements Serializable{
         Group group = groupHelper.getGroup(groupId);
         if (group == null) {
             return null;
-        } else
+        }
+        else{
+            group.progress = GroupProgress.getProgressByGroupId(MyApplication.getAppContext(),group.getGroupId());
             return group;
+        }
     }
 
 

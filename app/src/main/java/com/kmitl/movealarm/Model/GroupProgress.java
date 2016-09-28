@@ -51,7 +51,18 @@ public class GroupProgress implements Serializable{
         public static final String HIPLEGCALF = "hipLegCalf";
     }
 
-    public GroupProgress() {
+    public GroupProgress(int groupId) {
+        this.groupId = groupId;
+        this.exerciseTime = 0;
+        this.acceptation = 0;
+        this.declination = 0;
+        this.totalActivity = 0;
+        this.neck = 0;
+        this.shoulder = 0;
+        this.chestBack = 0;
+        this.wrist =0;
+        this.waist =0;
+        this.hipLegCalf = 0;
     }
 
     public GroupProgress(int id,

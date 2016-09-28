@@ -23,6 +23,8 @@ import com.kmitl.movealarm.Model.Posture;
 import com.kmitl.movealarm.Model.StatusDescription;
 import com.kmitl.movealarm.RESTService.Implement.GroupServiceImp;
 import com.kmitl.movealarm.Service.Cache;
+import com.kmitl.movealarm.Service.MyApplication;
+import com.kmitl.movealarm.Service.UserManage;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -177,14 +179,19 @@ public class EventActivity extends AppCompatActivity {
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i1);
                 //send score to back
-                Group group = (Group) Cache.getInstance().getData("groupData");
+
+                final Group group = Group.find(UserManage.getCurrentUser().getGroupId(),EventActivity.this);
+                //Group group = (Group) Cache.getInstance().getData("groupData");
                 group.addScore(2);
                 updateEvent(img,group);
                 GroupServiceImp.getInstance().updateGroup(group, new Callback<StatusDescription>() {
                     @Override
                     public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
 //                        Log.i("response from server", response.body().toString());
-                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
+
+                        group.save(MyApplication.getAppContext());
+                        group.getProgress().save(MyApplication.getAppContext());
+//                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -229,7 +236,8 @@ public class EventActivity extends AppCompatActivity {
         Snackbar.make(txtA, text, Snackbar.LENGTH_LONG).show();
     }
     public void updatecancel(){
-        Group groupuser = (Group) Cache.getInstance().getData("groupData");
+        final Group groupuser = Group.find(UserManage.getCurrentUser().getGroupId(),EventActivity.this);
+//        Group groupuser = (Group) Cache.getInstance().getData("groupData");
         if(groupuser!=null){
             int cancelweek = groupuser.getProgress().getDeclination()+1;
             int totalweek = groupuser.getProgress().getTotalActivity()+1;
@@ -239,6 +247,7 @@ public class EventActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
 //                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
+                    groupuser.getProgress().save(MyApplication.getAppContext());
                 }
 
                 @Override
