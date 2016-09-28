@@ -56,7 +56,7 @@ public class EventActivity extends AppCompatActivity {
     private static final String FORMAT = "%02d:%02d";
     public static Context context;
     private MediaPlayer mediaPlayer;
-
+    private MediaPlayer songPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,7 @@ public class EventActivity extends AppCompatActivity {
             frameAnimation.start();
 
         }
-
+        playSong();
         time1 =new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -221,6 +221,9 @@ public class EventActivity extends AppCompatActivity {
             time2.cancel();
             time2=null;
         }
+        if(songPlayer.isPlaying()){
+            songPlayer.stop();
+        }
         //history
 
         // TODO update progress
@@ -291,4 +294,14 @@ public class EventActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this,R.raw.bell);
         mediaPlayer.start();
     }
+    public void playSong(){
+
+        if(songPlayer != null){
+            songPlayer.stop();
+            songPlayer.release();
+        }
+        songPlayer = MediaPlayer.create(this,R.raw.exercise_sound);
+        songPlayer.start();
+    }
+
 }
