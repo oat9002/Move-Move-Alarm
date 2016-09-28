@@ -170,7 +170,7 @@ public class EventActivity extends AppCompatActivity {
                     vdoView.stopPlayback();
                 //sent data to serve
 
-
+                count++;
                 //history
                 // TODO update progress
                 //
@@ -184,13 +184,14 @@ public class EventActivity extends AppCompatActivity {
                 //Group group = (Group) Cache.getInstance().getData("groupData");
                 group.addScore(2);
                 updateEvent(img,group);
+                group.save(MyApplication.getAppContext());
+                group.getProgress().save(MyApplication.getAppContext());
+
                 GroupServiceImp.getInstance().updateGroup(group, new Callback<StatusDescription>() {
                     @Override
                     public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
 //                        Log.i("response from server", response.body().toString());
 
-                        group.save(MyApplication.getAppContext());
-                        group.getProgress().save(MyApplication.getAppContext());
 //                        Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_SHORT).show();
                     }
 
@@ -243,11 +244,13 @@ public class EventActivity extends AppCompatActivity {
             int totalweek = groupuser.getProgress().getTotalActivity()+1;
             groupuser.getProgress().setDeclination(cancelweek);
             groupuser.getProgress().setTotalActivity(totalweek);
+            groupuser.getProgress().setExerciseTime(groupuser.getProgress().getExerciseTime()+(count));
+            groupuser.getProgress().save(MyApplication.getAppContext());
+
             GroupServiceImp.getInstance().updateGroup(groupuser, new Callback<StatusDescription>() {
                 @Override
                 public void onResponse(retrofit.Response<StatusDescription> response, Retrofit retrofit) {
 //                    Toast.makeText(getApplicationContext(), "สามารถอัปเดตข้อมูลไปยังเซิร์ฟเวอร์ได้", Toast.LENGTH_LONG).show();
-                    groupuser.getProgress().save(MyApplication.getAppContext());
                 }
 
                 @Override
@@ -276,7 +279,7 @@ public class EventActivity extends AppCompatActivity {
             }
             group.getProgress().setAcceptation(group.getProgress().getAcceptation()+1);
             group.getProgress().setTotalActivity(group.getProgress().getTotalActivity()+1);
-            group.getProgress().setExerciseTime(group.getProgress().getExerciseTime()+(1*numberofimg));
+            group.getProgress().setExerciseTime(group.getProgress().getExerciseTime()+(count));
         }
     }
     public void playBell(){

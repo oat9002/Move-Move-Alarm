@@ -31,6 +31,7 @@ import com.kmitl.movealarm.RESTService.Implement.EventServiceImp;
 import com.kmitl.movealarm.RESTService.Implement.GroupServiceImp;
 import com.kmitl.movealarm.RESTService.Implement.UserServiceImp;
 import com.kmitl.movealarm.Service.Cache;
+import com.kmitl.movealarm.Service.MyApplication;
 import com.kmitl.movealarm.Service.UserManage;
 
 import java.security.MessageDigest;
@@ -176,8 +177,8 @@ public class LoginActivity extends AppCompatActivity {
                             if(group == null)
                                 return;
                             Cache.getInstance().putData("groupData", group);
-//                            group.save(getApplicationContext());
-//                            group.getProgress().save(getApplicationContext());
+                            group.save(MyApplication.getAppContext());
+                            group.getProgress().save(MyApplication.getAppContext());
                         }
 
                         @Override

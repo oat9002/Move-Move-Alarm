@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.util.Log;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.kmitl.movealarm.RESTService.Implement.EventServiceImp;
 import com.kmitl.movealarm.RESTService.Implement.GroupServiceImp;
 import com.kmitl.movealarm.Service.Cache;
 import com.kmitl.movealarm.Service.Converter;
+import com.kmitl.movealarm.Service.MyApplication;
 import com.kmitl.movealarm.Service.UserManage;
 
 import java.text.DateFormat;
@@ -48,38 +50,73 @@ public class GroupMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_main);
         ButterKnife.bind(this);
 //        groupData = (Group) getIntent().getSerializableExtra("groupData");
-        groupData = Group.find(UserManage.getCurrentUser().getGroupId(),getApplicationContext());
-        userManage = UserManage.getInstance(this);
-        EventServiceImp.getInstance().getEvent(new Callback<Event>() {
+        User user = UserManage.getCurrentUser();
+
+
+        GroupServiceImp.getInstance().findByUser(user, new Callback<Group>() {
             @Override
-            public void onResponse(Response<Event> response, Retrofit retrofit) {
-                DateFormat dateFormat = new SimpleDateFormat("hh : mm  aa");
-                event.setText(dateFormat.format(response.body().getTime().getTime()));
-                Cache.getInstance().putData("eventData", response.body());
+            public void onResponse(retrofit.Response<Group> response, Retrofit retrofit) {
+                Group group = response.body();
+                if(group == null)
+                    return;
+                groupData = group;
+
+                groupData.save(MyApplication.getAppContext());
+                groupData.getProgress().save(MyApplication.getAppContext());
+
+
+                String code = String.format("%0" + (4 - Converter.toString(groupData.getGroupId()).length()) + "d%s", 0, groupData.getGroupId());
+                groupCode.setText(code);
+                groupName.setText(groupData.getName());
+                adminName.setText(groupData.getAdmin().getFacebookFirstName());
+                groupScore.setText("" + groupData.getScore());
+
+
+                if(groupData.getAdmin().getId() == userManage.getCurrentUser().getId()){
+                    exitGroup.setText("ลบกลุ่ม");
+                }
+                else {
+                    exitGroup.setText("ออกจากกลุ่ม");
+                }
+//                amountMember.setText("0");
+
+                EventServiceImp.getInstance().getEvent(new Callback<Event>() {
+                    @Override
+                    public void onResponse(Response<Event> response, Retrofit retrofit) {
+                        DateFormat dateFormat = new SimpleDateFormat("hh : mm  aa");
+                        event.setText(dateFormat.format(response.body().getTime().getTime()));
+                        Cache.getInstance().putData("eventData", response.body());
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+
+                    }
+                });
+
             }
 
             @Override
             public void onFailure(Throwable t) {
+                groupData = Group.find(UserManage.getCurrentUser().getGroupId(),getApplicationContext());
 
+                String code = String.format("%0" + (4 - Converter.toString(groupData.getGroupId()).length()) + "d%s", 0, groupData.getGroupId());
+                groupCode.setText(code);
+                groupName.setText(groupData.getName());
+                adminName.setText(groupData.getAdmin().getFacebookFirstName());
+                amountMember.setText("" + groupData.getMembers().size());
+                groupScore.setText("" + groupData.getScore());
+
+                if(groupData.getAdmin().getId() == userManage.getCurrentUser().getId()){
+                    exitGroup.setText("ลบกลุ่ม");
+                }
+                else {
+                    exitGroup.setText("ออกจากกลุ่ม");
+                }
             }
         });
-        try {
-            String code = String.format("%0" + (4 - Converter.toString(groupData.getGroupId()).length()) + "d%s", 0, groupData.getGroupId());
-            groupCode.setText(code);
-            groupName.setText(groupData.getName());
-            adminName.setText(groupData.getAdmin().getFacebookFirstName());
-            amountMember.setText("" + groupData.getMembers().size());
-            groupScore.setText("" + groupData.getScore());
-
-            if(groupData.getAdmin().getId() == userManage.getCurrentUser().getId()){
-                exitGroup.setText("ลบกลุ่ม");
-            }
-            else {
-                exitGroup.setText("ออกจากกลุ่ม");
-            }
-        } catch (Exception e) {
-//            Log.i("setup group", e.toString());
-        }
+//
     }
 
     @Override
@@ -114,6 +151,7 @@ public class GroupMainActivity extends AppCompatActivity {
                 public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
 
                     userManage.getCurrentUser().setGroupId(0);
+                    userManage.getCurrentUser().save(GroupMainActivity.this);
                     Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
                     Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);
@@ -137,6 +175,7 @@ public class GroupMainActivity extends AppCompatActivity {
                 public void onResponse(retrofit.Response<User> response, Retrofit retrofit) {
 
                     userManage.getCurrentUser().setGroupId(0);
+                    userManage.getCurrentUser().save(GroupMainActivity.this);
                     Intent intent2 = new Intent(GroupMainActivity.this, MainActivity.class);
                     Cache.getInstance().putData("groupData",null);
                     startActivity(intent2);

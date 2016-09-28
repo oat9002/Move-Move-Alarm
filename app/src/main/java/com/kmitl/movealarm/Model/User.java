@@ -118,8 +118,11 @@ public class User implements Serializable{
         User checkUser = userHelper.getUser(id);
         if (checkUser == null) {
             this.internalId = userHelper.addUser(this);
-        } else {
+        }
+        else{
             this.internalId = checkUser.getInternalId();
+            this.login = checkUser.getLogin();
+            this.statesw = checkUser.getStatesw();
             userHelper.updateUser(this);
         }
     }

@@ -172,6 +172,7 @@ public class Activity extends AppCompatActivity {
                     frameAnimation.stop();
                 else
                     vdoView.stopPlayback();
+                count++;
                 Intent i1 = new Intent(Activity.this, Camera.class);
                 i1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i1);
@@ -253,6 +254,10 @@ public class Activity extends AppCompatActivity {
             int totalweek = user.getWeeklyProgress().getTotalActivity()+1;
             user.getWeeklyProgress().setDeclination(cancelweek);
             user.getWeeklyProgress().setTotalActivity(totalweek);
+
+            user.getDailyProgress().setExerciseTime(user.getDailyProgress().getExerciseTime()+(count));
+            user.getWeeklyProgress().setExerciseTime(user.getWeeklyProgress().getExerciseTime()+(count));
+
             user.save(context);
             user.getDailyProgress().save(context,1);
             user.getWeeklyProgress().save(context,0);
@@ -295,10 +300,10 @@ public class Activity extends AppCompatActivity {
             }
             user.getDailyProgress().setAcceptation(user.getDailyProgress().getAcceptation()+1);
             user.getDailyProgress().setTotalActivity(user.getDailyProgress().getTotalActivity()+1);
-            user.getDailyProgress().setExerciseTime(user.getDailyProgress().getExerciseTime()+(1*numberofimg));
+            user.getDailyProgress().setExerciseTime(user.getDailyProgress().getExerciseTime()+(count));
             user.getWeeklyProgress().setAcceptation(user.getWeeklyProgress().getAcceptation()+1);
             user.getWeeklyProgress().setTotalActivity(user.getWeeklyProgress().getTotalActivity()+1);
-            user.getWeeklyProgress().setExerciseTime(user.getWeeklyProgress().getExerciseTime()+(1*numberofimg));
+            user.getWeeklyProgress().setExerciseTime(user.getWeeklyProgress().getExerciseTime()+(count));
         }
 
     }

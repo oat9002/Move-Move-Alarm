@@ -55,10 +55,7 @@ public class ProgressEventFragment extends Fragment {
         Group groupuser = Group.find(UserManage.getCurrentUser().getGroupId(), MyApplication.getAppContext());
 
         if(groupuser != null){
-            int totalExerciseTime_week = groupuser.getProgress().getNeck()+
-                    groupuser.getProgress().getShoulder()+groupuser.getProgress().getChestBack()+
-                    groupuser.getProgress().getWrist()+groupuser.getProgress().getWaist()+
-                    groupuser.getProgress().getHipLegCalf();
+            int totalExerciseTime_week = groupuser.getProgress().getExerciseTime();
             int totalActivity_week = groupuser.getProgress().getTotalActivity();
             if(totalExerciseTime_week == 0){
                 totalExerciseTime_week = 1;
@@ -75,7 +72,7 @@ public class ProgressEventFragment extends Fragment {
             barHipLegCalfweek = (groupuser.getProgress().getHipLegCalf()*100)/totalExerciseTime_week;
             timePerPicE = groupuser.getProgress().getExerciseTime();
             numberofneckweek = groupuser.getProgress().getNeck();
-            numberofshoulderweek = groupuser.getProgress().getChestBack();
+            numberofshoulderweek = groupuser.getProgress().getShoulder();
             numberofbreastbackweek = groupuser.getProgress().getChestBack();
             numberofwristweek = groupuser.getProgress().getWrist();
             numberofwaistweek = groupuser.getProgress().getWaist();
