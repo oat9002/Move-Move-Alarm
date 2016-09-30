@@ -308,7 +308,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="อกและหลัง"/>
+                            android:text="ลำตัว"/>
                         <TextView
                             android:id="@+id/timeFraction4"
                             android:layout_width="95dp"
@@ -347,7 +347,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="ข้อมือ"/>
+                            android:text="แขน"/>
                         <TextView
                             android:id="@+id/timeFraction5"
                             android:layout_width="95dp"
@@ -387,7 +387,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="เอว"/>
+                            android:text="หน้าอก หน้าท้อง และหลัง"/>
                         <TextView
                             android:id="@+id/timeFraction6"
                             android:layout_width="95dp"
@@ -427,7 +427,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="สะโพก ขา และน่อง"/>
+                            android:text="เท้า ขา หน้าแข้ง และน่อง"/>
                         <TextView
                             android:id="@+id/timeFraction7"
                             android:layout_width="95dp"
@@ -564,7 +564,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="อกและหลัง"/>
+                            android:text="ลำตัว"/>
                         <TextView
                             android:id="@+id/timeFraction10"
                             android:layout_width="95dp"
@@ -603,7 +603,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="ข้อมือ"/>
+                            android:text="แขน"/>
                         <TextView
                             android:id="@+id/timeFraction11"
                             android:layout_width="95dp"
@@ -643,7 +643,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="เอว"/>
+                            android:text="หน้าอก หน้าท้อง และหลัง"/>
                         <TextView
                             android:id="@+id/timeFraction12"
                             android:layout_width="95dp"
@@ -683,7 +683,7 @@
                             android:padding="8dp"
                             android:textColor="#222"
                             android:textSize="18dp"
-                            android:text="สะโพก ขา และน่อง"/>
+                            android:text="เท้า ขา หน้าแข้ง และ น่อง"/>
                         <TextView
                             android:id="@+id/timeFraction13"
                             android:layout_width="95dp"

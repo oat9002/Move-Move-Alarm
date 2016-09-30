@@ -31,8 +31,8 @@ public class ChoosePostureFragment extends android.support.v4.app.Fragment  {
     int[] image = {R.drawable.picneck, R.drawable.picelbow,
             R.drawable.picbreast, R.drawable.picneckhand,
             R.drawable.piceaw, R.drawable.picleg};
-    String[] title  = {"คอ", "ไหล่", "อกและหลัง"
-            , "ข้อมือ", "เอว", "สะโพก ขาและน่อง"};
+    String[] title  = {"คอ", "ไหล่", "ลำตัว"
+            , "แขน", "หน้าอก หน้าท้อง และ หลัง", "เท้า ขา หน้าแข้ง และน่อง"};
     public ChoosePostureFragment() {
 
     }
