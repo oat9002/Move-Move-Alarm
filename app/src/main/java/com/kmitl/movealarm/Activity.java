@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.media.MediaPlayer;
 import java.util.ArrayList;
@@ -43,9 +44,9 @@ public class Activity extends AppCompatActivity {
     @BindView(R.id.atime) TextView txtA;
     @BindView(R.id.des) TextView txtDes;
     @BindView(R.id.imgname) TextView txtName;
-    @BindView(R.id.img) ImageView imgView;
+//    @BindView(R.id.img) ImageView imgView;
     @BindView(R.id.vdo) VideoView vdoView;
-    AnimationDrawable frameAnimation;
+//    AnimationDrawable frameAnimation;
     int count=0;
     ArrayList<Posture> img ;
     int exerciseImg;
@@ -84,24 +85,30 @@ public class Activity extends AppCompatActivity {
         txtDes.setText(exerciseDes);
         txtName.setText(exerciseName);
 
-        if(exerciseVdo != -1){
+//        if(exerciseVdo != -1){
             vdoView.setVisibility(View.VISIBLE);
-            imgView.setVisibility(View.INVISIBLE);
+//            imgView.setVisibility(View.INVISIBLE);
             vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+exerciseVdo));
+            vdoView.setOnPreparedListener (new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                }
+            });
             vdoView.start();
-        }
-        else{
-
-            vdoView.setBackgroundResource(0);
-            vdoView.setVisibility(View.INVISIBLE);
-            imgView.setVisibility(View.VISIBLE);
-            imgView.setBackgroundResource(exerciseImg);
+//        }
+//        else{
+//
+//            vdoView.setBackgroundResource(0);
+//            vdoView.setVisibility(View.INVISIBLE);
+//            imgView.setVisibility(View.VISIBLE);
+//            imgView.setBackgroundResource(exerciseImg);
             // Get the background, which has been compiled to an AnimationDrawable object.
-            frameAnimation = (AnimationDrawable) imgView.getBackground();
+//            frameAnimation = (AnimationDrawable) imgView.getBackground();
             // Start the animation (looped playback by default).
-            frameAnimation.start();
+//            frameAnimation.start();
 
-        }
+//        }
         playSong();
         time1 = new CountDownTimer(60000, 1000) {
 
@@ -117,9 +124,9 @@ public class Activity extends AppCompatActivity {
             public void onFinish() {
                 playBell();
                 txtR.setText("เสร็จสิ้น!");
-                if(exerciseVdo == -1)
-                    frameAnimation.stop();
-                else
+//                if(exerciseVdo == -1)
+//                    frameAnimation.stop();
+//                else
                     vdoView.stopPlayback();
                 count++;
                 if(count<img.size()) {
@@ -131,24 +138,30 @@ public class Activity extends AppCompatActivity {
 
                     txtDes.setText(exerciseDes);
                     txtName.setText(exerciseName);
-                    if(exerciseVdo != -1){
+//                    if(exerciseVdo != -1){
                         vdoView.setVisibility(View.VISIBLE);
-                        imgView.setVisibility(View.INVISIBLE);
+//                        imgView.setVisibility(View.INVISIBLE);
                         vdoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+exerciseVdo));
+                        vdoView.setOnPreparedListener (new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                mp.setLooping(true);
+                            }
+                        });
                         vdoView.start();
-                    }
-                    else{
+//                    }
+//                    else{
+//
+//                        vdoView.setBackgroundResource(0);
+//                        vdoView.setVisibility(View.INVISIBLE);
+//                        imgView.setVisibility(View.VISIBLE);
+//                        imgView.setBackgroundResource(exerciseImg);
+//                        // Get the background, which has been compiled to an AnimationDrawable object.
+//                        frameAnimation = (AnimationDrawable) imgView.getBackground();
+//                        // Start the animation (looped playback by default).
+//                        frameAnimation.start();
 
-                        vdoView.setBackgroundResource(0);
-                        vdoView.setVisibility(View.INVISIBLE);
-                        imgView.setVisibility(View.VISIBLE);
-                        imgView.setBackgroundResource(exerciseImg);
-                        // Get the background, which has been compiled to an AnimationDrawable object.
-                        frameAnimation = (AnimationDrawable) imgView.getBackground();
-                        // Start the animation (looped playback by default).
-                        frameAnimation.start();
-
-                    }
+//                    }
 
                     start();
                 }
@@ -169,9 +182,9 @@ public class Activity extends AppCompatActivity {
                 playBell();
                 txtA.setText("เสร็จสิ้น!");
 
-                if(exerciseVdo == -1)
-                    frameAnimation.stop();
-                else
+//                if(exerciseVdo == -1)
+//                    frameAnimation.stop();
+//                else
                     vdoView.stopPlayback();
                 count++;
                 Intent i1 = new Intent(Activity.this, Camera.class);
@@ -205,9 +218,9 @@ public class Activity extends AppCompatActivity {
 
     public void linkHome(View view)
     {
-        if(exerciseVdo == -1)
-            frameAnimation.stop();
-        else
+//        if(exerciseVdo == -1)
+//            frameAnimation.stop();
+//        else
             vdoView.stopPlayback();
         if(time1!=null){
             time1.cancel();
