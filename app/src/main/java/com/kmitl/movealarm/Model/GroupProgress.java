@@ -27,11 +27,13 @@ public class GroupProgress implements Serializable{
     int neck;
     int shoulder;
     @SerializedName("chest_back")
-    int chestBack;
-    int wrist;
-    int waist;
+    int body;
+    @SerializedName("wrist")
+    int arm;
+    @SerializedName("waist")
+    int breast_belly_back;
     @SerializedName("hip_leg_calf")
-    int hipLegCalf;
+    int feet_leg_shin_calf;
 
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE = "groupProgress";
@@ -45,10 +47,10 @@ public class GroupProgress implements Serializable{
         public static final String TOTAL = "total";
         public static final String NECK = "neck";
         public static final String SHOULDER = "shoulder";
-        public static final String CHESTBACK ="chestBack";
-        public static final String WRIST = "wrist";
-        public static final String WAIST = "waist";
-        public static final String HIPLEGCALF = "hipLegCalf";
+        public static final String BODY ="body";
+        public static final String ARM = "arm";
+        public static final String BREASTBELLYBACK = "breast_belly_back";
+        public static final String FEETLEGSHINCALF = "feet_leg_shin_calf";
     }
 
     public GroupProgress(int groupId) {
@@ -59,10 +61,10 @@ public class GroupProgress implements Serializable{
         this.totalActivity = 0;
         this.neck = 0;
         this.shoulder = 0;
-        this.chestBack = 0;
-        this.wrist =0;
-        this.waist =0;
-        this.hipLegCalf = 0;
+        this.body = 0;
+        this.arm =0;
+        this.breast_belly_back =0;
+        this.feet_leg_shin_calf = 0;
     }
 
     public GroupProgress(int id,
@@ -73,10 +75,10 @@ public class GroupProgress implements Serializable{
                          int totalActivity,
                          int neck,
                          int shoulder,
-                         int chestBack,
-                         int wrist,
-                         int waist,
-                         int hipLegCalf){
+                         int body,
+                         int arm,
+                         int breast_belly_back,
+                         int feet_leg_shin_calf){
         this.id = id;
         this.groupId = groupId;
         this.exerciseTime = exerciseTime;
@@ -85,10 +87,10 @@ public class GroupProgress implements Serializable{
         this.totalActivity = totalActivity;
         this.neck = neck;
         this.shoulder =shoulder;
-        this.chestBack =chestBack;
-        this.wrist = wrist;
-        this.waist =waist;
-        this.hipLegCalf = hipLegCalf;
+        this.body = body;
+        this.arm =arm;
+        this.breast_belly_back =breast_belly_back;
+        this.feet_leg_shin_calf = feet_leg_shin_calf;
     }
 
     public void save(Context context) {

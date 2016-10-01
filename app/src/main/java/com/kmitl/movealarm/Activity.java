@@ -302,17 +302,17 @@ public class Activity extends AppCompatActivity {
                     user.getDailyProgress().setShoulder(user.getDailyProgress().getShoulder() + 1);
                     user.getWeeklyProgress().setShoulder(user.getWeeklyProgress().getShoulder() + 1);}
                 else if((mode.get(i)).getMode()==3){
-                    user.getDailyProgress().setChestBack(user.getDailyProgress().getChestBack() + 1);
-                    user.getWeeklyProgress().setChestBack(user.getWeeklyProgress().getChestBack() + 1);}
+                    user.getDailyProgress().setBody(user.getDailyProgress().getBody() + 1);
+                    user.getWeeklyProgress().setBody(user.getWeeklyProgress().getBody() + 1);}
                 else if((mode.get(i)).getMode() == 4) {
-                    user.getDailyProgress().setWrist(user.getDailyProgress().getWrist() + 1);
-                    user.getWeeklyProgress().setWrist(user.getWeeklyProgress().getWrist() + 1);}
+                    user.getDailyProgress().setArm(user.getDailyProgress().getArm() + 1);
+                    user.getWeeklyProgress().setArm(user.getWeeklyProgress().getArm() + 1);}
                 else if((mode.get(i)).getMode() == 5) {
-                    user.getDailyProgress().setWaist(user.getDailyProgress().getWaist() + 1);
-                    user.getWeeklyProgress().setWaist(user.getWeeklyProgress().getWaist() + 1);}
+                    user.getDailyProgress().setBreast_belly_back(user.getDailyProgress().getBreast_belly_back() + 1);
+                    user.getWeeklyProgress().setBreast_belly_back(user.getWeeklyProgress().getBreast_belly_back() + 1);}
                 else if((mode.get(i)).getMode()==6){
-                    user.getDailyProgress().setHipLegCalf(user.getDailyProgress().getHipLegCalf() + 1);
-                    user.getWeeklyProgress().setHipLegCalf(user.getWeeklyProgress().getHipLegCalf() + 1);}
+                    user.getDailyProgress().setFeet_leg_shin_calf(user.getDailyProgress().getFeet_leg_shin_calf() + 1);
+                    user.getWeeklyProgress().setFeet_leg_shin_calf(user.getWeeklyProgress().getFeet_leg_shin_calf() + 1);}
 
             }
             user.getDailyProgress().setAcceptation(user.getDailyProgress().getAcceptation()+1);

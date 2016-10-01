@@ -60,11 +60,11 @@ public class ProgressActivityFragment extends Fragment {
         User user = UserManage.getCurrentUser();
         if(user!=null){
             int totalExerciseTime_daily =  user.getDailyProgress().getNeck() + user.getDailyProgress().getShoulder() +
-                                           user.getDailyProgress().getChestBack() + user.getDailyProgress().getWrist() +
-                                           user.getDailyProgress().getWaist() + user.getDailyProgress().getHipLegCalf();
+                                           user.getDailyProgress().getBody() + user.getDailyProgress().getArm() +
+                                           user.getDailyProgress().getBreast_belly_back() + user.getDailyProgress().getFeet_leg_shin_calf();
             int totalExerciseTime_week = user.getWeeklyProgress().getNeck() + user.getWeeklyProgress().getShoulder() +
-                                         user.getWeeklyProgress().getChestBack() + user.getWeeklyProgress().getWrist() +
-                                         user.getWeeklyProgress().getWaist() + user.getWeeklyProgress().getHipLegCalf();
+                                         user.getWeeklyProgress().getBody() + user.getWeeklyProgress().getArm() +
+                                         user.getWeeklyProgress().getBreast_belly_back() + user.getWeeklyProgress().getFeet_leg_shin_calf();
             int totalActivity_daily = user.getDailyProgress().getTotalActivity();
             int totalActivity_week = user.getWeeklyProgress().getTotalActivity();
             if(totalExerciseTime_daily == 0  ) {
@@ -83,30 +83,30 @@ public class ProgressActivityFragment extends Fragment {
             cirProgressstatusweek = (user.getWeeklyProgress().getAcceptation() * 100) / totalActivity_week;
             barNeck = (user.getDailyProgress().getNeck() * 100) / totalExerciseTime_daily;
             barShoulder = (user.getDailyProgress().getShoulder() * 100) / totalExerciseTime_daily;
-            barChestBack = (user.getDailyProgress().getChestBack() * 100) / totalExerciseTime_daily;
-            barWrist = (user.getDailyProgress().getWrist() * 100) / totalExerciseTime_daily;
-            barwaist = (user.getDailyProgress().getWaist() * 100) / totalExerciseTime_daily;
-            barHipLegCalf = (user.getDailyProgress().getHipLegCalf() * 100) / totalExerciseTime_daily;
+            barChestBack = (user.getDailyProgress().getBody() * 100) / totalExerciseTime_daily;
+            barWrist = (user.getDailyProgress().getArm() * 100) / totalExerciseTime_daily;
+            barwaist = (user.getDailyProgress().getBreast_belly_back() * 100) / totalExerciseTime_daily;
+            barHipLegCalf = (user.getDailyProgress().getFeet_leg_shin_calf() * 100) / totalExerciseTime_daily;
             barNeckWeek = (user.getWeeklyProgress().getNeck() * 100) / totalExerciseTime_week;
             barShoulderWeek = (user.getWeeklyProgress().getShoulder() * 100) / totalExerciseTime_week;
-            barChestBackWeek = (user.getWeeklyProgress().getChestBack() * 100) / totalExerciseTime_week;
-            barWristWeek = (user.getWeeklyProgress().getWrist() * 100) / totalExerciseTime_week;
-            barWaistWeek = (user.getWeeklyProgress().getWaist() * 100) / totalExerciseTime_week;
-            barHipLegCalfWeek = (user.getWeeklyProgress().getHipLegCalf() * 100) / totalExerciseTime_week;
+            barChestBackWeek = (user.getWeeklyProgress().getBody() * 100) / totalExerciseTime_week;
+            barWristWeek = (user.getWeeklyProgress().getArm() * 100) / totalExerciseTime_week;
+            barWaistWeek = (user.getWeeklyProgress().getBreast_belly_back() * 100) / totalExerciseTime_week;
+            barHipLegCalfWeek = (user.getWeeklyProgress().getFeet_leg_shin_calf() * 100) / totalExerciseTime_week;
             timePerPic = user.getDailyProgress().getExerciseTime();
             timePerPicweek = user.getWeeklyProgress().getExerciseTime();
             numberofneck = user.getDailyProgress().getNeck();
             numberofshoulder = user.getDailyProgress().getShoulder();
-            numberofbreastback = user.getDailyProgress().getChestBack();
-            numberofwrist = user.getDailyProgress().getWrist();
-            numberofwaist = user.getDailyProgress().getWaist();
-            numberofleg = user.getDailyProgress().getHipLegCalf();
+            numberofbreastback = user.getDailyProgress().getBody();
+            numberofwrist = user.getDailyProgress().getArm();
+            numberofwaist = user.getDailyProgress().getBreast_belly_back();
+            numberofleg = user.getDailyProgress().getFeet_leg_shin_calf();
             numberofneckweek = user.getWeeklyProgress().getNeck();
             numberofshoulderweek = user.getWeeklyProgress().getShoulder();
-            numberofbreastbackweek = user.getWeeklyProgress().getChestBack();
-            numberofwristweek = user.getWeeklyProgress().getWrist();
-            numberofwaistweek = user.getWeeklyProgress().getWaist();
-            numberoflegweek = user.getWeeklyProgress().getHipLegCalf();
+            numberofbreastbackweek = user.getWeeklyProgress().getBody();
+            numberofwristweek = user.getWeeklyProgress().getArm();
+            numberofwaistweek = user.getWeeklyProgress().getBreast_belly_back();
+            numberoflegweek = user.getWeeklyProgress().getFeet_leg_shin_calf();
         }
 
         final CircularProgressBar c2 = (CircularProgressBar) view.findViewById(R.id.circularprogressbar2);

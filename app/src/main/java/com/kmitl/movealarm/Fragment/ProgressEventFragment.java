@@ -66,17 +66,17 @@ public class ProgressEventFragment extends Fragment {
             cirProgressstatusE = (groupuser.getProgress().getAcceptation()*100)/totalActivity_week;
             barneckweek = (groupuser.getProgress().getNeck()*100)/totalExerciseTime_week;
             barshoulderweek = (groupuser.getProgress().getShoulder()*100)/totalExerciseTime_week;
-            barchestback = (groupuser.getProgress().getChestBack()*100)/totalExerciseTime_week;;
-            barwristweek = (groupuser.getProgress().getWrist()*100)/totalExerciseTime_week;
-            barwaistweek = (groupuser.getProgress().getWaist()*100)/totalExerciseTime_week;
-            barHipLegCalfweek = (groupuser.getProgress().getHipLegCalf()*100)/totalExerciseTime_week;
+            barchestback = (groupuser.getProgress().getBody()*100)/totalExerciseTime_week;;
+            barwristweek = (groupuser.getProgress().getArm()*100)/totalExerciseTime_week;
+            barwaistweek = (groupuser.getProgress().getBreast_belly_back()*100)/totalExerciseTime_week;
+            barHipLegCalfweek = (groupuser.getProgress().getFeet_leg_shin_calf()*100)/totalExerciseTime_week;
             timePerPicE = groupuser.getProgress().getExerciseTime();
             numberofneckweek = groupuser.getProgress().getNeck();
             numberofshoulderweek = groupuser.getProgress().getShoulder();
-            numberofbreastbackweek = groupuser.getProgress().getChestBack();
-            numberofwristweek = groupuser.getProgress().getWrist();
-            numberofwaistweek = groupuser.getProgress().getWaist();
-            numberoflegweek = groupuser.getProgress().getHipLegCalf();
+            numberofbreastbackweek = groupuser.getProgress().getBody();
+            numberofwristweek = groupuser.getProgress().getArm();
+            numberofwaistweek = groupuser.getProgress().getBreast_belly_back();
+            numberoflegweek = groupuser.getProgress().getFeet_leg_shin_calf();
         }
 
         final CircularProgressBar cE = (CircularProgressBar) view.findViewById(R.id.circularprogressbarE);

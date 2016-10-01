@@ -272,13 +272,13 @@ public class EventActivity extends AppCompatActivity {
                 else if((mode.get(i)).getMode()==2){
                     group.getProgress().setShoulder(group.getProgress().getShoulder() + 1);}
                 else if((mode.get(i)).getMode()==3){
-                    group.getProgress().setChestBack(group.getProgress().getChestBack() + 1);}
+                    group.getProgress().setBody(group.getProgress().getBody() + 1);}
                 else if((mode.get(i)).getMode() == 4) {
-                    group.getProgress().setWrist(group.getProgress().getWrist() + 1);}
+                    group.getProgress().setArm(group.getProgress().getArm() + 1);}
                 else if((mode.get(i)).getMode() == 5) {
-                    group.getProgress().setWaist(group.getProgress().getWaist() + 1);}
+                    group.getProgress().setBreast_belly_back(group.getProgress().getBreast_belly_back() + 1);}
                 else if((mode.get(i)).getMode()==6){
-                    group.getProgress().setHipLegCalf(group.getProgress().getHipLegCalf() + 1);}
+                    group.getProgress().setFeet_leg_shin_calf(group.getProgress().getFeet_leg_shin_calf() + 1);}
             }
             group.getProgress().setAcceptation(group.getProgress().getAcceptation()+1);
             group.getProgress().setTotalActivity(group.getProgress().getTotalActivity()+1);

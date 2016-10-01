@@ -31,10 +31,10 @@ public class UserProgressHelper extends SQLiteOpenHelper {
                 UserProgress.Column.TOTAL,
                 UserProgress.Column.NECK,
                 UserProgress.Column.SHOULDER,
-                UserProgress.Column.CHESTBACK,
-                UserProgress.Column.WRIST,
-                UserProgress.Column.WAIST,
-                UserProgress.Column.HIPLEGCALF,
+                UserProgress.Column.BODY,
+                UserProgress.Column.ARM,
+                UserProgress.Column.BREASTBELLYBACK,
+                UserProgress.Column.FEETLEGSHINCALF,
                 UserProgress.Column.DAILY);
         db.execSQL(CREATE_USER_TABLE);
     }
@@ -54,10 +54,10 @@ public class UserProgressHelper extends SQLiteOpenHelper {
         values.put(UserProgress.Column.TOTAL, userProgress.getTotalActivity());
         values.put(UserProgress.Column.NECK, userProgress.getNeck());
         values.put(UserProgress.Column.SHOULDER, userProgress.getShoulder());
-        values.put(UserProgress.Column.CHESTBACK, userProgress.getChestBack());
-        values.put(UserProgress.Column.WRIST, userProgress.getWrist());
-        values.put(UserProgress.Column.WAIST, userProgress.getWaist());
-        values.put(UserProgress.Column.HIPLEGCALF, userProgress.getHipLegCalf());
+        values.put(UserProgress.Column.BODY, userProgress.getBody());
+        values.put(UserProgress.Column.ARM, userProgress.getArm());
+        values.put(UserProgress.Column.BREASTBELLYBACK, userProgress.getBreast_belly_back());
+        values.put(UserProgress.Column.FEETLEGSHINCALF, userProgress.getFeet_leg_shin_calf());
         values.put(UserProgress.Column.DAILY, daily);
 
         long id = sqLiteDatabase.insert(UserProgress.TABLE, null, values);
@@ -75,10 +75,10 @@ public class UserProgressHelper extends SQLiteOpenHelper {
         values.put(UserProgress.Column.TOTAL, userProgress.getTotalActivity());
         values.put(UserProgress.Column.NECK, userProgress.getNeck());
         values.put(UserProgress.Column.SHOULDER, userProgress.getShoulder());
-        values.put(UserProgress.Column.CHESTBACK, userProgress.getChestBack());
-        values.put(UserProgress.Column.WRIST, userProgress.getWrist());
-        values.put(UserProgress.Column.WAIST, userProgress.getWaist());
-        values.put(UserProgress.Column.HIPLEGCALF, userProgress.getHipLegCalf());
+        values.put(UserProgress.Column.BODY, userProgress.getBody());
+        values.put(UserProgress.Column.ARM, userProgress.getArm());
+        values.put(UserProgress.Column.BREASTBELLYBACK, userProgress.getBreast_belly_back());
+        values.put(UserProgress.Column.FEETLEGSHINCALF, userProgress.getFeet_leg_shin_calf());
         values.put(UserProgress.Column.DAILY, daily);
 
         int row = sqLiteDatabase.update(UserProgress.TABLE,
@@ -97,10 +97,10 @@ public class UserProgressHelper extends SQLiteOpenHelper {
                         UserProgress.Column.TOTAL,
                         UserProgress.Column.NECK,
                         UserProgress.Column.SHOULDER,
-                        UserProgress.Column.CHESTBACK,
-                        UserProgress.Column.WRIST,
-                        UserProgress.Column.WAIST,
-                        UserProgress.Column.HIPLEGCALF,
+                        UserProgress.Column.BODY,
+                        UserProgress.Column.ARM,
+                        UserProgress.Column.BREASTBELLYBACK,
+                        UserProgress.Column.FEETLEGSHINCALF,
                         UserProgress.Column.DAILY
                 },UserProgress.Column.USERID + " = ? AND "+UserProgress.Column.DAILY+" = ?",
                 new String[]{String.valueOf(UserId),String.valueOf(daily)}, null, null, null, null);

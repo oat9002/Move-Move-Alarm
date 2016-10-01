@@ -31,10 +31,10 @@ public class GroupProgressHelper extends SQLiteOpenHelper {
                 GroupProgress.Column.TOTAL,
                 GroupProgress.Column.NECK,
                 GroupProgress.Column.SHOULDER,
-                GroupProgress.Column.CHESTBACK,
-                GroupProgress.Column.WRIST,
-                GroupProgress.Column.WAIST,
-                GroupProgress.Column.HIPLEGCALF);
+                GroupProgress.Column.BODY,
+                GroupProgress.Column.ARM,
+                GroupProgress.Column.BREASTBELLYBACK,
+                GroupProgress.Column.FEETLEGSHINCALF);
         db.execSQL(CREATE_USER_TABLE);
     }
     @Override
@@ -53,10 +53,10 @@ public class GroupProgressHelper extends SQLiteOpenHelper {
         values.put(GroupProgress.Column.TOTAL, groupProgress.getTotalActivity());
         values.put(GroupProgress.Column.NECK, groupProgress.getNeck());
         values.put(GroupProgress.Column.SHOULDER, groupProgress.getShoulder());
-        values.put(GroupProgress.Column.CHESTBACK, groupProgress.getChestBack());
-        values.put(GroupProgress.Column.WRIST, groupProgress.getWrist());
-        values.put(GroupProgress.Column.WAIST, groupProgress.getWaist());
-        values.put(GroupProgress.Column.HIPLEGCALF, groupProgress.getHipLegCalf());
+        values.put(GroupProgress.Column.BODY, groupProgress.getBody());
+        values.put(GroupProgress.Column.ARM, groupProgress.getArm());
+        values.put(GroupProgress.Column.BREASTBELLYBACK, groupProgress.getBreast_belly_back());
+        values.put(GroupProgress.Column.FEETLEGSHINCALF, groupProgress.getFeet_leg_shin_calf());
 
         long id = sqLiteDatabase.insert(GroupProgress.TABLE, null, values);
         sqLiteDatabase.close();
@@ -72,10 +72,10 @@ public class GroupProgressHelper extends SQLiteOpenHelper {
         values.put(GroupProgress.Column.TOTAL, groupProgress.getTotalActivity());
         values.put(GroupProgress.Column.NECK, groupProgress.getNeck());
         values.put(GroupProgress.Column.SHOULDER, groupProgress.getShoulder());
-        values.put(GroupProgress.Column.CHESTBACK, groupProgress.getChestBack());
-        values.put(GroupProgress.Column.WRIST, groupProgress.getWrist());
-        values.put(GroupProgress.Column.WAIST, groupProgress.getWaist());
-        values.put(GroupProgress.Column.HIPLEGCALF, groupProgress.getHipLegCalf());
+        values.put(GroupProgress.Column.BODY, groupProgress.getBody());
+        values.put(GroupProgress.Column.ARM, groupProgress.getArm());
+        values.put(GroupProgress.Column.BREASTBELLYBACK, groupProgress.getBreast_belly_back());
+        values.put(GroupProgress.Column.FEETLEGSHINCALF, groupProgress.getFeet_leg_shin_calf());
         int row = sqLiteDatabase.update(GroupProgress.TABLE,
                 values,
                 GroupProgress.Column.ID + " = ? ",
@@ -92,10 +92,10 @@ public class GroupProgressHelper extends SQLiteOpenHelper {
                         GroupProgress.Column.TOTAL,
                         GroupProgress.Column.NECK,
                         GroupProgress.Column.SHOULDER,
-                        GroupProgress.Column.CHESTBACK,
-                        GroupProgress.Column.WRIST,
-                        GroupProgress.Column.WAIST,
-                        GroupProgress.Column.HIPLEGCALF
+                        GroupProgress.Column.BODY,
+                        GroupProgress.Column.ARM,
+                        GroupProgress.Column.BREASTBELLYBACK,
+                        GroupProgress.Column.FEETLEGSHINCALF
                 },GroupProgress.Column.GROUPID + " = ? ",
                 new String[]{String.valueOf(groupId)}, null, null, null, null);
         GroupProgress groupProgress;
