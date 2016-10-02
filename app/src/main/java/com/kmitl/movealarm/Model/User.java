@@ -2,10 +2,13 @@ package com.kmitl.movealarm.Model;
 
 import android.content.Context;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import com.kmitl.movealarm.Helper.UserHelper;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.kmitl.movealarm.Service.MyApplication;
+import com.kmitl.movealarm.Service.UserManage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -118,12 +121,14 @@ public class User implements Serializable{
         User checkUser = userHelper.getUser(id);
         if (checkUser == null) {
             this.internalId = userHelper.addUser(this);
+            Log.i("checkCurrent save new",this.facebookFirstName+this.login );
+
         }
         else{
             this.internalId = checkUser.getInternalId();
-            this.login = checkUser.getLogin();
-            this.statesw = checkUser.getStatesw();
             userHelper.updateUser(this);
+            Log.i("checkCurrent save old",this.facebookFirstName+this.login );
+
         }
     }
 

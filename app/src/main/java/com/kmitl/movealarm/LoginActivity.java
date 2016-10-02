@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 //import android.util.Log;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         instance = this;
         super.onCreate(savedInstanceState);
-//        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin(this)+"");
+        Log.i("checkCurrentLogin",UserManage.getInstance(this).checkCurrentLogin(this)+"");
         if(UserManage.getInstance(this).checkCurrentLogin(this))
         {
             Intent intent = new Intent(this, MainActivity.class);
@@ -176,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
                             Group group = response.body();
                             if(group == null)
                                 return;
-                            Cache.getInstance().putData("groupData", group);
+//                            Cache.getInstance().putData("groupData", group);
                             group.save(MyApplication.getAppContext());
                             group.getProgress().save(MyApplication.getAppContext());
                         }

@@ -6,6 +6,7 @@ import android.provider.BaseColumns;
 import com.google.gson.annotations.SerializedName;
 import com.kmitl.movealarm.Helper.GroupHelper;
 import com.kmitl.movealarm.Service.MyApplication;
+import com.kmitl.movealarm.Service.UserManage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,10 +72,28 @@ public class Group implements Serializable{
             this.internalId = checkGroup.getInternalId();
             groupHelper.updateGroup(this);
         }
-        this.admin.save(context);
+        User admin = this.admin;
+        if(admin.getId() != UserManage.getCurrentUser().getId()) {
+            admin.setLogin(0);
+            admin.setStatesw(0);
+        }
+        else{
+            admin.setLogin(UserManage.getCurrentUser().getLogin());
+            admin.setStatesw(UserManage.getCurrentUser().getStatesw());
+        }
+        admin.save(context);
         if(this.members!=null){
             for(int i=0;i<this.members.size();i++){
-                this.members.get(i).save(context);
+                User member = this.members.get(i);
+                if(member.getId() != UserManage.getCurrentUser().getId()) {
+                    member.setLogin(0);
+                    member.setStatesw(0);
+                }
+                else{
+                    member.setLogin(UserManage.getCurrentUser().getLogin());
+                    member.setStatesw(UserManage.getCurrentUser().getStatesw());
+                }
+                member.save(context);
             }
         }
 

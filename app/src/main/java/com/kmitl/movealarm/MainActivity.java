@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 //import android.util.Log;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -230,6 +231,9 @@ public class MainActivity extends AppCompatActivity {
 
                 mAlarmHelper.deleteSetAlarm("1");
                 mDrawerLayout.closeDrawers();
+//                Log.i("checkCurrent logout",UserManage.getCurrentUser());
+                Log.i("checkCurrent logout",UserManage.getInstance(this).checkCurrentLogin(this)+"");
+
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
