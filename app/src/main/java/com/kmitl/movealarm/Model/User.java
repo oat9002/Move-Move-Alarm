@@ -121,13 +121,11 @@ public class User implements Serializable{
         User checkUser = userHelper.getUser(id);
         if (checkUser == null) {
             this.internalId = userHelper.addUser(this);
-            Log.i("checkCurrent save new",this.facebookFirstName+this.login );
 
         }
         else{
             this.internalId = checkUser.getInternalId();
             userHelper.updateUser(this);
-            Log.i("checkCurrent save old",this.facebookFirstName+this.login );
 
         }
     }

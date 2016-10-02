@@ -232,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
                 mAlarmHelper.deleteSetAlarm("1");
                 mDrawerLayout.closeDrawers();
 //                Log.i("checkCurrent logout",UserManage.getCurrentUser());
-                Log.i("checkCurrent logout",UserManage.getInstance(this).checkCurrentLogin(this)+"");
 
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
