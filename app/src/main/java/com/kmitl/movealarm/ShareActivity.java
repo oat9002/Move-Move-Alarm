@@ -72,7 +72,7 @@ public class ShareActivity extends AppCompatActivity {
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.fatel.mamtv1/http/host/path")
+                Uri.parse("android-app://com.kmitl.movealarm/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
     }
@@ -91,7 +91,7 @@ public class ShareActivity extends AppCompatActivity {
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.fatel.mamtv1/http/host/path")
+                Uri.parse("android-app://com.kmitl.movealarm/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
@@ -385,37 +385,33 @@ public class ShareActivity extends AppCompatActivity {
     public String findImage() {
         int id = Activity.getCurrentActivityHandle().getRandomPosture().get(0).getIdPosture();
         int mode[] = Activity.getCurrentActivityHandle().getModeSelect();
-        if (mode[0] == 1) {
-            if (id == 0) return "p1_1_1";
-            else if (id == 1) return "p1_2_1";
-            else if (id == 2) return "p1_3_1";
-        } else if (mode[0] == 2) {
-            if (id == 3) return "p2_1_1";
-            else if (id == 4) return "p2_2_1";
-        } else if (mode[0] == 3) {
-            if (id == 5) return "p3_1_1";
-            else if (id == 6) return "p3_2_1";
-            else if (id == 7) return "p3_3_1";
-            else if (id == 8) return "p3_4_1";
-            else if (id == 9) return "p3_5_1";
-        } else if (mode[0] == 4) {
-            if (id == 10) return "p4_1_1";
-            else if (id == 11) return "p4_2_1";
-            else if (id == 12) return "p4_3_1";
-        } else if (mode[0] == 5) {
-            if (id == 13) return "p5_1_1";
-            else if (id == 14) return "p5_2_1";
-        } else if (mode[0] == 6) {
-            if (id == 15) return "p6_1_1";
-            else if (id == 16) return "p6_2_1";
-            else if (id == 17) return "p6_3_1";
-            else if (id == 18) return "p6_4_1";
-            else if (id == 19) return "p6_5_1";
-            else if (id == 20) return "p6_6_1";
-            else if (id == 21) return "p6_7_1";
-            else if (id == 22) return "p6_8_1";
-        }
-        return "p1_1_1";
+        if(id== 1) return "pos1_1";
+        else if(id==2) return "pos1_2";
+        else if(id==3) return "pos1_3";
+        else if(id==4) return "pos2_1";
+        else if(id==5) return "pos2_2";
+        else if(id==6) return "pos4_1";
+        else if(id==7) return "pos5_1";
+        else if(id==8) return "pos3_1";
+        else if(id==9) return "pos4_2";
+        else if(id==10) return "pos3_2";
+        else if(id==11) return "pos6_1";
+        else if(id==12) return "pos6_2";
+        else if(id==13) return "pos6_4";
+        else if(id==14) return "pos6_5";
+        else if(id==15) return "pos6_7";
+        else if(id==16) return "pos5_2";
+        else if(id==17) return "pos6_10";
+        else if(id==18) return "pos6_3";
+        else if(id==19) return "pos3_3";
+        else if(id==20) return "pos6_11";
+        else if(id==21) return "pos6_8";
+        else if(id==22) return "pos6_9";
+        else if(id==23) return "pos5_3";
+        else if(id==24) return "pos3_4";
+        else if(id==25) return "pos3_5";
+        else return "pos6_6";
+
     }
     public String nameofExercise(){
         String name = "ท่าออกกำลังกายส่วน";
@@ -425,13 +421,13 @@ public class ShareActivity extends AppCompatActivity {
         else if (mode[0] == 2)
             name += "ไหล่";
         else if (mode[0] == 3)
-            name += "อกและหลัง";
+            name += "ลำตัว";
         else if (mode[0] == 4)
-            name += "ข้อมือ";
+            name += "แขน";
         else if (mode[0] == 5)
-            name += "เอว";
+            name += "หน้าอก หน้าท้อง และ หลัง";
         else if (mode[0] == 6)
-            name += "สะโพก ขา และน่อง";
+            name += "เท้า ขา หน้าแข้ง และน่อง";
         return name;
     }
     public void makeToast(String text) {

@@ -182,7 +182,7 @@ public class EventActivity extends AppCompatActivity {
 
                 final Group group = Group.find(UserManage.getCurrentUser().getGroupId(),EventActivity.this);
                 //Group group = (Group) Cache.getInstance().getData("groupData");
-                group.addScore(2);
+                group.addScore(group.getMembers().size());
                 updateEvent(img,group);
                 group.save(MyApplication.getAppContext());
                 group.getProgress().save(MyApplication.getAppContext());
